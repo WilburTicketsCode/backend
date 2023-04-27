@@ -19,6 +19,7 @@ model Cartao_Credito {
   cvv        String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  clientes Cliente[]
 }
 
 model Usuario {
@@ -26,6 +27,7 @@ model Usuario {
  nome String
  email String @unique
  senha String
+ cliente Cliente?
 }
 
 model Setor {
@@ -36,4 +38,16 @@ model Setor {
 model Perfil {
   id Int @id @default(autoincrement())
   nome String 
+}
+
+model Cliente{
+  id Int @id @default(autoincrement())
+  cpf String @unique
+  data_nasc DateTime
+  usuario Usuario @relation(fields: [id_usuario], references: [id])
+  id_usuario Int @unique
+  cartao Cartao_Credito @relation(fields: [id_cartao], references: [id])
+  id_cartao Int @unique
+  telefone String
+  
 }

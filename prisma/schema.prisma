@@ -20,3 +20,21 @@ model Cartao_Credito {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Usuario {
+  id         Int   @id@default(autoincrement())
+ nome String
+ email String @unique
+ senha String
+}
+
+model Endereco {
+  id          Int   @id@default(autoincrement())
+  rua         String
+  numero      Int
+  bairro      String 
+  cidade      String
+  estado      String
+  cep         String
+  complemento String
+}

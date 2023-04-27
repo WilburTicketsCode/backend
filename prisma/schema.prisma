@@ -19,15 +19,27 @@ model Cartao_Credito {
   cvv        String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  clientes Cliente[]
 }
-
 model Usuario {
   id         Int   @id@default(autoincrement())
  nome String
  email String @unique
  senha String
+ cliente Cliente?
 }
 
+model Endereco {
+  id          Int   @id@default(autoincrement())
+  rua         String
+  numero      Int
+  bairro      String 
+  cidade      String
+  estado      String
+  cep         String
+  complemento String?
+  clientes Cliente[]
+}
 model Setor {
   id Int @id @default(autoincrement())
   nome String 
@@ -38,27 +50,16 @@ model Perfil {
   nome String 
 }
 
-model Cliente {
-  id      Int         @id @default(autoincrement())
-  compras Compra[]
-}
-
-model Ingresso {
-  id        Int       @id @default(autoincrement())
-  compra    Compra    @relation(fields: [id_compra], references: [id])
-  id_compra Int
+model Cliente{
+  id Int @id @default(autoincrement())
+  cpf String @unique
+  data_nasc DateTime
+  usuario Usuario @relation(fields: [id_usuario], references: [id])
+  id_usuario Int @unique
+  cartao Cartao_Credito @relation(fields: [id_cartao], references: [id])
+  id_cartao Int @unique
+  endereco Endereco @relation(fields: [id_endereco], references: [id])
+  id_endereco Int @unique
+  telefone String
   
-
-  @@index([id_compra])        
-}               
-
-model Compra {
-  id            Int        @id @default(autoincrement())
-  id_cliente    Int
-  cliente       Cliente    @relation(fields: [id_cliente], references: [id])
-  ingressos     Ingresso[] 
-  data_hora     DateTime   @default(now())
-  numero_cartao String
-
-  @@index([id_cliente])       //Index para pesquisar por cliente
 }

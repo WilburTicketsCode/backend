@@ -37,3 +37,28 @@ model Perfil {
   id Int @id @default(autoincrement())
   nome String 
 }
+
+model Cliente {
+  id      Int         @id @default(autoincrement())
+  compras Compra[]
+}
+
+model Ingresso {
+  id        Int       @id @default(autoincrement())
+  compra    Compra    @relation(fields: [id_compra], references: [id])
+  id_compra Int
+  
+
+  @@index([id_compra])        
+}               
+
+model Compra {
+  id            Int        @id @default(autoincrement())
+  id_cliente    Int
+  cliente       Cliente    @relation(fields: [id_cliente], references: [id])
+  ingressos     Ingresso[] 
+  data_hora     DateTime   @default(now())
+  numero_cartao String
+
+  @@index([id_cliente])       //Index para pesquisar por cliente
+}

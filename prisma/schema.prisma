@@ -21,6 +21,7 @@ model Cartao_Credito {
   updatedAt DateTime @updatedAt
   clientes Cliente[]
 }
+
 model Usuario {
   id         Int   @id@default(autoincrement())
   nome String

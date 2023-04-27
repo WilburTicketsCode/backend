@@ -36,5 +36,5 @@ model Endereco {
   cidade      String
   estado      String
   cep         String
-  complemento String
+  complemento String?
 }

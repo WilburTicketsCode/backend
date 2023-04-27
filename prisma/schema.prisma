@@ -27,3 +27,13 @@ model Usuario {
  email String @unique
  senha String
 }
+
+model Evento {
+  id          Int      @id @default(autoincrement())
+  data        DateTime 
+  descricao   String
+  nome        String
+  endereco    String 
+  id_promoter Int
+  banner      String
+}

@@ -23,7 +23,19 @@ model Cartao_Credito {
 
 model Usuario {
   id         Int   @id@default(autoincrement())
- nome String
- email String @unique
- senha String
+  nome String
+  email String @unique
+  senha String
+
+  adm Administrador?
+}
+
+model Administrador {
+  id Int @id @default(autoincrement())
+  cpf String @unique
+  super_adm Boolean
+
+  id_usuario Int @unique
+  usuario Usuario @relation(fields: [id_usuario], references: [id])
+  @@index([id_usuario])
 }

@@ -19,8 +19,8 @@ model Cartao_Credito {
   cvv        String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  clientes Cliente[]
 }
-
 model Usuario {
   id         Int   @id@default(autoincrement())
   nome String
@@ -28,6 +28,7 @@ model Usuario {
   senha String
 
   adm Administrador?
+  cliente Cliente?
 }
 
 model Administrador {
@@ -38,4 +39,39 @@ model Administrador {
   id_usuario Int @unique
   usuario Usuario @relation(fields: [id_usuario], references: [id])
   @@index([id_usuario])
+}
+
+model Endereco {
+  id          Int   @id@default(autoincrement())
+  rua         String
+  numero      Int
+  bairro      String 
+  cidade      String
+  estado      String
+  cep         String
+  complemento String?
+  clientes Cliente[]
+}
+model Setor {
+  id Int @id @default(autoincrement())
+  nome String 
+}
+
+model Perfil {
+  id Int @id @default(autoincrement())
+  nome String 
+}
+
+model Cliente{
+  id Int @id @default(autoincrement())
+  cpf String @unique
+  data_nasc DateTime
+  usuario Usuario @relation(fields: [id_usuario], references: [id])
+  id_usuario Int @unique
+  cartao Cartao_Credito @relation(fields: [id_cartao], references: [id])
+  id_cartao Int @unique
+  endereco Endereco @relation(fields: [id_endereco], references: [id])
+  id_endereco Int @unique
+  telefone String
+  
 }

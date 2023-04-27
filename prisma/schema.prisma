@@ -38,3 +38,12 @@ model Endereco {
   cep         String
   complemento String?
 }
+model Setor {
+  id Int @id @default(autoincrement())
+  nome String 
+}
+
+model Perfil {
+  id Int @id @default(autoincrement())
+  nome String 
+}

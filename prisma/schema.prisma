@@ -21,7 +21,6 @@ model Cartao_Credito {
   updatedAt DateTime @updatedAt
   clientes Cliente[]
 }
-
 model Usuario {
   id         Int   @id@default(autoincrement())
  nome String
@@ -30,6 +29,16 @@ model Usuario {
  cliente Cliente?
 }
 
+model Endereco {
+  id          Int   @id@default(autoincrement())
+  rua         String
+  numero      Int
+  bairro      String 
+  cidade      String
+  estado      String
+  cep         String
+  complemento String?
+}
 model Setor {
   id Int @id @default(autoincrement())
   nome String 

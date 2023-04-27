@@ -20,3 +20,10 @@ model Cartao_Credito {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Usuario {
+  id         Int   @id@default(autoincrement())
+ nome String
+ email String @unique
+ senha String
+}

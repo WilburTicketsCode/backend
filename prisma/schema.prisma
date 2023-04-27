@@ -27,3 +27,13 @@ model Usuario {
  email String @unique
  senha String
 }
+
+model Setor {
+  id Int @id @default(autoincrement())
+  nome String 
+}
+
+model Perfil {
+  id Int @id @default(autoincrement())
+  nome String 
+}

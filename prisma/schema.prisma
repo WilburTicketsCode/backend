@@ -21,13 +21,26 @@ model Cartao_Credito {
   updatedAt DateTime @updatedAt
   clientes Cliente[]
 }
+
 model Usuario {
   id         Int   @id@default(autoincrement())
  nome String
  email String @unique
  senha String
- cliente Cliente? 
- promoter Promoter?
+  adm Administrador?
+  cliente Cliente?
+  promoter Promoter?
+}
+
+model Administrador {
+  id Int @id @default(autoincrement())
+  cpf String @unique
+  super_adm Boolean
+
+  id_usuario Int @unique
+  usuario Usuario @relation(fields: [id_usuario], references: [id])
+  @@index([id_usuario])
+
 }
 
 model Endereco {

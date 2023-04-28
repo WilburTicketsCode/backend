@@ -26,7 +26,8 @@ model Usuario {
  nome String
  email String @unique
  senha String
- cliente Cliente?
+ cliente Cliente? 
+ promoter Promoter?
 }
 
 model Endereco {
@@ -39,6 +40,7 @@ model Endereco {
   cep         String
   complemento String?
   clientes Cliente[]
+  promoters Promoter[]
 }
 model Setor {
   id Int @id @default(autoincrement())
@@ -62,4 +64,17 @@ model Cliente{
   id_endereco Int @unique
   telefone String
   
+}  
+
+model Promoter{ 
+  id Int @id @default(autoincrement()) 
+  usuario Usuario @relation(fields: [id_usuario], references: [id])
+  id_usuario Int @unique
+  cpf Int @unique 
+  cnpj Int @unique 
+  status String 
+  data_nasc DateTime 
+  telefone Int 
+  endereco Endereco @relation(fields: [id_endereco], references: [id])
+  id_endereco Int @unique
 }

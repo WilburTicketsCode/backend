@@ -27,16 +27,15 @@ model Usuario {
  nome String
  email String @unique
  senha String
-  adm Administrador?
-  cliente Cliente?
-  promoter Promoter?
+ adm Administrador?
+ cliente Cliente?
+ promoter Promoter?
 }
 
 model Administrador {
   id Int @id @default(autoincrement())
   cpf String @unique
   super_adm Boolean
-
   id_usuario Int @unique
   usuario Usuario @relation(fields: [id_usuario], references: [id])
   @@index([id_usuario])

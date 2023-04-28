@@ -24,22 +24,22 @@ model Cartao_Credito {
 
 model Usuario {
   id         Int   @id@default(autoincrement())
-  nome String
-  email String @unique
-  senha String
-
-  adm Administrador?
-  cliente Cliente?
+ nome String
+ email String @unique
+ senha String
+ adm Administrador?
+ cliente Cliente?
+ promoter Promoter?
 }
 
 model Administrador {
   id Int @id @default(autoincrement())
   cpf String @unique
   super_adm Boolean
-
   id_usuario Int @unique
   usuario Usuario @relation(fields: [id_usuario], references: [id])
   @@index([id_usuario])
+
 }
 
 model Endereco {
@@ -52,6 +52,7 @@ model Endereco {
   cep         String
   complemento String?
   clientes Cliente[]
+  promoters Promoter[]
 }
 model Setor {
   id Int @id @default(autoincrement())
@@ -75,4 +76,17 @@ model Cliente{
   id_endereco Int @unique
   telefone String
   
+}  
+
+model Promoter{ 
+  id Int @id @default(autoincrement()) 
+  usuario Usuario @relation(fields: [id_usuario], references: [id])
+  id_usuario Int @unique
+  cpf Int @unique 
+  cnpj Int @unique 
+  status String 
+  data_nasc DateTime 
+  telefone Int 
+  endereco Endereco @relation(fields: [id_endereco], references: [id])
+  id_endereco Int @unique
 }

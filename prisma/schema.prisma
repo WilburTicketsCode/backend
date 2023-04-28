@@ -58,14 +58,19 @@ model Endereco {
   clientes Cliente[]
   promoters Promoter[]
 }
+
 model Setor {
   id Int @id @default(autoincrement())
   nome String 
+  // Para associação
+  lotacao Lotacao?
 }
 
 model Perfil {
   id Int @id @default(autoincrement())
   nome String 
+  // Para associação
+  lotacao Lotacao?
 }
 
 model Cliente{
@@ -93,4 +98,19 @@ model Promoter{
   telefone Int 
   endereco Endereco @relation(fields: [id_endereco], references: [id])
   id_endereco Int @unique
+}
+
+model Lotacao {
+  id  Int     @id @default(autoincrement())
+  valorTotal  Float
+  quantidade  Int 
+
+  perfil Perfil @relation(fields: [id_perfil], references: [id])
+  id_perfil Int @unique
+  
+  setor Setor @relation(fields: [id_setor], references: [id])
+  id_setor Int @unique
+
+  evento Evento @relation(fields: [id_evento], references: [id])
+  id_evento Int @unique
 }

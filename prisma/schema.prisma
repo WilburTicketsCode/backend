@@ -37,3 +37,11 @@ model Perfil {
   id Int @id @default(autoincrement())
   nome String 
 }
+
+model Ingresso {
+  id Int @id @default(autoincrement()) 
+  valor_pago Float
+
+  lotacao Lotacao @relation(fields: [id_lotacao], references: [id])
+  id_lotacao Int @unique
+}

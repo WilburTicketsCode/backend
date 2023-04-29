@@ -21,8 +21,6 @@ model Cartao_Credito {
   dono_cartao String 
   data_vencimento String
   cvv        String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
   clientes Cliente[]
 }
 
@@ -91,11 +89,11 @@ model Promoter{
   id Int @id @default(autoincrement()) 
   usuario Usuario @relation(fields: [id_usuario], references: [id])
   id_usuario Int @unique
-  cpf Int @unique 
-  cnpj Int @unique 
+  cpf String? @unique 
+  cnpj String? @unique 
   status String 
   data_nasc DateTime 
-  telefone Int 
+  telefone String 
   endereco Endereco @relation(fields: [id_endereco], references: [id])
   id_endereco Int @unique
 }

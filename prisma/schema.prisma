@@ -113,3 +113,23 @@ model Lotacao {
   evento Evento @relation(fields: [id_evento], references: [id])
   id_evento Int @unique
 }
+
+model Ingresso {
+  id Int @id @default(autoincrement()) 
+  valor_pago Float
+  lotacao Lotacao @relation(fields: [id_lotacao], references: [id])
+  id_lotacao Int @unique
+  compra     Compra    @relation(fields: [id_compra], references: [id])
+  id_compra  Int
+}
+
+model Compra {
+  id              Int         @id @default(autoincrement())
+  id_cliente      Int
+  cliente         Cliente     @relation(fields: [id_cliente], references: [id])
+  ingressos       Ingresso[] 
+  data_hora       DateTime    @default(now())
+  numero_cartao   String
+
+  @@index([id_cliente])
+}

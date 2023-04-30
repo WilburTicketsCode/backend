@@ -131,6 +131,5 @@ model Compra {
   data_hora       DateTime    @default(now())
   numero_cartao   String
 
-  @@index([id_cliente])       //Index para pesquisar por cliente
+  @@index([id_cliente])
 }
-

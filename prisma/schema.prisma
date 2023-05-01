@@ -56,6 +56,7 @@ model Endereco {
   complemento String?
   clientes Cliente[]
   promoters Promoter[]
+  eventos Evento[]
 }
 
 model Setor {
@@ -84,6 +85,7 @@ model Cliente{
   id_endereco Int @unique
   telefone String
   compras Compra[]
+  
 }  
 
 model Promoter{ 
@@ -97,17 +99,20 @@ model Promoter{
   telefone String 
   endereco Endereco @relation(fields: [id_endereco], references: [id])
   id_endereco Int @unique
+  eventos Evento[]
 }
 
 model Evento {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   data        DateTime 
   descricao   String
   nome        String
-  endereco    String 
-  id_promoter Int
+  endereco    Endereco  @relation(fields: [id_endereco], references: [id])
+  id_endereco Int    
+  promoter    Promoter  @relation(fields: [id_promoter], references: [id])
+  id_promoter Int      
   banner      String
-  lotacao Lotacao?
+  lotacao     Lotacao[]
 }
 
 model Lotacao {

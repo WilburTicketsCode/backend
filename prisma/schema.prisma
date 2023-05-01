@@ -5,9 +5,14 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
 datasource db {
   provider = "mysql"
   url = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
   relationMode = "prisma"
 }
 
@@ -17,8 +22,7 @@ model Cartao_Credito {
   dono_cartao String 
   data_vencimento String
   cvv        String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  clientes Cliente[]
 }
 
 model Usuario {
@@ -26,22 +30,120 @@ model Usuario {
  nome String
  email String @unique
  senha String
+ adm Administrador?
+ cliente Cliente?
+ promoter Promoter?
+}
+
+model Administrador {
+  id Int @id @default(autoincrement())
+  cpf String @unique
+  super_adm Boolean
+  id_usuario Int @unique
+  usuario Usuario @relation(fields: [id_usuario], references: [id])
+  @@index([id_usuario])
+
+}
+
+model Endereco {
+  id          Int   @id@default(autoincrement())
+  rua         String
+  numero      Int
+  bairro      String 
+  cidade      String
+  estado      String
+  cep         String
+  complemento String?
+  clientes Cliente[]
+  promoters Promoter[]
 }
 
 model Setor {
   id Int @id @default(autoincrement())
   nome String 
+  // Para associação
+  lotacao Lotacao?
 }
 
 model Perfil {
   id Int @id @default(autoincrement())
   nome String 
+  // Para associação
+  lotacao Lotacao?
+}
+
+model Cliente{
+  id Int @id @default(autoincrement())
+  cpf String @unique
+  data_nasc DateTime
+  usuario Usuario @relation(fields: [id_usuario], references: [id])
+  id_usuario Int @unique
+  cartao Cartao_Credito @relation(fields: [id_cartao], references: [id])
+  id_cartao Int @unique
+  endereco Endereco @relation(fields: [id_endereco], references: [id])
+  id_endereco Int @unique
+  telefone String
+  compras Compra[]
+}  
+
+model Promoter{ 
+  id Int @id @default(autoincrement()) 
+  usuario Usuario @relation(fields: [id_usuario], references: [id])
+  id_usuario Int @unique
+  cpf String? @unique 
+  cnpj String? @unique 
+  status String 
+  data_nasc DateTime 
+  telefone String 
+  endereco Endereco @relation(fields: [id_endereco], references: [id])
+  id_endereco Int @unique
+}
+
+model Evento {
+  id          Int      @id @default(autoincrement())
+  data        DateTime 
+  descricao   String
+  nome        String
+  endereco    String 
+  id_promoter Int
+  banner      String
+  lotacao Lotacao?
+}
+
+model Lotacao {
+  id  Int     @id @default(autoincrement())
+  valorTotal  Float
+  quantidade  Int 
+
+  perfil Perfil @relation(fields: [id_perfil], references: [id])
+  id_perfil Int @unique
+  
+  setor Setor @relation(fields: [id_setor], references: [id])
+  id_setor Int @unique
+
+  evento Evento @relation(fields: [id_evento], references: [id])
+  id_evento Int @unique
+
+  ingressos Ingresso[]
 }
 
 model Ingresso {
   id Int @id @default(autoincrement()) 
   valor_pago Float
-
   lotacao Lotacao @relation(fields: [id_lotacao], references: [id])
   id_lotacao Int @unique
+  compra     Compra    @relation(fields: [id_compra], references: [id])
+  id_compra  Int
+}
+
+model Compra {
+  id              Int         @id @default(autoincrement())
+  id_cliente      Int
+  cliente         Cliente     @relation(fields: [id_cliente], references: [id])
+  ingressos       Ingresso[] 
+  data_hora       DateTime    @default(now())
+  numero_cartao   String
+
+  @@index([id_cliente])
+
 }

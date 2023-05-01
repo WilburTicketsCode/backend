@@ -1,8 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-
-
 const Usuarios = [
     {
       "name": "Lee Mccullough",
@@ -104,7 +102,7 @@ const Usuarios = [
       "email": "cras.eget@hotmail.com",
       "senha": "mesmasenha"
     }
-  ];
+  ]
   
   const cartoes = [
     {
@@ -433,7 +431,7 @@ const Usuarios = [
 async function main() {
 
     for (const endereco of addresses) {
-        const setor = await prisma.endereco.create({
+        const setor = await prisma.Endereco.create({
           data:{
             "rua": endereco.rua,
             "numero": endereco.numero,
@@ -498,6 +496,17 @@ async function main() {
    
    
 
+   //Criar usuarios
+   for (const UsuarioUnico of Usuarios) {
+    const usuario = await prisma.usuario.create({
+      data:{
+        "nome": UsuarioUnico.name,
+        "email": UsuarioUnico.email,
+        "senha": UsuarioUnico.senha,
+      }
+    })
+  }
+   
 
 }main()
   .then(async () => {

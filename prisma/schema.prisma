@@ -5,9 +5,14 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
 datasource db {
   provider = "mysql"
   url = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
   relationMode = "prisma"
 }
 
@@ -17,16 +22,27 @@ model Cartao_Credito {
   dono_cartao String 
   data_vencimento String
   cvv        String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
   clientes Cliente[]
 }
+
 model Usuario {
   id         Int   @id@default(autoincrement())
  nome String
  email String @unique
  senha String
+ adm Administrador?
  cliente Cliente?
+ promoter Promoter?
+}
+
+model Administrador {
+  id Int @id @default(autoincrement())
+  cpf String @unique
+  super_adm Boolean
+  id_usuario Int @unique
+  usuario Usuario @relation(fields: [id_usuario], references: [id])
+  @@index([id_usuario])
+
 }
 
 model Endereco {
@@ -39,15 +55,22 @@ model Endereco {
   cep         String
   complemento String?
   clientes Cliente[]
+  promoters Promoter[]
+  eventos Evento[]
 }
+
 model Setor {
   id Int @id @default(autoincrement())
   nome String 
+  // Para associação
+  lotacao Lotacao?
 }
 
 model Perfil {
   id Int @id @default(autoincrement())
   nome String 
+  // Para associação
+  lotacao Lotacao?
 }
 
 model Cliente{
@@ -61,6 +84,7 @@ model Cliente{
   endereco Endereco @relation(fields: [id_endereco], references: [id])
   id_endereco Int @unique
   telefone String
+  compras Compra[]
   
 }  
 
@@ -84,7 +108,7 @@ model Evento {
   descricao   String
   nome        String
   endereco    Endereco  @relation(fields: [id_endereco], references: [id])
-  id_endereco Int     
+  id_endereco Int    
   promoter    Promoter  @relation(fields: [id_promoter], references: [id])
   id_promoter Int      
   banner      String
@@ -128,4 +152,3 @@ model Compra {
   @@index([id_cliente])
 
 }
-

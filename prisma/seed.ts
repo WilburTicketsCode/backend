@@ -1,12 +1,20 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
+
 async function main() {
-   const card = await prisma.cartao_Credito.create({
+   const card = await prisma.administrador.create({
     data:{
-        "num_cartao": "6052 6589 6548 0123",
-        "dono_cartao": "Nalbert Santos Araujo",
-        "data_vencimento": "12/28",
-        "cvv":    "609"    
+        "cpf": "985.654.968-98"
+        "super_adm": true;
+        
+        Usuario:{
+            create: {
+            "nome" : "Albert",
+            "email" : "Nsa@gmail.com",
+            "senha": "566854964"}
+        }
+
+           
     }
    })
 

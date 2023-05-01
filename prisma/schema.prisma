@@ -128,6 +128,7 @@ model Lotacao {
 
   evento Evento @relation(fields: [id_evento], references: [id])
   id_evento Int @unique
+
   ingressos Ingresso[]
 }
 
@@ -149,4 +150,5 @@ model Compra {
   numero_cartao   String
 
   @@index([id_cliente])
+
 }

@@ -83,7 +83,7 @@ model Cliente{
   endereco Endereco @relation(fields: [id_endereco], references: [id])
   id_endereco Int @unique
   telefone String
-  
+  compras Compra[]
 }  
 
 model Promoter{ 
@@ -123,6 +123,8 @@ model Lotacao {
 
   evento Evento @relation(fields: [id_evento], references: [id])
   id_evento Int @unique
+
+  ingressos Ingresso[]
 }
 
 model Ingresso {
@@ -143,4 +145,5 @@ model Compra {
   numero_cartao   String
 
   @@index([id_cliente])
+
 }

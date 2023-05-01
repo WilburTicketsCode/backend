@@ -39,6 +39,7 @@ model Administrador {
   id Int @id @default(autoincrement())
   cpf String @unique
   super_adm Boolean
+  id_usuario Int @unique
   usuario Usuario @relation(fields: [id_usuario], references: [id])
   @@index([id_usuario])
 

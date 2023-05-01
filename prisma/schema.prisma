@@ -99,6 +99,17 @@ model Promoter{
   id_endereco Int @unique
 }
 
+model Evento {
+  id          Int      @id @default(autoincrement())
+  data        DateTime 
+  descricao   String
+  nome        String
+  endereco    String 
+  id_promoter Int
+  banner      String
+  lotacao Lotacao?
+}
+
 model Lotacao {
   id  Int     @id @default(autoincrement())
   valorTotal  Float

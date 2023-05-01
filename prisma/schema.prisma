@@ -59,13 +59,14 @@ model Endereco {
 model Setor {
   id      Int      @id @default(autoincrement())
   nome    String
-  lotacao Lotacao?
+  lotacao Lotacao[]
 }
 
 model Perfil {
   id      Int      @id @default(autoincrement())
   nome    String
-  lotacao Lotacao?
+  lotacao Lotacao[]
+
 }
 
 model Cliente {
@@ -113,9 +114,9 @@ model Lotacao {
   id         Int        @id @default(autoincrement())
   valorTotal Float
   quantidade Int
-  id_perfil  Int        @unique
-  id_setor   Int        @unique
-  id_evento  Int        @unique
+  id_perfil  Int        
+  id_setor   Int        
+  id_evento  Int        
   perfil     Perfil     @relation(fields: [id_perfil], references: [id])
   setor      Setor      @relation(fields: [id_setor], references: [id])
   evento     Evento     @relation(fields: [id_evento], references: [id])

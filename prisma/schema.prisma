@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,145 +7,138 @@ generator erd {
 }
 
 datasource db {
-  provider = "mysql"
-  url = env("DATABASE_URL")
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
-  relationMode = "prisma"
+  relationMode      = "prisma"
 }
 
 model Cartao_Credito {
-  id         Int     @id @default(autoincrement())
-  num_cartao String  @unique
-  dono_cartao String 
+  id              Int       @id @default(autoincrement())
+  num_cartao      String    @unique
+  dono_cartao     String
   data_vencimento String
-  cvv        String
-  clientes Cliente[]
+  cvv             String
+  clientes        Cliente[]
 }
 
 model Usuario {
-  id         Int   @id@default(autoincrement())
- nome String
- email String @unique
- senha String
- adm Administrador?
- cliente Cliente?
- promoter Promoter?
+  id       Int            @id @default(autoincrement())
+  nome     String
+  email    String         @unique
+  senha    String
+  adm      Administrador?
+  cliente  Cliente?
+  promoter Promoter?
 }
 
 model Administrador {
-  id Int @id @default(autoincrement())
-  cpf String @unique
-  super_adm Boolean
-  id_usuario Int @unique
-  usuario Usuario @relation(fields: [id_usuario], references: [id])
-  @@index([id_usuario])
+  id         Int     @id @default(autoincrement())
+  cpf        String  @unique
+  super_adm  Boolean
+  id_usuario Int     @unique
+  usuario    Usuario @relation(fields: [id_usuario], references: [id])
 
+  @@index([id_usuario])
 }
 
 model Endereco {
-  id          Int   @id@default(autoincrement())
+  id          Int        @id @default(autoincrement())
   rua         String
   numero      Int
-  bairro      String 
+  bairro      String
   cidade      String
   estado      String
   cep         String
   complemento String?
-  clientes Cliente[]
-  promoters Promoter[]
-  eventos Evento[]
+  clientes    Cliente[]
+  promoters   Promoter[]
+  eventos     Evento[]
 }
 
 model Setor {
-  id Int @id @default(autoincrement())
-  nome String 
-  // Para associação
-  lotacao Lotacao?
+  id      Int      @id @default(autoincrement())
+  nome    String
+  lotacao Lotacao[]
 }
 
 model Perfil {
-  id Int @id @default(autoincrement())
-  nome String 
-  // Para associação
-  lotacao Lotacao?
+  id      Int      @id @default(autoincrement())
+  nome    String
+  lotacao Lotacao[]
+
 }
 
-model Cliente{
-  id Int @id @default(autoincrement())
-  cpf String @unique
-  data_nasc DateTime
-  usuario Usuario @relation(fields: [id_usuario], references: [id])
-  id_usuario Int @unique
-  cartao Cartao_Credito @relation(fields: [id_cartao], references: [id])
-  id_cartao Int @unique
-  endereco Endereco @relation(fields: [id_endereco], references: [id])
-  id_endereco Int @unique
-  telefone String
-  compras Compra[]
-  
-}  
+model Cliente {
+  id          Int            @id @default(autoincrement())
+  cpf         String         @unique
+  data_nasc   DateTime
+  id_usuario  Int            @unique
+  id_cartao   Int            @unique
+  id_endereco Int            @unique
+  telefone    String
+  usuario     Usuario        @relation(fields: [id_usuario], references: [id])
+  cartao      Cartao_Credito @relation(fields: [id_cartao], references: [id])
+  endereco    Endereco       @relation(fields: [id_endereco], references: [id])
+  compras     Compra[]
+}
 
-model Promoter{ 
-  id Int @id @default(autoincrement()) 
-  usuario Usuario @relation(fields: [id_usuario], references: [id])
-  id_usuario Int @unique
-  cpf String? @unique 
-  cnpj String? @unique 
-  status String 
-  data_nasc DateTime 
-  telefone String 
-  endereco Endereco @relation(fields: [id_endereco], references: [id])
-  id_endereco Int @unique
-  eventos Evento[]
+model Promoter {
+  id          Int      @id @default(autoincrement())
+  id_usuario  Int      @unique
+  cpf         String?  @unique
+  cnpj        String?  @unique
+  status      String
+  data_nasc   DateTime
+  telefone    String
+  id_endereco Int      @unique
+  usuario     Usuario  @relation(fields: [id_usuario], references: [id])
+  endereco    Endereco @relation(fields: [id_endereco], references: [id])
+  eventos     Evento[]
 }
 
 model Evento {
   id          Int       @id @default(autoincrement())
-  data        DateTime 
-  descricao   String
   nome        String
-  endereco    Endereco  @relation(fields: [id_endereco], references: [id])
-  id_endereco Int    
-  promoter    Promoter  @relation(fields: [id_promoter], references: [id])
-  id_promoter Int      
+  data        DateTime
+  descricao   String
   banner      String
+  id_promoter Int
+  id_endereco Int
+  endereco    Endereco  @relation(fields: [id_endereco], references: [id])
+  promoter    Promoter  @relation(fields: [id_promoter], references: [id])
   lotacao     Lotacao[]
 }
 
 model Lotacao {
-  id  Int     @id @default(autoincrement())
-  valorTotal  Float
-  quantidade  Int 
-
-  perfil Perfil @relation(fields: [id_perfil], references: [id])
-  id_perfil Int @unique
-  
-  setor Setor @relation(fields: [id_setor], references: [id])
-  id_setor Int @unique
-
-  evento Evento @relation(fields: [id_evento], references: [id])
-  id_evento Int @unique
-
-  ingressos Ingresso[]
+  id         Int        @id @default(autoincrement())
+  valorTotal Float
+  quantidade Int
+  id_perfil  Int        
+  id_setor   Int        
+  id_evento  Int        
+  perfil     Perfil     @relation(fields: [id_perfil], references: [id])
+  setor      Setor      @relation(fields: [id_setor], references: [id])
+  evento     Evento     @relation(fields: [id_evento], references: [id])
+  ingressos  Ingresso[]
 }
 
 model Ingresso {
-  id Int @id @default(autoincrement()) 
+  id         Int     @id @default(autoincrement())
   valor_pago Float
-  lotacao Lotacao @relation(fields: [id_lotacao], references: [id])
-  id_lotacao Int @unique
-  compra     Compra    @relation(fields: [id_compra], references: [id])
+  id_lotacao Int     @unique
   id_compra  Int
+  lotacao    Lotacao @relation(fields: [id_lotacao], references: [id])
+  compra     Compra  @relation(fields: [id_compra], references: [id])
 }
 
 model Compra {
-  id              Int         @id @default(autoincrement())
-  id_cliente      Int
-  cliente         Cliente     @relation(fields: [id_cliente], references: [id])
-  ingressos       Ingresso[] 
-  data_hora       DateTime    @default(now())
-  numero_cartao   String
+  id            Int        @id @default(autoincrement())
+  id_cliente    Int
+  data_hora     DateTime   @default(now())
+  numero_cartao String
+  cliente       Cliente    @relation(fields: [id_cliente], references: [id])
+  ingressos     Ingresso[]
 
   @@index([id_cliente])
-
 }

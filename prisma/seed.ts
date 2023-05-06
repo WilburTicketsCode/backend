@@ -119,7 +119,17 @@ async function main() {
           }
         })
       }*/
-    
+
+      for (const clienteUnico of Clientes) {
+        const cliente = await prisma.cliente.create({
+          data:{
+            "cpf": clienteUnico.cpf,
+            "data_nasc": new Date(clienteUnico.data_nasc),
+            "id_usuario": clienteUnico.id_usuario,
+            "id_endereco": clienteUnico.id_endereco,
+            "id_cartao": clienteUnico.id_cartao,
+          }
+        })
    
    
    

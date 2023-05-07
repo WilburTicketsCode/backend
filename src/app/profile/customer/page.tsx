@@ -1,5 +1,5 @@
 import '../../../styles/globals.css'
-import Teste from "../../../components/CostumerProfile";
+import CostumerP from "../../../components/CostumerProfile";
 
 
 export default function Dash() {
@@ -7,7 +7,7 @@ export default function Dash() {
         <div>
 
 
-                <Teste />
+                <CostumerP />
 
             
         </div>

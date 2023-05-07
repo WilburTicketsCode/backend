@@ -4,7 +4,7 @@ import React from 'react';
 import Cardform from '../Cardform';
 import FlippableCard from '../FlippableCard';
 import { PayContext } from '../../../contexts/payContext';
-import { ThemeProvider } from "@material-tailwind/react";
+
 import {
     Button,
     Dialog,
@@ -39,7 +39,7 @@ export default function Payment() {
 
     return (
         <React.Fragment>
-            <ThemeProvider>
+
             <PayContext.Provider value={{ infoCard, setInfoCard }} >
                 <Button onClick={()=>{cleanInfoCard(); handleOpen()}}>Adicionar Cartão</Button>
                 <Dialog
@@ -59,7 +59,7 @@ export default function Payment() {
 
                 </Dialog>
             </PayContext.Provider>
-            </ThemeProvider>
+
         </React.Fragment>
     )
 }

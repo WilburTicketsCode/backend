@@ -1,5 +1,5 @@
 export default function Dash() {
     return(
-        <div>Ta tudo certo</div>
+        <div className="">Ta tudo certo</div>
     )
 }

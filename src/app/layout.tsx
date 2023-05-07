@@ -1,4 +1,7 @@
+
+
 import MainLayout from "@/components/layouts/MainLayout"
+
 
 export const metadata = {
   title: 'Next.js',
@@ -13,9 +16,13 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body>
+
         <MainLayout>
+          
         {children}
+        
         </MainLayout>
+        
         </body>
     </html>
   )

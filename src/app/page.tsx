@@ -12,6 +12,7 @@ export default function Home() {
       <ul className='justify-center items-center'>
         <Link href="/creditcard" >Cartão de Credito</Link>
         <Link href="/profile/customer">Perfil do cliente</Link>
+        <Link href="/home">Página inicial</Link>
       </ul>
     </div>
   )

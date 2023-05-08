@@ -42,6 +42,21 @@ model Administrador {
   @@index([id_usuario])
 }
 
+model Promoter {
+  id          Int      @id @default(autoincrement())
+  id_usuario  Int      @unique
+  cpf         String?  @unique
+  cnpj        String?  @unique
+  status      String
+  data_nasc   DateTime
+  telefone    String
+  id_endereco Int      @unique
+  usuario     Usuario  @relation(fields: [id_usuario], references: [id])
+  endereco    Endereco @relation(fields: [id_endereco], references: [id])
+  eventos     Evento[]
+  
+}
+
 model Endereco {
   id          Int        @id @default(autoincrement())
   rua         String
@@ -83,20 +98,6 @@ model Cliente {
   compras     Compra[]
 }
 
-model Promoter {
-  id          Int      @id @default(autoincrement())
-  id_usuario  Int      @unique
-  cpf         String?  @unique
-  cnpj        String?  @unique
-  status      String
-  data_nasc   DateTime
-  telefone    String
-  id_endereco Int      @unique
-  usuario     Usuario  @relation(fields: [id_usuario], references: [id])
-  endereco    Endereco @relation(fields: [id_endereco], references: [id])
-  eventos     Evento[]
-}
-
 model Evento {
   id          Int       @id @default(autoincrement())
   nome        String
@@ -104,10 +105,13 @@ model Evento {
   descricao   String
   banner      String
   id_promoter Int
-  id_endereco Int
+  id_endereco Int 
   endereco    Endereco  @relation(fields: [id_endereco], references: [id])
   promoter    Promoter  @relation(fields: [id_promoter], references: [id])
   lotacao     Lotacao[]
+
+  @@index([id_endereco])
+  @@index([id_promoter])
 }
 
 model Lotacao {
@@ -117,26 +121,25 @@ model Lotacao {
   id_perfil  Int        
   id_setor   Int        
   id_evento  Int        
-  perfil     Perfil     @relation(fields: [id_perfil], references: [id])
-  setor      Setor      @relation(fields: [id_setor], references: [id])
-  evento     Evento     @relation(fields: [id_evento], references: [id])
+  perfil     Perfil     @relation(fields: [id_perfil], references: [id], onDelete: Cascade)
+  setor      Setor      @relation(fields: [id_setor], references: [id], onDelete: Cascade)
+  evento     Evento     @relation(fields: [id_evento], references: [id], onDelete: Cascade)
   ingressos  Ingresso[]
 }
 
 model Ingresso {
   id         Int     @id @default(autoincrement())
   valor_pago Float
-  id_lotacao Int     @unique
-  id_compra  Int
+  id_lotacao Int
+  id_compra  Int?
   lotacao    Lotacao @relation(fields: [id_lotacao], references: [id])
-  compra     Compra  @relation(fields: [id_compra], references: [id])
+  compra     Compra?  @relation(fields: [id_compra], references: [id])
 }
 
 model Compra {
   id            Int        @id @default(autoincrement())
   id_cliente    Int
   data_hora     DateTime   @default(now())
-  numero_cartao String
   cliente       Cliente    @relation(fields: [id_cliente], references: [id])
   ingressos     Ingresso[]
 

@@ -10,7 +10,7 @@ export default function NoCard() {
     return (
         <div className="flex flex-col w-full h-full items-center justify-center">
 
-            <Typography variant="h2" className="font-normal text-center">
+            <Typography variant="h4" className="font-normal text-center">
                 Você não possui cartão cadastrado
             </Typography>
             <div className="w-[17rem] h-[14rem] sm:w-[24rem] sm:h-[18rem] md:w-[30rem] md:h-[24rem]">

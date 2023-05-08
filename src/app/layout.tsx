@@ -1,5 +1,5 @@
 
-
+import '../styles/globals.css'
 import MainLayout from "@/components/layouts/MainLayout"
 
 

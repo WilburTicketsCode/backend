@@ -19,13 +19,15 @@ export default function RegistrationData() {
     return (
         <div className="flex flex-col w-full h-full items-center justify-center gap-4">
             <Card>
-                <div className="h-[60vh] w-[40vw] flex flex-col items-center justify-center gap-4">
+                <div className="h-[70vh] w-[85vw] sm:h-[60vh] sm:w-[50vw] md:w-[60vw] flex flex-col items-center justify-center gap-20">
                 <Avatar className="cursor-pointer" src="/img/profile/placeholder.jpg" alt="avatar" size="xxl" />
-                <Typography>{useData.name}</Typography>
-                <Typography>{useData.cpf}</Typography>
-                <Typography>{useData.email}</Typography>
-                <Typography>{useData.date}</Typography>
-                <Typography>{useData.fone}</Typography>
+                <div className="flex flex-col gap-1">
+                    <Typography className="text-base font-semibold text-center sm:text-lg">Nome: {useData.name}</Typography>
+                    <Typography className="text-base font-semibold text-center sm:text-lg">CPF: {useData.cpf}</Typography>
+                    <Typography className="text-base font-semibold text-center sm:text-lg">Email: {useData.email}</Typography>
+                    <Typography className="text-base font-semibold text-center sm:text-lg">Data de Nasc.: {useData.date}</Typography>
+                    <Typography className="text-base font-semibold text-center sm:text-lg">Telefone: {useData.fone}</Typography>
+                </div>
                 </div>
             </Card>
         </div>

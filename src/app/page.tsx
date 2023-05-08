@@ -13,6 +13,7 @@ export default function Home() {
         <Link href="/creditcard" >Cartão de Credito</Link>
         <Link href="/profile/customer">Perfil do cliente</Link>
         <Link href="/event-details">evento</Link>
+        <Link href="/home">Página inicial</Link>
       </ul>
     </div>
   )

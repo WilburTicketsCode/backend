@@ -6,8 +6,8 @@ import {
   TabsBody,
   Tab,
   TabPanel,
+  Typography,
 } from "@material-tailwind/react";
-import Password from "./ChangePassword";
 import WithCard from "./EditCard/WithCard";
 import NoCard from "./EditCard/NoCard";
 import Address from "./Address";
@@ -21,19 +21,16 @@ export default function CostumerP() {
 
   return (
     <div className="flex h-full w-full items-center justify-center rounded-md" >
-      <Tabs value={type} className="overflow-visible h-[95%]  w-[95%] lg:w-5/6 bg-white rounded-lg">
-        <TabsHeader className="h-[5.2rem] text-black">
+      <Tabs value={type} className="overflow-visible h-[95%]  w-[95%] lg:w-5/6 rounded-lg bg-gray-100" >
+        <TabsHeader className="h-[5.2rem] text-black bg-light-blue-200">
           <Tab value="registrationData" onClick={() => { setType("registrationData") }}>
-            Dados
+            <Typography className="text-base font-bold" >Dados</Typography> 
           </Tab>
           <Tab value="address" onClick={() => { setType("address") }}>
-            Endereço
+          <Typography className="text-base font-bold" >Endereço</Typography> 
           </Tab>
           <Tab value="card" onClick={() => { setType("card") }}>
-            Cartão
-          </Tab>
-          <Tab value="password" onClick={() => { setType("password") }}>
-            Alterar Senha
+          <Typography className="text-base font-bold" >Cartão de Credito</Typography> 
           </Tab>
 
         </TabsHeader>
@@ -51,9 +48,6 @@ export default function CostumerP() {
           </TabPanel>
           <TabPanel className="h-full" value="card">
             {existCard ? <WithCard /> : <NoCard />}
-          </TabPanel>
-          <TabPanel className="h-full" value="password">
-            <Password />
           </TabPanel>
         </TabsBody>
       </Tabs>

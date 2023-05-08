@@ -1,505 +1,453 @@
 import { PrismaClient } from '@prisma/client'
+import { data } from 'autoprefixer';
+import { create } from 'domain';
 const prisma = new PrismaClient()
-
-
-
-const Usuarios = [
-    {
-      "name": "Lee Mccullough",
-      "email": "integer.sem@icloud.org",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Lawrence Miles",
-      "email": "nec.cursus@outlook.ca",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Dana Good",
-      "email": "phasellus.ornare@outlook.com",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Hayes Dotson",
-      "email": "sagittis@icloud.org",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Emi Wilson",
-      "email": "dui.nec@icloud.com",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Carson Mcpherson",
-      "email": "tellus@icloud.com",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Zorita Hardy",
-      "email": "ullamcorper@hotmail.org",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Mercedes Alvarado",
-      "email": "ut.tincidunt@hotmail.ca",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Reuben Gonzales",
-      "email": "maecenas.ornare.egestas@icloud.com",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Madaline Welch",
-      "email": "ante.bibendum.ullamcorper@outlook.ca",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Nomlanga Foster",
-      "email": "sed.dictum.eleifend@google.couk",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Barry Melendez",
-      "email": "vestibulum.nec@google.ca",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Laith Dale",
-      "email": "nostra.per@aol.com",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Thane Carr",
-      "email": "elit@protonmail.couk",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Sopoline Guzman",
-      "email": "est.mauris@outlook.couk",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Chester Bowman",
-      "email": "quam@yahoo.ca",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Judah Gillespie",
-      "email": "ipsum.sodales@outlook.couk",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Stacey Forbes",
-      "email": "id.magna@hotmail.ca",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Bree Gilbert",
-      "email": "amet@hotmail.net",
-      "senha": "mesmasenha"
-    },
-    {
-      "name": "Carol Lloyd",
-      "email": "cras.eget@hotmail.com",
-      "senha": "mesmasenha"
-    }
-  ];
-  
-  const cartoes = [
-    {
-      num_cartao: '1111222233334444',
-      dono_cartao: 'John Doe',
-      data_vencimento: '12/2022',
-      cvv: '123'
-    },
-    {
-      num_cartao: '5555666677778888',
-      dono_cartao: 'Jane Doe',
-      data_vencimento: '06/2023',
-      cvv: '456'
-    },
-    {
-      num_cartao: '9999888877776666',
-      dono_cartao: 'Bob Smith',
-      data_vencimento: '01/2025',
-      cvv: '789'
-    },
-    {
-      num_cartao: '3333444455556666',
-      dono_cartao: 'Alice Johnson',
-      data_vencimento: '10/2024',
-      cvv: '987'
-    },
-    {
-      num_cartao: '7777888899990000',
-      dono_cartao: 'Eve Wilson',
-      data_vencimento: '09/2023',
-      cvv: '654'
-    },
-    {
-      num_cartao: '4444555566667777',
-      dono_cartao: 'Tom Brown',
-      data_vencimento: '08/2024',
-      cvv: '321'
-    },
-    {
-      num_cartao: '0000111122223333',
-      dono_cartao: 'Jill Green',
-      data_vencimento: '11/2023',
-      cvv: '654'
-    },
-    {
-      num_cartao: '6666777788889999',
-      dono_cartao: 'Sam Taylor',
-      data_vencimento: '05/2025',
-      cvv: '987'
-    },
-    {
-      num_cartao: '2222333344445555',
-      dono_cartao: 'Chris Anderson',
-      data_vencimento: '02/2024',
-      cvv: '123'
-    },
-    {
-      num_cartao: '8888999911112222',
-      dono_cartao: 'Karen Lee',
-      data_vencimento: '03/2023',
-      cvv: '456'
-    },
-    {
-      num_cartao: '7777666655554444',
-      dono_cartao: 'Mike Scott',
-      data_vencimento: '06/2024',
-      cvv: '789'
-    },
-    {
-      num_cartao: '3333222211110000',
-      dono_cartao: 'Anna Williams',
-      data_vencimento: '07/2025',
-      cvv: '654'
-    },
-    {
-      num_cartao: '9999888877776669',
-      dono_cartao: 'Alex Brown',
-      data_vencimento: '04/2024',
-      cvv: '321'
-    },
-    {
-      num_cartao: '5555444433332222',
-      dono_cartao: 'Julia Martin',
-      data_vencimento: '12/2023',
-      cvv: '987'
-    }
-  ];
-  
-  const Administradores = [
-    {
-      "cpf": "03885293040",
-      "super_adm": true,
-      "id_usuario": 22,
-    },
-    {
-      "cpf": "53295726635",
-      "super_adm": false,
-      "id_usuario": 23,
-    }
-  ];
-
-  const Setores = [
-    {
-      "name": "vip"
-    },
-    {
-      "name": "backstage"
-    },
-    {
-      "name": "camarote"
-    }
-  ]
-
-  const Perfis = [
-    {
-      "name": "entrada inteira"
-    },
-    {
-      "name": "meia entrada"
-    },
-    {
-      "name": "entrada gratuita"
-    }
-  ];
-  const addresses = [
-    {
-      "rua": "402-5353 Dui, Ave",
-      "numero": 28,
-      "bairro": "bibendum",
-      "cidade": "Itajaí",
-      "estado": "Santa Catarina",
-      "cep": "42429-256",
-      "complemento": "Galpão"
-    },
-    {
-      "rua": "P.O. Box 652, 4481 Lectus Street",
-      "numero": 44,
-      "bairro": "euismod urna.",
-      "cidade": "Imperatriz",
-      "estado": "Maranhão",
-      "cep": "74750-713",
-      "complemento": "Casa"
-    },
-    {
-      "rua": "Ap #491-6513 Aliquet Av.",
-      "numero": 67,
-      "bairro": "accumsan",
-      "cidade": "Guarulhos",
-      "estado": "São Paulo",
-      "cep": "35153858",
-      "complemento": "Galpão"
-    },
-    {
-      "rua": "Ap #353-9805 Nulla. Rd.",
-      "numero": 48,
-      "bairro": "lobortis",
-      "cidade": "Marabá",
-      "estado": "Pará",
-      "cep": "99753-539",
-      "complemento": "Casa"
-    },
-    {
-      "rua": "747-1536 Eu, St.",
-      "numero": 20,
-      "bairro": "Curabitur",
-      "cidade": "Maringá",
-      "estado": "Paraná",
-      "cep": "36139657",
-      "complemento": "Galpão"
-    },
-    {
-      "rua": "Ap #460-2326 Magna St.",
-      "numero": 196,
-      "bairro": "et, rutrum",
-      "cidade": "Governador Valadares",
-      "estado": "Minas Gerais",
-      "cep": "58799-774",
-      "complemento": "Galpão"
-    },
-    {
-      "rua": "751-3934 Sed Road",
-      "numero": 183,
-      "bairro": "netus",
-      "cidade": "Aparecida de Goiânia",
-      "estado": "Goiás",
-      "cep": "89121-242",
-      "complemento": "Apartamento"
-    },
-    {
-      "rua": "847-3070 Feugiat Avenue",
-      "numero": 9,
-      "bairro": "erat",
-      "cidade": "Barra do Corda",
-      "estado": "Maranhão",
-      "cep": "67016-244",
-      "complemento": "Apartamento"
-    },
-    {
-      "rua": "P.O. Box 763, 3454 Gravida. Rd.",
-      "numero": 128,
-      "bairro": "ut,",
-      "cidade": "Aparecida de Goiânia",
-      "estado": "Goiás",
-      "cep": "44064-438",
-      "complemento": "Apartamento"
-    },
-    {
-      "rua": "P.O. Box 326, 2783 Massa Av.",
-      "numero": 122,
-      "bairro": "scelerisque",
-      "cidade": "Blumenau",
-      "estado": "Santa Catarina",
-      "cep": "65095-748",
-      "complemento": "Apartamento"
-    },
-    {
-      "rua": "890-1194 Egestas Road",
-      "numero": 57,
-      "bairro": "Etiam vestibulum",
-      "cidade": "Paranaguá",
-      "estado": "Paraná",
-      "cep": "95917-803",
-      "complemento": "Casa"
-    },
-    {
-      "rua": "Ap #282-4945 Luctus Ave",
-      "numero": 162,
-      "bairro": "erat",
-      "cidade": "Paranaguá",
-      "estado": "Paraná",
-      "cep": "68781-499",
-      "complemento": "Galpão"
-    },
-    {
-      "rua": "Ap #411-6070 Eget, St.",
-      "numero": 181,
-      "bairro": "gravida non,",
-      "cidade": "Jaboatão dos Guararapes",
-      "estado": "Pernambuco",
-      "cep": "62608-314",
-      "complemento": "Apartamento"
-    },
-    {
-      "rua": "545-4282 Tempus St.",
-      "numero": 146,
-      "bairro": "vehicula et,",
-      "cidade": "Florianópolis",
-      "estado": "Santa Catarina",
-      "cep": "41336-747",
-      "complemento": "Galpão"
-    },
-    {
-      "rua": "Ap #945-7068 Interdum. Av.",
-      "numero": 2,
-      "bairro": "fames ac",
-      "cidade": "Florianópolis",
-      "estado": "Santa Catarina",
-      "cep": "68211-067",
-      "complemento": "Galpão"
-    },
-    {
-      "rua": "Ap #868-7892 Blandit Street",
-      "numero": 160,
-      "bairro": "Nunc sed",
-      "cidade": "Balsas",
-      "estado": "Maranhão",
-      "cep": "37381111",
-      "complemento": "Casa"
-    },
-    {
-      "rua": "369-5704 Orci St.",
-      "numero": 25,
-      "bairro": "eu neque",
-      "cidade": "São João de Meriti",
-      "estado": "Rio de Janeiro",
-      "cep": "11561-117",
-      "complemento": "Apartamento"
-    },
-    {
-      "rua": "P.O. Box 383, 9521 Feugiat Street",
-      "numero": 166,
-      "bairro": "leo,",
-      "cidade": "Goiânia",
-      "estado": "Goiás",
-      "cep": "37671437",
-      "complemento": "Galpão"
-    },
-    {
-      "rua": "744-3943 Urna. Avenue",
-      "numero": 69,
-      "bairro": "tellus sem",
-      "cidade": "Bayeux",
-      "estado": "Paraíba",
-      "cep": "82975-475",
-      "complemento": "Galpão"
-    },
-    {
-      "rua": "6265 Mauris Rd.",
-      "numero": 150,
-      "bairro": "ligula.",
-      "cidade": "Sousa",
-      "estado": "Paraíba",
-      "cep": "35742125",
-      "complemento": "Apartamento"
-    },
-    {
-      "rua": "Ap #488-1025 Mi Rd.",
-      "numero": 18,
-      "bairro": "purus gravida",
-      "cidade": "Ipatinga",
-      "estado": "Minas Gerais",
-      "cep": "42991-237",
-      "complemento": "Apartamento"
-    },
-    {
-      "rua": "328-7720 Enim. Rd.",
-      "numero": 30,
-      "bairro": "blandit",
-      "cidade": "Guarulhos",
-      "estado": "São Paulo",
-      "cep": "30139079",
-      "complemento": "Galpão"
-    }
-  ]
 
 async function main() {
 
-    for (const endereco of addresses) {
-        const setor = await prisma.endereco.create({
-          data:{
-            "rua": endereco.rua,
-            "numero": endereco.numero,
-            "bairro": endereco.bairro,
-            "cidade": endereco.cidade,
-            "estado": endereco.estado,
-            "cep": endereco.cep,
-            "complemento": endereco.complemento
-          }
-        })
-      }
+  await prisma.compra.deleteMany()
+  await prisma.ingresso.deleteMany()
+  await prisma.lotacao.deleteMany()
+  await prisma.evento.deleteMany()
+  await prisma.promoter.deleteMany()
+  await prisma.cliente.deleteMany()
+  await prisma.administrador.deleteMany()
+  await prisma.usuario.deleteMany()
+  await prisma.endereco.deleteMany()
+  await prisma.cartao_Credito.deleteMany()
 
-    /*for (const setorUnico of Setores) {
-        const setor = await prisma.setor.create({
-          data:{
-            "nome": setorUnico.name
-          }
-        })
+  /* ADMINISTRADOR 1 */
+  const adm1 = await prisma.administrador.create({
+    data: {
+      cpf: "95545192069",
+      super_adm: true,
+      usuario: {
+        create: { 
+        nome: "Pedro",
+        email: "pedro200@hotmail.com",
+        senha: "pedropedro99"}
       }
-  
-    for (const perfilUnico of Perfis) {
-      const perfil = await prisma.perfil.create({
-        data:{
-          "nome": perfilUnico.name
+    }
+  })
+
+  /* ADMINISTRADOR 2 */
+  const adm2 = await prisma.administrador.create({
+    data: {
+      cpf: "27770383099",
+      super_adm: false,
+      usuario: {
+        create: {
+          nome: "Nalbert",
+          email: "nalbert100@gmail.com",
+          senha: "nalbert123"
         }
-      })
-    }*/
-
-
-
-    /*for (const AdmUnico of Administradores) {
-        const Adm = await prisma.administrador.create({
-          data:{
-            "cpf": AdmUnico.cpf,
-            "super_adm": AdmUnico.super_adm,
-            "id_usuario": AdmUnico.id_usuario,
-          }
-        })
-      }*/
-    /*for (const cartao of cartoes) {
-        await prisma.cartao_Credito.create({
-          data: {
-            num_cartao: cartao.num_cartao,
-            dono_cartao: cartao.dono_cartao,
-            data_vencimento: cartao.data_vencimento,
-            cvv: cartao.cvv,
-          },
-        });
       }
-    
-    for (const UsuarioUnico of Usuarios) {
-        const usuario = await prisma.usuario.create({
-          data:{
-            "nome": UsuarioUnico.name,
-            "email": UsuarioUnico.email,
-            "senha": UsuarioUnico.senha,
+    }
+  })
+
+  /* PERFIS DE INGREO */
+  const perfilInteira = await prisma.perfil.create({
+    data: {
+      nome: "Inteira"
+    }
+  })
+
+  const perfilMeia = await prisma.perfil.create({
+    data: {
+      nome: "Meia"
+    }
+  })
+
+  const perfilGratuita = await prisma.perfil.create({
+    data: {
+      nome: "Gratuita"
+    }
+  })
+
+  /* SETORES DE INGREÇO */
+  const sertorVip = await prisma.setor.create({
+    data: {
+      nome: "Vip"
+    }
+  })
+
+  const sertorCamarote = await prisma.setor.create({
+    data: {
+      nome: "Camarote"
+    }
+  })
+  
+  const sertorBackstage = await prisma.setor.create({
+    data: {
+      nome: "Backstage"
+    }
+  })
+
+  /* PROMOTER 1 */
+  const promoter1 = await prisma.promoter.create({
+    data: {
+      usuario: {
+        create: {
+          nome: "Rafeael Tosta",
+          email: "tostinha123@yahoo.com",
+          senha: "Tosta1134"
+        }
+      },
+      cpf: "45267413020",
+      status: "aprovado",
+      data_nasc: new Date(),
+      telefone: "6523848514",
+      endereco: {
+        create: {
+          rua: "Rua da Paz",
+          numero: 123,
+          bairro: "Centro",
+          cidade: "São Paulo",
+          estado: "SP",
+          cep: "01010-010",
+          complemento: "Apartamento 42"
+       }
+      }
+    }
+  })
+
+  //Criação de Enderço do Evento
+  const endereco1 = await prisma.endereco.create({
+    data: {
+      "rua": "Avenida das Flores",
+      numero: 1234,
+      bairro: "Jardim das Tulipas",
+      cidade: "São Paulo",
+      estado: "SP",
+      cep: "04567-890",
+      complemento: "Apartamento 56"
+    }
+  })
+
+  //Criação do Evento
+  const evento1 = await prisma.evento.create({
+    data: {
+      nome: "Festinha da UEFS",
+      data: new Date(),
+      descricao: "Uma festa que ira acontecer na UEFS",
+      banner: "nada",
+      id_promoter: promoter1.id,
+      id_endereco: endereco1.id
+    }
+  })
+
+  //Cirnado lotações do Evento
+  const lotacao1 = await prisma.lotacao.create({
+    data: {
+      id_evento: evento1.id,
+      id_perfil: perfilInteira.id,
+      id_setor: sertorVip.id,
+      quantidade: 100,
+      valorTotal: 200
+    }
+  })
+
+  const lotacao2 = await prisma.lotacao.create({
+    data: {
+      id_evento: evento1.id,
+      id_perfil: perfilMeia.id,
+      id_setor: sertorVip.id,
+      quantidade: 100,
+      valorTotal: 100
+    }
+  })
+
+   /* PROMOTER 2 */
+   const promoter2 = await prisma.promoter.create({
+    data: {
+      usuario: {
+        create: {
+          nome: "Luan Gabirel",
+          email: "luanzito@gmaiil.com",
+          senha: "1234"
+        }
+      },
+      cpf: "72417917033",
+      status: "aprovado",
+      data_nasc: new Date(),
+      telefone: "9136945571",
+      endereco: {
+        create: {
+          rua: "Rua dos Girassóis",
+          numero: 123,
+          bairro: "Jardim das Flores",
+          cidade: "Curitiba",
+          estado: "PR",
+          cep: "80000-000",
+          complemento: ""
           }
-        })
-      }*/
-    
-   
-   
-   
+      }
+    }
+  })
 
+   /* PROMOTER 3 */
+   const promoter3 = await prisma.promoter.create({
+    data: {
+      usuario: {
+        create: {
+          nome: "Borger Manuel",
+          email: "borgerzada@outlook.com",
+          senha: "123456"
+        }
+      },
+      cpf: "58429911014",
+      status: "aprovado",
+      data_nasc: new Date(),
+      telefone: "8536231962",
+      endereco: {
+        create: {
+          rua: "Rua das Flores",
+          numero: 123,
+          bairro: "Jardim Botânico",
+          cidade: "Porto Alegre",
+          estado: "RS",
+          cep: "90210-123",
+          complemento: "Apartamento 401"
+          }
+      }
+    }
+  })
 
-}main()
+  //Criação de Enderço do Evento
+  const endereco2 = await prisma.endereco.create({
+    data: {
+      rua: "Rua da Paz",
+      numero: 100,
+      bairro: "Jardim das Flores",
+      cidade: "São Paulo",
+      estado: "SP",
+      cep: "04535-070",
+      complemento: "Apto 501"
+   }
+  })
+
+  //Criação do Evento
+  const evento2 = await prisma.evento.create({
+    data: {
+      nome: "Festinha de Tosta",
+      data: new Date(),
+      descricao: "Uma festa que ira ver Tosta",
+      banner: "nada",
+      id_promoter: promoter3.id,
+      id_endereco: endereco2.id
+    }
+  })
+
+  //Cirnado lotações do Evento
+  const lotacao3 = await prisma.lotacao.create({
+    data: {
+      id_evento: evento2.id,
+      id_perfil: perfilInteira.id,
+      id_setor: sertorVip.id,
+      quantidade: 100,
+      valorTotal: 200
+    }
+  })
+
+  const lotacao4 = await prisma.lotacao.create({
+    data: {
+      id_evento: evento2.id,
+      id_perfil: perfilMeia.id,
+      id_setor: sertorVip.id,
+      quantidade: 100,
+      valorTotal: 100
+    }
+  })
+
+  const lotacao5 = await prisma.lotacao.create({
+    data: {
+      id_evento: evento2.id,
+      id_perfil: perfilInteira.id,
+      id_setor: sertorCamarote.id,
+      quantidade: 300,
+      valorTotal: 500
+    }
+  })
+
+  const lotacao6 = await prisma.lotacao.create({
+    data: {
+      id_evento: evento2.id,
+      id_perfil: perfilMeia.id,
+      id_setor: sertorCamarote.id,
+      quantidade: 100,
+      valorTotal: 250
+    }
+  })
+
+  
+   /* PROMOTER 4 */
+   const promoter4 = await prisma.promoter.create({
+    data: {
+      usuario: {
+        create: {
+          nome: "Seu Jorge",
+          email: "jorge@gmaiil.com",
+          senha: "123456789"
+        }
+      },
+      cpf: "28419554006",
+      status: "suspenso",
+      data_nasc: new Date(),
+      telefone: "6838738801",
+      endereco: {
+        create: {
+          rua: "Rua dos Jasmins",
+          numero: 12,
+          bairro: "Jardim das Flores",
+          cidade: "São Paulo",
+          estado: "SP",
+          cep: "04567-890",
+          complemento: "Apto 42"
+        }
+      }
+    }
+  })
+
+  /* CLEINTE 1 */
+  const cliente1 = await prisma.cliente.create({
+    data: {
+      cpf: '66668230016',
+      telefone: '6926587229',
+      data_nasc: new Date(),
+      usuario: {
+        create: {
+          nome: "Jorge Amado",
+          email: "seujorgeamado@yahoo.com",
+          senha: "1234"
+        }
+      },
+      endereco: {
+        create: {
+          rua: "Rua da Consolação",
+          numero: 1000,
+          bairro: "Consolação",
+          cidade: "São Paulo",
+          estado: "SP",
+          cep: "01302-907",
+          complemento: "Apt 501"
+        }  
+      },
+      cartao: {
+        create: {
+          num_cartao: "123123123123",
+          dono_cartao: "Juliano Folenta",
+          data_vencimento: "2023",
+          cvv: "123",
+        }
+      }
+    }
+  })
+
+  //Criando compra do Cliente
+  const compra1 = await prisma.compra.create({
+    data: {
+      id_cliente: cliente1.id,
+      data_hora: new Date(),
+      ingressos: {
+          createMany: {
+            data:[ {
+              valor_pago: 200,
+              id_lotacao: lotacao1.id
+            }, {
+              valor_pago: 200,
+              id_lotacao: lotacao1.id
+            }]
+          }
+        }
+      }
+  })
+  
+  /* CLEINTE 2 */
+  const cliente2 = await prisma.cliente.create({
+    data: {
+      cpf: '66668240016',
+      telefone: '5926587229',
+      data_nasc: new Date(),
+      usuario: {
+        create: {
+          nome: "Josivaldo da Silva",
+          email: "meuemail@yahoo.com",
+          senha: "1234232"
+        }
+      },
+      endereco: {
+        create: {
+          rua: "Rua Barão de Itapetininga",
+          numero: 37,
+          bairro: "República",
+          cidade: "São Paulo",
+          estado: "SP",
+          cep: "01042-000",
+          complemento: "Sala 12"
+       }
+       
+      },
+      cartao: {
+        create: {
+          num_cartao: "9999999999999999",
+          dono_cartao: "Josivaldo da Silva",
+          data_vencimento: "245",
+          cvv: "444",
+        }
+      }
+    }
+  })
+
+  const compra2 = await prisma.compra.create({
+    data: {
+      id_cliente: cliente2.id,
+      data_hora: new Date(),
+      ingressos: {
+          create: {
+              valor_pago: 200,
+              id_lotacao: lotacao1.id
+          }
+        }
+      }
+  })
+
+  /* CLEINTE 3 */
+  const cliente3 = await prisma.cliente.create({
+    data: {
+      cpf: '62807982085',
+      telefone: '6725361968',
+      data_nasc: new Date(),
+      usuario: {
+        create: {
+          nome: "Andre Rodrigues",
+          email: "andrezito@yahoo.com",
+          senha: "123"
+        }
+      },
+      endereco: {
+        create: {
+          rua: "Rua Barão de Itapetininga",
+          numero: 150,
+          bairro: "República",
+          cidade: "São Paulo",
+          estado: "SP",
+          cep: "01042-000",
+          complemento: "Sala 12"
+       }
+       
+      },
+      cartao: {
+        create: {
+          num_cartao: "1111111111111111",
+          dono_cartao: "Josemar Almeida",
+          data_vencimento: "2055",
+          cvv: "333",
+        }
+      }
+    }
+  })
+
+} main()
   .then(async () => {
     await prisma.$disconnect()
   })
@@ -508,3 +456,9 @@ async function main() {
     await prisma.$disconnect()
     process.exit(1)
   })
+
+/*Parabéns 
+professor
+você
+chegou ao
+FIM!!!! */

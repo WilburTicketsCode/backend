@@ -67,9 +67,9 @@ export default function EditAddress() {
                 className="bg-transparent shadow-none"
             >
                 <Card className="flex justify-center items-center mx-auto w-full  h-[90vh]" >
-                        <div className="w-full h-full gap-6 flex flex-col justify-center items-center">
+                        <div className="w-full h-full gap-6 flex flex-col justify-center items-center overflow-auto">
                             <h2 className="text-2xl font-bold text-center">Editar Endereço</h2>
-                            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+                            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2 overflow-auto">
                                 <Input {...register('cep')} className='w-[15rem] sm:w-[20rem] lg:w-[30rem]' label='CEP*'></Input>
                                 {errors.cep?.message && <p className="text-red-500">{errors.cep?.message}</p>}
                                 <Input {...register('state')} className='w-[15rem] sm:w-[20rem] lg:w-[30rem]' label='Estado*'/>

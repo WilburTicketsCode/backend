@@ -15,9 +15,9 @@ export default function Addrress() {
 
     return (
         <div className="h-full flex justify-center items-center w-[98%] ">
-            <div className="w-full h-full gap-1 flex flex-col justify-center items-center">
+            <div className="w-full h-full gap-1 flex flex-col justify-center items-center overflow-auto  pt-6">
                 <div className="w-[15rem] sm:w-[20rem] lg:w-[30rem]">
-                    <label>CEP*:</label>
+                    <label >CEP*:</label>
                     <Input value={userAddress.cep} disabled ></Input>
                 </div>
                 <div className="w-[15rem] sm:w-[20rem] lg:w-[30rem]">
@@ -44,8 +44,9 @@ export default function Addrress() {
                     <label>Complemento:</label>
                     <Input value={userAddress.complement} disabled></Input>
                 </div>
-                <EditAddress/>
-
+                <div className="flex items-center justify-center w-[15rem] h-[10rem] sm:w-[20rem] lg:w-[30rem] ">
+                    <EditAddress/>
+                </div>
             </div>
         </div>
     );

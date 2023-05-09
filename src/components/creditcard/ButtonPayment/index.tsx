@@ -1,7 +1,10 @@
+'use client';
+
 import React from 'react';
 import Cardform from '../Cardform';
 import FlippableCard from '../FlippableCard';
 import { PayContext } from '../../../contexts/payContext';
+
 import {
     Button,
     Dialog,
@@ -11,7 +14,7 @@ import {
 } from "@material-tailwind/react";
 
 
-
+{/*Teste*/}
 export default function Payment() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen((cur) => !cur);
@@ -36,6 +39,7 @@ export default function Payment() {
 
     return (
         <React.Fragment>
+
             <PayContext.Provider value={{ infoCard, setInfoCard }} >
                 <Button onClick={()=>{cleanInfoCard(); handleOpen()}}>Adicionar Cartão</Button>
                 <Dialog
@@ -55,6 +59,7 @@ export default function Payment() {
 
                 </Dialog>
             </PayContext.Provider>
+
         </React.Fragment>
     )
 }

@@ -21,7 +21,7 @@ export default function CostumerP() {
 
   return (
     <div className="flex h-full w-full items-center justify-center rounded-md" >
-      <Tabs value={type} className="overflow-visible h-[95%]  w-[95%] lg:w-5/6 rounded-lg bg-gray-100" >
+      <Tabs value={type} className="overflow-visible h-[100%]  w-[95%] lg:w-5/6 rounded-lg bg-gray-100" >
         <TabsHeader className="h-[5.2rem] text-black bg-light-blue-200">
           <Tab value="registrationData" onClick={() => { setType("registrationData") }}>
             <Typography className="text-base font-bold" >Dados</Typography> 
@@ -39,14 +39,14 @@ export default function CostumerP() {
           mount: { x: 0 },
           unmount: { x: -250 },
         }}>
-          <TabPanel className="h-full" value="registrationData">
+          <TabPanel className="h-full overflow-auto" value="registrationData">
             <RegistrationData/>
 
           </TabPanel>
-          <TabPanel className="h-full" value="address">
+          <TabPanel className="h-full overflow-auto" value="address">
             <Address/>
           </TabPanel>
-          <TabPanel className="h-full" value="card">
+          <TabPanel className="h-full overflow-auto" value="card">
             {existCard ? <WithCard /> : <NoCard />}
           </TabPanel>
         </TabsBody>

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getEventos } from "../../../../lib/evento";
+import { getEvento } from "../../../../../lib/evento";
 
 
 /* Banco pessoal
@@ -11,7 +11,7 @@ mysql://nh7ntf3fxeucxnnj0c6s:pscale_pw_Xy42bmYPRmC8byFrTK6SzV7jv4OABObnuFmuSZogC
 */
 
 export async function GET(request: Request) {
-    const data = await getEventos()
+    const data = await getEvento(1)
     
     return NextResponse.json(data)
 }

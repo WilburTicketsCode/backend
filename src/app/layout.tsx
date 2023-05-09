@@ -1,5 +1,5 @@
 
-
+import '../styles/globals.css'
 import MainLayout from "@/components/layouts/MainLayout"
 
 
@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br">
-      <body>
+      <body className="bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200">
 
         <MainLayout>
           

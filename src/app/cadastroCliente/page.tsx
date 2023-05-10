@@ -1,139 +1,62 @@
-import {
-  Card,
-  Input,
-  Checkbox,
-  Button,
-  Typography,
-} from "@material-tailwind/react";
+"use client";
+
+import "../globals.css";
+import { ThemeProvider, Typography } from "@material-tailwind/react";
+import { CustomerRegistrationContext } from "../../contexts/CustomerRegistrationContext";
+import { StepperContext } from "../../contexts/StepperContext";
 import React from "react";
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import UseStepperContext from "../../use/UseStepperContext";
-import { useForm } from "react-hook-form";
-import UseCustomerRegistrationContext from "../../use/UseCustomerRegistrationContext";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import RegistrationSteps from "@/components/RegisterClient/Stepper";
+ 
 
-type AcessFormData = z.infer<typeof AcessFormSchema>;
-
-const AcessFormSchema = z.object({
-  email: z.string().min(1),
-  password: z.string().min(1),
-  passwordConfirm: z.string().min(1),
-})
-.refine((data) => data.password === data.passwordConfirm, {
-  message: "Passwords don't match",
-  path: ["passwordConfirm"],
-});
-
-export default function AcessForm() {
-  const { infoStepper, setInfoStepper } = UseStepperContext();
-  const [activeStep, setActiveStep] = React.useState(infoStepper.activeStep);
-
-  const onSubmit = (data: AcessFormData) => {
-    console.log(data);
-    setInfoStepper({
-      activeStep: activeStep+1
-    });
-    setActiveStep(activeStep);
-}
-
-  const { infoAcessForm, setInfoAcessForm } = UseCustomerRegistrationContext();
-  const [email, setEmail] = React.useState(infoAcessForm.email);
-  const [password, setPassword] = React.useState(infoAcessForm.password);
-  const [passwordConfirm, setPasswordConfirm] = React.useState("");
-
-  const { register, handleSubmit, formState: { errors } } = useForm<AcessFormData>({
-    resolver: zodResolver(AcessFormSchema),
-    criteriaMode: 'all',
-        mode: 'all',
-        defaultValues: {
-            email: email,
-            password: password,
-        },
+export default function Example() {
+  const [infoPersonalForm, setInfoPersonalForm] = React.useState({
+    name: "",
+    birthDate: "",
+    CPF: "",
+    phone: "",
   })
 
-  const handlePrev = (e: any) => {
-    setInfoStepper({
-      activeStep: activeStep-1
-    });
-    setActiveStep(activeStep);
-  }
+  const [infoAdressForm, setInfoAdressForm] = React.useState({
+    CEP: "",
+      state: "",
+      city: "",
+      district: "",
+      street: "",
+      number: "",
+      complement: "",
+  })
 
-  const handleEmail = (e: any) => {
-    const email = e.target.value;
-    setInfoAcessForm({
-        email: email,
-        password: password,
-    });
-    setEmail(email);
-  }
+  const [infoAcessForm, setInfoAcessForm] = React.useState({
+    email: "",
+    password: "",
+  })
 
-  const handlePassword = (e: any) => {
-    const password = e.target.value;
-    setInfoAcessForm({
-        email: email,
-        password: password,
-    });
-    setPassword(password);
-  }
+  const [infoStepper, setInfoStepper] = React.useState({
+    activeStep: 0
+  })
 
-  const handlePasswordConfirm = (e: any) => {
-    const passwordConfirm = e.target.value;
-    setInfoAcessForm({
-        email: email,
-        password: password,
-    });
-    setPasswordConfirm(passwordConfirm);
-  }
 
-return (
-  <form onSubmit={handleSubmit(onSubmit)} className="mt-8 mb-2 w-96 max-w-screen-lg sm:w-96">
-    <div className="flex flex-col gap-6">
-      <Input size="lg" 
-        label="E-mail*" 
-        containerProps={{ className: "min-w-[72px]" }}
-        {...register("email")}
-            value={email}
-            onChange={(e) => { handleEmail(e) }}
-            onClick={(e)=>handleEmail(e)}
-            color="indigo"
-            error={Boolean(errors.email)}
-      />   
-      <div>
-        <Input size="lg" 
-          type="password"
-          label="Senha*" 
-          containerProps={{ className: "min-w-[72px]" }}
-          {...register("password")}
-              value={password}
-              onChange={(e) => { handlePassword(e) }}
-              onClick={(e)=>handlePassword(e)}
-              color="indigo"
-              error={Boolean(errors.password)}
-        />
-        <Typography variant="small" color="gray" className="flex items-center gap-1 font-normal mt-2">
-          <InformationCircleIcon className="w-4 h-4 -mt-px" />
-          Use pelo menos 8 caracteres.
-        </Typography> 
-      </div>
-      <div>
-        <Input size="lg" 
-          label="Confirmação da Senha*" 
-          containerProps={{ className: "min-w-[72px]" }}
-          {...register("passwordConfirm")}
-          value={passwordConfirm}
-          onChange={(e) => { handlePasswordConfirm(e) }}
-          onClick={(e)=>handlePasswordConfirm(e)}
-          color="indigo"
-          error={Boolean(errors.passwordConfirm)}
-        />
-        {errors.passwordConfirm?.message && 
-          <Typography variant="small" color="gray" className="flex items-center gap-1 font-normal mt-2">
-            <InformationCircleIcon className="w-4 h-4 -mt-px" />
-            {errors.passwordConfirm?.message}
-          </Typography> }
-      </div>
-    </div>
-  </form>
-);
+  return (
+    <ThemeProvider>
+      <StepperContext.Provider value={{ infoStepper, setInfoStepper }}>
+        <CustomerRegistrationContext.Provider value={{ infoPersonalForm, setInfoPersonalForm, infoAdressForm, setInfoAdressForm,infoAcessForm, setInfoAcessForm }} >
+          <div className="flex justify-center items-center h-screen">
+              <div className="w-[500px] h-[700px] bg-gray-200 rounded-lg">
+                <div className="flex flex-col items-center my-10">
+                  <Typography variant="h2" className="text-[#404c76]">
+                    Seja nosso cliente!
+                  </Typography>
+                  <Typography variant="small" className="text-[#404c76]">
+                    Cadastre-se no sistema para vender seus ingressos.
+                  </Typography>
+                </div>
+                <div className="my-10" >
+                  <RegistrationSteps />  
+                </div>
+              </div>
+          </div>
+        </CustomerRegistrationContext.Provider>
+      </StepperContext.Provider>
+    </ThemeProvider>
+  );
 }

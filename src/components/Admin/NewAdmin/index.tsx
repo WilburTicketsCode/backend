@@ -4,6 +4,7 @@ import {
     Button,
     Typography,
 } from "@material-tailwind/react";
+import Link from 'next/link';
 
 export default function TelaNewAdm() {
     return (
@@ -35,7 +36,12 @@ export default function TelaNewAdm() {
                         Cadastrar
                     </Button>
 
-                    <a href="/admin-list" className="">Ver todos os administradores</a>
+                    <Link href="/admin/admin-list">
+                        <p className="items-center justify-center">
+                            Ver todos os administradores  
+                        </p>
+                        
+                    </Link>
                 </form>
             </Card>
 

@@ -15,6 +15,16 @@ export async function getEventos() {
           }
         ],
     })
+
+    try{
+      await prisma.$disconnect()
+    }
+    catch (e) {
+      console.error(e)
+      await prisma.$disconnect()
+      process.exit(1)
+    }
+
     return data
 }
 
@@ -29,5 +39,14 @@ export async function getEvento(id: number) {
       },
     });
   
+    try{
+      await prisma.$disconnect()
+    }
+    catch (e) {
+      console.error(e)
+      await prisma.$disconnect()
+      process.exit(1)
+    }
+
     return data;
   }

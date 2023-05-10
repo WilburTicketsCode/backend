@@ -1,8 +1,8 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "./prisma";
 
-export type Companies = Prisma.PromiseReturnType<typeof getClientes>;
-export type Company = Prisma.PromiseReturnType<typeof getCliente>;
+export type Clientes = Prisma.PromiseReturnType<typeof getClientes>;
+export type Cliente = Prisma.PromiseReturnType<typeof getCliente>;
 
 export async function getClientes() {
     const data = await prisma.cliente.findMany({

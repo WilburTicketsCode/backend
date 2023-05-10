@@ -15,6 +15,7 @@ export default function Home() {
         <Link href="/profile/customer"><Button>Perfil</Button></Link>
         <Link href="/event-details">evento</Link>
         <Link href="/home">Página inicial</Link>
+        <Link href="/admin">Administrador</Link>
       </ul>
     </div>
   )

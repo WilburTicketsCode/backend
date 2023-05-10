@@ -1,8 +1,8 @@
-import { Prisma } from "@prisma/client";
+import { Administrador, Prisma } from "@prisma/client";
 import { prisma } from "./prisma";
 
-export type Companies = Prisma.PromiseReturnType<typeof getAdministradores>;
-export type Company = Prisma.PromiseReturnType<typeof getAdministrador>;
+export type administradores = Prisma.PromiseReturnType<typeof getAdministradores>;
+export type administrador = Prisma.PromiseReturnType<typeof getAdministrador>;
 
 export async function getAdministradores() {
     const data = await prisma.administrador.findMany({
@@ -37,4 +37,38 @@ export async function getAdministrador(cpf: string) {
     }
   
     return data;
+}
+
+export async function inserirAdministrador(nome: string, email: string, senha: string, cpf: string,
+  superAdm: boolean) {
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const senhaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const cpfRegex = /^\d{11}$/;
+
+  if (!emailRegex.test(email) || !senhaRegex.test(senha) || !cpfRegex.test(cpf)) {
+    return null
   }
+
+  try {
+    const adm = prisma.administrador.create({
+      data: {
+        usuario: {
+          create: {
+            nome: nome,
+            email: email,
+            senha: senha
+          }
+        },
+        cpf: cpf,
+        super_adm: superAdm
+      }
+    })
+    return adm
+  } catch (e) {
+    console.log(e)
+    return null
+  }
+  
+}
+

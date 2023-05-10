@@ -1,8 +1,8 @@
-import { Administrador, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { prisma } from "./prisma";
 
-export type administradores = Prisma.PromiseReturnType<typeof getAdministradores>;
-export type administrador = Prisma.PromiseReturnType<typeof getAdministrador>;
+export type Administradores = Prisma.PromiseReturnType<typeof getAdministradores>;
+export type Administrador = Prisma.PromiseReturnType<typeof getAdministrador>;
 
 export async function getAdministradores() {
     const data = await prisma.administrador.findMany({

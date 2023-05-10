@@ -16,6 +16,16 @@ export async function getClientes() {
           }
         ],
     })
+
+    try{
+      await prisma.$disconnect()
+    }
+    catch (e) {
+      console.error(e)
+      await prisma.$disconnect()
+      process.exit(1)
+    }
+
     return data
 }
 
@@ -30,6 +40,15 @@ export async function getCliente(cpf: string) {
         cartao: true,
       },
     });
+
+    try{
+      await prisma.$disconnect()
+    }
+    catch (e) {
+      console.error(e)
+      await prisma.$disconnect()
+      process.exit(1)
+    }
   
     return data;
   }

@@ -8,10 +8,10 @@ interface MainLayoutProps {
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     return (
         <main>
-            <div className="flex h-[10vh] items-center justify-center">
+            <div className="flex min-h-[10vh] items-center justify-center">
                 <ComplexNavbar />
             </div>
-            <div className="flex h-[90vh] items-center justify-center">
+            <div className="flex min-h-[90vh] items-center justify-center">
                 {children}
             </div>
         </main>

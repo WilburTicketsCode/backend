@@ -6,7 +6,7 @@ import {
 
 import { ImClock } from "react-icons/im";
 import Tickets from '@/components/event/Tickets';
-
+import { Button } from '@/components/ClientSide';
 
 
  async function loadEvent(id: Number) {
@@ -22,7 +22,7 @@ export default async function Event({params} : any) {
         <div className="mx-auto w-full h-full">
             <div className='flex justify-center lg:h-[70%] md:h-1/2 sm:h-1/2 mb-1 mt-2'>
                 <img 
-                    className='w-[95%] m-5 items-center object-fit rounded-2xl'
+                    className='w-[95%] h-[50%] m-5 items-center object-fit rounded-2xl'
                     src="/img/event-banner/show_djavan.jpeg"
                     alt='Imagem do evento'
                 />
@@ -34,10 +34,10 @@ export default async function Event({params} : any) {
                         <p className="text-2xl font-bold m-6 ">
                            {evento.nome}
                         </p>
-                        <button className="shadow-xl text-gray-100 font-bold bg-deep-purple-400 flex items-center gap-3 rounded-full p-2">
+                        <Button color="purple" size="md" className="flex items-center gap-3 rounded-full">
                             <MdOutlineShare size={'1rem'}/>
                             Compartilhar
-                        </button>
+                        </Button>
                     </div>
 
                     <div className="flex flex-wrap mt-8">
@@ -68,9 +68,9 @@ export default async function Event({params} : any) {
                             <Tickets setor="Backstage"/>
 
                             <p className="mb-5">Subtotal: R$0,00</p>
-                            <button type="submit" className="m-auto shadow-xl text-gray-100 font-bold bg-deep-purple-400 flex gap-3 rounded-full p-2">
+                            <Button color="purple" type="submit" className="m-auto flex gap-3 rounded-full p-2">
                                 Adicionar ao carrinho
-                            </button>           
+                            </Button>           
                         </div>
 
                     </div>

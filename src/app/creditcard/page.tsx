@@ -1,16 +1,11 @@
 import '../../styles/globals.css'
-import Payment from "../../components/creditcard/ButtonPayment";
+import RegistrationCustomer from '@/components/RegisterClient';
 
 
 export default function Dash() {
     return(
         <div>
-
-            <h1>Ta tudo certo</h1>
-
-                <Payment />
-
-            
+            <RegistrationCustomer />
         </div>
     )
 }

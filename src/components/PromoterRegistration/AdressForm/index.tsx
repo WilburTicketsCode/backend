@@ -1,14 +1,16 @@
 import UseStepperContext from "../../../use/UseStepperContext";
 import {
+  Card,
   Input,
+  Checkbox,
   Button,
-
-} from "../../ClientSide";
+  Typography,
+} from "@material-tailwind/react";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import UseCustomerRegistrationContext from "../../../use/UseCustomerRegistrationContext";
+import UsePromoterRegistrationContext from "@/use/UsePromoterRegistrationContext";
 
 function formatCEP(value:string) {
   return value
@@ -33,7 +35,7 @@ export default function AdressForm() {
 
   const { infoStepper, setInfoStepper } = UseStepperContext();
 
-  const { infoAdressForm, setInfoAdressForm } = UseCustomerRegistrationContext();
+  const { infoAdressForm, setInfoAdressForm } = UsePromoterRegistrationContext();
 
   const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<AdressFormData>({
       resolver: zodResolver(AdressFormSchema),
@@ -87,14 +89,14 @@ return (
         {...register("CEP")}
           color="indigo"
           error={Boolean(errors.CEP)}
-          containerProps={{ className: "min-w-[10px]" }}
+          containerProps={{ className: "min-w-[20px]" }}
       />
       <Input size="lg" 
         label="Estado*" 
         {...register("state")}
           color="indigo"
           error={Boolean(errors.state)}
-          containerProps={{ className: "min-w-[10px]" }}
+          containerProps={{ className: "min-w-[20px]" }}
       />
     </div>
     <div className="flex flex-row gap-6">
@@ -103,14 +105,14 @@ return (
         {...register("city")}
           color="indigo"
           error={Boolean(errors.city)}
-          containerProps={{ className: "min-w-[10px]" }}
+          containerProps={{ className: "min-w-[20px]" }}
       />
       <Input size="lg" 
         label="Bairro*" 
         {...register("district")}
           color="indigo"
           error={Boolean(errors.district)}
-          containerProps={{ className: "min-w-[10px]" }}
+          containerProps={{ className: "min-w-[20px]" }}
       />
     </div>
     <div className="flex flex-row gap-6">
@@ -119,14 +121,14 @@ return (
         {...register("street")}
           color="indigo"
           error={Boolean(errors.street)}
-          containerProps={{ className: "min-w-[10px]" }}
+          containerProps={{ className: "min-w-[20px]" }}
       />
       <Input size="lg" 
         label="Número*" 
         {...register("number")}
           color="indigo"
           error={Boolean(errors.number)}
-          containerProps={{ className: "min-w-[10px]" }}
+          containerProps={{ className: "min-w-[20px]" }}
       />
     </div> 
     <Input size="lg" 

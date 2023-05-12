@@ -1,4 +1,4 @@
-'use client'
+
 
 import NavBarAdm from "@/components/Navbar/Adm"
 import TelaNewAdm from "@/components/Admin/NewAdmin"

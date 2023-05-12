@@ -1,5 +1,6 @@
-import { Input, Button } from '@material-tailwind/react'
+import { Input, Button } from '../ClientSide'
 import { CiSearch } from "react-icons/ci"
+
 
 
 export default function Search() {

@@ -1,7 +1,6 @@
-"use client";
-
+'use client'
 import "../globals.css";
-import { ThemeProvider, Typography } from "@material-tailwind/react";
+import { Typography } from "@/components/ClientSide";
 import { CustomerRegistrationContext } from "../../contexts/CustomerRegistrationContext";
 import { StepperContext } from "../../contexts/StepperContext";
 import React from "react";
@@ -37,7 +36,6 @@ export default function Example() {
 
 
   return (
-    <ThemeProvider>
       <StepperContext.Provider value={{ infoStepper, setInfoStepper }}>
         <CustomerRegistrationContext.Provider value={{ infoPersonalForm, setInfoPersonalForm, infoAdressForm, setInfoAdressForm,infoAcessForm, setInfoAcessForm }} >
           <div className="w-full h-[90%] flex justify-center">
@@ -53,6 +51,5 @@ export default function Example() {
           </div>
         </CustomerRegistrationContext.Provider>
       </StepperContext.Provider>
-    </ThemeProvider>
   );
 }

@@ -1,10 +1,8 @@
 import {
-  Card,
   Input,
-  Checkbox,
   Button,
   Typography,
-} from "@material-tailwind/react";
+} from "../../ClientSide";
 import React from "react";
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';

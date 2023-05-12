@@ -1,5 +1,5 @@
-'use client'
-import { Button } from '@material-tailwind/react';
+
+import { Button } from '../components/ClientSide';
 import '../styles/globals.css'
 import { Inter } from 'next/font/google';
 import Link from 'next/link';

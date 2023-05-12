@@ -1,11 +1,7 @@
-import { CheckCircleIcon, InformationCircleIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import {
-    Card,
-    CardBody,
-    CardFooter,
     Typography,
-    Button
-  } from "@material-tailwind/react";
+  } from "../../ClientSide";
    
   export default function Example() {
     return (

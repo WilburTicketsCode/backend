@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input } from "@material-tailwind/react";
+import { Input } from "../../ClientSide";
 import EditAddress from "@/components/CostumerProfile/EditAddress";
 
 export default function Addrress() {

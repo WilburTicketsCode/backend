@@ -1,4 +1,4 @@
-import {Carousel, Typography} from '@/components/home/carrossel/carousel'
+import {Carousel, Typography} from '@/components/ClientSide'
 import '../../styles/globals.css'
 import Carrossel from '../../components/home/carrossel';
 import EventCard from '@/components/home/eventCard';

@@ -89,14 +89,14 @@ return (
         {...register("CEP")}
           color="indigo"
           error={Boolean(errors.CEP)}
-          containerProps={{ className: "min-w-[10px]" }}
+          containerProps={{ className: "min-w-[20px]" }}
       />
       <Input size="lg" 
         label="Estado*" 
         {...register("state")}
           color="indigo"
           error={Boolean(errors.state)}
-          containerProps={{ className: "min-w-[10px]" }}
+          containerProps={{ className: "min-w-[20px]" }}
       />
     </div>
     <div className="flex flex-row gap-6">
@@ -105,14 +105,14 @@ return (
         {...register("city")}
           color="indigo"
           error={Boolean(errors.city)}
-          containerProps={{ className: "min-w-[10px]" }}
+          containerProps={{ className: "min-w-[20px]" }}
       />
       <Input size="lg" 
         label="Bairro*" 
         {...register("district")}
           color="indigo"
           error={Boolean(errors.district)}
-          containerProps={{ className: "min-w-[10px]" }}
+          containerProps={{ className: "min-w-[20px]" }}
       />
     </div>
     <div className="flex flex-row gap-6">
@@ -121,14 +121,14 @@ return (
         {...register("street")}
           color="indigo"
           error={Boolean(errors.street)}
-          containerProps={{ className: "min-w-[10px]" }}
+          containerProps={{ className: "min-w-[20px]" }}
       />
       <Input size="lg" 
         label="Número*" 
         {...register("number")}
           color="indigo"
           error={Boolean(errors.number)}
-          containerProps={{ className: "min-w-[10px]" }}
+          containerProps={{ className: "min-w-[20px]" }}
       />
     </div> 
     <Input size="lg" 

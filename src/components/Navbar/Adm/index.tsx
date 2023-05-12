@@ -11,7 +11,7 @@ import {
   MenuItem,
   Avatar,
   IconButton,
-} from "@material-tailwind/react";
+} from "../../ClientSide";
 import {
   UserCircleIcon,
   ArrowLeftOnRectangleIcon,

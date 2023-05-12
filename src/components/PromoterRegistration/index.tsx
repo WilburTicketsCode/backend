@@ -1,18 +1,17 @@
 "use client";
 
-import "../globals.css";
 import { ThemeProvider, Typography } from "@material-tailwind/react";
-import { CustomerRegistrationContext } from "../../contexts/CustomerRegistrationContext";
+import { PromoterRegistrationContext } from "../../contexts/PromoterRegistrationContext";
 import { StepperContext } from "../../contexts/StepperContext";
 import React from "react";
-import RegistrationSteps from "@/components/RegisterClient/Stepper";
+import PromoteRegSteps from "./PromoterRegStepper";
  
 
-export default function Example() {
-  const [infoPersonalForm, setInfoPersonalForm] = React.useState({
+export default function PromoterRegistration() {
+  const [infoCompanyForm, setInfoCompanyForm] = React.useState({
     name: "",
-    birthDate: "",
     CPF: "",
+    CNPJ: "",
     phone: "",
   })
 
@@ -39,19 +38,19 @@ export default function Example() {
   return (
     <ThemeProvider>
       <StepperContext.Provider value={{ infoStepper, setInfoStepper }}>
-        <CustomerRegistrationContext.Provider value={{ infoPersonalForm, setInfoPersonalForm, infoAdressForm, setInfoAdressForm,infoAcessForm, setInfoAcessForm }} >
+        <PromoterRegistrationContext.Provider value={{ infoCompanyForm, setInfoCompanyForm, infoAdressForm, setInfoAdressForm,infoAcessForm, setInfoAcessForm}} >
           <div className="w-full h-[90%] flex justify-center">
-            <div className="flex flex-col items-center w-[480px] h-fit rounded-lg bg-gray-200">
+            <div className="flex flex-col items-center w-[400px] h-fit rounded-lg bg-gray-200">
               <Typography variant="h2" className="text-[#404c76] mt-6">
-                Seja nosso cliente!
+                Seja um promoter!
               </Typography>
               <Typography variant="small" className="text-[#404c76] mb-4">
                 Cadastre-se no sistema para vender seus ingressos.
               </Typography>
-              <RegistrationSteps />  
+              <PromoteRegSteps />  
             </div>
           </div>
-        </CustomerRegistrationContext.Provider>
+        </PromoterRegistrationContext.Provider>
       </StepperContext.Provider>
     </ThemeProvider>
   );

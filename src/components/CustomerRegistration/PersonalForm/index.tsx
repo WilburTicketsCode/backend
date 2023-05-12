@@ -86,7 +86,7 @@ export default function PersonalForm() {
         {...register("name")}
         color="indigo"
         error={Boolean(errors.name)}
-        containerProps={{ className: "min-w-[10px]" }}
+        containerProps={{ className: "min-w-[20px]" }}
       />
 
       <Input size="lg" 
@@ -95,7 +95,7 @@ export default function PersonalForm() {
         type="date"
         {...register("birthDate")}
         error={Boolean(errors.birthDate)}
-        containerProps={{ className: "min-w-[10px]" }}
+        containerProps={{ className: "min-w-[20px]" }}
       />
       <div className="flex flex-row gap-4">
         <Input size="lg" 
@@ -103,7 +103,7 @@ export default function PersonalForm() {
         maxLength={14}
         {...register("CPF")}
         error={Boolean(errors.CPF)}
-        containerProps={{ className: "min-w-[10px]" }}
+        containerProps={{ className: "min-w-[20px]" }}
         />
       
         <Input size="lg" 
@@ -111,7 +111,7 @@ export default function PersonalForm() {
           maxLength={15}
           {...register("phone")}
           error={Boolean(errors.phone)}
-          containerProps={{ className: "min-w-[10px]" }}
+          containerProps={{ className: "min-w-[20px]" }}
         />
       </div>
       <div className="flex flex-row w-full justify-end mt-4 mb-8">

@@ -12,6 +12,7 @@ import AdressForm from "../AdressForm";
 import AcessForm from "../AcessForm";
 import UseStepperContext from "../../../use/UseStepperContext";
 import RegistrationFinish from "../RegistrationFinish";
+import CompanyForm from "@/components/PromoterRegistration/CompanyForm";
  
 
 function getStepContent(step: number) {
@@ -30,8 +31,7 @@ function getStepContent(step: number) {
 }
 
 export default function RegistrationSteps() {
-  const { infoStepper, setInfoStepper } = UseStepperContext();
-  const [activeStep, setActiveStep] = React.useState(infoStepper.activeStep);
+  const { infoStepper} = UseStepperContext();
 
   return (
     <div className="w-full flex flex-col items-center">

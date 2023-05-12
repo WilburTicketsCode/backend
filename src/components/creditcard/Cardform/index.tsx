@@ -1,6 +1,7 @@
+'use client'
 import React, { useState } from 'react';
 import UPayContext from '../../../use/UPayContext';
-import { Input, Button } from '@material-tailwind/react';
+import { Input, Button } from '../../ClientSide';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';

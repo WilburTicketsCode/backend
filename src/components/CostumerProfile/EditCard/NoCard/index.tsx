@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button, Typography } from "@material-tailwind/react";
+import {  Typography } from "../../../ClientSide";
 import { CiCreditCardOff } from "react-icons/ci";
 import Payment from "@/components/creditcard/ButtonPayment";
 

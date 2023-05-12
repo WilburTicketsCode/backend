@@ -1,7 +1,5 @@
-'use client';
-
 import '../../styles/globals.css'
-import { Card, CardBody, CardHeader, Typography, Button } from '@material-tailwind/react';
+import { Card, CardBody, CardHeader, Typography, Button } from '@/components/ClientSide';
 import { MdOutlineShare, MdCalendarMonth, MdLocationOn } from "react-icons/md";
 import { ImClock } from "react-icons/im";
 import DetailsSection from '@/components/event/DetailsSection';

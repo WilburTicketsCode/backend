@@ -1,7 +1,9 @@
+'use client';
+
 import {
   Input,
   Button,
-} from "@material-tailwind/react";
+} from "../../ClientSide";
 import React, { useEffect } from "react";
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';

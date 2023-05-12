@@ -7,7 +7,7 @@ import {
   Tab,
   TabPanel,
   Typography,
-} from "@material-tailwind/react";
+} from "../ClientSide";
 import WithCard from "./EditCard/WithCard";
 import NoCard from "./EditCard/NoCard";
 import Address from "./Address";

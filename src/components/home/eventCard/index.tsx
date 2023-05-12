@@ -1,11 +1,11 @@
-'use client'
+
 import {
     Card,
     CardHeader,
     CardBody,
     Typography,
     Button,
-  } from "@material-tailwind/react";
+  } from "../../ClientSide";
   import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
    
   export default function EventCard(props: any) {

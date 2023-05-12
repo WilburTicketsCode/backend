@@ -1,5 +1,5 @@
-"use client";
-import {Carousel} from "@material-tailwind/react";
+
+import {Carousel} from "../../ClientSide";
 
 export default function Carrossel(props: any){
     return(

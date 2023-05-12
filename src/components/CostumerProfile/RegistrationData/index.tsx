@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button, Typography, Avatar } from "@material-tailwind/react";
+import { Card, Button, Typography, Avatar } from "../../ClientSide";
 
 
 

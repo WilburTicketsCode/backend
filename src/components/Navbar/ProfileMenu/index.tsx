@@ -17,25 +17,31 @@ import {
   InboxArrowDownIcon,
   LifebuoyIcon,
   PowerIcon,
+  HomeIcon,
+  BanknotesIcon,
 } from "@heroicons/react/24/outline";
 
 
 const profileMenuItems = [
   {
+    label: "R$ 10.50",
+    icon: BanknotesIcon,
+  },
+  {
+    label: "Pagina inicial",
+    icon: HomeIcon,
+  },
+  {
     label: "Meu Perfil",
     icon: UserCircleIcon,
   },
   {
-    label: "Edit Profile",
-    icon: Cog6ToothIcon,
-  },
-  {
-    label: "Inbox",
+    label: "Histórico",
     icon: InboxArrowDownIcon,
   },
   {
-    label: "Help",
-    icon: LifebuoyIcon,
+    label: "Mudar Senha",
+    icon: Cog6ToothIcon,
   },
   {
     label: "Sair",

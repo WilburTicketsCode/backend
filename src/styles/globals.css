@@ -201,3 +201,31 @@ body {
 .flip-enter-done {
   transform: rotateY(0deg);
 }
+
+
+/* ========================================================================================================= */
+.box-gray{
+  padding: 8px;
+  /* Centraliza em relação ao pai */
+  margin-right: auto;
+  margin-left: auto;
+  /* 100% do pai */
+  width: 100%;
+  height: 100%;
+  /*Vai acompanha a tela até chegar em seu limite*/
+  max-width: 700px;
+
+  min-height: 300px;
+  background-color: #E7E7E7;
+
+  border-radius: 10px;
+}
+
+.red{
+  background-color: red;
+}
+
+.btn-save{
+  background-color: #404C76 !important;
+}
+/* ========================================================================================================= */

@@ -7,16 +7,17 @@ export default function Search() {
 
   return (
 
-    <div className="relative flex w-full gap-2 md:w-max">
+    <div className="relative flex w-full gap-2 md:w-max lg:w-[50rem]">
       <Input
         type="search"
         label="Pesquisar"
-        className="pr-20"
+        className="pr-36"
+        size='lg'
         containerProps={{
-          className: "min-w-[288px]",
+          className: "min-w-[200px]",
         }}
       />
-      <Button size="sm" className="!absolute right-1 top-1 rounded">
+      <Button size="md" className="!absolute right-1 top-1 rounded">
         <CiSearch/>
       </Button>
     </div>

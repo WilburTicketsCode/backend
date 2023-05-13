@@ -9,7 +9,7 @@ import React from 'react';
 
 export default function Home() {
   return (
-    <div className='flex'>
+    <div className='flex justify-center items-center w-full h-full'>
       <ul className='flex flex-col justify-center items-center'>
         <Link href="/creditcard" >Cartão de Credito</Link>
         <Link href="/profile/customer"><Button>Perfil</Button></Link>

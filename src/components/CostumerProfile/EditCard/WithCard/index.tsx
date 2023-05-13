@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button} from "@material-tailwind/react";
+import { Card, Button} from "../../../ClientSide";
 import FlippableCard from "@/components/creditcard/FlippableCard";
 
 

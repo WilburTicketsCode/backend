@@ -11,7 +11,7 @@ import {
     Card,
     CardBody,
     CardFooter,
-} from "@material-tailwind/react";
+} from "../../ClientSide";
 
 
 {/*Teste*/}

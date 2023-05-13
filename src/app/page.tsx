@@ -12,7 +12,7 @@ export default function Home() {
     <div className='flex justify-center items-center w-full h-full'>
       <ul className='flex flex-col justify-center items-center'>
         <Link href="/creditcard" >Cartão de Credito</Link>
-        <Link href="/profile/customer"><Button>Perfil</Button></Link>
+        <Link href="/profile/custumer"><Button>Perfil</Button></Link>
         <Link href="/event-details">evento</Link>
         <Link href="/home">Página inicial</Link>
         <Link href="/admin">Administrador</Link>

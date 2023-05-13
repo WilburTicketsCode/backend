@@ -20,7 +20,7 @@ export default function CostumerP() {
   const [existCard, setExistCard] = React.useState(false);
 
   return (
-    <div className="flex h-full w-full items-center justify-center rounded-md" >
+    <div className="flex h-full w-full items-center justify-center rounded-md pt-28 md:pt-40" >
       <Tabs value={type} className="overflow-visible h-[100%]  w-[95%] lg:w-5/6 rounded-lg bg-gray-100" >
         <TabsHeader className="h-[5.2rem] text-black bg-light-blue-200">
           <Tab value="registrationData" onClick={() => { setType("registrationData") }}>

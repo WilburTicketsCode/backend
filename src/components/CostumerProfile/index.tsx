@@ -20,8 +20,8 @@ export default function CostumerP() {
   const [existCard, setExistCard] = React.useState(false);
 
   return (
-    <div className="flex h-full w-full items-center justify-center rounded-md pt-28 md:pt-40" >
-      <Tabs value={type} className="overflow-visible h-[100%]  w-[95%] lg:w-5/6 rounded-lg bg-gray-100" >
+    <div className="flex w-full items-center justify-center rounded-md pt-28 md:pt-40 bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200" >
+      <Tabs value={type} className="overflow-visible h-[100%]  w-[100%] lg:w-5/6 rounded-lg bg-gray-100" >
         <TabsHeader className="h-[5.2rem] text-black bg-light-blue-200">
           <Tab value="registrationData" onClick={() => { setType("registrationData") }}>
             <Typography className="text-base font-bold" >Dados</Typography> 
@@ -34,19 +34,18 @@ export default function CostumerP() {
           </Tab>
 
         </TabsHeader>
-        <TabsBody className="h-[88%]" animate={{
+        <TabsBody className="h-auto min-h-full" animate={{
           initial: { x: 250 },
           mount: { x: 0 },
           unmount: { x: -250 },
         }}>
-          <TabPanel className="h-full overflow-auto" value="registrationData">
+          <TabPanel className="overflow-auto" value="registrationData">
             <RegistrationData/>
-
           </TabPanel>
-          <TabPanel className="h-full overflow-auto" value="address">
+          <TabPanel className=" overflow-auto" value="address">
             <Address/>
           </TabPanel>
-          <TabPanel className="h-full overflow-auto" value="card">
+          <TabPanel className="overflow-auto" value="card">
             {existCard ? <WithCard /> : <NoCard />}
           </TabPanel>
         </TabsBody>

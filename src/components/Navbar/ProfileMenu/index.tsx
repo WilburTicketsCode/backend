@@ -15,37 +15,43 @@ import {
   ChevronDownIcon,
   Cog6ToothIcon,
   InboxArrowDownIcon,
-  LifebuoyIcon,
   PowerIcon,
   HomeIcon,
   BanknotesIcon,
 } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 
 const profileMenuItems = [
   {
     label: "R$ 10.50",
     icon: BanknotesIcon,
+    href: '/profile/costumer'
   },
   {
     label: "Pagina inicial",
     icon: HomeIcon,
+    href: '/'
   },
   {
     label: "Meu Perfil",
     icon: UserCircleIcon,
+    href: '/profile/costumer',
   },
   {
     label: "Histórico",
     icon: InboxArrowDownIcon,
+    href: '#',
   },
   {
     label: "Mudar Senha",
     icon: Cog6ToothIcon,
+    href: '/profile/changepassword',
   },
   {
     label: "Sair",
     icon: PowerIcon,
+    href: '#',
   },
 ];
 
@@ -75,7 +81,7 @@ export default function ProfileMenu() {
         </Button>
       </MenuHandler>
       <MenuList className="p-1">
-        {profileMenuItems.map(({ label, icon }, key) => {
+        {profileMenuItems.map(({ label, icon, href }, key) => {
           const isLastItem = key === profileMenuItems.length - 1;
           return (
             <MenuItem
@@ -86,18 +92,20 @@ export default function ProfileMenu() {
                 : ""
                 }`}
             >
-              {React.createElement(icon, {
-                className: `h-6 w-6 ${isLastItem ? "text-red-500" : ""}`,
-                strokeWidth: 2,
-              })}
-              <Typography
-                as="span"
-                variant="h5"
-                className="font-normal"
-                color={isLastItem ? "red" : "inherit"}
-              >
-                {label}
-              </Typography>
+              <Link href={href} className='flex flex-row gap-2'>
+                {React.createElement(icon, {
+                  className: `h-6 w-6 ${isLastItem ? "text-red-500" : ""}`,
+                  strokeWidth: 2,
+                })}
+                <Typography
+                  as="span"
+                  variant="h5"
+                  className="font-normal"
+                  color={isLastItem ? "red" : "inherit"}
+                >
+                  {label}
+                </Typography>
+              </Link>
             </MenuItem>
           );
         })}

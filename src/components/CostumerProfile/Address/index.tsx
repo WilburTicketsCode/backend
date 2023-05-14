@@ -14,8 +14,8 @@ export default function Addrress() {
     });
 
     return (
-        <div className="h-full flex justify-center items-center w-[98%] ">
-            <div className="w-full h-full gap-1 flex flex-col justify-center items-center overflow-auto  pt-6">
+        <div className="flex justify-center items-center md:min-h-[50rem] ">
+            <div className="w-full h-full gap-1 flex flex-col justify-center items-center overflow-auto bg-white">
                 <div className="w-[15rem] sm:w-[20rem] lg:w-[30rem]">
                     <label >CEP*:</label>
                     <Input value={userAddress.cep} disabled ></Input>

@@ -20,7 +20,14 @@ import {
   TabsBody,
   Tab,
   TabPanel,
-} from "@material-tailwind/react";
+} from "@material-tailwind/react"; 
+
+import {
+  Bars2Icon, 
+  UserCircleIcon,
+  ChevronDownIcon,
+  PowerIcon,
+} from "@heroicons/react/24/outline";
 
 export { Input, Stepper, Step, Button, Typography, Navbar,
     MobileNav,
@@ -40,4 +47,9 @@ export { Input, Stepper, Step, Button, Typography, Navbar,
     TabsHeader,
     TabsBody,
     Tab,
-    TabPanel,};
+    TabPanel, 
+    Bars2Icon, 
+    UserCircleIcon,
+    ChevronDownIcon,
+    PowerIcon,
+  };

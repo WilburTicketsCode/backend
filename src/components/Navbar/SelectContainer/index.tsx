@@ -7,6 +7,7 @@ import NavList from '../Adm/NavListADM'
 import { IconButton } from '../../ClientSide';
 import { BellIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import ProfileMenuADM from '../Adm/ProfileMenuADM';
+import Link from 'next/link';
 
 
 
@@ -49,13 +50,14 @@ const promoter = () => {
 
 const noLogin = () => {
     return (
-        <div className="lg:px-[10rem]  flex flex-row items-center justify-between gap-3 md:gap-1">
+        <div className=" flex flex-row items-center justify-between gap-3 md:gap-1">
             <Logo />
             <Search />
             <div className='flex flex-col md:flex-row gap-1 md:gap-6'>
-                <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Promoter</button>
-                <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Entrar</button>
-                <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar</button>
+                <Link href={'/loginpromoter'} className='flex items-center justify-center'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Entrar Promoter</button> </Link>
+                <Link href={''} className='flex items-center justify-center'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar Promoter</button> </Link>
+                <Link href={'/logincostumer'} className='flex items-center justify-center'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Entrar</button> </Link>
+                <Link href={''} className='flex items-center justify-center'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar</button> </Link>
             </div>
         </div>
     )
@@ -82,7 +84,7 @@ const adm = () => {
 }
 
 export default function Select() {
-    const [cases, setCases] = useState('costumer')
+    const [cases, setCases] = useState('noLogin')
 
     return (
         <>

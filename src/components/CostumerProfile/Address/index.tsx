@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Input } from "../../ClientSide";
-import EditAddress from "@/components/CostumerProfile/EditAddress";
+import { Input,Button } from "../../ClientSide";
+import Link from "next/link";
 
 export default function Addrress() {
     const [userAddress, setUserAddress] = useState({
@@ -45,7 +45,7 @@ export default function Addrress() {
                     <Input value={userAddress.complement} disabled></Input>
                 </div>
                 <div className="flex items-center justify-center w-[15rem] h-[10rem] sm:w-[20rem] lg:w-[30rem] ">
-                    <EditAddress/>
+                    <Link href='/profile/editaddress'><Button> Editar </Button></Link>
                 </div>
             </div>
         </div>

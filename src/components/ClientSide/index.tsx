@@ -1,6 +1,9 @@
 "use client";
 
 import {
+    Accordion,
+    AccordionHeader,
+    AccordionBody,
     Input, Stepper, Step, Button, Typography, Navbar,
     MobileNav,
     Menu,
@@ -29,7 +32,10 @@ import {
   PowerIcon,
 } from "@heroicons/react/24/outline";
 
-export { Input, Stepper, Step, Button, Typography, Navbar,
+export { Accordion,
+    AccordionHeader,
+    AccordionBody,
+    Input, Stepper, Step, Button, Typography, Navbar,
     MobileNav,
     Menu,
     MenuHandler,

@@ -1,6 +1,7 @@
-
+import React from 'react'
 import '../styles/globals.css'
-import MainLayout from "@/components/layouts/MainLayout"
+import Navbar from '../components/Navbar/Navbar'
+
 
 
 export const metadata = {
@@ -15,13 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br">
-      <body className="min-h-screen bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200">
-
-        <MainLayout>
-          
+      <body className="bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200">
+          <Navbar/>
         {children}
-        
-        </MainLayout>
         
         </body>
     </html>

@@ -1,6 +1,12 @@
+<<<<<<< HEAD:src/app/cadastroCliente/page.tsx
+'use client'
+import "../globals.css";
+import { Typography } from "@/components/ClientSide";
+=======
 "use client";
 
 import { ThemeProvider, Typography } from "@material-tailwind/react";
+>>>>>>> main:src/components/CustomerRegistration/index.tsx
 import { CustomerRegistrationContext } from "../../contexts/CustomerRegistrationContext";
 import { StepperContext } from "../../contexts/StepperContext";
 import React from "react";
@@ -36,7 +42,6 @@ export default function CustomerRegistration() {
 
 
   return (
-    <ThemeProvider>
       <StepperContext.Provider value={{ infoStepper, setInfoStepper }}>
         <CustomerRegistrationContext.Provider value={{ infoPersonalForm, setInfoPersonalForm, infoAdressForm, setInfoAdressForm,infoAcessForm, setInfoAcessForm }} >
           <div className="w-full h-[90%] flex justify-center">
@@ -52,6 +57,5 @@ export default function CustomerRegistration() {
           </div>
         </CustomerRegistrationContext.Provider>
       </StepperContext.Provider>
-    </ThemeProvider>
   );
 }

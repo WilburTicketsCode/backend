@@ -1,5 +1,5 @@
 import React from "react";
-import { Stepper, Step, Button, Typography } from "@material-tailwind/react";
+import { Stepper, Step, Button, Typography } from "../../ClientSide";
 import {
   CogIcon,
   UserIcon,

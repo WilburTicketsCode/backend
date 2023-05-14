@@ -13,7 +13,8 @@ export default function Home() {
         <Link href="/profile/costumer"><Button>Perfil</Button></Link>
         <Link href="/event-details">evento</Link>
         <Link href="/home">Página inicial</Link>
-        <Link href="/admin">Administrador</Link>
+        <Link href="/admin">Administrador</Link> 
+        <Link href="/eventosPromoter">Promoter</Link>
       </ul>
     </div>
   )

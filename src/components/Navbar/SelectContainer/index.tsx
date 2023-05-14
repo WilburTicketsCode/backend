@@ -1,5 +1,5 @@
 'use client'
-import Search from '../../Search';
+import Search from '../Search';
 import Logo from '../Logo'
 import ProfileMenu from '../ProfileMenu';
 import { useState } from 'react';
@@ -82,7 +82,7 @@ const adm = () => {
 }
 
 export default function Select() {
-    const [cases, setCases] = useState('promoter')
+    const [cases, setCases] = useState('costumer')
 
     return (
         <>

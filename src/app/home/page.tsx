@@ -1,4 +1,3 @@
-import {Carousel, Typography} from '@/components/ClientSide'
 import '../../styles/globals.css'
 import Carrossel from '../../components/home/carrossel';
 import EventCard from '@/components/home/eventCard';
@@ -17,7 +16,7 @@ export default function Home() {
 
         </div>
 
-        <div className= "flex justify-center lg:w-[81vw] w-[95vw] min-h-[8rem] flex-col bg-gray-300 rounded-xl">
+        <div className= "flex justify-center lg:w-[60vw] w-[95vw] min-h-[8rem] flex-col bg-gray-300 rounded-xl">
             <EventCard imagem = "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" 
             data="05/04" local="Recife - PE">Djavan Turnê A 2023</EventCard>
 

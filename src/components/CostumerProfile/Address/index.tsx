@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Input } from "@material-tailwind/react";
-import EditAddress from "@/components/CostumerProfile/EditAddress";
+import { Input,Button } from "../../ClientSide";
+import Link from "next/link";
 
 export default function Addrress() {
     const [userAddress, setUserAddress] = useState({
@@ -14,8 +14,8 @@ export default function Addrress() {
     });
 
     return (
-        <div className="h-full flex justify-center items-center w-[98%] ">
-            <div className="w-full h-full gap-1 flex flex-col justify-center items-center overflow-auto  pt-6">
+        <div className="flex justify-center items-center md:min-h-[50rem] ">
+            <div className="w-full h-full gap-1 flex flex-col justify-center items-center overflow-auto bg-white">
                 <div className="w-[15rem] sm:w-[20rem] lg:w-[30rem]">
                     <label >CEP*:</label>
                     <Input value={userAddress.cep} disabled ></Input>
@@ -45,7 +45,7 @@ export default function Addrress() {
                     <Input value={userAddress.complement} disabled></Input>
                 </div>
                 <div className="flex items-center justify-center w-[15rem] h-[10rem] sm:w-[20rem] lg:w-[30rem] ">
-                    <EditAddress/>
+                    <Link href='/profile/editaddress'><Button> Editar </Button></Link>
                 </div>
             </div>
         </div>

@@ -1,9 +1,4 @@
-import { Input } from "@material-tailwind/react";
-import {
-    Card,
-    Button,
-    Typography,
-} from "@material-tailwind/react";
+import { Input, Card, Button, Typography,} from "@/components/ClientSide";
 import Link from 'next/link';
 
 export default function TelaNewAdm() {

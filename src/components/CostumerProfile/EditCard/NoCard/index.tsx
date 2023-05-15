@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button, Typography } from "@material-tailwind/react";
+import {  Typography } from "../../../ClientSide";
 import { CiCreditCardOff } from "react-icons/ci";
 import Payment from "@/components/creditcard/ButtonPayment";
 
@@ -8,7 +8,7 @@ export default function NoCard() {
 
 
     return (
-        <div className="flex flex-col w-full h-full items-center justify-center">
+        <div className="flex flex-col w-full h-full items-center justify-center md:min-h-[50rem] bg-white">
 
             <Typography variant="h4" className="font-normal text-center">
                 Você não possui cartão cadastrado

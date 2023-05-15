@@ -1,8 +1,8 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "./prisma";
 
-export type Companies = Prisma.PromiseReturnType<typeof getEventos>;
-export type Company = Prisma.PromiseReturnType<typeof getEvento>;
+export type Eventos = Prisma.PromiseReturnType<typeof getEventos>;
+export type Evento = Prisma.PromiseReturnType<typeof getEvento>;
 
 export async function getEventos() {
     const data = await prisma.evento.findMany({

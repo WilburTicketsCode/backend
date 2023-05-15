@@ -83,8 +83,12 @@ const adm = () => {
     )
 }
 
-export default function Select() {
-    const [cases, setCases] = useState('noLogin')
+type Props = {
+    navbarType: string,
+}
+
+export default function Select({navbarType}: Props) {
+    const [cases, setCases] = useState(navbarType)
 
     return (
         <>

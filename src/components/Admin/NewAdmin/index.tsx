@@ -2,6 +2,7 @@ import { Input, Card, Button, Typography,} from "@/components/ClientSide";
 import Link from 'next/link';
 
 export default function TelaNewAdm() {
+
     return (
         <section className='bg-gray-200 text-blue-900 rounded-xl p-10 m-5 w-auto h-auto flex gap-20 items-center justify-center'>
             
@@ -32,7 +33,7 @@ export default function TelaNewAdm() {
                     </Button>
 
                     <Link href="/admin/admin-list">
-                        <p className="items-center justify-center">
+                        <p className="flex items-center justify-center">
                             Ver todos os administradores  
                         </p>
                         

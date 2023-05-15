@@ -12,7 +12,7 @@ const Logo = () => {
         <Link href='/'>
         <Image
             alt='Logo'
-            className='hidden md:block cursor-pointer'
+            className='hidden md:block cursor-pointer sm:block lg:block'
             height='130'
             width='130'
             src='/icons/logo.svg'

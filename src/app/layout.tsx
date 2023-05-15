@@ -1,4 +1,8 @@
-import MainLayout from "@/components/layouts/MainLayout"
+import React from 'react'
+import '../styles/globals.css'
+import Navbar from '../components/Navbar/Navbar'
+
+
 
 export const metadata = {
   title: 'Next.js',
@@ -12,10 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br">
-      <body>
-        <MainLayout>
+      <body className="bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200">
+          <Navbar/>
         {children}
-        </MainLayout>
+        
         </body>
     </html>
   )

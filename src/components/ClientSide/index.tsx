@@ -19,10 +19,11 @@ import {
     Dialog,
     CardFooter,
     Tabs,
-  TabsHeader,
-  TabsBody,
-  Tab,
-  TabPanel,
+    TabsHeader,
+    TabsBody,
+    Tab,
+    TabPanel,
+  
 } from "@material-tailwind/react"; 
 
 import {

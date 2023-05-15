@@ -1,6 +1,6 @@
 'use client';
 import React from "react";
-import Search from "@/components/Search";
+import Search from "@/components/Navbar/Search";
 
 import {
   Navbar,
@@ -32,22 +32,27 @@ const profileMenuItems = [
   {
     label: "Meu Perfil",
     icon: UserCircleIcon,
+    href: '#',
   },
   {
     label: "Edit Profile",
     icon: Cog6ToothIcon,
+    href: '#',
   },
   {
     label: "Inbox",
     icon: InboxArrowDownIcon,
+    href: '#',
   },
   {
     label: "Help",
     icon: LifebuoyIcon,
+    href: '#',
   },
   {
     label: "Sair",
     icon: PowerIcon,
+    href: '#',
   },
 ];
 
@@ -77,7 +82,7 @@ function ProfileMenu() {
         </Button>
       </MenuHandler>
       <MenuList className="p-1">
-        {profileMenuItems.map(({ label, icon }, key) => {
+        {profileMenuItems.map(({ label, icon, href }, key) => {
           const isLastItem = key === profileMenuItems.length - 1;
           return (
             <MenuItem
@@ -93,6 +98,7 @@ function ProfileMenu() {
                 strokeWidth: 2,
               })}
               <Typography
+                href={href}
                 as="span"
                 variant="small"
                 className="font-normal"

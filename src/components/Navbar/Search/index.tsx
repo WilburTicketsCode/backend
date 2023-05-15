@@ -1,4 +1,4 @@
-import { Input, Button } from '../ClientSide'
+import { Input, Button } from '../../ClientSide'
 import { CiSearch } from "react-icons/ci"
 
 

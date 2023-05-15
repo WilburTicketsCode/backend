@@ -9,6 +9,7 @@ const Logo = () => {
     const router = useRouter();
     
     return(
+        <Link href='/'>
         <Image
             alt='Logo'
             className='hidden md:block cursor-pointer'
@@ -16,6 +17,7 @@ const Logo = () => {
             width='130'
             src='/icons/logo.svg'
         />
+        </Link>
     )
 }
 

@@ -8,6 +8,7 @@ import { IconButton } from '../../ClientSide';
 import { BellIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import ProfileMenuADM from '../Adm/ProfileMenuADM';
 import Link from 'next/link';
+import SingInButton from '@/components/SingInButton';
 
 
 
@@ -56,8 +57,9 @@ const noLogin = () => {
             <div className='flex flex-col md:flex-row gap-1 md:gap-6'>
                 <Link href={'/loginpromoter'} className='flex items-center justify-center'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Entrar Promoter</button> </Link>
                 <Link href={''} className='flex items-center justify-center'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar Promoter</button> </Link>
-                <Link href={'/logincostumer'} className='flex items-center justify-center'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Entrar</button> </Link>
                 <Link href={''} className='flex items-center justify-center'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar</button> </Link>
+                <Link href={'/logincostumer'} className='flex items-center justify-center'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Entrar</button> </Link>
+                <SingInButton />
             </div>
         </div>
     )
@@ -83,8 +85,12 @@ const adm = () => {
     )
 }
 
-export default function Select() {
-    const [cases, setCases] = useState('noLogin')
+type Props = {
+    navbarType: string,
+}
+
+export default function Select({navbarType}: Props) {
+    const [cases, setCases] = useState(navbarType)
 
     return (
         <>

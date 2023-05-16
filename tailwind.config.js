@@ -7,6 +7,10 @@ module.exports = withMT({
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    colors:{
+      'roxo-wil': '#404C76',
+      'cinza-wil': '#E7E7E7',
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

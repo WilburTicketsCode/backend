@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className="bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200">  {/* md:h-max xl:h-max 2xl:h-max h-max*/}
         <Providers>
-        
+        {<Navbar navbarType={'noLogin'}/>}
         {children}
 
         </Providers>

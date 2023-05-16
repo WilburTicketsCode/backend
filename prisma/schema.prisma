@@ -101,7 +101,8 @@ model Cliente {
 model Evento {
   id          Int       @id @default(autoincrement())
   nome        String
-  data        DateTime
+  horaInicio  DateTime
+  horaFim     DateTime
   descricao   String
   banner      String
   id_promoter Int

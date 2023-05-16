@@ -62,7 +62,9 @@ export default async function Event({params} : any) {
 
                 <div className="flex mt-5">
                     <MdLocationOn color={'#6a1b9a'} size={'1.5rem'}/>
-                    <p className="font-semibold ml-2 mr-5 text-blue-gray-900">CLASSIC HALL - Av. Gov Agamenon Magalhães S/N, Recife - Pernambuco</p>
+                    <p className="font-semibold ml-2 mr-5 text-blue-gray-900">
+                        {`${evento.endereco.rua}, ${evento.endereco.numero}, ${evento.endereco.bairro}, ${evento.endereco.cidade} - ${evento.endereco.estado}`}
+                    </p>
                 </div>
 
                 <p className='font-bold mt-16 text-blue-gray-900'>Descrição</p>

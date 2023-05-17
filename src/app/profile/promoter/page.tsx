@@ -15,7 +15,7 @@ import {
 export default function PromoterPage() {
     const [type, setType] = useState("personal");
     return(
-        <div className='box-gray mt-6'>       
+        <div className='box-gray mt-6 '>       
             <Tabs value={type} >
                 <TabsHeader className="rounded-none border-b border-blue-gray-50 bg-transparent p-0"
                 indicatorProps={{

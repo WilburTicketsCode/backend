@@ -2,145 +2,227 @@
 import React, { useEffect, useState } from "react";
 import CardEventoAdm from "@/components/Admin/EventsAdmin";
 
+
 export default function AdmHome() {
 
+    
+    const [numOfElement, setNumOfElement] = useState(6);
+
+    //------ Consulta a API
+    /*
+    const [events, setEvents] = useState([]);
+    
+    const fetchEvents = async () => {
+        const reponse = await fetch("http://localhost:3000/api/evento");
+        const  data = await reponse.json();
+        setEvents(data);
+    }
+
+    useEffect(() => {
+        fetchEvents();
+    }, []);
+    
+    */
+    // ----- Fim Consulta a API
+
+    // ----- Dados sem BD -----------
     const data = {
         eventData: [{
             id: 1,
-            imagemEvento: "https://mundoconectado.com.br/uploads/chamadas/capa_145.jpg",
-            nomeEvento: "Evento 1",
-            dataEvento: "06/06/2023 - 20:00",
-            localEvento: "Hall do auditório central"
+            banner: "https://mundoconectado.com.br/uploads/chamadas/capa_145.jpg",
+            nome: "Evento 1",
+            horaInicio: "2023-06-01T21:00:00.000Z",
+            endereco: {
+                rua: "Rua da Paz",
+                bairro: "Jardim das Flores",
+                cidade: "São Paulo",
+            }
         },
         {
             id: 2,
-            imagemEvento: "https://alphaconvites.com.br/wp-content/uploads/2023/01/festa-antes-formatura-scaled-1-2048x1367.jpg",
-            nomeEvento: "Evento 2",
-            dataEvento: "06/06/2023 - 20:00",
-            localEvento: "Hall do auditório central"
+            banner: "https://alphaconvites.com.br/wp-content/uploads/2023/01/festa-antes-formatura-scaled-1-2048x1367.jpg",
+            nome: "Evento 2",
+            horaInicio: "2023-06-01T21:00:00.000Z",
+            endereco: {
+                rua: "Rua da Paz",
+                bairro: "Jardim das Flores",
+                cidade: "São Paulo",
+            }
         },
         {
             id: 3,
-            imagemEvento: "https://www.paxbahia.com.br/images/bl/festas-juninas-na-bahia-programacao.jpg",
-            nomeEvento: "Evento 3",
-            dataEvento: "06/06/2023 - 20:00",
-            localEvento: "Hall do auditório central"
+            banner: "https://www.paxbahia.com.br/images/bl/festas-juninas-na-bahia-programacao.jpg",
+            nome: "Evento 3",
+            horaInicio: "2023-06-01T21:00:00.000Z",
+            endereco: {
+                rua: "Rua da Paz",
+                bairro: "Jardim das Flores",
+                cidade: "São Paulo",
+            }
         },
         {
             id: 4,
-            imagemEvento: "https://lesdemoiselles.com.br/wp-content/uploads/2022/04/pexels-javon-swaby-3279692-1024x683.jpg",
-            nomeEvento: "Evento 4",
-            dataEvento: "06/06/2023 - 20:00",
-            localEvento: "Hall do auditório central"
+            banner: "https://lesdemoiselles.com.br/wp-content/uploads/2022/04/pexels-javon-swaby-3279692-1024x683.jpg",
+            nome: "Evento 4",
+            horaInicio: "2023-06-01T21:00:00.000Z",
+            endereco: {
+                rua: "Rua da Paz",
+                bairro: "Jardim das Flores",
+                cidade: "São Paulo",
+            }
         },
         {
             id: 5,
-            imagemEvento: "https://mundoconectado.com.br/uploads/chamadas/capa_145.jpg",
-            nomeEvento: "Evento 5",
-            dataEvento: "06/06/2023 - 20:00",
-            localEvento: "Hall do auditório central"
+            banner: "https://mundoconectado.com.br/uploads/chamadas/capa_145.jpg",
+            nome: "Evento 5",
+            horaInicio: "2023-06-01T21:00:00.000Z",
+            endereco: {
+                rua: "Rua da Paz",
+                bairro: "Jardim das Flores",
+                cidade: "São Paulo",
+            }
         },
         {
             id: 6,
-            imagemEvento: "https://alphaconvites.com.br/wp-content/uploads/2023/01/festa-antes-formatura-scaled-1-2048x1367.jpg",
-            nomeEvento: "Evento 6",
-            dataEvento: "06/06/2023 - 20:00",
-            localEvento: "Hall do auditório central"
+            banner: "https://alphaconvites.com.br/wp-content/uploads/2023/01/festa-antes-formatura-scaled-1-2048x1367.jpg",
+            nome: "Evento 6",
+            horaInicio: "2023-06-01T21:00:00.000Z",
+            endereco: {
+                rua: "Rua da Paz",
+                bairro: "Jardim das Flores",
+                cidade: "São Paulo",
+            }
         },
         {
             id: 7,
-            imagemEvento: "https://www.paxbahia.com.br/images/bl/festas-juninas-na-bahia-programacao.jpg",
-            nomeEvento: "Evento 7",
-            dataEvento: "06/06/2023 - 20:00",
-            localEvento: "Hall do auditório central"
+            banner: "https://www.paxbahia.com.br/images/bl/festas-juninas-na-bahia-programacao.jpg",
+            nome: "Evento 7",
+            horaInicio: "2023-06-01T21:00:00.000Z",
+            endereco: {
+                rua: "Rua da Paz",
+                bairro: "Jardim das Flores",
+                cidade: "São Paulo",
+            }
         },
         {
             id: 8,
-            imagemEvento: "https://lesdemoiselles.com.br/wp-content/uploads/2022/04/pexels-javon-swaby-3279692-1024x683.jpg",
-            nomeEvento: "Evento 8",
-            dataEvento: "06/06/2023 - 20:00",
-            localEvento: "Hall do auditório central"
+            banner: "https://lesdemoiselles.com.br/wp-content/uploads/2022/04/pexels-javon-swaby-3279692-1024x683.jpg",
+            nome: "Evento 8",
+            horaInicio: "2023-06-01T21:00:00.000Z",
+            endereco: {
+                rua: "Rua da Paz",
+                bairro: "Jardim das Flores",
+                cidade: "São Paulo",
+            }
         },
         {
             id: 11,
-            imagemEvento: "https://mundoconectado.com.br/uploads/chamadas/capa_145.jpg",
-            nomeEvento: "Evento 11",
-            dataEvento: "06/06/2023 - 20:00",
-            localEvento: "Hall do auditório central"
+            banner: "https://mundoconectado.com.br/uploads/chamadas/capa_145.jpg",
+            nome: "Evento 11",
+            horaInicio: "2023-06-01T21:00:00.000Z",
+            endereco: {
+                rua: "Rua da Paz",
+                bairro: "Jardim das Flores",
+                cidade: "São Paulo",
+            }
         },
         {
             id: 21,
-            imagemEvento: "https://alphaconvites.com.br/wp-content/uploads/2023/01/festa-antes-formatura-scaled-1-2048x1367.jpg",
-            nomeEvento: "Evento 21",
-            dataEvento: "06/06/2023 - 20:00",
-            localEvento: "Hall do auditório central"
+            banner: "https://alphaconvites.com.br/wp-content/uploads/2023/01/festa-antes-formatura-scaled-1-2048x1367.jpg",
+            nome: "Evento 21",
+            horaInicio: "2023-06-01T21:00:00.000Z",
+            endereco: {
+                rua: "Rua da Paz",
+                bairro: "Jardim das Flores",
+                cidade: "São Paulo",
+            }
         },
         {
             id: 31,
-            imagemEvento: "https://www.paxbahia.com.br/images/bl/festas-juninas-na-bahia-programacao.jpg",
-            nomeEvento: "Evento 31",
-            dataEvento: "06/06/2023 - 20:00",
-            localEvento: "Hall do auditório central"
+            banner: "https://www.paxbahia.com.br/images/bl/festas-juninas-na-bahia-programacao.jpg",
+            nome: "Evento 31",
+            horaInicio: "2023-06-01T21:00:00.000Z",
+            endereco: {
+                rua: "Rua da Paz",
+                bairro: "Jardim das Flores",
+                cidade: "São Paulo",
+            }
         },
         {
             id: 41,
-            imagemEvento: "https://lesdemoiselles.com.br/wp-content/uploads/2022/04/pexels-javon-swaby-3279692-1024x683.jpg",
-            nomeEvento: "Evento 41",
-            dataEvento: "06/06/2023 - 20:00",
-            localEvento: "Hall do auditório central"
+            banner: "https://lesdemoiselles.com.br/wp-content/uploads/2022/04/pexels-javon-swaby-3279692-1024x683.jpg",
+            nome: "Evento 41",
+            horaInicio: "2023-06-01T21:00:00.000Z",
+            endereco: {
+                rua: "Rua da Paz",
+                bairro: "Jardim das Flores",
+                cidade: "São Paulo",
+            }
         },
         {
             id: 51,
-            imagemEvento: "https://mundoconectado.com.br/uploads/chamadas/capa_145.jpg",
-            nomeEvento: "Evento 51",
-            dataEvento: "06/06/2023 - 20:00",
-            localEvento: "Hall do auditório central"
+            banner: "https://mundoconectado.com.br/uploads/chamadas/capa_145.jpg",
+            nome: "Evento 51",
+            horaInicio: "2023-06-01T21:00:00.000Z",
+            endereco: {
+                rua: "Rua da Paz",
+                bairro: "Jardim das Flores",
+                cidade: "São Paulo",
+            }
         },
         {
             id: 61,
-            imagemEvento: "https://alphaconvites.com.br/wp-content/uploads/2023/01/festa-antes-formatura-scaled-1-2048x1367.jpg",
-            nomeEvento: "Evento 61",
-            dataEvento: "06/06/2023 - 20:00",
-            localEvento: "Hall do auditório central"
+            banner: "https://alphaconvites.com.br/wp-content/uploads/2023/01/festa-antes-formatura-scaled-1-2048x1367.jpg",
+            nome: "Evento 61",
+            horaInicio: "2023-06-01T21:00:00.000Z",
+            endereco: {
+                rua: "Rua da Paz",
+                bairro: "Jardim das Flores",
+                cidade: "São Paulo",
+            }
         },
         {
             id: 71,
-            imagemEvento: "https://www.paxbahia.com.br/images/bl/festas-juninas-na-bahia-programacao.jpg",
-            nomeEvento: "Evento 71",
-            dataEvento: "06/06/2023 - 20:00",
-            localEvento: "Hall do auditório central"
+            banner: "https://www.paxbahia.com.br/images/bl/festas-juninas-na-bahia-programacao.jpg",
+            nome: "Evento 71",
+            horaInicio: "2023-06-01T21:00:00.000Z",
+            endereco: {
+                rua: "Rua da Paz",
+                bairro: "Jardim das Flores",
+                cidade: "São Paulo",
+            }
         },
         {
             id: 81,
-            imagemEvento: "https://lesdemoiselles.com.br/wp-content/uploads/2022/04/pexels-javon-swaby-3279692-1024x683.jpg",
-            nomeEvento: "Evento 81",
-            dataEvento: "06/06/2023 - 20:00",
-            localEvento: "Hall do auditório central"
+            banner: "https://lesdemoiselles.com.br/wp-content/uploads/2022/04/pexels-javon-swaby-3279692-1024x683.jpg",
+            nome: "Evento 81",
+            horaInicio: "2023-06-01T21:00:00.000Z",
+            endereco: {
+                rua: "Rua da Paz",
+                bairro: "Jardim das Flores",
+                cidade: "São Paulo",
+            }
         }
         ]
-    }
+    };
+    // ----- Fim Dados sem BD -----------
 
-    const [numOfElement, setNumOfElement] = useState(6);
-    const slice = data.eventData.slice(0, numOfElement);
+    const slice = data.eventData.slice(0, numOfElement);  //const slice = events.slice(0, numOfElement);
+
+    function formatDate(date: string): string {
+        const dd = date.slice(0,16).replaceAll('-', '/').replaceAll('T', '-').split('-');   
+        return dd[0] + " - " + dd[1]
+    }
 
     const loadMore = () => {
         setNumOfElement(numOfElement + numOfElement)
     }
 
-    //const [items, setItems] = useState([]);
-    //const [visible, setVisible] = useState([3]);
-
-    //useEffect(() => {
-    //    fetch("https://jsonplaceholder.typicode.com/posts")
-    //        .then((res) => res.json())
-    //        .then((data) => setItems(data));
-    //}, [])
-
     return (
-        <div className="flex flex-col h-full items-center justify-center mt-4">
+        <div className="flex flex-col h-full items-center justify-center mt-4 bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200">
             <div className="grid grid-cols-12 md:col-span-6 xl:col-span-4 h-full xl:gap-x-14 md:gap-8 gap-y-8 mt-4 mb-4">  {/*Layout para essa página*/}
                 {slice.map((item, index) => {
-                    return (<CardEventoAdm imagemEvento={item.imagemEvento} nomeEvento={item.nomeEvento} dataEvento={item.dataEvento} localEvento={item.localEvento} evento="#" />)
+                    return (<CardEventoAdm imagemEvento={item.banner} nomeEvento={item.nome} dataEvento={formatDate(item.horaInicio)} localEvento={item.endereco.rua + ", " + item.endereco.bairro + ", " + item.endereco.cidade} evento="#" />)
                 })}
                 <div className="object-center text-center col-span-12 mt-10 mb-3">
                     <button className="bg-roxo-wil h-[36px] w-[230px] text-white font-sans text-sm font-semibold text-center object-center rounded-full shadow-md shadow-black/40" onClick={() => loadMore()}>

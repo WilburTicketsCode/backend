@@ -31,7 +31,7 @@ function formatPhone(value:string) {
 type PersonalFormData = z.infer<typeof PersonalFormSchema>;
 
 const PersonalFormSchema = z.object({
-name: z.string().min(3),
+name: z.string().min(1),
 birthDate: z.string().min(10),
 CPF: z.string().min(14),
 phone: z.string().min(15),

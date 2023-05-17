@@ -9,6 +9,7 @@ export async function getEventos() {
         include: {
             endereco: true,
             promoter: true,
+            lotacao: true,
         },
         orderBy: [{
             id: "desc"

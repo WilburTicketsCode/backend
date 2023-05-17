@@ -227,3 +227,8 @@ html,body,:root{
 
   border-radius: 10px;
 }
+
+.select-box{
+  background-color: #fff;
+  color: #000000;
+}

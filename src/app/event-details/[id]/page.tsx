@@ -11,19 +11,19 @@ import moment from 'moment';
 
 
 async function loadEvent(id: Number) {
-    const res = await fetch(`http://localhost:3000/api/evento/${id}`);
+    const res = await fetch(`http://localhost:3000/api/evento/${id}`, { 
+            next: {
+                revalidate: 3600 // Atualiza o cache a cada 1h
+            } 
+        }); 
+
     return res.json();
 }
 
-async function loadLotacoes(id: Number) {
-    const res = await fetch(`http://localhost:3000/api/lotacao/${id}`);
-    return res.json();
-}
+export default async function Event({params}: {params: { id: number }}) {
 
-export default async function Event({params} : any) {
-
-   const evento = await loadEvent(params.id)
-   const lotacoes = await loadLotacoes(params.id)
+   const evento = await loadEvent(params.id);
+   const endereco = evento.endereco;
 
     return (
         
@@ -62,7 +62,7 @@ export default async function Event({params} : any) {
                 <div className="flex flex-shrink mt-5 text-sm">
                     <div className="flex flex-wrap"><MdLocationOn color={'#6a1b9a'} size={'1.5rem'}/></div>
                     <h3 className="font-semibold ml-2 mr-5 text-blue-gray-900">
-                        {`${evento.endereco.rua}, ${evento.endereco.numero}, ${evento.endereco.bairro}, ${evento.endereco.cidade} - ${evento.endereco.estado}`}
+                        {`${endereco.rua}, ${endereco.numero}, ${endereco.bairro}, ${endereco.cidade} - ${endereco.estado}`}
                     </h3>
                 </div>
 
@@ -77,15 +77,14 @@ export default async function Event({params} : any) {
 
                     <div className='shadow-2xl text-center gap-20 grid-cols-3 bg-gray-300 rounded-lg p-3'>
 
-                        {lotacoes.map((lotacao : any) => (
-                            <Tickets key={lotacao.id}
-                                setor={lotacao.setor.nome}
-                                perfil={lotacao.perfil.nome}
-                                valor={lotacao.valorTotal}
+                        {evento.lotacao.map((lot: any) => (
+                            <Tickets key={lot.id}
+                                setor={lot.setor.nome}
+                                perfil={lot.perfil.nome}
+                                valor={lot.valorTotal}
                             />
                         ))}
 
-                        <p className="mb-5">Subtotal: R$ 0,00</p>
                         <Button color="purple" type="submit" className="m-auto flex gap-3 rounded-full p-2">
                             Adicionar ao carrinho
                         </Button> 

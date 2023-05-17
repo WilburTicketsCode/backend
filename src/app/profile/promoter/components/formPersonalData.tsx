@@ -68,28 +68,27 @@ export default function FormPersonalData() {
               </div>
             </div>
 
-			{/* Seleção do tipo de identificador */}
+			{/* Identificador */}
             <div className="sm:col-span-3 flex">
-				<div className='mt-auto mb-auto'>
-					<select {...register('selectField')} className='block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'>
+				<div>
+					<label className="block text-sm font-medium leading-6 text-gray-900">
+						Identificador
+					</label>
+					<div className="mt-2 block sm:flex">
+					<select {...register('selectField')} className='block rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'>
 						<option value="cpf">CPF</option>
 						<option value="cnpj">CNPJ</option>
 					</select>
-				</div>
-				<div>
-					<label className="block text-sm font-medium leading-6 text-gray-900">
-					Identificador
-					</label>
-					<div className="mt-2">
 						<input
 							{...register('cpf_cnpj')}
 							type="text"
 							className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 						/>
-						{errors.cpf_cnpj && <span className="text-red-500">{errors.cpf_cnpj.message}</span>}
 					</div>
+					{errors.cpf_cnpj && <span className="text-red-500">{errors.cpf_cnpj.message}</span>}
 				</div>
             </div>
+
 
 			{/* Email */}
             <div className="sm:col-span-3">

@@ -37,7 +37,12 @@ export async function getEvento(id: number) {
       include: {
         endereco: true,
         promoter: true,
-        lotacao: true,
+        lotacao: {
+          include: {
+            perfil: true,
+            setor: true
+          }
+        }
       },
     });
   

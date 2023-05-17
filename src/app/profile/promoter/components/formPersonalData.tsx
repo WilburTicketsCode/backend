@@ -35,7 +35,7 @@ export default function FormPersonalData() {
             city: '',
             state: '',
             cep: '',
-			selectField: 'cpf'
+			      selectField: 'cpf'
         },
 
     });

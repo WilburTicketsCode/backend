@@ -1,12 +1,7 @@
-<<<<<<< HEAD:src/app/cadastroCliente/page.tsx
-'use client'
-import "../globals.css";
-import { Typography } from "@/components/ClientSide";
-=======
-"use client";
 
+
+"use client";
 import { ThemeProvider, Typography } from "@material-tailwind/react";
->>>>>>> main:src/components/CustomerRegistration/index.tsx
 import { CustomerRegistrationContext } from "../../contexts/CustomerRegistrationContext";
 import { StepperContext } from "../../contexts/StepperContext";
 import React from "react";
@@ -44,12 +39,12 @@ export default function CustomerRegistration() {
   return (
       <StepperContext.Provider value={{ infoStepper, setInfoStepper }}>
         <CustomerRegistrationContext.Provider value={{ infoPersonalForm, setInfoPersonalForm, infoAdressForm, setInfoAdressForm,infoAcessForm, setInfoAcessForm }} >
-          <div className="w-full h-[90%] flex justify-center">
-            <div className="flex flex-col items-center w-[400px] h-fit rounded-lg bg-gray-200">
-              <Typography variant="h2" className="text-[#404c76] mt-6">
+          <div className="w-full h-[90%] flex justify-center p-4">
+            <div className="flex flex-col items-center w-[500px] h-fit rounded-lg bg-gray-200">
+              <Typography variant="h2" className="text-[#404c76] mt-6 ml-4">
                 Seja nosso cliente!
               </Typography>
-              <Typography variant="small" className="text-[#404c76] mb-4">
+              <Typography variant="small" className="text-[#404c76] mb-4 ml-4">
                 Cadastre-se no sistema para fazer suas compras.
               </Typography>
               <RegistrationSteps />  

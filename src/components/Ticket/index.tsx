@@ -20,7 +20,7 @@ export default function Ticket() {
       <div className="flex flex-col gap-2 w-full h-full rounded-lg">
         <div className="flex flex-row justify-between items-center w-full h-24 bg-gray-200 rounded-lg p-4">
           <img className="h-16"
-            src="/icons/wil.svg" >
+            src="/icons/logo.svg" >
           </img>
           <h1 className="text-4xl font-extrabold text-[#404c76] ">
             E-TICKET

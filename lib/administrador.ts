@@ -1,74 +1,65 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "./prisma";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+
 
 export type Administradores = Prisma.PromiseReturnType<typeof getAdministradores>;
 export type Administrador = Prisma.PromiseReturnType<typeof getAdministrador>;
 
 export async function getAdministradores() {
-    const data = await prisma.administrador.findMany({
-        include: {
-            usuario: true,
-        },
-        orderBy: [{
-            id: "desc"
-          }
-        ],
-    })
-    return data
+  const data = await prisma.administrador.findMany({
+    include: {
+      usuario: true,
+    },
+    orderBy: [{
+      id: "desc"
+    }
+    ],
+  })
+  return data
 }
 
 export async function getAdministrador(cpf: string) {
-    const data = await prisma.administrador.findUnique({
-      where: {
-        cpf: cpf,
-      },
-      include: {
-        usuario: true
-      },
-    });
+  const data = await prisma.administrador.findUnique({
+    where: {
+      cpf: cpf,
+    },
+    include: {
+      usuario: true
+    },
+  });
 
-    try{
-      await prisma.$disconnect()
-    }
-    catch (e) {
-      console.error(e)
-      await prisma.$disconnect()
-      process.exit(1)
-    }
-  
-    return data;
+  return data;
 }
 
-export async function inserirAdministrador(nome: string, email: string, senha: string, cpf: string,
-  superAdm: boolean) {
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+export async function inserirAdministrador(adm: Administrador) {
+  /*const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const senhaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   const cpfRegex = /^\d{11}$/;
 
   if (!emailRegex.test(email) || !senhaRegex.test(senha) || !cpfRegex.test(cpf)) {
     return null
-  }
+  }*/
+  if (adm === null) {
+    return null
+  } else {
 
-  try {
-    const adm = prisma.administrador.create({
+    const administradorData = prisma.administrador.create({
       data: {
         usuario: {
           create: {
-            nome: nome,
-            email: email,
-            senha: senha
+            nome: adm.usuario.nome,
+            email: adm.usuario.email,
+            senha: adm.usuario.senha
           }
         },
-        cpf: cpf,
-        super_adm: superAdm
+        cpf: adm.cpf,
+        super_adm: adm.super_adm
       }
     })
-    return adm
-  } catch (e) {
-    console.log(e)
-    return null
+    return administradorData
+
   }
-  
+
 }
 

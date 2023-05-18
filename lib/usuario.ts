@@ -9,15 +9,6 @@ export async function getUsuario(email: string) {
         email: email,
       },
     });
-
-    try{
-      await prisma.$disconnect()
-    }
-    catch (e) {
-      console.error(e)
-      await prisma.$disconnect()
-      process.exit(1)
-    }
   
     return data;
 }

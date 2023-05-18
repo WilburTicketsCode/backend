@@ -35,7 +35,7 @@ export default function FormPersonalData() {
             city: '',
             state: '',
             cep: '',
-			selectField: 'cpf'
+			      selectField: 'cpf'
         },
 
     });
@@ -75,7 +75,7 @@ export default function FormPersonalData() {
 						Identificador
 					</label>
 					<div className="mt-2 block sm:flex">
-					<select {...register('selectField')} className='block rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'>
+					<select {...register('selectField')} className='block w-[80%] max-w-[90px] rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'>
 						<option value="cpf">CPF</option>
 						<option value="cnpj">CNPJ</option>
 					</select>

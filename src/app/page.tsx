@@ -16,7 +16,11 @@ export default function Home() {
         <Link href="/admin">Administrador</Link> 
         <Link href="/eventosPromoter">Promoter</Link>
         <Link href="/admin/eventos">Administrador Eventos</Link>
+<<<<<<< Updated upstream
         <Link href="/profile/admin">Perfil Administrador</Link> 
+=======
+        <Link href="/shoppingCart">Carrinho de Compras</Link>
+>>>>>>> Stashed changes
       </ul>
     </div>
   )

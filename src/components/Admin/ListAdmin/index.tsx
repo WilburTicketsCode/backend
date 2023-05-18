@@ -1,4 +1,9 @@
-import {Card, Typography,} from "@/components/ClientSide";
+import {Card, Button, Typography,} from "@/components/ClientSide";
+import Link from 'next/link';
+
+function ListProps() {
+    
+}
 
 export default function TelaListAdm(props: any) {
 
@@ -21,6 +26,12 @@ export default function TelaListAdm(props: any) {
                     </li>
                 </ul>
             </Card>
+
+            <Link href="/admin/admin-list">
+                <Button className="mt-20" fullWidth>
+                    Cadastrar
+                </Button>
+            </Link>
 
         </section>
     )

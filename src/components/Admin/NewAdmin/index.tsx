@@ -28,15 +28,13 @@ export default function TelaNewAdm() {
                         </div>
                     </div>
 
-                    <Button className="mt-20" fullWidth>
-                        Cadastrar
-                    </Button>
-
                     <Link href="/admin/admin-list">
+                        <Button className="mt-20" fullWidth>
+                            Cadastrar
+                        </Button>
                         <p className="flex items-center justify-center">
                             Ver todos os administradores  
                         </p>
-                        
                     </Link>
                 </form>
             </Card>

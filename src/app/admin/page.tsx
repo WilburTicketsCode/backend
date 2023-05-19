@@ -1,5 +1,4 @@
-
-
+'use client'
 
 import TelaNewAdm from "@/components/Admin/NewAdmin"
 

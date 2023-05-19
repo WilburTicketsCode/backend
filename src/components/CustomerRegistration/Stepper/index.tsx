@@ -45,7 +45,7 @@ export default function RegistrationSteps() {
             <div className="absolute -bottom-[2.5rem] w-max text-center">
               <Typography
                 variant="h6"
-                className = {infoStepper.activeStep >= 0 ? "text-[#404c76]" : "text-[#B0BEC5]"}
+                className = {infoStepper.activeStep >= 0 ? "md:text-[#404c76] text-transparent" : "md:text-[#B0BEC5] text-transparent"}
               >
                 Dados Pessoais
               </Typography>
@@ -56,7 +56,7 @@ export default function RegistrationSteps() {
             <div className="absolute -bottom-[2.5rem] w-max text-center">
               <Typography
                 variant="h6"
-                className = {infoStepper.activeStep >= 1 ? "text-[#404c76]" : "text-[#B0BEC5]"}
+                className = {infoStepper.activeStep >= 1 ? "md:text-[#404c76] text-transparent" : "md:text-[#B0BEC5] text-transparent"}
               >
                 Endereço
               </Typography>
@@ -67,7 +67,7 @@ export default function RegistrationSteps() {
             <div className="absolute -bottom-[2.5rem] w-max text-center">
               <Typography
                 variant="h6"
-                className = {infoStepper.activeStep >= 2 ? "text-[#404c76]" : "text-[#B0BEC5]"}
+                className = {infoStepper.activeStep >= 2 ? "md:text-[#404c76] text-transparent" : "md:text-[#B0BEC5] text-transparent"}
               >
                 Dados de Acesso
               </Typography>

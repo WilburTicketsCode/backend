@@ -127,9 +127,10 @@ async function main() {
   //Criação do Evento
   const evento1 = await prisma.evento.create({
     data: {
-      nome: "Festinha da UEFS",
-      data: new Date(),
-      descricao: "Uma festa que ira acontecer na UEFS",
+      nome: "Djavan Turnê D 2023",
+      horaInicio: new Date("2023-05-30 19:00"),
+      horaFim: new Date("2023-05-30 23:00"),
+      descricao: "Depois de encerrar o ano de 2022 com participações marcantes em importantes festivais, Djavan volta aos palcos em 2023 com uma longa série de shows da turnê ‘D’!",
       banner: "nada",
       id_promoter: promoter1.id,
       id_endereco: endereco1.id
@@ -230,7 +231,8 @@ async function main() {
   const evento2 = await prisma.evento.create({
     data: {
       nome: "Festinha de Tosta",
-      data: new Date(),
+      horaInicio: new Date("2023-06-01 18:00"),
+      horaFim: new Date("2023-01-06 22:00"),
       descricao: "Uma festa que ira ver Tosta",
       banner: "nada",
       id_promoter: promoter3.id,

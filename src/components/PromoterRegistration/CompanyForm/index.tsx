@@ -40,7 +40,7 @@ function formatPhone(value:string) {
 type CompanyFormData = z.infer<typeof CompanyFormSchema>;
 
 const CompanyFormSchema = z.object({
-name: z.string().min(3),
+name: z.string().min(1),
 CPF: z.string(),
 CNPJ: z.string(),
 phone: z.string().min(15),
@@ -52,8 +52,8 @@ phone: z.string().min(15),
 export default function CompanyForm() {
 
   const [select, setSelect] = React.useState(0);
-  const handleSelectFisicPerson = () => setSelect(0);
-  const handleSelectJuridicPerson = () => setSelect(1);
+  const handleSelectFisicPerson = () => {setSelect(0); setValue("CPF","")};
+  const handleSelectJuridicPerson = () => {setSelect(1); setValue("CNPJ","")};
 
   const { infoStepper, setInfoStepper } = UseStepperContext();
 

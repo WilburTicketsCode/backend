@@ -14,13 +14,11 @@ export default function Home() {
         <Link href="/event-details">evento</Link>
         <Link href="/home">Página inicial</Link>
         <Link href="/admin">Administrador</Link> 
-        <Link href="/eventosPromoter">Promoter</Link>
+        <Link href="/eventosPromoter">Promoter Eventos</Link>
         <Link href="/admin/eventos">Administrador Eventos</Link>
-<<<<<<< Updated upstream
         <Link href="/profile/admin">Perfil Administrador</Link> 
-=======
         <Link href="/shoppingCart">Carrinho de Compras</Link>
->>>>>>> Stashed changes
+        <Link href="/finalizacaoCompra">Finalizacao Compra</Link>
       </ul>
     </div>
   )

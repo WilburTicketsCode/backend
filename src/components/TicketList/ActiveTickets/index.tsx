@@ -80,7 +80,7 @@ export default function ActiveTickets() {
         <div className="flex flex-col h-full items-center justify-center mt-4 ">
             <div className="grid grid-cols-12 md:col-span-6 xl:col-span-4 h-full xl:gap-x-14 md:gap-8 gap-y-8 mt-4 mb-4">  {/*Layout para essa página*/}
                 {slice.map((item, index) => {
-                    return (<CardEventoAdm imagemEvento={item.banner} nomeEvento={item.nome} dataEvento={formatDate(item.horaInicio)} localEvento={item.endereco.rua + ", " + item.endereco.bairro + ", " + item.endereco.cidade} evento="#" />)
+                    return (<CardEventoAdm imagemEvento={item.banner} nomeEvento={item.nome} dataEvento={formatDate(item.horaInicio)} localEvento={item.endereco.rua + ", " + item.endereco.bairro + ", " + item.endereco.cidade} evento="/ticket" />)
                 })}
                 <div className="object-center text-center col-span-12 mt-10 mb-3">
                     <button className="bg-roxo-wil h-[36px] w-[230px] text-white font-sans text-sm font-semibold text-center object-center rounded-full shadow-md shadow-black/40" onClick={() => loadMore()}>

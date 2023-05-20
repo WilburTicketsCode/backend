@@ -15,7 +15,7 @@ const SingInButton = () => {
         )
     }
     return (
-        <button onClick={() => signIn()} className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">
+        <button onClick={() => signIn()} className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md hidden">
         Entrar
         </button>
     )

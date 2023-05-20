@@ -7,11 +7,11 @@ import {
 const navListItems = [
     {
       label: "Eventos",
-      href:"#"
+      href:"/admin/eventos"
     },
     {
       label: "Administradores",
-      href:"#"
+      href:"/admin/admin-list"
     },
     {
       label: "Promoters",

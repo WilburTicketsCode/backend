@@ -5,11 +5,10 @@ import Link from 'next/link';
 import React from 'react';
 
 
-
 export default function Home() {
   return (
-    <div className='flex justify-center items-center w-full h-full'>
-      <ul className='flex flex-col justify-center items-center'>
+    <div className='flex justify-center items-center w-full h-full pt-[250px]'>
+      <ul className='flex flex-col justify-center items-center mt-15'>
         <Link href="/profile/costumer"><Button>Perfil</Button></Link>
         <Link href="/event-details">evento</Link>
         <Link href="/home">Página inicial</Link>

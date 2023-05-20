@@ -8,7 +8,7 @@ export default function CostumerLayout({
   children: React.ReactNode
 }) {
 
-  let typeNavbar = 'costumer'    //Indica o tipo de navbar da página
+  let typeNavbar = 'noLogin'    //Indica o tipo de navbar da página
   
   return (
     <main className="block">

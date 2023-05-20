@@ -46,7 +46,7 @@ export default function EditAddress() {
 
     return (
 
-            <div className="w-full h-[90%] md:h-[80%] md:w-[50%] gap-6 flex flex-col justify-center items-center overflow-auto bg-white rounded-xl">
+            <div className="w-full h-[80vh] md:h-[80vh] md:w-[70%] lg:w-[60%] xl: gap-6 flex flex-col justify-center items-center overflow-auto bg-white rounded-xl">
                 <h2 className="text-2xl font-bold text-center">Editar Endereço</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2 overflow-auto">
                     <Input {...register('cep')} className='w-[15rem] sm:w-[20rem] lg:w-[30rem]' label='CEP*'></Input>

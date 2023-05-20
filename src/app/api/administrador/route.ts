@@ -1,20 +1,8 @@
 import { NextResponse } from "next/server";
 import { Administrador, getAdministradores, inserirAdministrador } from "../../../../lib/administrador";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import { cpfDuplicado, emailDuplicado } from "../../../../lib/erros";
 
-class emailDuplicado extends Error {
-    constructor(message: string) {
-      super(message);
-      this.name = 'emailDuplicado';
-    }
-  }
-  
-  class cpfDuplicado extends Error {
-    constructor(message: string) {
-      super(message);
-      this.name = 'cpfDuplicado';
-    }
-  }
 
 /* Banco pessoal
 mysql://root:(SENHA)@localhost:3306/(NOME DO BANCO) 
@@ -32,9 +20,9 @@ export async function GET(request: Request) {
 
 export async function POST(request:Request) {
     const dados: Administrador = await request.json()
-
     if (dados !== null){
         try {
+
             const adm = await inserirAdministrador(dados)
     
             if (adm === null) {

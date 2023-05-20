@@ -44,7 +44,7 @@ export async function inserirAdministrador(adm: Administrador) {
     return null
   } else {
 
-    const administradorData = prisma.administrador.create({
+    const administradorData = await prisma.administrador.create({
       data: {
         usuario: {
           create: {

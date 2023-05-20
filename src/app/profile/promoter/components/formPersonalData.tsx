@@ -21,21 +21,21 @@ const personalSchema = z.object({
 	}, { message: 'O campo é inválido' }),
 })
 
-export default function FormPersonalData() {
+export default function FormPersonalData(props: any) {
     const {register,handleSubmit,formState:{errors} } = useForm<personalFormData>({
         resolver: zodResolver(personalSchema),
         criteriaMode: 'all',
         mode: 'all',
         defaultValues: {
-            name: '',
-            cpf_cnpj: '',
-            email: '',
-            phone: '',
-            addres: '',
-            city: '',
-            state: '',
-            cep: '',
-			      selectField: 'cpf'
+            name: props.user.name,
+            cpf_cnpj: props.user.cpf_cnpj,
+            email: props.user.email,
+            phone: props.user.phone,
+            addres: props.user.addres,
+            city: props.user.city,
+            state: props.user.state,
+            cep: props.user.cep,
+			      selectField: props.user.selectField
         },
 
     });

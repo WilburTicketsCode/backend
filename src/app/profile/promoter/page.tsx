@@ -13,6 +13,17 @@ import {
   } from "@material-tailwind/react";
 
 export default function PromoterPage() {
+    const obj = {
+        name: 'João',
+        cpf_cnpj: '00000000000',
+        email: 'joazinho@uefs.br',
+        phone: '11900000000',
+        addres: 'Avenida Uefs',
+        city: 'Feira de Santana City',
+        state: 'Bahia',
+        cep: '000000-00',
+        selectField: 'cpf'
+    };
     // Para controle do Tabs
     const [type, setType] = useState("personal");
 
@@ -34,7 +45,7 @@ export default function PromoterPage() {
 
                     <TabsBody>
                         <TabPanel className="h-full overflow-auto" value="personal">
-                            <FormPersonalData/>
+                            <FormPersonalData user={obj}/>
                         </TabPanel>
                         <TabPanel className="h-full overflow-auto" value="security">
                             <FormSecurityData/>

@@ -1,8 +1,29 @@
 "use client"
 
+import { Cliente } from "@prisma/client";
 import { useState } from "react";
 
+/*
+function searchTicket(compras: any, ticketId: number) {
+  for (let i = 0; i < compras.length; i++) {
+    const compra = compras[i];
+    for (let j = 0; j < compra.ingressos.length; i++) {
+      const ticket = compra.ingressos[i];
+      if (ticket.id === ticketId) {
+        return ticket
+      }
+    }
+  }
+  return null
+  }
+
+  export default function Ticket(data: any) {
+*/
+
 export default function Ticket() {
+  //const ingresso = cliente.compras;
+  //console.log(data.cliente)
+  //console.log(searchTicket(data.cliente.compras, 8))
   const [ticketInfo, setTicketInfo] = useState({
     event: "Djavan Turnê D 2023",
     date: "02/04/2023",

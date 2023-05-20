@@ -14,7 +14,7 @@ export default function AdminData() {
 
 
 return (
-    <div className="bg-white flex flex-col w-[100%] md:w-[50%] h-[30rem]  items-center justify-center gap-4 overflow-auto rounded-lg">
+    <div className="pt-2 bg-white flex flex-col items-center justify-center gap-4 overflow-auto rounded-lg">
         <Avatar className="cursor-pointer" src="/img/profile/placeholder.jpg" alt="avatar" size="xxl" />
         <div className="flex flex-col gap-1">
             <Typography className="text-base font-semibold text-center sm:text-lg">Nome: {userData.nome}</Typography>

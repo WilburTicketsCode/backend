@@ -4,13 +4,13 @@ export default function SectorProf(props: any){
     return(
         <div className="grid grid-cols-3 h-[30px]">
 
-            <p className="flex mx-auto text-center items-center text-[#404C76] font-bold">{props.nomePerfil}</p>
+            <p className="flex mx-auto text-center items-center text-[14px] text-[#404C76] font-bold">{props.nomePerfil}</p>
             
             <div className="flex mx-auto text-center items-center">
 
                 <Button className="h-[15px] w-[15px] p-0 text-blue-gray-700 bg-gray-500">-</Button>
                 
-                <p className='mx-1 bg-[#D9D9D9] w-[20px]'>{props.quantidade}</p>
+                <p className='mx-1 bg-[#D9D9D9] text-[14px] w-[20px]'>{props.quantidade}</p>
                 
                 <Button className="h-[15px] w-[15px] p-0 text-blue-gray-700 bg-gray-500">+</Button>
                 
@@ -21,7 +21,7 @@ export default function SectorProf(props: any){
             </div>
 
             <div className= "flex ml-1 col-auto row-auto items-center">
-                <p className="flex text-left items-center ">R${props.preco}</p>
+                <p className="flex text-left text-[14px] items-center ">R${props.preco}</p>
             </div>
 
         </div>

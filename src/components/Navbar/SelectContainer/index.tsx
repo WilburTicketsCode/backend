@@ -56,8 +56,8 @@ const noLogin = () => {
             <Search />
             <div className='flex flex-col md:flex-row gap-1 md:gap-6'>
                 <Link href={'/loginpromoter'} className='flex items-center justify-center'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Entrar Promoter</button> </Link>
-                <Link href={''} className='flex items-center justify-center'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar Promoter</button> </Link>
-                <Link href={''} className='flex items-center justify-center'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar</button> </Link>
+                <Link href={'/promoter-registration'} className='flex items-center justify-center'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar Promoter</button> </Link>
+                <Link href={'/customer-registration'} className='flex items-center justify-center'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar</button> </Link>
                 <Link href={'/logincostumer'} className='flex items-center justify-center'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Entrar</button> </Link>
                 <SingInButton />
             </div>

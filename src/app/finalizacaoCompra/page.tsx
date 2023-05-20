@@ -4,7 +4,7 @@ import CardPreco from "@/components/FinalizacaoCompra/cardPrecos/cardBackGround"
 
 export default function finalizacaoCompra() {
     return (
-        <div className="flex items-center justify-center h-full w-full container mx-auto py-2 ">
+        <div className="flex items-center justify-center h-full w-full container mx-auto py-28 ">
             <div className="grid grid-cols-1 grid-rows-2 gap-4 md:grid-cols-8  lg:grid-cols-8  ">
                 <div className="col-span-4 row-span-4 sm:h-52 md:w-72 h-full lg:h-96 w-96 rounded-lg ">
                     <CardIngresso/>

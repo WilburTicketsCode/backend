@@ -8,6 +8,7 @@ import { ImClock } from "react-icons/im";
 import Tickets from '@/components/event/Tickets';
 import { Button } from '@/components/ClientSide';
 import moment from 'moment';
+import Footer from "@/components/footer/footer";
 
 
 async function loadEvent(id: Number) {
@@ -30,13 +31,13 @@ export default async function Event({params}: {params: { id: number }}) {
         <div className="bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200">
             <div className='flex justify-center'>
                 <img 
-                    className='w-[95%] lg:h-[500px] m-5 items-center max-w-full h-auto object-fit rounded-2xl'
+                    className='mt-32 w-[95%] lg:h-[500px] m-5 items-center max-w-full h-auto object-fit rounded-2xl'
                     src="/img/event-banner/show_djavan.jpeg"
                     alt='Imagem do evento'
                 />
             </div>
 
-            <div className='shadow-2xl mr-6 ml-6 flex-row rounded-lg bg-gray-100 p-10'>
+            <div className='mb-10 shadow-2xl mr-6 ml-6 flex-row rounded-lg bg-gray-100 p-10'>
                 <div className='flex flex-col items-center'>
                     <h1 className="text-2xl font-bold m-6">
                         {evento.nome}
@@ -93,7 +94,7 @@ export default async function Event({params}: {params: { id: number }}) {
 
                 </div>
             </div>
-
+            <Footer/>
         </div>
     )
 }

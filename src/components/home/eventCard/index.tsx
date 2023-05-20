@@ -6,6 +6,7 @@ import {
     Typography,
     Button,
   } from "../../ClientSide";
+  import Link from 'next/link';
   import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
    
   export default function EventCard(props: any) {
@@ -21,24 +22,26 @@ import {
         </CardHeader>
 
         <CardBody className="flex flex-col w-full p-1">
-          <h6 color="[#404C76]" className="font-semibold text-center text-[16px] md:text-[24px] lg:text-[32px] uppercase overflow-hidden">{props.children}</h6>
+          <h6 color="[#404C76]" className="font-semibold text-center text-[16px] md:text-[24px] lg:text-[28px] uppercase overflow-hidden">{props.children}</h6>
           
           <div className="flex flex-col">
-            <Typography color="gray" className="flex flex-col ml-4 mb-3 justify-center font-bold text-[14px] md:text-[22px]">
+            <div color="gray" className="flex flex-col ml-4 mb-3 justify-center font-bold text-[14px] md:text-[18px]">
               <div className="flex">
-                <img src="/icons/fi-br-calendar.png" className="mr-1 h-[14px] md:h-[24px] lg:h-[2rem] w-h" />
+                <img src="/icons/fi-br-calendar.png" className="mr-1 mb-1 h-[14px] md:h-[24px] lg:h-[28px] w-h" />
                 {props.data}
               </div>
               <div className="flex">
-                <img src="/icons/fi-br-location-alt.png" className="mr-1 h-[14px] md:h-[24px] lg:h-[2rem] w-h"/>
+                <img src="/icons/fi-br-location-alt.png" className="mr-1 mb-1 h-[14px] md:h-[24px] lg:h-[28px] w-h"/>
                 {props.local}
               </div>
-            </Typography>
+            </div>
 
             <div className="flex h-full justify-center items-center mx-auto">
-              <Button className="bg-purple-800 h-[40px] w-[130px] mt-auto p-0">
-                Ver detalhes
-              </Button>
+              <Link href= {`/event-details/${props.key}`}>
+                <Button className="bg-purple-800 h-[40px] w-[130px] mt-auto p-0">
+                  Ver detalhes
+                </Button>
+              </Link>
             </div>
           </div>
 

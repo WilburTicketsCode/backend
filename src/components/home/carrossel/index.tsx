@@ -1,29 +1,19 @@
 
 import {Carousel} from "../../ClientSide";
+import { data } from '@/data/homeData/data';
+import { useState } from 'react';
 
 export default function Carrossel(props: any){
+    const [eventosCarrossel, setEventosCarrossel] = useState(data.slice(0, 4));
+
     return(
         <Carousel className="rounded-xl">
-        <img
-          src= {props.imagem1}
-          alt="image 1"
-          className="h-full w-full object-cover lg:px-[150px]"
-        />
-        <img
-          src={props.imagem2}
-          alt="image 2"
-          className="h-full w-full object-cover lg:px-[150px]"
-        />
-        <img
-          src={props.imagem3}
-          alt="image 3"
-          className="h-full w-full object-cover lg:px-[150px]"
-        />
-        <img
-          src={props.imagem3}
-          alt="image 4"
-          className="h-full w-full object-cover lg:px-[150px]"
-        />
+
+          {eventosCarrossel.map((evento, index) =>(
+            <div key={index} className="h-full">
+              <img src={evento.banner} alt={evento.nome} className="h-full w-full object-cover lg:px-[150px]"/>
+            </div>
+          ))}
       </Carousel>
     )
 }

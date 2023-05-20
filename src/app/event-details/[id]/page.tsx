@@ -1,83 +1,102 @@
 import { 
     MdOutlineShare,
     MdCalendarMonth,
-    MdLocationOn 
 } from "react-icons/md";
 
+import {FaMapMarkerAlt} from "react-icons/fa";
 import { ImClock } from "react-icons/im";
+
+import Footer from "@/components/footer/footer";
 import Tickets from '@/components/event/Tickets';
 import { Button } from '@/components/ClientSide';
+import moment from 'moment';
 
 
- async function loadEvent(id: Number) {
-    const res = await fetch(`http://localhost:3000/api/evento/${id}`);
+async function loadEvent(id: Number) {
+    const res = await fetch(`http://localhost:3000/api/evento/${id}`, { 
+            next: {
+                revalidate: 3600 // Atualiza o cache a cada 1h
+            } 
+        }); 
+
     return res.json();
 }
 
-export default async function Event({params} : any) {
+export default async function Event({params}: {params: { id: number }}) {
 
-   const evento = await loadEvent(params.id)
+   const evento = await loadEvent(params.id);
+   const endereco = evento.endereco;
 
     return (
-        <div className="mx-auto w-full h-full">
-            <div className='flex justify-center lg:h-[70%] md:h-1/2 sm:h-1/2 mb-1 mt-2'>
+        
+        <div>
+            <div className='flex justify-center'>
                 <img 
-                    className='w-[95%] h-[50%] m-5 items-center object-fit rounded-2xl'
+                    className='mt-32 w-[95%] lg:h-[500px] m-5 items-center max-w-full h-auto object-fit rounded-lg'
                     src="/img/event-banner/show_djavan.jpeg"
                     alt='Imagem do evento'
                 />
             </div>
 
-            <div className='shadow-2xl mr-8 ml-8 relative flex-row rounded-lg bg-gray-100 p-10'>
-                <div>
-                    <div className='flex flex-col items-center'>
-                        <p className="text-2xl font-bold m-6 ">
-                           {evento.nome}
-                        </p>
-                        <Button color="purple" size="md" className="flex items-center gap-3 rounded-full">
-                            <MdOutlineShare size={'1rem'}/>
-                            Compartilhar
-                        </Button>
-                    </div>
+            <div className='mb-10 shadow-2xl mr-6 ml-6 flex-row rounded-lg bg-gray-100 p-10'>
+                <div className='flex flex-col items-center'>
+                    <h1 className="text-2xl font-bold m-6">
+                        {evento.nome}
+                    </h1>
+                    <Button color="purple" size="md" className="flex items-center gap-3 rounded-full">
+                        <MdOutlineShare size={'1rem'}/>
+                        Compartilhar
+                    </Button>
+                </div>
 
-                    <div className="flex flex-wrap mt-8">
-                        <MdCalendarMonth color={'#6a1b9a'} size={'1.5rem'}/>
-                        <p className="font-semibold ml-2 mr-16 text-blue-gray-900">Domingo, 02/04/2023</p>
-                        
-                        <ImClock color={'#6a1b9a'} size={'1.5rem'}/>
-                        <p className="font-semibold ml-2 mr-5 text-blue-gray-900">21:00 - 00:00</p>
-                        
+                <div className="items-center text-sm">
+                    <div className="flex flex-wrap mt-8"><MdCalendarMonth color={'#6a1b9a'} size={'1rem'}/>
+                    <h3 className="font-semibold ml-2 mr-16 text-blue-gray-900">
+                        {moment(evento.horaInicio).format("DD/MM/YYYY")}
+                    </h3>
                     </div>
-
-                    <div className="flex mt-5">
-                        <MdLocationOn color={'#6a1b9a'} size={'1.5rem'}/>
-                        <p className="font-semibold ml-2 mr-5 text-blue-gray-900">CLASSIC HALL - Av. Gov Agamenon Magalhães S/N, Recife - Pernambuco</p>
+                    <div className="flex flex-wrap mt-5"><ImClock color={'#6a1b9a'} size={'1rem'}/>
+                    <h3 className="font-semibold ml-2 mr-5 text-blue-gray-900">
+                        {moment(evento.horaInicio).format("HH:mm")} - {moment(evento.horaFim).format("HH:mm")}
+                    </h3>
                     </div>
+                </div>
 
-                    <p className='font-bold mt-16 text-blue-gray-900'>Descrição</p>
-                    <div className='lg:flex md:flex mt-2 text-justify justify-between'>
-                        <div className='md:w-[50%] lg:w-[50%] mb-10'>
-                            <p className='text-blue-gray-900'> 
+                <div className="flex flex-shrink mt-5 text-sm">
+                    <div className="flex flex-wrap"><FaMapMarkerAlt color={'#6a1b9a'} size={'1.2rem'}/></div>
+                    <h3 className="font-semibold ml-2 mr-5 text-blue-gray-900">
+                        {`${endereco.rua}, ${endereco.numero}, ${endereco.bairro}, ${endereco.cidade} - ${endereco.estado}`}
+                    </h3>
+                </div>
+
+                <h2 className='font-bold mt-16 text-blue-gray-900'>Descrição</h2>
+                <div className='lg:flex lg:gap-10 grid mt-2 text-justify justify-between'>
+
+                    <div className='lg:w-[50%] mb-10'>
+                        <h3 className='text-blue-gray-900 text-sm'> 
                             {evento.descricao}
-                            </p> 
-                        </div>
+                        </h3> 
+                    </div>
 
-                        <div className='shadow-2xl lg:w-[30%] lg:flex-col text-center items-center gap-20 inline-block bg-gray-300 rounded-lg p-3'>
-                            <Tickets setor="Área Vip"/>
-                            <Tickets setor="Camarote"/>
-                            <Tickets setor="Backstage"/>
+                    <div className='shadow-2xl text-center gap-20 grid-cols-3 bg-gray-300 rounded-lg p-3'>
 
-                            <p className="mb-5">Subtotal: R$0,00</p>
-                            <Button color="purple" type="submit" className="m-auto flex gap-3 rounded-full p-2">
-                                Adicionar ao carrinho
-                            </Button>           
-                        </div>
+                        {evento.lotacao.map((lot: any) => (
+                            <Tickets key={lot.id}
+                                setor={lot.setor.nome}
+                                perfil={lot.perfil.nome}
+                                valor={lot.valorTotal}
+                            />
+                        ))}
+
+                        <Button color="purple" type="submit" className="m-auto flex gap-3 rounded-full p-2">
+                            Adicionar ao carrinho
+                        </Button> 
 
                     </div>
 
                 </div>
             </div>
-
+            <Footer/>
         </div>
     )
 }

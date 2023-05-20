@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { getAdministradores, inserirAdministrador } from "../../../../lib/administrador";
+import { Administrador, getAdministradores, inserirAdministrador } from "../../../../lib/administrador";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import { cpfDuplicado, emailDuplicado } from "../../../../lib/erros";
 
 
 /* Banco pessoal
@@ -16,25 +18,37 @@ export async function GET(request: Request) {
     return NextResponse.json(data)
 }
 
-/* Versão beta do codigo de POST, sofrera mudanças em breve. */
 export async function POST(request:Request) {
-    const dados = await request.json()
-    try {
-        const nome = dados.nome
-        const email = dados.email
-        const senha = dados.senha
-        const cpf = dados.cpf
-        const superAdm = dados.superAdm
+    const dados: Administrador = await request.json()
+    if (dados !== null){
+        try {
 
-        const adm = await inserirAdministrador(nome, email, senha, cpf, superAdm)
+            const adm = await inserirAdministrador(dados)
+    
+            if (adm === null) {
+                console.log("Dados de ADM invalidos.")
+            } else {
+                console.log("Dados criados.\n", adm);
+            }
 
-        if (adm === null) {
-            console.log("Dados de ADM invalidos.")
-        } else {
-            console.log("Dados criados.");
+        } catch (e) {
+            if (e instanceof  PrismaClientKnownRequestError) {
+
+                if (e.code === 'P2002'){
+
+                    if (e.message.split(' ')[8] === '`Usuario_email_key`'){
+
+                    throw new emailDuplicado("esté email já existe nos registros.")
+
+                  } else if (e.message.split(' ')[8] === '`Administrador_cpf_key`') {
+
+                    throw new cpfDuplicado("esté cpf já existe nos registros.")
+
+                  }
+                }
+            }
         }
-    } catch (e) {
-        console.log("Não deu.")
-    }
+    
+    } 
 
 }

@@ -20,9 +20,7 @@ export default function CardCartaoItem(props: any) {
                     termina em: {props.finalCartao}
                 </p>
                 
-                <p className="text-[8px] font-sans text-blue-700 underline px-2 " >
-                    Alterar
-                </p>
+                <a href="#"><p className="text-[8px] font-sans text-blue-700 underline px-2 ">Alterar</p></a>
                 
 
             </div>

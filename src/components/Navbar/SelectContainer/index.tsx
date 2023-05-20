@@ -41,8 +41,9 @@ const promoter = () => {
             <Logo />
             <div>
                 <div className='gap-1 md:gap-5 flex flex-row justify-between items-center md:pr-96 '>
-                    <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Meus eventos</button>
-                    <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Criar evento</button>
+                <a href='/eventosPromoter'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Meus eventos</button></a>
+                <a href='/event-registration'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Criar evento</button></a>
+                <a href='/profile/promoter'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Meu Perfil</button></a>
                 </div>
             </div>
         </div>
@@ -57,16 +58,10 @@ const noLogin = () => {
             <div className='flex flex-col w-full max-w-screen md:flex-row gap-1 md:gap-6'>
                 <NoLoginMenu></NoLoginMenu>
 
-                <Link href={'/signin'} className='md:flex items-center justify-center hidden'>
-                    <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Entrar</button> 
-                </Link>
-                <Link href={'/promoter-registration'} className='md:flex items-center justify-center hidden'>
-                     <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar promoter</button> 
-                </Link>
-                <Link href={'/customer-registration'} className='md:flex items-center justify-center hidden'>
-                    <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar cliente</button> 
-                </Link>
-
+                <Link href={''} className='md:flex items-center justify-center hidden'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Entrar</button> </Link>
+                <Link href={'/promoter-registration'} className='md:flex items-center justify-center hidden'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar promoter</button> </Link>
+                <Link href={'/customer-registration'} className='md:flex items-center justify-center hidden'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar cliente</button> </Link>
+                
             </div>
         </div>
     )
@@ -96,7 +91,7 @@ type Props = {
     navbarType: string,
 }
 
-export default function Select({ navbarType }: Props) {
+export default function Select({navbarType}: Props) {
     const [cases, setCases] = useState(navbarType)
 
     return (

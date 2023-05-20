@@ -18,6 +18,7 @@ import {
   PowerIcon,
   HomeIcon,
   BanknotesIcon,
+  TicketIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -37,6 +38,11 @@ const profileMenuItems = [
     label: "Meu Perfil",
     icon: UserCircleIcon,
     href: '/profile/costumer',
+  },
+  {
+    label: "Meus Ingressos",
+    icon: TicketIcon,
+    href: '/ticket-list',
   },
   {
     label: "Histórico",

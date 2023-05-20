@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import EventCard from '@/components/home/eventCard';
-import { data } from '@/data/homeData/data';
+import { data } from '@/data/eventsData/data';
 import { useRouter } from 'next/router';
 
 

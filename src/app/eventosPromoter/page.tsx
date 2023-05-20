@@ -3,6 +3,7 @@ import Example from "@/components/cardEventoPromoter"
 export default function eventosPromoter (){
     return(
        <div className="flex items-center justify-center min-h-screen container mx-auto ">
+
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2  lg:grid-cols-3 h-36">
 
             <Example imagem = "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" 

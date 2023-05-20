@@ -4,7 +4,7 @@ import '../../styles/globals.css'
 import { useState } from 'react';
 import Carrossel from '../../components/home/carrossel';
 import EventCard from '@/components/home/eventCard';
-import { data } from '@/data/homeData/data';
+import { data } from '@/data/eventsData/data';
 import Link from 'next/link';
 
 

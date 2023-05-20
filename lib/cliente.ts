@@ -10,6 +10,7 @@ export async function getClientes() {
             endereco: true,
             usuario: true,
             cartao: true,
+            compras: true,
         },
         orderBy: [{
             id: "desc"
@@ -29,6 +30,7 @@ export async function getCliente(cpf: string) {
         endereco: true,
         usuario: true,
         cartao: true,
+        compras: true,
       },
     });
   

@@ -1,7 +1,7 @@
 import React from "react";
 
 import EditAddress from '../../components/CostumerProfile/EditAddress';
-
+/** ISTO NÃO DEVERIA SER ACESSADO POR ROTAS */
 
 const editAddress = () => {
     return (

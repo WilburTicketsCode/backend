@@ -1,6 +1,7 @@
 import React from "react";
 import Password from '../../../components/ChangePassword';
 
+/** ISTO NÃO DEVERIA SER ACESSADO POR ROTAS */
 
 const password = () => {
     return (

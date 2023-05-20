@@ -3,14 +3,12 @@ import React from "react";
 import {
   Tabs,
   TabsHeader,
-  TabsBody,
   Tab,
   TabPanel,
   Typography,
 } from "../../ClientSide";
 
 import AdminData from "./profiledata";
-
 
 
 export default function AdminP() {

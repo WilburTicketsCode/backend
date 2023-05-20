@@ -5,7 +5,7 @@ import {
   Checkbox,
   Button,
   Typography,
-} from "@material-tailwind/react";
+} from "../../ClientSide";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from 'zod';

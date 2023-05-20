@@ -42,7 +42,7 @@ const profileMenuItems = [
   {
     label: "Meus Ingressos",
     icon: TicketIcon,
-    href: '/ticket-list',
+    href: '/profile/costumer/ticket-list',
   },
   {
     label: "Histórico",

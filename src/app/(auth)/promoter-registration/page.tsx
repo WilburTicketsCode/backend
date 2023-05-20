@@ -1,10 +1,9 @@
-import TabsTicketList from "@/components/TicketList/Tabs";
-
+import PromoterRegistration from '@/components/PromoterRegistration';
 
 export default function Dash() {
-  return(
+  return (
     <div className="w-full h-full pt-32 flex justify-center">
-      <TabsTicketList />
+      <PromoterRegistration />
     </div>
   )
 }

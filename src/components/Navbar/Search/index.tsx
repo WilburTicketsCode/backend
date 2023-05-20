@@ -17,7 +17,7 @@ export default function Search() {
           className: "min-w-[200px]",
         }}
       />
-      <Link href="../../home/search">
+      <Link href="../../search">
       <Button size="md" className="!absolute right-1 top-1 rounded">
         <CiSearch/>
       </Button>

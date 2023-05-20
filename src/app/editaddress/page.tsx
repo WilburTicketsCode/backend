@@ -1,6 +1,6 @@
 import React from "react";
 
-import EditAddress from './../../../components/CostumerProfile/EditAddress';
+import EditAddress from '../../components/CostumerProfile/EditAddress';
 
 
 const editAddress = () => {

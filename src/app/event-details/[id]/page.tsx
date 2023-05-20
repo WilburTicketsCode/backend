@@ -7,11 +7,12 @@ import {
 import {FaMapMarkerAlt} from "react-icons/fa";
 import { ImClock } from "react-icons/im";
 import { data } from '@/data/eventsData/data';
-import Footer from "@/components/footer/footer";
+import Footer from "@/components/Footer";
 import Tickets from '@/components/event/Tickets';
 import { Button } from '@/components/ClientSide';
 import { useState } from 'react';
-import moment from 'moment';
+
+
 
 
 async function loadEvent(id: Number) {
@@ -29,7 +30,6 @@ export default async function Event({params}: {params: { id: number }}) {
 
    /*const evento = await loadEvent(params.id);
    const endereco = evento.endereco;*/
-
    const [eventos, setEventos] = useState(data);
    const evento = eventos?.at(params.id);
    const endereco = evento?.endereco;

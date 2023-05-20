@@ -1,4 +1,5 @@
 import {Button} from '@/components/ClientSide'
+import Link from 'next/link';
 
 export default function TotalCart(){
     return(
@@ -11,7 +12,7 @@ export default function TotalCart(){
             </div>
 
             <div className="flex flex-col items-center mt-auto mb-2">
-                <Button className="bg-purple-800 w-[140px] h-[40px] p-0 rounded-xl">Fechar pedido</Button>
+                <Link href={'/shoppingCart/finalizacaoCompra'}><Button className="bg-purple-800 w-[140px] h-[40px] p-0 rounded-xl">Fechar pedido</Button></Link> 
             </div>
         </div>
     )

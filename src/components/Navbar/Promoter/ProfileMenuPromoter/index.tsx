@@ -21,10 +21,12 @@ const profileMenuItems = [
     {
         label: "Meu Perfil",
         icon: UserCircleIcon,
+        href: "/profile/promoter"
     },
     {
         label: "Sair",
         icon: PowerIcon,
+        href:"/3000"
     },
 ];
 

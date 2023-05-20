@@ -13,6 +13,16 @@ interface ListProps {
     admsBD: Adm[];
   }
 
+  //Forma de exibir tirando os dados da API (Não vai ser utilizado agora)
+/**{props.admsBD.map((admin) => (
+    <ul className="bg-gray-300 mt-10 mr-5 flex flex-col gap-6">
+        <li key={admin.id} className="font-semibold">{admin.nome}</li>
+        <li key={admin.id}>Email: {admin.email}</li>
+        <li key={admin.id}>CPF: {admin.cpf}</li>
+        <li key={admin.id}>Senha: {admin.senha}</li>
+    </ul>
+    ))}*/
+
 export default function TelaListAdm(props: ListProps) {
 
     return (
@@ -22,15 +32,6 @@ export default function TelaListAdm(props: ListProps) {
                 <Typography variant="h4" color="blue-gray">
                     Administradores:
                 </Typography>
-
-                {props.admsBD.map((admin) => (
-                    <ul className="bg-gray-300 mt-10 mr-5 flex flex-col gap-6">
-                        <li key={admin.id} className="font-semibold">{admin.nome}</li>
-                        <li key={admin.id}>Email: {admin.email}</li>
-                        <li key={admin.id}>CPF: {admin.cpf}</li>
-                        <li key={admin.id}>Senha: {admin.senha}</li>
-                    </ul>
-                    ))}
 
                     <ul className="bg-gray-300 mt-10 mr-5 flex flex-col gap-6">
                         <li className="font-semibold">Maria Gabriela Fernandes</li>

@@ -4,7 +4,7 @@ export default function CardIngresso(){
     return(
         <div className="container  mx-auto">
 
-            <div className ="bg-white overflow-y-auto sm:h-52 md:w-72 h-[420px]  lg:h-96 w-96 rounded-lg ">
+            <div className ="bg-white overflow-y-auto sm:h-52 md:w-72 md:h-[340px]  lg:h-96 w-96 rounded-lg ">
 
                 <h6 className="text font-semibold px-2">Revisar Ingressos</h6> 
 

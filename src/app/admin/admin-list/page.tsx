@@ -8,7 +8,7 @@ interface Adm {
   nome: String;
   email: String
   cpf: String;
-  senha: String;
+  senha: String; 
 }
 
 export default function Adm() {
@@ -19,7 +19,7 @@ export default function Adm() {
     const fetchAdmins = async () => {
         const reponse = await fetch("http://localhost:3000/api/administrador");
         const  data = await reponse.json();
-        console.log(data);
+        data.map((as: any) => {console.log(data)});
         setAdmins(data);
     }
 

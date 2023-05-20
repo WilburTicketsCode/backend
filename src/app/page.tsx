@@ -8,14 +8,19 @@ import React from 'react';
 
 export default function Home() {
   return (
-    <div className='flex justify-center items-center w-full h-full'>
-      <ul className='flex flex-col justify-center items-center'>
+    <div className='flex justify-center items-center w-full h-full pt-[250px]'>
+      <ul className='flex flex-col justify-center items-center mt-15'>
         <Link href="/profile/costumer"><Button>Perfil</Button></Link>
         <Link href="/event-details">evento</Link>
         <Link href="/home">Página inicial</Link>
         <Link href="/admin">Administrador</Link> 
         <Link href="/eventosPromoter">Promoter</Link>
         <Link href="/admin/eventos">Administrador Eventos</Link>
+<<<<<<< Updated upstream
+=======
+        <Link href="/profile/admin">Perfil Administrador</Link> 
+        <Link href="/shoppingCart">Carrinho de Compras</Link>
+>>>>>>> Stashed changes
       </ul>
     </div>
   )

@@ -1,14 +1,15 @@
 import { 
     MdOutlineShare,
     MdCalendarMonth,
-    MdLocationOn 
 } from "react-icons/md";
 
+import {FaMapMarkerAlt} from "react-icons/fa";
 import { ImClock } from "react-icons/im";
+
+import Footer from "@/components/footer/footer";
 import Tickets from '@/components/event/Tickets';
 import { Button } from '@/components/ClientSide';
 import moment from 'moment';
-import Footer from "@/components/footer/footer";
 
 
 async function loadEvent(id: Number) {
@@ -28,10 +29,10 @@ export default async function Event({params}: {params: { id: number }}) {
 
     return (
         
-        <div className="bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200">
+        <div>
             <div className='flex justify-center'>
                 <img 
-                    className='mt-32 w-[95%] lg:h-[500px] m-5 items-center max-w-full h-auto object-fit rounded-2xl'
+                    className='mt-32 w-[95%] lg:h-[500px] m-5 items-center max-w-full h-auto object-fit rounded-lg'
                     src="/img/event-banner/show_djavan.jpeg"
                     alt='Imagem do evento'
                 />
@@ -48,20 +49,21 @@ export default async function Event({params}: {params: { id: number }}) {
                     </Button>
                 </div>
 
-                <div className="flex flex-shrink mt-8 text-sm">
-                    <div className="flex flex-wrap"><MdCalendarMonth color={'#6a1b9a'} size={'1rem'}/></div>
+                <div className="items-center text-sm">
+                    <div className="flex flex-wrap mt-8"><MdCalendarMonth color={'#6a1b9a'} size={'1rem'}/>
                     <h3 className="font-semibold ml-2 mr-16 text-blue-gray-900">
                         {moment(evento.horaInicio).format("DD/MM/YYYY")}
                     </h3>
-                    
-                    <div className="flex flex-wrap"><ImClock color={'#6a1b9a'} size={'1rem'}/></div>
+                    </div>
+                    <div className="flex flex-wrap mt-5"><ImClock color={'#6a1b9a'} size={'1rem'}/>
                     <h3 className="font-semibold ml-2 mr-5 text-blue-gray-900">
                         {moment(evento.horaInicio).format("HH:mm")} - {moment(evento.horaFim).format("HH:mm")}
                     </h3>
+                    </div>
                 </div>
 
                 <div className="flex flex-shrink mt-5 text-sm">
-                    <div className="flex flex-wrap"><MdLocationOn color={'#6a1b9a'} size={'1.5rem'}/></div>
+                    <div className="flex flex-wrap"><FaMapMarkerAlt color={'#6a1b9a'} size={'1.2rem'}/></div>
                     <h3 className="font-semibold ml-2 mr-5 text-blue-gray-900">
                         {`${endereco.rua}, ${endereco.numero}, ${endereco.bairro}, ${endereco.cidade} - ${endereco.estado}`}
                     </h3>

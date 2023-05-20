@@ -48,7 +48,7 @@ export async function inserirPromoter(promoter: Promoter) {
         return null
     } else {
 
-        const promoterDATA = prisma.promoter.create({
+        const promoterDATA = await prisma.promoter.create({
             data: {
                 usuario: {
                     create: {

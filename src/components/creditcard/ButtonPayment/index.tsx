@@ -46,16 +46,16 @@ export default function Payment() {
                     size="xl"
                     open={open}
                     handler={handleOpen}
-                    className="bg-transparent shadow-none"
+                    className="bg-transparent shadow-none overflow-auto"
                 >
-                    <Card className="mx-auto w-full  h-1/2" >
-                        <CardBody className='flex flex-col h-80 w-full justify-center gap-y-12 items-center'>
+                    <div className="mx-auto w-full h-[90vh] bg-white p-6 gap-y-5 overflow-auto" >
+                        <div className='flex flex-col h-[50%] w-full justify-center lg:mb-5 items-center'>
                             <FlippableCard />
-                        </CardBody>
-                        <CardFooter className="flex justify-center">
+                        </div>
+                        <div className="flex justify-center h-[50%]">
                             <Cardform />
-                        </CardFooter>
-                    </Card>
+                        </div>
+                    </div>
 
                 </Dialog>
             </PayContext.Provider>

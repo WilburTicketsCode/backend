@@ -5,7 +5,6 @@ import Link from 'next/link';
 import React from 'react';
 
 
-
 export default function Home() {
   return (
     <div className='flex justify-center items-center w-full h-full pt-[250px]'>

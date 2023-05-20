@@ -6,7 +6,7 @@ type Props = {
     nomeEvento: string,
     dataEvento: string,
     localEvento: string,
-    evento: string
+    evento: number
 }
  
 export default function CardEventoAdm({imagemEvento, nomeEvento, dataEvento, localEvento, evento}: Props) {

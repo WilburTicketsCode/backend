@@ -1,4 +1,4 @@
-
+'use client'
 import {Carousel} from "../../ClientSide";
 import { data } from '@/data/eventsData/data';
 import { useState } from 'react';

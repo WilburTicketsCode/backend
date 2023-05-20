@@ -1,3 +1,4 @@
+/* FakeApi para consumo da tela principal */ 
 export const data = [
     {
         id: 1,

@@ -1,5 +1,3 @@
-'use client'
-
 export default function Footer() {
     return (
       <footer className="mx-auto max-w-[1920px] px-3 bg-gray-100" >

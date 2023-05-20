@@ -1,7 +1,7 @@
 "use client"
 
-import FormSecurityData from "./components/formSecurityData";
-import FormPersonalData from "./components/formPersonalData";
+import FormSecurityData from "../../../components/Promoter/formSecurityData";
+import FormPersonalData from "../../../components/Promoter/formPersonalData";
 import { useState } from "react";
 import {
     Tabs,
@@ -10,7 +10,7 @@ import {
     Tab,
     TabPanel,
     Typography,
-  } from "@material-tailwind/react";
+  } from "../../../components/ClientSide";
 
 export default function PromoterPage() {
     const obj = {

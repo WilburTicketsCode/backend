@@ -23,6 +23,7 @@ import {
     TabsBody,
     Tab,
     TabPanel,
+    Checkbox
   
 } from "@material-tailwind/react"; 
 
@@ -59,4 +60,5 @@ export { Accordion,
     UserCircleIcon,
     ChevronDownIcon,
     PowerIcon,
+    Checkbox
   };

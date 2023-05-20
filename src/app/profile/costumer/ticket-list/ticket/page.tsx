@@ -24,7 +24,7 @@ export default async function Dash({params}: {params: { cpf: string }}) {
 */
 
 export default function Dash() {
-  return(
+  return (
     <div className="w-full h-full pt-32 flex justify-center">
       <Ticket />
     </div>

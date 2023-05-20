@@ -1,10 +1,15 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CardEventoAdm from "@/components/Admin/EventsAdmin";
 
 
 export default function AdmHome() {
 
+    interface IEndereco {
+        rua: string;
+        bairro: string;
+        cidade: string;
+    }
     
     const [numOfElement, setNumOfElement] = useState(6);
 
@@ -13,7 +18,7 @@ export default function AdmHome() {
     const [events, setEvents] = useState([]);
     
     const fetchEvents = async () => {
-        const reponse = await fetch("http://localhost:3000/api/evento");
+        const reponse = await fetch("/api/evento");
         const  data = await reponse.json();
         setEvents(data);
     }
@@ -210,8 +215,14 @@ export default function AdmHome() {
     const slice = data.eventData.slice(0, numOfElement);  //const slice = events.slice(0, numOfElement);
 
     function formatDate(date: string): string {
-        const dd = date.slice(0,16).replaceAll('-', '/').replaceAll('T', '-').split('-');   
-        return dd[0] + " - " + dd[1]
+        const fullDate = date.slice(0,16).replaceAll('-', '/').replaceAll('T', '-').split('-');   
+        const dateymdA = fullDate[0].split('/').reverse();      // Obtém o ano, mês e dia para ordenar como -> dia/mês/ano
+        const dateymdS = `${dateymdA[0]}/${dateymdA[1]}/${dateymdA[2]}`;    // Formata a data para ser exibida corretamente
+        return `${dateymdS} - ${fullDate[1]}`
+    }
+
+    function formatLocalEvento(endereco: IEndereco): string {
+        return endereco.rua + ", " + endereco.bairro + ", " + endereco.cidade
     }
 
     const loadMore = () => {
@@ -222,7 +233,7 @@ export default function AdmHome() {
         <div className="flex flex-col h-full items-center justify-center mt-4 bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200">
             <div className="grid grid-cols-12 md:col-span-6 xl:col-span-4 h-full xl:gap-x-14 md:gap-8 gap-y-8 mt-4 mb-4">  {/*Layout para essa página*/}
                 {slice.map((item, index) => {
-                    return (<CardEventoAdm imagemEvento={item.banner} nomeEvento={item.nome} dataEvento={formatDate(item.horaInicio)} localEvento={item.endereco.rua + ", " + item.endereco.bairro + ", " + item.endereco.cidade} evento="#" />)
+                    return (<CardEventoAdm key={item.id} imagemEvento={item.banner} nomeEvento={item.nome} dataEvento={formatDate(item.horaInicio)} localEvento={formatLocalEvento(item.endereco)} evento="#" />)
                 })}
                 <div className="object-center text-center col-span-12 mt-10 mb-3">
                     <button className="bg-roxo-wil h-[36px] w-[230px] text-white font-sans text-sm font-semibold text-center object-center rounded-full shadow-md shadow-black/40" onClick={() => loadMore()}>
@@ -231,7 +242,5 @@ export default function AdmHome() {
                 </div>
             </div>
         </div>
-
-
     )
 }

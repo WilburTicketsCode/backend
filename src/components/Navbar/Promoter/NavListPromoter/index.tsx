@@ -7,11 +7,11 @@ import {
 const navListItems = [
     {
       label: "Eventos",
-      href: '#'
+      href: '/eventosPromoter'
     },
     {
       label: "Novo Evento",
-      href: '#'
+      href: '/event-registration'
     },
   ];
   

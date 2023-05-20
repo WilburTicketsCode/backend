@@ -230,7 +230,7 @@ export default function AdmHome() {
     }
 
     return (
-        <div className="flex flex-col h-full items-center justify-center mt-4 bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200">
+        <div className="flex flex-col h-full items-center justify-center mt-4 pt-20 bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200">
             <div className="grid grid-cols-12 md:col-span-6 xl:col-span-4 h-full xl:gap-x-14 md:gap-8 gap-y-8 mt-4 mb-4">  {/*Layout para essa página*/}
                 {slice.map((item, index) => {
                     return (<CardEventoAdm key={item.id} imagemEvento={item.banner} nomeEvento={item.nome} dataEvento={formatDate(item.horaInicio)} localEvento={formatLocalEvento(item.endereco)} evento={item.id} />)

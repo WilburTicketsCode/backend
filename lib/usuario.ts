@@ -8,6 +8,11 @@ export async function getUsuario(email: string) {
       where: {
         email: email,
       },
+      include: {
+        adm: true,
+        promoter: true,
+        cliente: true
+      }
     });
   
     return data;

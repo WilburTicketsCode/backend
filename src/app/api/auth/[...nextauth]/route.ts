@@ -45,11 +45,12 @@ const handler = NextAuth({
       async jwt({token, user}) {
         return ({...token,...user})
       },
-      async session({session, token, user}){
+      async session ({session, token, user}){
         session.user = token
         return session
-      },
+      }
     }
+    
 })
 
 export {handler as GET, handler as POST}

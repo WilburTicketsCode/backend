@@ -8,16 +8,14 @@ const SinginButton = () => {
         return (
         <div className="flex gap-4 ml--auto">
             <p className="text-sky-600">{session.user.name}</p>
-            <button onClick={() => signOut()} className="bg-[#ffffff] text-red-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">
-                Sair
-            </button>
+            <button onClick={() => signOut()} className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Sair</button>
+                
         </div>
         )
     }
     return (
-        <button onClick={() => signIn()}>
-        Entrar
-        </button>
+        <button onClick={() => signIn()} className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Entrar</button>
+                
     )
 }
 

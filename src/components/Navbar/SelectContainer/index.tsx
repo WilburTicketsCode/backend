@@ -56,9 +56,9 @@ const noLogin = () => {
             <Search />
             <div className='flex flex-col w-full max-w-screen md:flex-row gap-1 md:gap-6'>
                 <NoLoginMenu></NoLoginMenu>
-                <SinginButton/>
                 <Link href={'/promoter-registration'} className='md:flex items-center justify-center hidden'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar promoter</button> </Link>
                 <Link href={'/customer-registration'} className='md:flex items-center justify-center hidden'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar cliente</button> </Link>
+                <SinginButton />
 
             </div>
         </div>

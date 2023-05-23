@@ -3,12 +3,13 @@ import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { signIn } from 'next-auth/react';
 
 type loginFormData = z.infer<typeof loginASchema>;
 
 const loginASchema = z.object({
     email: z.string().email({ message: 'Email inválido' }),
-    password: z.string().min(8, { message: 'Senha deve conter no mínimo 8 caracteres' }),
+    password: z.string().min(3, { message: 'Senha deve conter no mínimo 8 caracteres' }),
 })
 
 
@@ -24,8 +25,14 @@ export default function LoginAdm() {
 
     });
 
-    const onSubmit = (data: loginFormData) => {
+    const onSubmit = async (data: loginFormData) => {
         console.log(data);
+        const result = await signIn("credentials", {
+            email: data.email,
+            password: data.password,
+            redirect: true,
+            callbackUrl: "/"
+        })
     }
 
 

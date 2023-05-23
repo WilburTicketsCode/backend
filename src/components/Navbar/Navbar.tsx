@@ -1,3 +1,4 @@
+"use client"
 import Container from './Container'
 import Select from './SelectContainer';
 import { useSession } from 'next-auth/react';

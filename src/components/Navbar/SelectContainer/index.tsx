@@ -9,6 +9,7 @@ import { BellIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import ProfileMenuADM from '../Adm/ProfileMenuADM';
 import Link from 'next/link';
 import NoLoginMenu from '../NoLoginMenu';
+import SinginButton from '../../SinginButton';
 
 
 
@@ -55,7 +56,7 @@ const noLogin = () => {
             <Search />
             <div className='flex flex-col w-full max-w-screen md:flex-row gap-1 md:gap-6'>
                 <NoLoginMenu></NoLoginMenu>
-                <Link href={'/sighin'} className='md:flex items-center justify-center hidden'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Entrar</button> </Link>
+                <SinginButton/>
                 <Link href={'/promoter-registration'} className='md:flex items-center justify-center hidden'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar promoter</button> </Link>
                 <Link href={'/customer-registration'} className='md:flex items-center justify-center hidden'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar cliente</button> </Link>
 

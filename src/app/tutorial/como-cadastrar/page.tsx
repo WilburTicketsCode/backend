@@ -1,5 +1,5 @@
 "use client"
-import SubmitButton from "@/components/SubmitButton";
+import SubmitButton from "../../../components/SinginButton";
 import React, { useState } from "react"
 
 export default function testes() {

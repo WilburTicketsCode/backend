@@ -9,8 +9,7 @@ import { BellIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import ProfileMenuADM from '../Adm/ProfileMenuADM';
 import Link from 'next/link';
 import NoLoginMenu from '../NoLoginMenu';
-import { signIn } from 'next-auth/react';
-import SinginButton from '@/components/SinginButton';
+import SinginButton from '../../SinginButton';
 
 
 

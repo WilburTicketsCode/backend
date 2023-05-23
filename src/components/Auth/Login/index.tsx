@@ -3,14 +3,7 @@ import React from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import {
-    Input,
-    Button,
-    Typography,
-
-} from "../../ClientSide";
 import { signIn } from 'next-auth/react';
-import { redirect } from 'next/dist/server/api-utils';
 
 type loginFormData = z.infer<typeof loginASchema>;
 
@@ -45,19 +38,56 @@ export default function LoginAdm() {
 
     return (
 
-        <div className="w-[90%] h-[80%] md:h-[80%] md:w-[60%] lg:h-[70%] xl:h-[70%] xl:w-[40%] gap-4 flex flex-col justify-center items-center bg-white rounded-xl overflow-auto shadow-md hover:shadow-2xl">
-            <Typography variant="h2" className="text-[#404c76] mt-6 ml-4">
-                Conecte-se ao nosso Site!
-            </Typography>
-            <form onSubmit={handleSubmit(onSubmit)} className="w-[90%] flex flex-col items-center text-sm justify-center gap-4 overflow-auto p-5">
-                <Input {...register('email')} size='lg' label='Email'></Input>
-                {errors.email?.message && <p className="text-red-500 text-center">{errors.email?.message}</p>}
-                <Input {...register('password')} className='' type='password' label='Senha' />
-                {errors.password?.message && <p className="text-red-500 text-center">{errors.password?.message}</p>}
-                <a href="#" className="text-blue-500 text-center">Esqueceu sua senha?</a>
-                <Button type='submit' size='md'>Entrar</Button>
-            </form>
-        </div>
+        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+            <div>
+                <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                    Email
+                </label>
+                <div className="mt-2">
+                    <input
+                        {...register('email')}
+                        id="email"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                    {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
+                </div>
+            </div>
 
+            <div>
+                <div className="flex items-center justify-between">
+                    <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                        Senha
+                    </label>
+                    <div className="text-sm">
+                        <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                            Esqueceu sua senha?
+                        </a>
+                    </div>
+                </div>
+                <div className="mt-2">
+                    <input
+                        {...register('password')}
+                        id="password"
+                        name="password"
+                        type="password"
+                        autoComplete="current-password"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                    {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
+                </div>
+            </div>
+
+            <div>
+                <button
+                    type="submit"
+                    className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                    Entrar
+                </button>
+            </div>
+        </form>
     )
 }

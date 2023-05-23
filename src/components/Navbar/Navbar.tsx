@@ -1,8 +1,4 @@
-"use client"
-import Search from './Search';
 import Container from './Container'
-import Logo from './Logo'
-import ProfileMenu from './ProfileMenu';
 import Select from './SelectContainer';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
@@ -11,6 +7,9 @@ import { BellIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 import NavList from './Adm/NavListADM';
 import NoLoginMenu from './NoLoginMenu';
 import SinginButton from '../SinginButton';
+import ProfileMenu from './ProfileMenu';
+import Logo from './Logo';
+import Search from './Search';
 
 /* Deixando isso aqui só pra não quebrar o codigo por agora*/
 type Props = {

@@ -1,7 +1,4 @@
-import Search from './Search';
 import Container from './Container'
-import Logo from './Logo'
-import ProfileMenu from './ProfileMenu';
 import Select from './SelectContainer';
 
 type Props = {

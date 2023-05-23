@@ -32,11 +32,11 @@ export default function Password() {
             <h2 className="text-2xl font-bold text-center">Alterar Senha</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center justify-center gap-4">
                 <Input className="w-[15rem] sm:w-[20rem] lg:w-[30rem]" type="password" label="Senha Atual" {...register('currentPassword')}></Input>
-                {errors.currentPassword && <span className="text-red-500 text-xs">{errors.currentPassword.message}</span>}
+                {errors.currentPassword && <p className="text-red-500 text-xs">{errors.currentPassword.message}</p>}
                 <Input className="w-[15rem] sm:w-[20rem] lg:w-[30rem]" type="password" label="Nova Senha" {...register('newPassword')}></Input>
-                {errors.newPassword && <span className="text-red-500 text-xs">{errors.newPassword.message}</span>}
+                {errors.newPassword && <p className="text-red-500 text-xs">{errors.newPassword.message}</p>}
                 <Input className="w-[15rem] sm:w-[20rem] lg:w-[30rem]" type="password" label="Confirmar Nova Senha" {...register('reNewPassword')}></Input>
-                {errors.reNewPassword && <span className="text-red-500 text-xs">{errors.reNewPassword.message}</span>}
+                {errors.reNewPassword && <p className="text-red-500 text-xs">{errors.reNewPassword.message}</p>}
                 <div className="flex flex-row gap-4">
                     <Button className='bg-red-900' type="reset">Cancelar</Button>
                     <Button type="submit">Salvar</Button>

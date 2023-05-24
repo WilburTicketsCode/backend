@@ -37,7 +37,7 @@ export async function POST(request:Request) {
                         ' quando sua conta foi criada no melhor site do universo. Sinta-se' +
                         ' honrado de estar recebendo o email do mago do beck-end Pedro VI</p>'
                     })
-                return NextResponse.json(cliente)
+                return NextResponse.json(dados)
             }
 
         } catch (e) {

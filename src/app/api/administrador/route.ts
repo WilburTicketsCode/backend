@@ -42,7 +42,7 @@ export async function POST(request:Request) {
                 } catch (e) {
                     console.log(e)
                 }
-                return NextResponse.json(adm)
+                return NextResponse.json(dados)
             }
 
         } catch (e) {

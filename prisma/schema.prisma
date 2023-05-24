@@ -89,11 +89,11 @@ model Cliente {
   cpf         String         @unique
   data_nasc   DateTime
   id_usuario  Int            @unique
-  id_cartao   Int            @unique
+  id_cartao   Int?            @unique
   id_endereco Int            @unique
   telefone    String
   usuario     Usuario        @relation(fields: [id_usuario], references: [id])
-  cartao      Cartao_Credito @relation(fields: [id_cartao], references: [id])
+  cartao      Cartao_Credito? @relation(fields: [id_cartao], references: [id])
   endereco    Endereco       @relation(fields: [id_endereco], references: [id])
   compras     Compra[]
 }

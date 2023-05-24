@@ -1,3 +1,11 @@
+## Contas (PlanetScale/seed.ts)
+
+Administrador - email: pedro200@hotmail.com | senha: pedropedro99
+
+Promoter - email: tostinha123@yahoo.com | senha: Tosta1134
+
+Cliente - email: andrezito@yahoo.com | senha: 123
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

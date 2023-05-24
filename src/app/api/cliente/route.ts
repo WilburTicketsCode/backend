@@ -22,33 +22,24 @@ export async function POST(request:Request) {
     const dados: Cliente = await request.json()
     if (dados !== null){
         try {
-
             const cliente = await inserirCliente(dados)
     
             if (cliente === null) {
-                console.log("Dados de CLIENTE invalidos.")
+                return NextResponse.json("ERROR 00")
             } else {
                 console.log("Dados criados.\n", cliente);
+                return NextResponse.json(cliente)
             }
 
         } catch (e) {
-            if (e instanceof  PrismaClientKnownRequestError) {
-
-                if (e.code === 'P2002'){
-
-                    if (e.message.split(' ')[8] === '`Usuario_email_key`'){
-
-                    throw new emailDuplicado("esté email já existe nos registros.")
-
-                  } else if (e.message.split(' ')[8] === '`Administrador_cpf_key`') {
-
-                    throw new cpfDuplicado("esté cpf já existe nos registros.")
-
-                  }
-                }
+            if (e instanceof cpfDuplicado){
+                return NextResponse.json("ERROR 01")
+            } else if (e instanceof emailDuplicado){
+                return NextResponse.json("ERROR 02")
             }
         }
-    
+        
+       
     } 
 
 }

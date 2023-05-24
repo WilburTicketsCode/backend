@@ -26,7 +26,6 @@ export default function LoginAdm() {
     });
 
     const onSubmit = async (data: loginFormData) => {
-        console.log(data);
         const result = await signIn("credentials", {
             email: data.email,
             password: data.password,

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Cliente, getClientes, inserirCliente } from "../../../../lib/cliente";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { cpfDuplicado, emailDuplicado } from "../../../../lib/erros";
+import { mailOptions, transporter, trocarDestinatario } from "../../../../lib/nodemailer";
 
 
 /* Banco pessoal
@@ -28,7 +28,16 @@ export async function POST(request:Request) {
                 return NextResponse.json("ERROR 00")
             } else {
                 console.log("Dados criados.\n", cliente);
-                return NextResponse.json(cliente)
+                trocarDestinatario(dados.usuario.email)
+                    await transporter.sendMail({
+                        ...mailOptions,
+                        subject: 'Verificando Conta Wilbor',
+                        text: 'Email vindo diretamente do mado do backend',
+                        html: '<h1>MAGO DO BACKEND</h1><p>Email enviado pelo mago do backend' +
+                        ' quando sua conta foi criada no melhor site do universo. Sinta-se' +
+                        ' honrado de estar recebendo o email do mago do beck-end Pedro VI</p>'
+                    })
+                return NextResponse.json(dados)
             }
 
         } catch (e) {

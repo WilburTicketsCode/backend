@@ -1,5 +1,4 @@
 "use client"
-import SubmitButton from "../../../components/SinginButton";
 import React, { useState } from "react"
 
 export default function testes() {
@@ -7,9 +6,9 @@ export default function testes() {
   const [jsonPraTela, setJsonPraTela] = useState('LOCAL ONDE O JSON CRIADO SERA EXIBIDO PARA SERVIR DE EXEMPLO')
 
   const adm = {
-    nome: 'adasdasdasda',
-    cpf: '99933344455',
-    email: 'dddsddw@yahoo.com',
+    nome: 'CARALHOO',
+    cpf: '00090780405',
+    email: 'aaaazfezqasdwa@xxxx.com',
     password: '123',
   }
 
@@ -92,8 +91,8 @@ export default function testes() {
     })
 
     if (res.ok) {
-      setJsonPraTela(jaison)
       const user = await res.json()
+      setJsonPraTela(JSON.stringify(user)) 
       console.log(user)
     } else {
       setJsonPraTela("DEU BO")
@@ -139,8 +138,8 @@ export default function testes() {
     })
 
     if (res.ok) {
-      setJsonPraTela(jaison)
       const user = await res.json()
+      setJsonPraTela(JSON.stringify(user)) 
       console.log(user)
     } else {
       setJsonPraTela("DEU BO")
@@ -181,7 +180,7 @@ export default function testes() {
     })
     if (res.ok) {
       const user = await res.json()
-      setJsonPraTela(user)
+      setJsonPraTela(JSON.stringify(user)) 
       console.log(user)
     } else {
       setJsonPraTela("DEU BO")

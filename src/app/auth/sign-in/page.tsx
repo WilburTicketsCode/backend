@@ -4,10 +4,11 @@ import LoginAdm from '../../../components/Auth/Login';
 
 const LoginA = () => {
     return (
-        <div className="w-full h-screen flex items-center justify-center pt-20 md:pt-36">
-            <div className=" flex w-full lg:w-[40%] h-4/5  justify-center ">
-
-                <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-white rounded-2xl">
+        <div className="w-full h-screen flex flex-col items-center justify-center">
+            <div className='w-full h-[10%]'></div>
+            <div className='flex w-full justify-center items-center'>
+            <div className="flex w-full lg:w-[40%] h-[100%] justify-center items-center">
+                <div className="flex  flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-white rounded-2xl">
                     <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                         <img
                             className="mx-auto h-15 w-auto"
@@ -18,12 +19,13 @@ const LoginA = () => {
                             Entre na sua conta
                         </h2>
                     </div>
-
-                    <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                    <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                         <LoginAdm />
                     </div>
                 </div>
             </div>
+            </div>
+            
 
         </div>
     )

@@ -1,9 +1,10 @@
 'use client'
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 type loginFormData = z.infer<typeof loginASchema>;
 
@@ -12,8 +13,10 @@ const loginASchema = z.object({
     password: z.string().min(3, { message: 'Senha deve conter no mínimo 8 caracteres' }),
 })
 
-
-export default function LoginAdm() {
+const LoginAdm = () => {
+    const { data: session } = useSession();
+    const router = useRouter();
+    const [credentials, setCredentials] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm<loginFormData>({
         resolver: zodResolver(loginASchema),
         criteriaMode: 'all',
@@ -25,19 +28,44 @@ export default function LoginAdm() {
 
     });
 
+    
+
+   
+
     const onSubmit = async (data: loginFormData) => {
         const result = await signIn("credentials", {
             email: data.email,
             password: data.password,
-            redirect: true,
-            callbackUrl: "/"
+            redirect: false,
         })
+
+        if (result && result.error === 'CredentialsSignin') {
+            result.error ? setCredentials(true) : setCredentials(false);
+        }
+        
     }
 
+    useEffect(() => {
+        const redirectToRolePage = async () => {
+          if (session && session.user) {
+            if (session.user.role === "cliente") {
+              router.push("/");
+            } else if (session.user.role === "promoter") {
+              router.push("/events/eventosPromoter");
+            } else if (session.user.role === "administrador") {
+              router.push("/admin/eventos");
+            }
+          }
+        };
+
+        redirectToRolePage();
+      }, [session]);
+    
 
     return (
 
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+            {credentials && <p className="text-red-500 text-xs">Email ou senha não são compatíveis</p>}
             <div>
                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                     Email
@@ -90,3 +118,5 @@ export default function LoginAdm() {
         </form>
     )
 }
+
+export default LoginAdm;

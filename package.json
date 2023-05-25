@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node_modules/next/dist/bin/next start -p $PORT",
     "postinstall": "prisma generate",
     "dev": "next dev",
     "build": "prisma generate && next build"

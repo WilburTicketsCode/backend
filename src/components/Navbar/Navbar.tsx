@@ -11,6 +11,8 @@ import SinginButton from '../SinginButton';
 import ProfileMenu from './ProfileMenu';
 import Logo from './Logo';
 import Search from './Search';
+import { useEffect } from 'react';
+
 
 /* Deixando isso aqui só pra não quebrar o codigo por agora*/
 type Props = {
@@ -19,8 +21,10 @@ type Props = {
 
 const Navbar = ({ navbarType }: Props) => {
     const { data: session } = useSession()
+    /*Pfv usar UseEffect ou outra coisa pois o codigo abaixo foi escrito por Pedro, ou seja, está errado. */
     if (session && session.user) {
         if (session.user.role === 'cliente') {
+
             return (
                 <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
                     <div className='py-4 border-b-[2px] rounded-b-lg'>

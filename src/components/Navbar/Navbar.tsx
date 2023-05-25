@@ -88,8 +88,8 @@ const Navbar = ({ navbarType }: Props) => {
                 </div>
             )
         }
-    }
-    return (
+    }else{
+        return (
 
         <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
             <div className='py-4 border-b-[2px] rounded-b-lg'>
@@ -103,7 +103,8 @@ const Navbar = ({ navbarType }: Props) => {
                 </div>
             </div>
         </div>
-    )
+    )}
+    
 }
 
 /* Funcionamento da navbar com Select /*

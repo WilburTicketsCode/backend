@@ -82,6 +82,7 @@ model Perfil {
 
 model Cliente {
   id          Int            @id @default(autoincrement())
+  perfil_foto String?
   cpf         String         @unique
   data_nasc   DateTime
   id_usuario  Int            @unique

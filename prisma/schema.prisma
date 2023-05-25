@@ -86,7 +86,7 @@ model Cliente {
   cpf         String         @unique
   data_nasc   DateTime
   id_usuario  Int            @unique
-  id_cartao   Int?            @unique
+  id_cartao   Int?           
   id_endereco Int            @unique
   telefone    String
   usuario     Usuario        @relation(fields: [id_usuario], references: [id])

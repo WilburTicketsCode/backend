@@ -1,16 +1,15 @@
-import { 
-    MdOutlineShare,
-    MdCalendarMonth,
-} from "react-icons/md";
 
-import {FaMapMarkerAlt} from "react-icons/fa";
+import { MdCalendarMonth } from "react-icons/md";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import { ImClock } from "react-icons/im";
 import Footer from "@/components/Footer";
-import Tickets from '@/components/event/Tickets';
+import Tickets from '@/components/EventDetails/Tickets';
 import { Button } from '@/components/ClientSide';
 import moment from "moment";
+import 'moment/locale/pt-br';
+import ShareButton from "@/components/EventDetails/ShareButton";
 
-
+moment.locale('pt-br')
 
 
 async function loadEvent(id: Number) {
@@ -27,6 +26,7 @@ export default async function Event({params}: {params: { id: number }}) {
 
    const evento = await loadEvent(params.id);
    const endereco = evento.endereco;
+   const weekDay = moment(evento.horaInicio).format("dddd");
 
     return (
         
@@ -44,19 +44,16 @@ export default async function Event({params}: {params: { id: number }}) {
                     <h1 className="text-2xl font-bold m-6">
                         {evento.nome}
                     </h1>
-                    <Button color="purple" size="md" className="flex items-center gap-3 rounded-full">
-                        <MdOutlineShare size={'1rem'}/>
-                        Compartilhar
-                    </Button>
+                    <ShareButton/>
                 </div>
 
                 <div className="items-center text-sm">
-                    <div className="flex flex-wrap mt-8"><MdCalendarMonth color={'#6a1b9a'} size={'1rem'}/>
+                    <div className="flex flex-wrap mt-8"><MdCalendarMonth className="fill-roxo-wil" size={'1rem'}/>
                     <h3 className="font-semibold ml-2 mr-16 text-blue-gray-900">
-                        {moment(evento.horaInicio).format("DD/MM/YYYY")}
+                        {weekDay.charAt(0).toUpperCase() + weekDay.slice(1)}, {moment(evento.horaInicio).format("L")}
                     </h3>
                     </div>
-                    <div className="flex flex-wrap mt-5"><ImClock color={'#6a1b9a'} size={'1rem'}/>
+                    <div className="flex flex-wrap mt-5"><ImClock className="fill-roxo-wil" size={'1rem'}/>
                     <h3 className="font-semibold ml-2 mr-5 text-blue-gray-900">
                         {moment(evento.horaInicio).format("HH:mm")} - {moment(evento.horaFim).format("HH:mm")}
                     </h3>
@@ -64,7 +61,7 @@ export default async function Event({params}: {params: { id: number }}) {
                 </div>
 
                 <div className="flex flex-shrink mt-5 text-sm">
-                    <div className="flex flex-wrap"><FaMapMarkerAlt color={'#6a1b9a'} size={'1.2rem'}/></div>
+                    <div className="flex flex-wrap"><FaMapMarkerAlt className="fill-roxo-wil" size={'1.2rem'}/></div>
                     <h3 className="font-semibold ml-2 mr-5 text-blue-gray-900">
                         {`${endereco.rua}, ${endereco.numero}, ${endereco.bairro}, ${endereco.cidade} - ${endereco.estado}`}
                     </h3>
@@ -86,13 +83,13 @@ export default async function Event({params}: {params: { id: number }}) {
                                 setor={lot.setor.nome}
                                 perfil={lot.perfil.nome}
                                 valor={lot.valorTotal}
+                                qtdIngressos={lot.quantidade}
                             />
                         ))}
 
-                        <Button color="purple" type="submit" className="m-auto flex gap-3 rounded-full p-2">
+                        <Button type="submit" className="bg-roxo-wil m-auto flex gap-3 rounded-full p-2">
                             Adicionar ao carrinho
                         </Button> 
-
                     </div>
 
                 </div>

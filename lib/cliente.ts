@@ -23,10 +23,10 @@ export async function getClientes() {
     return data
 }
 
-export async function getCliente(cpf: string) {
+export async function getCliente(id: number) {
     const data = await prisma.cliente.findUnique({
       where: {
-        cpf: cpf,
+        id: id,
       },
       include: {
         endereco: true,

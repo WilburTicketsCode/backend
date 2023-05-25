@@ -3,4 +3,5 @@ export interface User {
     role?: string,
     username?: string,
     accessToken?: string,
+    id? : number,
 }

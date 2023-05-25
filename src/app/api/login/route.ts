@@ -15,21 +15,24 @@ export async function POST(request:Request) {
             const userWithoutPass = {
                 name: user.nome,
                 email: user.email,
-                role: "administrador"
+                role: "administrador",
+                id: user.id
             }
             return new Response(JSON.stringify(userWithoutPass))
         } else if (user.promoter !== null){
             const userWithoutPass = {
                 name: user.nome,
                 email: user.email,
-                role: "promoter"
+                role: "promoter",
+                id: user.id
             }
             return new Response(JSON.stringify(userWithoutPass))
         } else {
             const userWithoutPass = {
                 name: user.nome,
                 email: user.email,
-                role: "cliente"
+                role: "cliente",
+                id: user.id
             } 
             return new Response(JSON.stringify(userWithoutPass))
         }

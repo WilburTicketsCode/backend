@@ -1,7 +1,5 @@
-"use client"
-import SinginButton from "@/components/SinginButton";
 import { useSession } from "next-auth/react";
-import React, { useState } from "react"
+import React from "react"
 
 export default function testes() {
   const {data: session} = useSession()

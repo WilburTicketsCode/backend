@@ -21,6 +21,7 @@ import {
   TicketIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 
 const profileMenuItems = [
@@ -115,6 +116,22 @@ export default function ProfileMenu() {
             </MenuItem>
           );
         })}
+        
+        <Button onClick={() => signOut()} className='bg-[#ffffff] flex flex-row gap-2 flex items-center gap-2 rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10'>
+          {React.createElement(PowerIcon, {
+            className: `h-6 w-6 text-red-500`,
+            strokeWidth: 2,
+          })}
+          <Typography
+            as="span"
+            variant="h5"
+            className="font-normal"
+            color="red"
+          >
+            Sair Verdadeiro
+          </Typography>
+        </Button>
+
       </MenuList>
     </Menu>
   );

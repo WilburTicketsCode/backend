@@ -35,7 +35,7 @@ const Navbar = ({ navbarType }: Props) => {
                             <div>
                                 <div className='gap-0.5 md:gap-5 flex flex-row justify-center items-center'>
                                     <div>
-                                        <Link href={'/shoppingCart'}>
+                                        <Link href={'/cliente/shoppingCart'}>
                                             <IconButton
                                                 variant="text"
                                                 color="blue-gray"
@@ -90,7 +90,7 @@ const Navbar = ({ navbarType }: Props) => {
                 </div>
             )
         }
-    }else{
+    }
         return (
 
         <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
@@ -99,13 +99,13 @@ const Navbar = ({ navbarType }: Props) => {
                     <Link href={'/'}><Logo /></Link>
                     <Search />
                     <NoLoginMenu></NoLoginMenu>
-                    <Link href={'/promoter-registration'} className='md:flex items-center justify-center hidden'> <button className="bg-[#ffffff] text-light-blue-900 text-md hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar promoter</button> </Link>
-                    <Link href={'/customer-registration'} className='md:flex items-center justify-center hidden'><button className="bg-[#ffffff] text-light-blue-900 text-md hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar cliente</button> </Link>
+                    <Link href={'/auth/promoter-registration'} className='md:flex items-center justify-center hidden'> <button className="bg-[#ffffff] text-light-blue-900 text-md hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar promoter</button> </Link>
+                    <Link href={'/auth/customer-registration'} className='md:flex items-center justify-center hidden'><button className="bg-[#ffffff] text-light-blue-900 text-md hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar cliente</button> </Link>
                     <SinginButton />
                 </div>
             </div>
         </div>
-    )}
+    )
     
 }
 

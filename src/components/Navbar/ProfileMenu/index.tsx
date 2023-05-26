@@ -57,12 +57,10 @@ const profileMenuItems = [
 
 
 
-
-
-export default async function ProfileMenu() {
+export default function ProfileMenu() {
   const {data: session } = useSession();
 
-  let res = await fetch(`/api/cliente/${session.user.id}`)
+ 
   
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
@@ -99,7 +97,7 @@ export default async function ProfileMenu() {
             className="font-normal"
             color="red"
           >
-            {session && session.user ? res.usuario.name : 'Carregando...'}
+            {session && session.user ? "Name" : 'Carregando...'}
           </Typography>
         </MenuItem>
         {profileMenuItems.map(({ label, icon, href }, key) => {

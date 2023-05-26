@@ -47,7 +47,7 @@ export default function CostumerP() {
         const fetchData = async () => {
           try {
             
-            const response = await fetch(`http://localhost:3000/api/usuario/${email}`);
+            const response = await fetch(`https://backend-wilbortick.vercel.app/api/usuario/${email}`);
             const jsonData = await response.json();
             setData(jsonData);
             console.log(jsonData)

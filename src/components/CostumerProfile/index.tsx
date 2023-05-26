@@ -1,5 +1,6 @@
 'use client'
-import React from "react";
+import React,{useState,useEffect} from "react";
+import { useSession } from "next-auth/react";
 import {
   Tabs,
   TabsHeader,
@@ -13,11 +14,51 @@ import NoCard from "./EditCard/NoCard";
 import Address from "./Address";
 import RegistrationData from "./RegistrationData";
 
+interface User {
+  id: number;
+  nome: string;
+  email: string;
+  senha: string;
+  adm: null | boolean;
+  promoter: null | boolean;
+  cliente: Cliente;
+}
+
+interface Cliente {
+  id: number;
+  cpf: string;
+  data_nasc: string;
+  id_usuario: number;
+  id_cartao: number;
+  id_endereco: number;
+  telefone: string;
+}
+
 
 
 export default function CostumerP() {
-  const [type, setType] = React.useState("registrationData");
-  const [existCard, setExistCard] = React.useState(false);
+  const [type, setType] = useState("registrationData");
+  const [existCard, setExistCard] = useState(false);
+  const [data, setData] = useState<User | null>(null);
+    const {data: session} = useSession();
+    const email = session?.user?.email;
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            
+            const response = await fetch(`http://localhost:3000/api/usuario/${email}`);
+            const jsonData = await response.json();
+            setData(jsonData);
+            console.log(jsonData)
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        };
+        fetchData();
+      }, [email]);
+
+
 
   return (
     <div className="flex w-full items-center justify-center rounded-md pt-28 md:pt-40 pb-28 md:pb-40 bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200" >
@@ -40,7 +81,7 @@ export default function CostumerP() {
           unmount: { x: -250 },
         }}>
           <TabPanel className="overflow-auto" value="registrationData">
-            <RegistrationData/>
+          <RegistrationData cType={data} />
           </TabPanel>
           <TabPanel className=" overflow-auto" value="address">
             <Address/>

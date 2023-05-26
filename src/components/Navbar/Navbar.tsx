@@ -90,7 +90,7 @@ const Navbar = ({ navbarType }: Props) => {
                 </div>
             )
         }
-    }else{
+    }
         return (
 
         <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
@@ -105,7 +105,7 @@ const Navbar = ({ navbarType }: Props) => {
                 </div>
             </div>
         </div>
-    )}
+    )
     
 }
 

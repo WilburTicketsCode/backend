@@ -1,3 +1,4 @@
+'use client'
 import { Card, Button, Typography, } from "@/components/ClientSide";
 import { useState, useEffect } from "react";
 import Link from 'next/link';

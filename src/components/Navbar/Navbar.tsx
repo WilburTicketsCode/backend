@@ -35,7 +35,7 @@ const Navbar = ({ navbarType }: Props) => {
                             <div>
                                 <div className='gap-0.5 md:gap-5 flex flex-row justify-center items-center'>
                                     <div>
-                                        <Link href={'/shoppingCart'}>
+                                        <Link href={'/cliente/shoppingCart'}>
                                             <IconButton
                                                 variant="text"
                                                 color="blue-gray"

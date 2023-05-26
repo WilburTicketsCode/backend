@@ -56,8 +56,8 @@ const profileMenuItems = [
 
 
 
-export default function ProfileMenu() {
-  const {data: session} = useSession()
+export function ProfileMenu() {
+  const {data: session } = useSession();
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);

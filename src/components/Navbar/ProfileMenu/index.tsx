@@ -22,14 +22,11 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 
 const profileMenuItems = [
-  {
-    label: "R$ 10.50",
-    icon: BanknotesIcon,
-    href: '/profile/costumer'
-  },
+
   {
     label: "Pagina inicial",
     icon: HomeIcon,
@@ -55,14 +52,16 @@ const profileMenuItems = [
     icon: Cog6ToothIcon,
     href: '/profile/changepassword',
   },
-  {
-    label: "Sair",
-    icon: PowerIcon,
-    href: '#',
-  },
+
 ];
 
+
+
 export default function ProfileMenu() {
+  const {data: session } = useSession();
+
+ 
+  
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -88,27 +87,36 @@ export default function ProfileMenu() {
         </Button>
       </MenuHandler>
       <MenuList className="p-1">
+        <MenuItem> 
+        {React.createElement(BanknotesIcon, {
+            className: `h-6 w-6 `,
+          })}
+          <Typography
+            as="span"
+            variant="h5"
+            className="font-normal"
+            color="red"
+          >
+            {session && session.user ? "Name" : 'Carregando...'}
+          </Typography>
+        </MenuItem>
         {profileMenuItems.map(({ label, icon, href }, key) => {
-          const isLastItem = key === profileMenuItems.length - 1;
           return (
             <MenuItem
               key={label}
               onClick={closeMenu}
-              className={`flex items-center gap-2 rounded ${isLastItem
-                ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                : ""
-                }`}
+              className={`flex items-center gap-2 rounded`}
             >
               <Link href={href} className='flex flex-row gap-2'>
                 {React.createElement(icon, {
-                  className: `h-6 w-6 ${isLastItem ? "text-red-500" : ""}`,
+                  className: `h-6 w-6`,
                   strokeWidth: 2,
                 })}
                 <Typography
                   as="span"
                   variant="h5"
                   className="font-normal"
-                  color={isLastItem ? "red" : "inherit"}
+                  color={"inherit"}
                 >
                   {label}
                 </Typography>
@@ -117,10 +125,9 @@ export default function ProfileMenu() {
           );
         })}
         
-        <Button onClick={() => signOut()} className='bg-[#ffffff] flex flex-row gap-2 flex items-center gap-2 rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10'>
+        <MenuItem onClick={() => signOut()} className='border-transparent p-2.5 cursor-pointer w-full bg-white flex gap-2 rounded hover:bg-red-500'>
           {React.createElement(PowerIcon, {
             className: `h-6 w-6 text-red-500`,
-            strokeWidth: 2,
           })}
           <Typography
             as="span"
@@ -128,9 +135,9 @@ export default function ProfileMenu() {
             className="font-normal"
             color="red"
           >
-            Sair Verdadeiro
+            Sair
           </Typography>
-        </Button>
+        </MenuItem>
 
       </MenuList>
     </Menu>

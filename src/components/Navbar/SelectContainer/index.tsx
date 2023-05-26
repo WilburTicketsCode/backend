@@ -1,7 +1,7 @@
 'use client'
 import Search from '../Search';
 import Logo from '../Logo'
-import ProfileMenu from '../ProfileMenu';
+import { ProfileMenu } from '../ProfileMenu';
 import { useState } from 'react';
 import NavList from '../Adm/NavListADM'
 import { IconButton } from '../../ClientSide';

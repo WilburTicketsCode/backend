@@ -8,9 +8,12 @@ import { BellIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 import NavList from './Adm/NavListADM';
 import NoLoginMenu from './NoLoginMenu';
 import SinginButton from '../SinginButton';
-import ProfileMenu from './ProfileMenu';
+import  {ProfileMenu}  from './ProfileMenu';
 import Logo from './Logo';
 import Search from './Search';
+import { useEffect } from 'react';
+
+
 
 /* Deixando isso aqui só pra não quebrar o codigo por agora*/
 type Props = {
@@ -19,8 +22,10 @@ type Props = {
 
 const Navbar = ({ navbarType }: Props) => {
     const { data: session } = useSession()
+    /*Pfv usar UseEffect ou outra coisa pois o codigo abaixo foi escrito por Pedro, ou seja, está errado. */
     if (session && session.user) {
         if (session.user.role === 'cliente') {
+
             return (
                 <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
                     <div className='py-4 border-b-[2px] rounded-b-lg'>
@@ -30,7 +35,7 @@ const Navbar = ({ navbarType }: Props) => {
                             <div>
                                 <div className='gap-0.5 md:gap-5 flex flex-row justify-center items-center'>
                                     <div>
-                                        <Link href={'/shoppingCart'}>
+                                        <Link href={'/cliente/shoppingCart'}>
                                             <IconButton
                                                 variant="text"
                                                 color="blue-gray"
@@ -39,6 +44,7 @@ const Navbar = ({ navbarType }: Props) => {
                                             </IconButton>
                                         </Link>
                                     </div>
+          
                                     <ProfileMenu />
                                 </div>
                             </div>
@@ -76,6 +82,7 @@ const Navbar = ({ navbarType }: Props) => {
                                         <BellIcon className="h-8 w-8" />
                                     </IconButton>
                                 </div>
+               
                                 <ProfileMenu />
                             </div>
                         </div>
@@ -84,23 +91,22 @@ const Navbar = ({ navbarType }: Props) => {
             )
         }
     }
-    return (
+        return (
+
         <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
             <div className='py-4 border-b-[2px] rounded-b-lg'>
                 <div className=" flex flex-row items-center justify-between gap-3 md:gap-1">
                     <Link href={'/'}><Logo /></Link>
                     <Search />
-                    <div className='flex flex-col w-full max-w-screen md:flex-row gap-1 md:gap-6'>
-                        <NoLoginMenu></NoLoginMenu>
-                        <Link href={'/promoter-registration'} className='md:flex items-center justify-center hidden'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar promoter</button> </Link>
-                        <Link href={'/customer-registration'} className='md:flex items-center justify-center hidden'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar cliente</button> </Link>
-                        <SinginButton />
-
-                    </div>
+                    <NoLoginMenu></NoLoginMenu>
+                    <Link href={'/auth/promoter-registration'} className='md:flex items-center justify-center hidden'> <button className="bg-[#ffffff] text-light-blue-900 text-md hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar promoter</button> </Link>
+                    <Link href={'/auth/customer-registration'} className='md:flex items-center justify-center hidden'><button className="bg-[#ffffff] text-light-blue-900 text-md hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar cliente</button> </Link>
+                    <SinginButton />
                 </div>
             </div>
         </div>
     )
+    
 }
 
 /* Funcionamento da navbar com Select /*

@@ -21,15 +21,11 @@ import {
   TicketIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 
 const profileMenuItems = [
-  {
-    label: "R$ 10.50",
-    icon: BanknotesIcon,
-    href: '/profile/costumer'
-  },
+
   {
     label: "Pagina inicial",
     icon: HomeIcon,
@@ -55,17 +51,94 @@ const profileMenuItems = [
     icon: Cog6ToothIcon,
     href: '/profile/changepassword',
   },
-  {
-    label: "Sair",
-    icon: PowerIcon,
-    href: '#',
-  },
+
 ];
 
-export default function ProfileMenu() {
+
+
+export function ProfileMenu() {
+  const {data: session } = useSession();
+
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
+  if (session && session.user && session.user.email){
+    return (
+      <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
+      <MenuHandler>
+        <Button
+          variant="text"
+          color="blue-gray"
+          className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
+        >
+          <Avatar
+            variant="circular"
+            size="lg"
+            alt="Profile"
+            className="border border-blue-500 p-0.5"
+            src="/img/profile/placeholder.jpg" />
+          <ChevronDownIcon
+            strokeWidth={2.5}
+            className={`h-3 w-3 transition-transform ${isMenuOpen ? "rotate-180" : ""
+              }`}
+          />
+        </Button>
+      </MenuHandler>
 
+      <MenuList className="p-1">
+        <div className="border-transparent p-2.5 cursor-pointer w-full bg-[#404C76] flex justify-center gap-2 rounded"> 
+        
+          <Typography
+            as="span"
+            variant="h5"
+            className="font-normal"
+            color="black"
+          >
+            {session.user.name}
+          </Typography>
+        </div>
+        {profileMenuItems.map(({ label, icon, href }, key) => {
+          return (
+            <MenuItem
+              key={label}
+              onClick={closeMenu}
+              className={`flex items-center gap-2 rounded`}
+            >
+              <Link href={href} className='flex flex-row gap-2'>
+                {React.createElement(icon, {
+                  className: `h-6 w-6`,
+                  strokeWidth: 2,
+                })}
+                <Typography
+                  as="span"
+                  variant="h5"
+                  className="font-normal"
+                  color={"inherit"}
+                >
+                  {label}
+                </Typography>
+              </Link>
+            </MenuItem>
+          );
+        })}
+        
+        <MenuItem onClick={() => signOut()} className='border-transparent p-2.5 cursor-pointer w-full bg-white flex gap-2 rounded hover:bg-red-500'>
+          {React.createElement(PowerIcon, {
+            className: `h-6 w-6 text-red-500`,
+          })}
+          <Typography
+            as="span"
+            variant="h5"
+            className="font-normal"
+            color="red"
+          >
+            Sair
+          </Typography>
+        </MenuItem>
+
+      </MenuList>
+    </Menu>
+  );
+  }
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
       <MenuHandler>
@@ -88,27 +161,36 @@ export default function ProfileMenu() {
         </Button>
       </MenuHandler>
       <MenuList className="p-1">
+        <MenuItem> 
+        {React.createElement(BanknotesIcon, {
+            className: `h-6 w-6 `,
+          })}
+          <Typography
+            as="span"
+            variant="h5"
+            className="font-normal"
+            color="red"
+          >
+            {session && session.user ? "Name" : 'Carregando...'}
+          </Typography>
+        </MenuItem>
         {profileMenuItems.map(({ label, icon, href }, key) => {
-          const isLastItem = key === profileMenuItems.length - 1;
           return (
             <MenuItem
               key={label}
               onClick={closeMenu}
-              className={`flex items-center gap-2 rounded ${isLastItem
-                ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                : ""
-                }`}
+              className={`flex items-center gap-2 rounded`}
             >
               <Link href={href} className='flex flex-row gap-2'>
                 {React.createElement(icon, {
-                  className: `h-6 w-6 ${isLastItem ? "text-red-500" : ""}`,
+                  className: `h-6 w-6`,
                   strokeWidth: 2,
                 })}
                 <Typography
                   as="span"
                   variant="h5"
                   className="font-normal"
-                  color={isLastItem ? "red" : "inherit"}
+                  color={"inherit"}
                 >
                   {label}
                 </Typography>
@@ -117,10 +199,9 @@ export default function ProfileMenu() {
           );
         })}
         
-        <Button onClick={() => signOut()} className='bg-[#ffffff] flex flex-row gap-2 flex items-center gap-2 rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10'>
+        <MenuItem onClick={() => signOut()} className='border-transparent p-2.5 cursor-pointer w-full bg-white flex gap-2 rounded hover:bg-red-500'>
           {React.createElement(PowerIcon, {
             className: `h-6 w-6 text-red-500`,
-            strokeWidth: 2,
           })}
           <Typography
             as="span"
@@ -128,9 +209,9 @@ export default function ProfileMenu() {
             className="font-normal"
             color="red"
           >
-            Sair Verdadeiro
+            Sair
           </Typography>
-        </Button>
+        </MenuItem>
 
       </MenuList>
     </Menu>

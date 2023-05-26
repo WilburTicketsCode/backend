@@ -17,8 +17,8 @@ import {
                 </MenuHandler>
                 <MenuList>
                     <Link href={'/sighin'}><MenuItem>Entrar</MenuItem></Link>
-                    <Link href={'/customer-registration'}><MenuItem>Cadastrar Cliente</MenuItem></Link>
-                    <Link href={'/promoter-registration'}><MenuItem>Cadastrar Promoter</MenuItem></Link>
+                    <Link href={'/auth/customer-registration'}><MenuItem>Cadastrar Cliente</MenuItem></Link>
+                    <Link href={'/auth/promoter-registration'}><MenuItem>Cadastrar Promoter</MenuItem></Link>
                 </MenuList>
             </Menu>
         </div>

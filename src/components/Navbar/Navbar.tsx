@@ -44,7 +44,7 @@ const Navbar = ({ navbarType }: Props) => {
                                             </IconButton>
                                         </Link>
                                     </div>
-                                    {/*@ts-expect-error*/}
+          
                                     <ProfileMenu />
                                 </div>
                             </div>
@@ -82,7 +82,7 @@ const Navbar = ({ navbarType }: Props) => {
                                         <BellIcon className="h-8 w-8" />
                                     </IconButton>
                                 </div>
-                                {/*@ts-expect-error*/}
+               
                                 <ProfileMenu />
                             </div>
                         </div>

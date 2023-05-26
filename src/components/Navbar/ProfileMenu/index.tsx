@@ -57,7 +57,7 @@ const profileMenuItems = [
 
 
 
-export async function ProfileMenu() {
+export function ProfileMenu() {
   const {data: session } = useSession();
 
  

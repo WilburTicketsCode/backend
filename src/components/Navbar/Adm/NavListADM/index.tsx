@@ -11,11 +11,12 @@ const navListItems = [
     },
     {
       label: "Administradores",
-      href:"/admin/admin-list"
+      href:"/administrador/admin-list"
     },
     {
       label: "Promoters",
       href:"#"
+      //criar telas para os promoters
     },
   ];
   

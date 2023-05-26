@@ -69,7 +69,7 @@ export default function TelaListAdm() {
                     }
             </Card>
 
-            <Link href="/admin">
+            <Link href="/administrador/admin-new">
                 <Button className="mt-20" fullWidth>
                     Cadastrar Novo Administrador
                 </Button>

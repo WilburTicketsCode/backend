@@ -64,7 +64,7 @@ export default function TelaNewAdm() {
                         </Button>
                     </div>
 
-                    <Link href="/admin/admin-list">
+                    <Link href="/administrador/admin-list">
                         <p className="flex items-center justify-center">
                             Ver todos os administradores  
                         </p>

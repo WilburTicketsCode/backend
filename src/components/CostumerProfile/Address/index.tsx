@@ -1,8 +1,13 @@
+'use client'
 import React, { useState } from "react";
 import { Input,Button } from "../../ClientSide";
 import Link from "next/link";
 
-export default function Addrress() {
+type Props = {
+    cType: any
+  }
+
+export default function Addrress( {cType}: Props) {
     const [userAddress, setUserAddress] = useState({
         cep: "44350-000",
         state: "Bahia",

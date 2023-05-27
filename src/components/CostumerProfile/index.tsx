@@ -63,7 +63,7 @@ export default function CostumerP() {
         const fetchData = async () => {
           try {
             
-            const response = await fetch(`https://backend-amber-chi.vercel.app/api/cliente/${cpf}`);
+            const response = await fetch(`/api/cliente/${cpf}`);
             /*const response = await fetch(`http://localhost:3000/api/cliente/${cpf}`);*/
             const jsonData = await response.json();
             setData(jsonData);

@@ -51,7 +51,7 @@ export default function Payment() {
                 >
                     <div className="mx-auto w-full h-[90vh] bg-white p-6 gap-y-5 overflow-auto" >
                         <div className='flex flex-col h-[50%] w-full justify-center lg:mb-5 items-center'>
-                            <FlippableCard  />
+                            <FlippableCard />
                         </div>
                         <div className="flex justify-center h-[50%]">
                             <Cardform />

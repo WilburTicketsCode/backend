@@ -2,8 +2,11 @@
 import React from 'react'
 import UPayContext from '../../../use/UPayContext';
 
+
 export default function cardfront() {
-    const {infoCard} = UPayContext()
+
+    const {infoCard} = UPayContext();
+    
     return (
             <div className="front" >
                 <div id="ccsingle"></div>

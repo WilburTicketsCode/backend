@@ -54,7 +54,6 @@ interface Data {
 
 export default function CostumerP() {
   const [type, setType] = useState("registrationData");
-  const [existCard, setExistCard] = useState(false);
   const [data, setData] = useState<Data | null>(null);
     const {data: session} = useSession();
     console.log(session)
@@ -64,8 +63,8 @@ export default function CostumerP() {
         const fetchData = async () => {
           try {
             
-            /*const response = await fetch(`https://backend-wilbortick.vercel.app/api/usuario/${email}`);*/
-            const response = await fetch(`http://localhost:3000/api/cliente/${cpf}`);
+            const response = await fetch(`https://backend-wilbortick.vercel.app/api/cliente/${cpf}`);
+            /*const response = await fetch(`http://localhost:3000/api/cliente/${cpf}`);*/
             const jsonData = await response.json();
             setData(jsonData);
             console.log(jsonData)
@@ -105,7 +104,7 @@ export default function CostumerP() {
             <Address cType={data}/>
           </TabPanel>
           <TabPanel className="overflow-auto" value="card">
-            {data?.cartao ? <WithCard /> : <NoCard />}
+            {data?.cartao ? <WithCard cType={data}/> : <NoCard />}
           </TabPanel>
         </TabsBody>
       </Tabs>

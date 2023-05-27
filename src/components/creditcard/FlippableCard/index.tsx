@@ -9,7 +9,7 @@ import UPayContext from '../../../use/UPayContext';
 
 
 
-export default function FlippableCard( ) {
+export default function FlippableCard() {
 
   const { infoCard, setInfoCard } = UPayContext();
 

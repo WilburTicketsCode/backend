@@ -6,11 +6,15 @@ import Cardfront from '../Cardfront';
 import Cardback from '../Cardback';
 import UPayContext from '../../../use/UPayContext';
 
-export default function FlippableCard() {
 
-  const { infoCard,setInfoCard } = UPayContext();
-  
+
+
+export default function FlippableCard( ) {
+
+  const { infoCard, setInfoCard } = UPayContext();
+
   const nodeRef = React.useRef(null);
+
 
   const handleClick = () => {
     setInfoCard({ ...infoCard, fucus: !infoCard.fucus });

@@ -14,42 +14,58 @@ import NoCard from "./EditCard/NoCard";
 import Address from "./Address";
 import RegistrationData from "./RegistrationData";
 
-interface User {
+interface Data {
   id: number;
-  nome: string;
-  email: string;
-  senha: string;
-  adm: null | boolean;
-  promoter: null | boolean;
-  cliente: Cliente;
-}
-
-interface Cliente {
-  id: number;
+  perfil_foto: string | null;
   cpf: string;
   data_nasc: string;
   id_usuario: number;
   id_cartao: number;
   id_endereco: number;
   telefone: string;
+  endereco: {
+    id: number;
+    rua: string;
+    numero: number;
+    bairro: string;
+    cidade: string;
+    estado: string;
+    cep: string;
+    complemento: string;
+  };
+  usuario: {
+    id: number;
+    nome: string;
+    email: string;
+    senha: string;
+  };
+  cartao: {
+    id: number;
+    num_cartao: string;
+    dono_cartao: string;
+    data_vencimento: string;
+    cvv: string;
+  };
+  compras: any[];
 }
+
 
 
 
 export default function CostumerP() {
   const [type, setType] = useState("registrationData");
   const [existCard, setExistCard] = useState(false);
-  const [data, setData] = useState<User | null>(null);
+  const [data, setData] = useState<Data | null>(null);
     const {data: session} = useSession();
-    
-    const email = session?.user?.email;
+    console.log(session)
+    const cpf = session?.user?.id;
 
     useEffect(() => {
         const fetchData = async () => {
           try {
             
             /*const response = await fetch(`https://backend-wilbortick.vercel.app/api/usuario/${email}`);*/
-            const response = await fetch(`https://localhost:3000/api/usuario/${email}`);
+            const response = await fetch(`http://localhost:3000/api/cliente/${cpf}`);
             const jsonData = await response.json();
             setData(jsonData);
             console.log(jsonData)
@@ -58,7 +74,7 @@ export default function CostumerP() {
           }
         };
         fetchData();
-      }, [email]);
+      }, [cpf]);
 
 
 
@@ -89,7 +105,7 @@ export default function CostumerP() {
             <Address cType={data}/>
           </TabPanel>
           <TabPanel className="overflow-auto" value="card">
-            {existCard ? <WithCard /> : <NoCard />}
+            {data?.cartao ? <WithCard /> : <NoCard />}
           </TabPanel>
         </TabsBody>
       </Tabs>

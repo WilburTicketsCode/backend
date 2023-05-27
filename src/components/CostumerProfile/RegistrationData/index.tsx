@@ -10,17 +10,6 @@ type Props = {
 
 export default function RegistrationData({ cType }: Props) {
 
-
-    const [useData, setUseData] = React.useState({
-        name: "João da Silva",
-        cpf: "123.***.***-10",
-        email: "Joãozinho69@gmail.com",
-        date: "10/10/2021",
-        fone: "(11) 99999-9999",
-
-    });
-    
-
     
 
     return (

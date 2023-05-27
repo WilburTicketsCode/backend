@@ -41,6 +41,7 @@ export default function CostumerP() {
   const [existCard, setExistCard] = useState(false);
   const [data, setData] = useState<User | null>(null);
     const {data: session} = useSession();
+    
     const email = session?.user?.email;
 
     useEffect(() => {
@@ -84,7 +85,7 @@ export default function CostumerP() {
           <RegistrationData cType={data} />
           </TabPanel>
           <TabPanel className=" overflow-auto" value="address">
-            <Address/>
+            <Address cType={data}/>
           </TabPanel>
           <TabPanel className="overflow-auto" value="card">
             {existCard ? <WithCard /> : <NoCard />}

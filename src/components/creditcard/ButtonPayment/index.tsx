@@ -25,6 +25,7 @@ export default function Payment() {
         date: "",
         cvv: "",
         fucus: true
+
     })
 
     const cleanInfoCard = () => {

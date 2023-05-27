@@ -16,23 +16,34 @@ export async function POST(request:Request) {
                 name: user.nome,
                 email: user.email,
                 role: "administrador",
-                id: user.id
+                id: user.adm.cpf
             }
             return new Response(JSON.stringify(userWithoutPass))
         } else if (user.promoter !== null){
-            const userWithoutPass = {
-                name: user.nome,
-                email: user.email,
-                role: "promoter",
-                id: user.id
+            if (user.promoter && user.promoter.cnpj !== null){
+                const userWithoutPass = {
+                    name: user.nome,
+                    email: user.email,
+                    role: "promoter",
+                    id: user.promoter.cnpj
+                }
+                return new Response(JSON.stringify(userWithoutPass))
+            } else if (user.promoter && user.promoter.cpf !== null){
+                const userWithoutPass = {
+                    name: user.nome,
+                    email: user.email,
+                    role: "promoter",
+                    id: user.promoter.cpf
+                }
+                return new Response(JSON.stringify(userWithoutPass))
             }
-            return new Response(JSON.stringify(userWithoutPass))
+            
         } else {
             const userWithoutPass = {
                 name: user.nome,
                 email: user.email,
                 role: "cliente",
-                id: user.id
+                id: user.cliente?.cpf
             } 
             return new Response(JSON.stringify(userWithoutPass))
         }

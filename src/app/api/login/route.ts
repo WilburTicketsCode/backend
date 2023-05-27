@@ -38,12 +38,12 @@ export async function POST(request:Request) {
                 return new Response(JSON.stringify(userWithoutPass))
             }
             
-        } else {
+        } else if (user.cliente !== null) {
             const userWithoutPass = {
                 name: user.nome,
                 email: user.email,
                 role: "cliente",
-                id: user.cliente?.cpf
+                id: user.cliente.cpf
             } 
             return new Response(JSON.stringify(userWithoutPass))
         }

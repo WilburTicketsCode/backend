@@ -71,7 +71,7 @@ const Navbar = ({ navbarType }: Props) => {
                 <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
                     <div className='py-4 border-b-[2px] rounded-b-lg'>
                         <div className="lg:px-[20rem] flex flex-row items-center justify-between gap-0.5 md:gap-1">
-                            <Link href={'/admin/eventos'}><Logo /></Link>
+                            <Link href={'/administrador/eventos'}><Logo /></Link>
                             <NavList />
                             <div className=' md:gap-5 flex flex-row justify-center items-center'>
                                 <div>

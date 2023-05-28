@@ -31,6 +31,8 @@ export default function Cardform() {
 
     const { register, handleSubmit, formState: { errors } } = useForm<CardFormData>({
         resolver: zodResolver(cardSchema),
+        mode: 'all'
+
     })
 
     const [cardNumber, setCardNumber] = useState("");
@@ -101,19 +103,19 @@ export default function Cardform() {
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center gap-1'>
                 <Input {...register("name")} size='md' label='Nome do Titular' value={name} maxLength={20}
                 onChange={(e) => { handleName(e) }} containerProps={{ className: "md:min-w-[90px]" }} onClick={(e)=>handleName(e)}/>
-                {errors.name && <span className="text-red-500 text-xs">{errors.name.message}</span>}
+                {errors.name && <p className="text-red-500 text-xs">{errors.name.message}</p>}
                 <Input {...register("cardNumber")} label='Número do Cartão' maxLength={19} value={cardNumber} type='text' 
                 containerProps={{ className: "md:min-w-[90px]" }} onChange={(e) => { handleCardNumber(e) }} onClick={(e)=>handleCardNumber(e)}/>
-                {errors.cardNumber && <span className="text-red-500 text-xs">{errors.cardNumber.message}</span>}
+                {errors.cardNumber && <p className="text-red-500 text-xs">{errors.cardNumber.message}</p>}
                 <div className="my-1 flex-col flex md:flex-row items-center gap-3  ">
                     <Input {...register("date")} label='Validade(MM/AA)' value={formatDate(date)} onChange={(e) => { handleDate(e) }} 
                     maxLength={5} containerProps={{ className: "md:min-w-[90px]" }}onClick={(e) => { handleDate(e)}} />
                     <Input {...register("cvv")} label="CVV" value={cvv} onChange={(e) => { handleCvv(e) }} maxLength={4} 
                     containerProps={{ className: "md:min-w-[90px]" }} onClick={(e)=>handleCvv(e)}/>
                 </div>
-                {errors.date && <span className="text-red-500 text-xs">{errors.date.message}</span>}
-                {errors.cvv && <span className="text-red-500 text-xs">{errors.cvv.message}</span>}
-                <Button type='submit' fullWidth>Salvar</Button>;
+                {errors.date && <p className="text-red-500 text-xs">{errors.date.message}</p>}
+                {errors.cvv && <p className="text-red-500 text-xs">{errors.cvv.message}</p>}
+                <Button type='submit' fullWidth>Salvar</Button>
             </form>
         </div>
     )

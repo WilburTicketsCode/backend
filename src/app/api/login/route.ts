@@ -9,9 +9,30 @@ export async function POST(request:Request) {
 
     const user = await getUsuario(body.email);
 
+
     if (user && user.senha === body.password){
-        const {senha, ...userWithoutPass} = user
-        return new Response(JSON.stringify(userWithoutPass))
+        if (user.adm !== null){
+            const userWithoutPass = {
+                name: user.nome,
+                email: user.email,
+                role: "administrador"
+            }
+            return new Response(JSON.stringify(userWithoutPass))
+        } else if (user.promoter !== null){
+            const userWithoutPass = {
+                name: user.nome,
+                email: user.email,
+                role: "promoter"
+            }
+            return new Response(JSON.stringify(userWithoutPass))
+        } else {
+            const userWithoutPass = {
+                name: user.nome,
+                email: user.email,
+                role: "cliente"
+            } 
+            return new Response(JSON.stringify(userWithoutPass))
+        }
     } else {
         return new Response(JSON.stringify(null))
     }

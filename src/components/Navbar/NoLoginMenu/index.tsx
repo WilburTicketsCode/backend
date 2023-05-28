@@ -3,7 +3,6 @@ import {
     MenuHandler,
     MenuList,
     MenuItem,
-    Button,
   } from "../../ClientSide";
   import Link from 'next/link';
    
@@ -17,25 +16,9 @@ import {
                 </div>
                 </MenuHandler>
                 <MenuList>
-                <Menu placement="right-start" offset={15}>
-                    <MenuHandler>
-                    <MenuItem>Cliente</MenuItem>
-                    </MenuHandler>
-                    <MenuList>
-                    <Link href={'/logincostumer'}><MenuItem>Entrar</MenuItem></Link>
-                    <Link href={'/customer-registration'}><MenuItem>Cadastrar</MenuItem></Link>
-                    </MenuList>
-                </Menu>
-
-                <Menu placement="right-start" offset={15}>
-                    <MenuHandler>
-                    <MenuItem>Promoter</MenuItem>
-                    </MenuHandler>
-                    <MenuList>
-                    <Link href={'/loginpromoter'}><MenuItem>Entrar</MenuItem></Link>
-                    <Link href={'/promoter-registration'}><MenuItem>Cadastrar</MenuItem></Link>
-                    </MenuList>
-                </Menu>
+                    <Link href={'/sighin'}><MenuItem>Entrar</MenuItem></Link>
+                    <Link href={'/customer-registration'}><MenuItem>Cadastrar Cliente</MenuItem></Link>
+                    <Link href={'/promoter-registration'}><MenuItem>Cadastrar Promoter</MenuItem></Link>
                 </MenuList>
             </Menu>
         </div>

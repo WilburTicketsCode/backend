@@ -27,6 +27,7 @@ const profileMenuItems = [
     {
         label: "Meu Perfil",
         icon: UserCircleIcon,
+        href: "/profile/admin"
     },
     {
         label: "Dashboard",

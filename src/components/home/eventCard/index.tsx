@@ -37,7 +37,8 @@ import {
             </div>
 
             <div className="flex h-full justify-center items-center mx-auto">
-              <Link href= {`/event-details/${props.key}`}>
+              
+              <Link href= {`/event-details/${props.id}`}>
                 <Button className="bg-purple-800 h-[40px] w-[130px] mt-auto p-0">
                   Ver detalhes
                 </Button>

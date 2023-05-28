@@ -1,3 +1,4 @@
+'use client'
 import { Input, Card, Button, Typography,} from "@/components/ClientSide";
 import Link from 'next/link';
 import { zodResolver } from '@hookform/resolvers/zod';

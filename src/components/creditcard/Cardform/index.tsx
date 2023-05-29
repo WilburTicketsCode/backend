@@ -106,7 +106,7 @@ export default function Cardform() {
             usuario_email: session?.user?.email
           
         })
-        const res = await fetch("https://backend-amber-chi.vercel.app/api/cartao", {
+        const res = await fetch("/api/cartao", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

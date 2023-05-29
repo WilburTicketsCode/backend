@@ -22,6 +22,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 
 const profileMenuItems = [
@@ -58,9 +59,13 @@ const profileMenuItems = [
 
 export function ProfileMenu() {
   const {data: session } = useSession();
+  const router = useRouter();
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
+
+
+
   if (session && session.user && session.user.email){
     return (
       <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -121,7 +126,7 @@ export function ProfileMenu() {
           );
         })}
         
-        <MenuItem onClick={() => signOut()} className='border-transparent p-2.5 cursor-pointer w-full bg-white flex gap-2 rounded hover:bg-red-500'>
+        <MenuItem onClick={() => { signOut({callbackUrl:'/'}); }} className='border-transparent p-2.5 cursor-pointer w-full bg-white flex gap-2 rounded hover:bg-red-500'>
           {React.createElement(PowerIcon, {
             className: `h-6 w-6 text-red-500`,
           })}
@@ -199,7 +204,7 @@ export function ProfileMenu() {
           );
         })}
         
-        <MenuItem onClick={() => signOut()} className='border-transparent p-2.5 cursor-pointer w-full bg-white flex gap-2 rounded hover:bg-red-500'>
+        <MenuItem onClick={() => {signOut({callbackUrl:'/'});}} className='border-transparent p-2.5 cursor-pointer w-full bg-white flex gap-2 rounded hover:bg-red-500'>
           {React.createElement(PowerIcon, {
             className: `h-6 w-6 text-red-500`,
           })}

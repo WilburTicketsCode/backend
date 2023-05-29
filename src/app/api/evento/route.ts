@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getEventos } from "../../../../lib/evento";
+import { Evento, getEventos, inserirEvento } from "../../../../lib/evento";
 
 
 /* Banco pessoal
@@ -14,4 +14,18 @@ export async function GET(request: Request) {
     const data = await getEventos()
     
     return NextResponse.json(data)
+}
+
+export async function POST(request:Request) {
+    const data: Evento = await request.json()
+    if (data !== null) {
+        const evento = await inserirEvento(data)
+        if (evento === null){
+            return NextResponse.json("ERROR 00")
+        } else {
+            return data
+        }
+    } else {
+        return NextResponse.json("ERROR 00")
+    }
 }

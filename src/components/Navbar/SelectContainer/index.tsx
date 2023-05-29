@@ -68,7 +68,7 @@ const noLogin = () => {
 const adm = () => {
     return (
         <div className="lg:px-[20rem] flex flex-row items-center justify-between gap-0.5 md:gap-1">
-            <Link href={'/admin/eventos'}><Logo/></Link> 
+            <Link href={'/administrador/eventos'}><Logo/></Link> 
             <NavList />
             <div className=' md:gap-5 flex flex-row justify-center items-center'>
                 <div>

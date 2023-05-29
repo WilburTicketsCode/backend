@@ -12,7 +12,7 @@ export default function TotalCart(){
             </div>
 
             <div className="flex flex-col items-center mt-auto mb-2">
-                <Link href={'/shoppingCart/finalizacaoCompra'}><Button className="bg-purple-800 w-[140px] h-[40px] p-0 rounded-xl">Fechar pedido</Button></Link> 
+                <Link href={'/cliente/finalizacaoCompra'}><Button className="bg-purple-800 w-[140px] h-[40px] p-0 rounded-xl">Fechar pedido</Button></Link> 
             </div>
         </div>
     )

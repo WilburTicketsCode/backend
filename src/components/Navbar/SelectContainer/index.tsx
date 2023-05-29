@@ -1,7 +1,7 @@
 'use client'
 import Search from '../Search';
 import Logo from '../Logo'
-import ProfileMenu from '../ProfileMenu';
+import { ProfileMenu } from '../ProfileMenu';
 import { useState } from 'react';
 import NavList from '../Adm/NavListADM'
 import { IconButton } from '../../ClientSide';
@@ -9,6 +9,7 @@ import { BellIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import ProfileMenuADM from '../Adm/ProfileMenuADM';
 import Link from 'next/link';
 import NoLoginMenu from '../NoLoginMenu';
+import SinginButton from '../../SinginButton';
 
 
 
@@ -55,9 +56,9 @@ const noLogin = () => {
             <Search />
             <div className='flex flex-col w-full max-w-screen md:flex-row gap-1 md:gap-6'>
                 <NoLoginMenu></NoLoginMenu>
-                <Link href={'/sighin'} className='md:flex items-center justify-center hidden'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Entrar</button> </Link>
-                <Link href={'/promoter-registration'} className='md:flex items-center justify-center hidden'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar promoter</button> </Link>
-                <Link href={'/customer-registration'} className='md:flex items-center justify-center hidden'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar cliente</button> </Link>
+                <Link href={'/auth/promoter-registration'} className='md:flex items-center justify-center hidden'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar promoter</button> </Link>
+                <Link href={'/auth/customer-registration'} className='md:flex items-center justify-center hidden'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar cliente</button> </Link>
+                <SinginButton />
 
             </div>
         </div>
@@ -67,7 +68,7 @@ const noLogin = () => {
 const adm = () => {
     return (
         <div className="lg:px-[20rem] flex flex-row items-center justify-between gap-0.5 md:gap-1">
-            <Link href={'/admin/eventos'}><Logo/></Link> 
+            <Link href={'/administrador/eventos'}><Logo/></Link> 
             <NavList />
             <div className=' md:gap-5 flex flex-row justify-center items-center'>
                 <div>

@@ -449,6 +449,32 @@ async function main() {
     }
   })
 
+  const cliente4 = await prisma.cliente.create({
+    data: {
+      cpf: '66168230016',
+      telefone: '6906587229',
+      data_nasc: new Date(),
+      usuario: {
+        create: {
+          nome: "Jorge Amado",
+          email: "seuxxxamado@yahoo.com",
+          senha: "1234"
+        }
+      },
+      endereco: {
+        create: {
+          rua: "Rua da Consolação",
+          numero: 1000,
+          bairro: "Consolação",
+          cidade: "São Paulo",
+          estado: "SP",
+          cep: "01302-907",
+          complemento: "Apt 501"
+        }  
+      },
+    }
+  })
+
 } main()
   .then(async () => {
     await prisma.$disconnect()

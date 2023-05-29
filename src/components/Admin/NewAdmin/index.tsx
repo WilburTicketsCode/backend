@@ -23,8 +23,28 @@ export default function TelaNewAdm() {
 
     });
 
-    const onSubmit = (data: adminFormData) => {
-        console.log(data);
+    const onSubmit = (e: React.FormEvent) => {
+        //console.log(data);
+        e.preventDefault();
+    
+        // Enviar dados do formulário para a API
+        fetch('http://localhost:3000/api/administrador', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(adminNSchema),
+        })
+          .then((response) => {
+            if (response.ok) {
+              console.log('Dados salvos com sucesso!');
+            } else {
+              console.error('Erro ao salvar os dados!');
+            }
+          })
+          .catch((error) => {
+            console.error('Erro ao enviar os dados:', error);
+          });
     }
 
     return (
@@ -39,7 +59,7 @@ export default function TelaNewAdm() {
                 </Typography>
 
                 {/**Formulário começa aqui */}
-                <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+                <form onSubmit={onSubmit} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
                     <div className="min-w-fit mb-4 flex flex-col gap-6">
                         <Input {...register('name')}  size='md'  label="Nome Completo" />
                         {errors.name?.message && <p className="text-red-500 text-center">{errors.name?.message}</p>}
@@ -64,7 +84,7 @@ export default function TelaNewAdm() {
                         </Button>
                     </div>
 
-                    <Link href="/admin/admin-list">
+                    <Link href="/administrador/admin-list">
                         <p className="flex items-center justify-center">
                             Ver todos os administradores  
                         </p>

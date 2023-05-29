@@ -6,7 +6,7 @@ export async function POST(request:Request) {
     const cpf: {cpf:string} = await request.json()
     if (cpf !== null) {
         const cartao = excluirCartao(cpf);
-        if (cartao !== null){
+        if (!cartao){
             return NextResponse.json("EBA")
         } else {
             return NextResponse.json("UUU")

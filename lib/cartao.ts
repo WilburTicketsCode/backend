@@ -15,11 +15,7 @@ export async function inserirCartao(cartao: Cartao) {
     const usuario = await getUsuario(cartao.usuario_email)
     console.log("USUARIO: ", usuario)
 
-    const cartaoBD = await prisma.cartao_Credito.findUnique({
-        where: {
-            num_cartao: cartao.num_cartao
-        }
-    })
+    const cartaoBD = null;
 
     console.log(cartaoBD)
 
@@ -33,7 +29,7 @@ export async function inserirCartao(cartao: Cartao) {
                 })
 
                 if (cliente !== null) {
-                    cliente.id_cartao = cartaoBD.id
+                    cliente.id_cartao = cartaoBD//.id
                     const clienteCartaoAdicionado = await prisma.cliente.update({
                         where: {
                             id_usuario: usuario.id
@@ -80,3 +76,17 @@ export async function inserirCartao(cartao: Cartao) {
     return cartaoBD
     
 }
+
+export async function excluirCartao(cpf: {cpf:string}) {
+    const cliente = await getCliente(cpf.cpf);
+    if (cliente !== null) {
+        const cartao = await prisma.cartao_Credito.delete({
+            where: {
+                id: cliente.id_cartao
+            }
+        });
+        return cartao;
+    }
+}
+
+

@@ -25,6 +25,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 
+
 const profileMenuItems = [
 
   {
@@ -60,6 +61,7 @@ const profileMenuItems = [
 export function ProfileMenu() {
   const {data: session } = useSession();
   const router = useRouter();
+
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);

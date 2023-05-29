@@ -8,9 +8,6 @@ import { PayContext } from '../../../contexts/payContext';
 import {
     Button,
     Dialog,
-    Card,
-    CardBody,
-    CardFooter,
 } from "../../ClientSide";
 
 

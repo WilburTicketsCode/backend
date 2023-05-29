@@ -82,6 +82,7 @@ export async function excluirCartao(cpf: {cpf:string}) {
     if (cliente !== null) {
         const cartao = await prisma.cartao_Credito.delete({
             where: {
+                //@ts-ignore
                 id: cliente.id_cartao
             }
         });

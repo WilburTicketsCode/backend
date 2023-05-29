@@ -64,7 +64,6 @@ export default function CostumerP() {
           try {
             
             const response = await fetch(`/api/cliente/${cpf}`);
-            /*const response = await fetch(`http://localhost:3000/api/cliente/${cpf}`);*/
             const jsonData = await response.json();
             setData(jsonData);
             console.log(jsonData)

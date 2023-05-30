@@ -76,7 +76,8 @@ export async function inserirCartao(cartao: Cartao) {
     return cartaoBD
     
 }
-
+export async function excluirCartao(cpf: {cpf:string}) {}
+/*
 export async function excluirCartao(cpf: {cpf:string}) {
     const cliente = await getCliente(cpf.cpf);
     if (cliente !== null) {
@@ -88,6 +89,6 @@ export async function excluirCartao(cpf: {cpf:string}) {
         });
         return cartao;
     }
-}
+}*/
 
 

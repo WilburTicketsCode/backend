@@ -13,6 +13,7 @@ type Props = {
 export default function WithCard({ cType }: Props) {
 
     const {data: session} = useSession();
+    console.log(session?.user?.id);
     
     async function deleteCartao() {
         const jaison = {
@@ -20,6 +21,7 @@ export default function WithCard({ cType }: Props) {
         }
         const res = await axios.post("/api/excluir", jaison)
         console.log(res.data)
+        
       }
     
 

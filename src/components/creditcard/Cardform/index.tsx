@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSession } from 'next-auth/react';
+import axios from 'axios';
 
 type CardFormData = z.infer<typeof cardSchema>;
 
@@ -98,28 +99,16 @@ export default function Cardform() {
     
     
       async function createCartao(data: any) {
-        const jaison = JSON.stringify({
+        const jaison = {
             num_cartao: data.cardNumber,
             dono_cartao: data.name,
             data_vencimento: data.date,
             cvv: data.cvv,
             usuario_email: session?.user?.email
           
-        })
-        const res = await fetch("/api/cartao", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: jaison
-        })
-    
-        if (res.ok) {
-          const user = await res.json();
-          console.log(user)
-        }else{
-            console.log("Erro")
         }
+        const res = await axios.post("/api/cartao", jaison)
+    
     
     
       }

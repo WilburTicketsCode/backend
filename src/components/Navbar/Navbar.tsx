@@ -56,8 +56,8 @@ const Navbar = ({ navbarType }: Props) => {
         } else if (session.user.role === 'promoter') {
             return (
                 <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
-                    <div className='py-4 border-b-[2px] rounded-b-lg'>
-                        <div className="2xl:px-[3rem]  flex flex-row items-center justify-between gap-3 md:gap-1">
+                    <div className='py-2 border-b-[2px] rounded-b-lg'>
+                        <div className="2xl:px-[3rem]  flex flex-row items-center justify-between gap-0.5 md:gap-1">
                             <Link href={'/promoter/eventos'} className='flex items-center justify-center'><Logo /></Link>
                             <div>
                                 <div className='gap-0.5 md:gap-5 flex flex-row justify-center items-center'>

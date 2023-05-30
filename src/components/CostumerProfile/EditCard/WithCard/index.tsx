@@ -1,8 +1,8 @@
 import React from "react";
 import {Button} from "../../../ClientSide";
 import CardProfile from "@/components/creditcard/CardProfile";
-import {useSession} from 'next-auth/react'
-
+import {useSession} from 'next-auth/react';
+import axios from 'axios';
 
 
 type Props = {
@@ -11,27 +11,15 @@ type Props = {
 
 
 export default function WithCard({ cType }: Props) {
+
     const {data: session} = useSession();
     
     async function deleteCartao() {
-        const jaison = JSON.stringify({
+        const jaison = {
             cpf: session?.user?.id,
-        })
-        const res = await fetch("/api/cartao/excluir", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: jaison
-        })
-    
-        if (res.ok) {
-          const user = await res.json();
-          console.log(user)
-        }else{
-            console.log("Erro")
         }
-    
+        const res = await axios.post("/api/excluir", jaison)
+        console.log(res.data)
       }
     
 

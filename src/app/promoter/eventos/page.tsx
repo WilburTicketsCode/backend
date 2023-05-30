@@ -2,7 +2,7 @@ import CardEventoPromoter from "@/components/cardEventoPromoter"
 
 export default function eventosPromoter() {
     return (
-        <div className="flex flex-col h-full items-center justify-center mt-4 pt-20 bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200">
+        <div className="flex flex-col h-full items-center py-10 justify-center mt-4 pt-20 bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200">
             <div className="grid grid-cols-12 md:col-span-6 xl:col-span-4 h-full xl:gap-x-14 md:gap-8 gap-y-8 mt-4 mb-4">
                 <CardEventoPromoter imagem="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
                     data="05/04" local="Recife - PE" nome="Djavan turnê A" evento={4} ></CardEventoPromoter>

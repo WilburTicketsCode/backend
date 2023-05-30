@@ -1,4 +1,4 @@
-import { excluirCartao } from "../../../../../lib/cartao";
+import { excluirCartao } from "../../../../lib/cartao";
 import { NextResponse } from "next/server";
 
 

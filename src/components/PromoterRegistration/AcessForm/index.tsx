@@ -12,6 +12,7 @@ import UseStepperContext from "../../../use/UseStepperContext";
 import { useForm } from "react-hook-form";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import UsePromoterRegistrationContext from "@/use/UsePromoterRegistrationContext";
+import CompanyForm from "../CompanyForm";
 
 type AcessFormData = z.infer<typeof AcessFormSchema>;
 
@@ -27,7 +28,7 @@ const AcessFormSchema = z.object({
 
 export default function AcessForm() {
   const { infoStepper, setInfoStepper } = UseStepperContext();
-  const { infoAcessForm, setInfoAcessForm } = UsePromoterRegistrationContext();
+  const { infoAcessForm, setInfoAcessForm, infoAdressForm, infoCompanyForm } = UsePromoterRegistrationContext();
 
   const { register, handleSubmit, formState: { errors } } = useForm<AcessFormData>({
       resolver: zodResolver(AcessFormSchema),
@@ -39,6 +40,64 @@ export default function AcessForm() {
           },
     })
 
+    const promoter = {
+      nome: infoCompanyForm.name,
+      cpf: infoCompanyForm.CPF,
+      cpnj: infoCompanyForm.CNPJ,
+      email: infoAcessForm.email,
+      password: infoAcessForm.password,
+      status: 'pendente',
+      data_nasc: new Date("1999-05-30"),
+      telefone: infoCompanyForm.phone,
+      rua: infoAdressForm.street,
+      numero: Number(infoAdressForm.number),
+      bairro: infoAdressForm.district,
+      cidade: infoAdressForm.street,
+      estado: infoAdressForm.state,
+      cep: infoAdressForm.CEP,
+      complemento: infoAdressForm.complement
+    }
+
+    async function createPromoter() {
+      const jaison = JSON.stringify({
+        cpf: promoter.cpf,
+        cnpj: promoter.cpnj,
+        status: promoter.status,
+        data_nasc: promoter.data_nasc,
+        telefone: promoter.telefone,
+        usuario: {
+          nome: promoter.nome,
+          email: promoter.email,
+          senha: promoter.password
+        },
+        endereco: {
+          rua: promoter.rua,
+          numero: promoter.numero,
+          bairro: promoter.bairro,
+          cidade: promoter.cidade,
+          estado: promoter.estado,
+          cep: promoter.cep,
+          complemento: promoter.complemento,
+        }
+      })
+  
+      /* Mostrando no console do navegador o formato do json usado para enviar os dados para API */
+      console.log("Exemplo de como o JSON para criação de um Promoter deve ser feito:\n" +
+        jaison)
+  
+      /* Enviando de verdade para API */
+      const res = await fetch("/api/promoter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: jaison
+      })
+
+      
+    }
+  
+
   const onSubmit = (data: AcessFormData) => {
 
     setInfoStepper({
@@ -49,6 +108,8 @@ export default function AcessForm() {
       email: data.email,
       password: data.password,
     })
+    
+    createPromoter()
 }
 
   const handlePrev = (e: any) => {

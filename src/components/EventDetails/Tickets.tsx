@@ -26,7 +26,7 @@ export default function Tickets(props: any) {
 
     const addTicket = () => {
         const ticket = {
-            idLotacao: Number(props.idLotacao),
+            idLotacao: props.idLotacao,
             qtd
         }
 

@@ -80,6 +80,7 @@ export default async function Event({params}: {params: { id: number }}) {
 
                         {evento.lotacao.map((lot: any) => (
                             <Tickets key={lot.id}
+                                idLotacao={lot.id}
                                 setor={lot.setor.nome}
                                 perfil={lot.perfil.nome}
                                 valor={lot.valorTotal}

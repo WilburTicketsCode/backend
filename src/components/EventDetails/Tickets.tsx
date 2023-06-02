@@ -1,7 +1,12 @@
 'use client'
 import { useState } from "react";
 
-let tickets : any = [];
+interface Itickets {
+    idLotacao: number,
+    qtd: number
+}
+
+let tickets : Itickets[] = [];
 
 export default function Tickets(props: any) {
     const [qtd, setQtd] = useState(0);
@@ -21,11 +26,11 @@ export default function Tickets(props: any) {
 
     const addTicket = () => {
         const ticket = {
-            idlotacao: props.idLotacao,
+            idLotacao: props.idLotacao,
             qtd
         }
 
-        const found = tickets.find(el => el.idlotacao === ticket.idlotacao);
+        const found = tickets.find(el => el.idLotacao === ticket.idLotacao);
 
         if (!found) { // so adiciona o ingresso se não existir no array, se sim so incrementa a quantidade
             tickets.push(ticket)

@@ -5,6 +5,8 @@ import { Input, Button } from '../../ClientSide';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useSession } from 'next-auth/react';
+import axios from 'axios';
 
 type CardFormData = z.infer<typeof cardSchema>;
 
@@ -28,7 +30,7 @@ function formatDate(value: string) {
 }
 
 export default function Cardform() {
-
+    const { data: session } = useSession();
     const { register, handleSubmit, formState: { errors } } = useForm<CardFormData>({
         resolver: zodResolver(cardSchema),
         mode: 'all'
@@ -94,13 +96,27 @@ export default function Cardform() {
         });
         setDate(dateFormated);
     }
-
-    const onSubmit = (data: any) => console.log(data);
+    
+    
+      async function createCartao(data: any) {
+        const jaison = {
+            num_cartao: data.cardNumber,
+            dono_cartao: data.name,
+            data_vencimento: data.date,
+            cvv: data.cvv,
+            usuario_email: session?.user?.email
+          
+        }
+        const res = await axios.post("/api/cartao", jaison)
+    
+    
+    
+      }
 
 
     return (
         <div className="flex w-92 h-full items-start justify-center">
-            <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col items-center gap-1'>
+            <form onSubmit={handleSubmit(createCartao)} className='flex flex-col items-center gap-1'>
                 <Input {...register("name")} size='md' label='Nome do Titular' value={name} maxLength={20}
                 onChange={(e) => { handleName(e) }} containerProps={{ className: "md:min-w-[90px]" }} onClick={(e)=>handleName(e)}/>
                 {errors.name && <p className="text-red-500 text-xs">{errors.name.message}</p>}

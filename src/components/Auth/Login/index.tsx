@@ -51,9 +51,9 @@ const LoginAdm = () => {
             if (session.user.role === "cliente") {
               router.push("/");
             } else if (session.user.role === "promoter") {
-              router.push("/events/eventosPromoter");
+              router.push("/promoter/eventos");
             } else if (session.user.role === "administrador") {
-              router.push("/admin/eventos");
+              router.push("/administrador/eventos");
             }
           }
         };

@@ -82,7 +82,7 @@ export default function testes() {
       jaison)
 
     /* Enviando de verdade para API */
-    const res = await fetch("http://localhost:3000/api/cliente", {
+    const res = await fetch("/api/cliente", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -129,7 +129,7 @@ export default function testes() {
       jaison)
 
     /* Enviando de verdade para API */
-    const res = await fetch("http://localhost:3000/api/promoter", {
+    const res = await fetch("/api/promoter", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -163,7 +163,7 @@ export default function testes() {
     console.log("Exemplo de como o JSON para criação de um Administrador deve ser feito:\n" +
       jaison)
     /* Enviando de verdade para API */
-    const res = await fetch("http://localhost:3000/api/administrador", {
+    const res = await fetch("/api/administrador", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

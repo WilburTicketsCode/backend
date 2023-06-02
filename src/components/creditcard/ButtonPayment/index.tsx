@@ -8,9 +8,6 @@ import { PayContext } from '../../../contexts/payContext';
 import {
     Button,
     Dialog,
-    Card,
-    CardBody,
-    CardFooter,
 } from "../../ClientSide";
 
 
@@ -25,6 +22,7 @@ export default function Payment() {
         date: "",
         cvv: "",
         fucus: true
+
     })
 
     const cleanInfoCard = () => {

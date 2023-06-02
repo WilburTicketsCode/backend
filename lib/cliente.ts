@@ -12,7 +12,11 @@ export async function getClientes() {
             endereco: true,
             usuario: true,
             cartao: true,
-            compras: true,
+            compras: {
+              include: {
+                ingressos: true,
+              }
+            },
         },
         orderBy: [{
             id: "desc"
@@ -32,7 +36,11 @@ export async function getCliente(cpf: string) {
         endereco: true,
         usuario: true,
         cartao: true,
-        compras: true,
+        compras: {
+          include: {
+            ingressos: true,
+          }
+        }
       },
     });
   

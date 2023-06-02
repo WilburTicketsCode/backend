@@ -1,3 +1,4 @@
+'use client'
 import { Card, Button, Typography, } from "@/components/ClientSide";
 import { useState, useEffect } from "react";
 import Link from 'next/link';
@@ -10,19 +11,16 @@ interface Adm {
     senha: String;
 }
 
-interface ListProps {
-    admsBD: Adm[];
-}
 
 //Forma de exibir tirando os dados da API (Não vai ser utilizado agora)
 
-export default function TelaListAdm(props: ListProps) {
+export default function TelaListAdm() {
 
     //Consulta a API
     const [admins, setAdmins] = useState<Adm[]>([]);
  
     const fetchAdmins = async () => {
-        const reponse = await fetch("http://localhost:3000/api/administrador");
+        const reponse = await fetch("https://backend-wilbortick.vercel.app/api/administrador");
         const  data = await reponse.json();
         setAdmins(data);
     }
@@ -51,8 +49,8 @@ return (
             <Typography variant="h4" color="blue-gray">
                 Administradores:
             </Typography>
-
-            {props.admsBD.map((admin) => (
+            
+            {admins.map((admin) => (
                 <ul className="bg-gray-300 mt-10 mr-5 flex flex-col gap-6">
                     <li key={admin.id} className="font-semibold">{admin.nome}</li>
                     <li key={admin.id}>Email: {admin.email}</li>

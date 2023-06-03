@@ -8,43 +8,44 @@ const typePersona = ["cpf", "cnpj"] as const;
 type personalFormData = z.infer<typeof personalSchema>;
 
 const personalSchema = z.object({
-  name: z.string(),
-  // cnpj_cpf: z.string().min(11, {message: 'A senha deve ter no mínimo 8 caracteres'}),
-email: z.string().email({message: 'O email é inválido'}),
-phone: z.string().min(11, {message: 'Exemplo: 71900000000'}),
-street: z.string(),
-neighborhood: z.string(),
-complement: z.string(),
-number: z.string(),
-city: z.string(),
-state: z.string(),
-cep: z.string().min(9, {message: 'Exemplo: 44036-900'}),
-selectField: z.enum(typePersona),
-cpf_cnpj: z.string().refine((value) => {
-  return value.length === 11 || value.length === 14 ;
-}, { message: 'O campo é inválido' }),
+    name: z.string(),
+    // cnpj_cpf: z.string().min(11, {message: 'A senha deve ter no mínimo 8 caracteres'}),
+	email: z.string().email({message: 'O email é inválido'}),
+	phone: z.string().min(11, {message: 'Exemplo: 71900000000'}),
+	street: z.string(),
+  neighborhood: z.string(),
+  complement: z.string(),
+  number: z.string(),
+	city: z.string(),
+	state: z.string(),
+	cep: z.string().min(9, {message: 'Exemplo: 44036-900'}),
+	selectField: z.enum(typePersona),
+	cpf_cnpj: z.string().refine((value) => {
+		return value.length === 11 || value.length === 14 ;
+	}, { message: 'O campo é inválido' }),
 })
 
 export default function FormPersonalData(props: any) {
-  const {register,handleSubmit,formState:{errors} } = useForm<personalFormData>({
-      resolver: zodResolver(personalSchema),
-      criteriaMode: 'all',
-      mode: 'all',
-      defaultValues: {
-          name: props.user.usuario.nome,//
-          cpf_cnpj: props.user.cpf ? props.user.cpf : props.user.cnpj,// 
-          email: props.user.usuario.email,//
-          phone: props.user.telefone,//
-          street: props.user.endereco.rua,//
-          neighborhood: props.user.endereco.bairro,
-          complement: props.user.endereco.complemento,
-          number: props.user.endereco.numero,
-          city: props.user.endereco.cidade,//
-          state: props.user.endereco.estado,//
-          cep: props.user.endereco.cep,//
-          selectField: props.user.cpf ? 'cpf' : 'cnpj'
-      },
-  });
+    const {register,handleSubmit,formState:{errors} } = useForm<personalFormData>({
+        resolver: zodResolver(personalSchema),
+        criteriaMode: 'all',
+        mode: 'all',
+        defaultValues: {
+            name: props.user.usuario.nome,//
+            cpf_cnpj: props.user.cpf ? props.user.cpf : props.user.cnpj,// 
+            email: props.user.usuario.email,//
+            phone: props.user.telefone,//
+            street: props.user.endereco.rua,//
+            neighborhood: props.user.endereco.bairro,
+            complement: props.user.endereco.complemento,
+            number: props.user.endereco.numero,
+            city: props.user.endereco.cidade,//
+            state: props.user.endereco.estado,//
+            cep: props.user.endereco.cep,//
+			      selectField: props.user.cpf ? 'cpf' : 'cnpj'
+        },
+
+    });
 
     const onSubmit = (data: personalFormData) => {
         console.log(data);

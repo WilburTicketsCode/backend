@@ -29,7 +29,7 @@ const Navbar = ({ navbarType }: Props) => {
 
             return (
                 <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
-                    <div className='py-2 border-b-[2px] rounded-b-lg'>
+                    <div className='p-1 border-b-[2px] rounded-b-lg'>
                         <div className="2xl:px-[3rem]  flex flex-row items-center justify-between gap-3 md:gap-1">
                             <Link href={'/'} className='flex items-center justify-center'><Logo /></Link>
                             <Search />
@@ -56,7 +56,7 @@ const Navbar = ({ navbarType }: Props) => {
         } else if (session.user.role === 'promoter') {
             return (
                 <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
-                    <div className='py-2 border-b-[2px] rounded-b-lg'>
+                    <div className='p-1 border-b-[2px] rounded-b-lg'>
                         <div className="2xl:px-[3rem]  flex flex-row items-center justify-between gap-0.5 md:gap-1">
                             <Link href={'/promoter/eventos'} className='flex items-center justify-center'><Logo /></Link>
                             <div>
@@ -75,7 +75,7 @@ const Navbar = ({ navbarType }: Props) => {
         } else if (session.user.role === 'administrador') {
             return (
                 <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
-                    <div className='py-4 border-b-[2px] rounded-b-lg'>
+                    <div className='p-1 border-b-[2px] rounded-b-lg'>
                         <div className="lg:px-[20rem] flex flex-row items-center justify-between gap-0.5 md:gap-1">
                             <Link href={'/administrador/eventos'}><Logo /></Link>
                             <NavList />
@@ -100,13 +100,13 @@ const Navbar = ({ navbarType }: Props) => {
     return (
 
         <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
-            <div className='py-4 border-b-[2px] rounded-b-lg'>
+            <div className='p-1 border-b-[2px] rounded-b-lg'>
                 <div className=" flex flex-row items-center justify-between gap-3 md:gap-1">
                     <Link href={'/'}><Logo /></Link>
                     <Search />
                     <NoLoginMenu></NoLoginMenu>
-                    <Link href={'/auth/promoter-registration'} className='md:flex items-center justify-center hidden'> <button className="bg-[#ffffff] text-light-blue-900 text-md hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar promoter</button> </Link>
-                    <Link href={'/auth/customer-registration'} className='md:flex items-center justify-center hidden'><button className="bg-[#ffffff] text-light-blue-900 text-md hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar cliente</button> </Link>
+                    <Link href={'/auth/promoter-registration'} className='md:flex items-center justify-center hidden'> <button className="bg-[#ffffff] text-light-blue-900 text-md hover:bg-blue-gray-300 px-4 py-2 rounded-md">Seja um promoter</button> </Link>
+                    <Link href={'/auth/customer-registration'} className='md:flex items-center justify-center hidden'><button className="bg-[#ffffff] text-light-blue-900 text-md hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastre-se</button> </Link>
                     <SinginButton />
                 </div>
             </div>

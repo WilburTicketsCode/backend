@@ -7,7 +7,7 @@ export default function Search() {
 
   return (
 
-    <div className="relative flex w-full gap-2 md:w-max lg:w-[50rem]">
+    <div className="relative flex w-full gap-2 md:w-max lg:w-[30rem]">
       <Input
         type="search"
         label="Pesquisar"

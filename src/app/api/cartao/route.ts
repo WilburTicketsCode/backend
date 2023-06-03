@@ -30,12 +30,9 @@ export async function POST(request:Request) {
                             dono_cartao: dados.dono_cartao,
                             data_vencimento: dados.data_vencimento,
                             cvv: dados.cvv,
-                            clientes: {
-                                connect: {
-                                    id: cliente.id
-                                }
+                            
                             }
-                        }
+                        
                     })
                 }
             }

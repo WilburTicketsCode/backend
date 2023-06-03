@@ -1,17 +1,45 @@
-import { Cartao, inserirCartao } from "../../../../lib/cartao";
 import { NextResponse } from "next/server";
 
+import { getCliente } from "../../../../lib/cliente"
+import prisma from "../../../../lib/prisma"
+import { getUsuario } from "../../../../lib/usuario"
 
+type Cartao = {
+    num_cartao: string,
+    dono_cartao: string,
+    data_vencimento: string,
+    cvv: string
+    usuario_email: string
+}
 
 export async function POST(request:Request) {
-    const dados: Cartao = await request.json()
-    console.log(dados);
-    if (dados !== null) {
-        const cartao = inserirCartao(dados)
-        if (cartao !== null){
-            return NextResponse.json("EBA")
-        } else {
-            return NextResponse.json("UUU")
+    const dados: Cartao = await request.json();
+    if (dados) {
+        const usuario = await getUsuario(dados.usuario_email);
+        if (usuario) {
+            if (usuario.cliente) {
+                const cliente = await prisma.cliente.findUnique({
+                    where: {
+                        id_usuario: usuario?.id
+                    }
+                })
+                if (cliente) {
+                    const cartao = await prisma.cartao_Credito.create({
+                        data: {
+                            num_cartao: dados.num_cartao,
+                            dono_cartao: dados.dono_cartao,
+                            data_vencimento: dados.data_vencimento,
+                            cvv: dados.cvv,
+                            clientes: {
+                                connect: {
+                                    id: cliente.id
+                                }
+                            }
+                        }
+                    })
+                }
+            }
         }
     }
 }
+    

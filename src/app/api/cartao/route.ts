@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-
-import { getCliente } from "../../../../lib/cliente"
 import prisma from "../../../../lib/prisma"
 import { getUsuario } from "../../../../lib/usuario"
 
@@ -30,13 +28,19 @@ export async function POST(request:Request) {
                             dono_cartao: dados.dono_cartao,
                             data_vencimento: dados.data_vencimento,
                             cvv: dados.cvv,
-                            
+                            clientes: {
+                                connect: {
+                                    id: cliente.id
+                                }
+                            }
                             }
                         
                     })
+                    NextResponse.json({message:"Cartão cadastrado com sucesso!"}, {status: 200})
                 }
             }
         }
     }
+    NextResponse.json({error:"Erro ao cadastrar cartão!"}, {status: 400})
 }
     

@@ -8,21 +8,21 @@ const typePersona = ["cpf", "cnpj"] as const;
 type personalFormData = z.infer<typeof personalSchema>;
 
 const personalSchema = z.object({
-  name: z.string(),
-  // cnpj_cpf: z.string().min(11, {message: 'A senha deve ter no mínimo 8 caracteres'}),
-email: z.string().email({message: 'O email é inválido'}),
-phone: z.string().min(11, {message: 'Exemplo: 71900000000'}),
-street: z.string(),
-neighborhood: z.string(),
-complement: z.string(),
-number: z.string(),
-city: z.string(),
-state: z.string(),
-cep: z.string().min(9, {message: 'Exemplo: 44036-900'}),
-selectField: z.enum(typePersona),
-cpf_cnpj: z.string().refine((value) => {
-  return value.length === 11 || value.length === 14 ;
-}, { message: 'O campo é inválido' }),
+ 	name: z.string(),
+	// cnpj_cpf: z.string().min(11, {message: 'A senha deve ter no mínimo 8 caracteres'}),
+	email: z.string().email({message: 'O email é inválido'}),
+	phone: z.string().min(10, {message: 'Exemplo: 7190000000'}),
+	street: z.string().min(1, {message: 'Exemplo: Novo horizonte'}),
+	neighborhood: z.string().min(1, {message: 'Exemplo: Centro'}),
+	complement: z.string(),
+	number: z.string().min(1, {message: 'Exemplo: 1'}),
+	city: z.string().min(1, {message: 'Exemplo: Feira de Santana'}),
+	state: z.string().min(2, {message: 'Exemplo: BA'}),
+	cep: z.string().min(9, {message: 'Exemplo: 44036-900'}),
+	selectField: z.enum(typePersona),
+	cpf_cnpj: z.string().refine((value) => {
+	return value.length === 11 || value.length === 14 ;
+	}, { message: 'O campo é inválido' }),
 })
 
 export default function FormPersonalData(props: any) {
@@ -44,16 +44,11 @@ export default function FormPersonalData(props: any) {
           cep: props.user.endereco.cep,//
           selectField: props.user.cpf ? 'cpf' : 'cnpj'
       },
-  });
+  	});
 
     const onSubmit = (data: personalFormData) => {
         console.log(data);
     }
-
-    useEffect(() => {
-      // Faça um console.log() nos dados recebidos
-      console.log(props);
-    }, [props]);
 
   return (
  	

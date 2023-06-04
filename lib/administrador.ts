@@ -5,7 +5,15 @@ import { cpfDuplicado, emailDuplicado } from "./erros";
 
 
 export type Administradores = Prisma.PromiseReturnType<typeof getAdministradores>;
-export type Administrador = Prisma.PromiseReturnType<typeof getAdministrador>;
+export type Administrador = {
+  cpf: string,
+  super_adm: boolean,
+  usuario: {
+    nome: string,
+    email: string,
+    senha: string
+  }
+};
 
 
 
@@ -19,7 +27,23 @@ export async function getAdministradores() {
     }
     ],
   })
-  return data
+
+  const listaAdministradorSemSenha: any = []
+  data.map((u) => {
+    if (u !== null) {
+      const { usuario, ...AdministradorSemSenha } = u;
+      const AdministradorSemSenhaCompleto = {
+        ...AdministradorSemSenha,
+        usuario: {
+          ...usuario,
+          senha: undefined // Exclui a propriedade "senha" do objeto interno "usuario"
+        }
+      }
+      listaAdministradorSemSenha.push(AdministradorSemSenhaCompleto);
+    }
+  });
+
+  return listaAdministradorSemSenha
 }
 
 export async function getAdministrador(cpf: string) {
@@ -32,7 +56,19 @@ export async function getAdministrador(cpf: string) {
     },
   });
 
-  return data;
+  if (data !== null) {
+    const { usuario, ...AdministradorSemSenha } = data;
+    const AdministradorSemSenhaCompleto = {
+      ...AdministradorSemSenha,
+      usuario: {
+        ...usuario,
+        senha: undefined // Exclui a propriedade "senha" do objeto interno "usuario"
+      }
+    }
+
+    return AdministradorSemSenhaCompleto;
+  }
+  return null
 }
 
 export async function inserirAdministrador(adm: Administrador) {
@@ -40,7 +76,7 @@ export async function inserirAdministrador(adm: Administrador) {
     return null
   } else {
     try {
-      const administradorData = await prisma.administrador.create({
+      const administradorDATA = await prisma.administrador.create({
         data: {
           usuario: {
             create: {
@@ -53,7 +89,7 @@ export async function inserirAdministrador(adm: Administrador) {
           super_adm: adm.super_adm
         }
       })
-      return administradorData
+      return administradorDATA
     } catch (e) {
       if (e instanceof PrismaClientKnownRequestError) {
         if (e.code === 'P2002') {

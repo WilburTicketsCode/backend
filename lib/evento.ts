@@ -73,51 +73,51 @@ export async function inserirEvento(evento: Evento) {
     return null
   } else {
     const promoter = await getPromoter(evento.id_promoter)
-    console.log(promoter)
-    console.log(evento);
-    
-    const endereco = await prisma.endereco.create({
-      data: {
+    if (promoter !== null) {
 
-        bairro: evento.endereco.bairro,
-        cep: evento.endereco.cep,
-        cidade: evento.endereco.cidade,
-        estado: evento.endereco.estado,
-        numero: evento.endereco.numero,
-        rua: evento.endereco.rua,
-        complemento: evento.endereco.complemento
-
-      }
-    })
-    console.log(endereco);
-    
-    const eventoDATA = await prisma.evento.create({
-      data: {
-        nome: evento.nome,
-        horaInicio: new Date(evento.horaInicio),
-        horaFim: new Date(evento.horaFim),
-        descricao: evento.descricao,
-        banner: evento.banner,
-        id_endereco: endereco.id,
-        id_promoter: promoter.id,
-
-      }
-    })
-    console.log(eventoDATA)
-    evento.lotacoes.map(async (lotacao) => {
-      await prisma.lotacao.create({
+      const endereco = await prisma.endereco.create({
         data: {
-          id_evento: eventoDATA.id,
-          id_perfil: lotacao.id_perfil,
-          id_setor: lotacao.id_setor,
-          quantidade: lotacao.quantidade,
-          valorTotal: lotacao.valorTotal
+  
+          bairro: evento.endereco.bairro,
+          cep: evento.endereco.cep,
+          cidade: evento.endereco.cidade,
+          estado: evento.endereco.estado,
+          numero: evento.endereco.numero,
+          rua: evento.endereco.rua,
+          complemento: evento.endereco.complemento
+  
         }
       })
-      console.log(lotacao)
-    })
-
-    return eventoDATA
-
+      console.log(endereco);
+      
+      const eventoDATA = await prisma.evento.create({
+        data: {
+          nome: evento.nome,
+          horaInicio: new Date(evento.horaInicio),
+          horaFim: new Date(evento.horaFim),
+          descricao: evento.descricao,
+          banner: evento.banner,
+          id_endereco: endereco.id,
+          id_promoter: promoter.id,
+  
+        }
+      })
+      console.log(eventoDATA)
+      evento.lotacoes.map(async (lotacao) => {
+        await prisma.lotacao.create({
+          data: {
+            id_evento: eventoDATA.id,
+            id_perfil: lotacao.id_perfil,
+            id_setor: lotacao.id_setor,
+            quantidade: lotacao.quantidade,
+            valorTotal: lotacao.valorTotal
+          }
+        })
+        console.log(lotacao)
+      })
+  
+      return eventoDATA
+    }
+    return null
   }
 }

@@ -12,6 +12,7 @@ import { ProfileMenu } from './ProfileMenu';
 import Logo from './Logo';
 import Search from './Search';
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import ProfileMenuPromoter from './Promoter/ProfileMenuPromoter';
 
 
@@ -21,8 +22,14 @@ type Props = {
     navbarType: string
 }
 
+function currentUser(){
+    const path = usePathname();
+    const user = path.split("/", 2);
+    return user[1];
+}
 const Navbar = ({ navbarType }: Props) => {
-    const { data: session } = useSession()
+    const { data: session } = useSession();
+    const userAtual = currentUser();
     /*Pfv usar UseEffect ou outra coisa pois o codigo abaixo foi escrito por Pedro, ou seja, está errado. */
     if (session && session.user) {
         if (session.user.role === 'cliente') {
@@ -30,7 +37,7 @@ const Navbar = ({ navbarType }: Props) => {
             return (
                 <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
                     <div className='p-1 border-b-[2px] rounded-b-lg'>
-                        <div className="2xl:px-[3rem]  flex flex-row items-center justify-between gap-3 md:gap-1">
+                        <div className="2xl:px-[3rem] flex flex-row items-center justify-between gap-0 md:gap-1">
                             <Link href={'/'} className='flex items-center justify-center'><Logo /></Link>
                             <Search />
                             <div>
@@ -41,7 +48,7 @@ const Navbar = ({ navbarType }: Props) => {
                                                 variant="text"
                                                 color="blue-gray"
                                                 className="ml-0 mr-2">
-                                                <ShoppingCartIcon className="h-8 w-8" />
+                                                <ShoppingCartIcon className="h-6 w-6 sm:h-8 md:w-8" />
                                             </IconButton>
                                         </Link>
                                     </div>
@@ -53,7 +60,7 @@ const Navbar = ({ navbarType }: Props) => {
                     </div>
                 </div>
             )
-        } else if (session.user.role === 'promoter') {
+        } else if (userAtual === 'promoter') {
             return (
                 <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
                     <div className='p-1 border-b-[2px] rounded-b-lg'>
@@ -72,11 +79,11 @@ const Navbar = ({ navbarType }: Props) => {
                     </div>
                 </div>
             )
-        } else if (session.user.role === 'administrador') {
+        } else if (userAtual === 'administrador') {
             return (
-                <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
+                <div className='w-full top-0 fixed bg-white z-50 shadow-sm rounded-b-lg'>
                     <div className='p-1 border-b-[2px] rounded-b-lg'>
-                        <div className="lg:px-[20rem] flex flex-row items-center justify-between gap-0.5 md:gap-1">
+                        <div className="lg:px-[20px] flex flex-row items-center justify-between gap-0.5 md:gap-1">
                             <Link href={'/administrador/eventos'}><Logo /></Link>
                             <NavList />
                             <div className=' md:gap-5 flex flex-row justify-center items-center'>
@@ -88,8 +95,9 @@ const Navbar = ({ navbarType }: Props) => {
                                         <BellIcon className="h-8 w-8" />
                                     </IconButton>
                                 </div>
-
-                                <ProfileMenu />
+                                <div className="w-[100px]">
+                                    <ProfileMenu />
+                                </div>
                             </div>
                         </div>
                     </div>

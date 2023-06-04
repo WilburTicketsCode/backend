@@ -1,4 +1,5 @@
 import React from "react";
+import { signOut, useSession } from "next-auth/react";
 
 import {
     Typography,
@@ -71,6 +72,7 @@ export default function ProfileMenuPromoter() {
                                 strokeWidth: 2,
                             })}
                             <Typography
+                                onClick={() => { signOut({callbackUrl:'/'}); }}
                                 as="span"
                                 variant="h5"
                                 className="font-normal"

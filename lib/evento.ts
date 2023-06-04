@@ -5,31 +5,38 @@ import { getPromoter } from "./promoter";
 
 export type Eventos = Prisma.PromiseReturnType<typeof getEventos>;
 export type Evento = {
-  nome: '',
-  horaInicio: '',
-  horaFim: '',
-  descricao: '',
-  banner: '',
-  id_endereco: 0,
-  id_promoter: '',
+  nome: string,
+  horaInicio: string,
+  horaFim: string,
+  descricao: string,
+  banner: string,
+  id_endereco: number,
+  id_promoter: string,
+  status: string,
   endereco: {
-    bairro: '',
-    cep: '',
-    cidade: '',
-    estado: '',
-    numero: 0,
-    rua: '',
-    complemento: ''
+    bairro: string,
+    cep: string,
+    cidade: string,
+    estado: string,
+    numero: number,
+    rua: string,
+    complemento: string
   }
   lotacoes: [
     lotacao: {
-      id_perfil: 0,
-      id_setor: 0,
-      quantidade: 0,
-      valorTotal: 0
+      id_perfil: number,
+      id_setor: number,
+      quantidade: number,
+      valorTotal: number
     }
   ]
 };
+
+export type edicaoEventoTipo = {
+  tipo: string,
+  novoDado: string,
+  idDoEvento: number
+}
 
 export async function getEventos() {
   const data = await prisma.evento.findMany({
@@ -73,51 +80,67 @@ export async function inserirEvento(evento: Evento) {
     return null
   } else {
     const promoter = await getPromoter(evento.id_promoter)
-    console.log(promoter)
-    console.log(evento);
-    
-    const endereco = await prisma.endereco.create({
-      data: {
+    if (promoter !== null) {
 
-        bairro: evento.endereco.bairro,
-        cep: evento.endereco.cep,
-        cidade: evento.endereco.cidade,
-        estado: evento.endereco.estado,
-        numero: evento.endereco.numero,
-        rua: evento.endereco.rua,
-        complemento: evento.endereco.complemento
-
-      }
-    })
-    console.log(endereco);
-    
-    const eventoDATA = await prisma.evento.create({
-      data: {
-        nome: evento.nome,
-        horaInicio: new Date(evento.horaInicio),
-        horaFim: new Date(evento.horaFim),
-        descricao: evento.descricao,
-        banner: evento.banner,
-        id_endereco: endereco.id,
-        id_promoter: promoter.id,
-
-      }
-    })
-    console.log(eventoDATA)
-    evento.lotacoes.map(async (lotacao) => {
-      await prisma.lotacao.create({
+      const endereco = await prisma.endereco.create({
         data: {
-          id_evento: eventoDATA.id,
-          id_perfil: lotacao.id_perfil,
-          id_setor: lotacao.id_setor,
-          quantidade: lotacao.quantidade,
-          valorTotal: lotacao.valorTotal
+  
+          bairro: evento.endereco.bairro,
+          cep: evento.endereco.cep,
+          cidade: evento.endereco.cidade,
+          estado: evento.endereco.estado,
+          numero: evento.endereco.numero,
+          rua: evento.endereco.rua,
+          complemento: evento.endereco.complemento
+  
         }
       })
-      console.log(lotacao)
-    })
+      console.log(endereco);
+      
+      const eventoDATA = await prisma.evento.create({
+        data: {
+          nome: evento.nome,
+          horaInicio: new Date(evento.horaInicio),
+          horaFim: new Date(evento.horaFim),
+          descricao: evento.descricao,
+          banner: evento.banner,
+          id_endereco: endereco.id,
+          id_promoter: promoter.id,
+          status: evento.status,
+        }
+      })
+      console.log(eventoDATA)
+      evento.lotacoes.map(async (lotacao) => {
+        await prisma.lotacao.create({
+          data: {
+            id_evento: eventoDATA.id,
+            id_perfil: lotacao.id_perfil,
+            id_setor: lotacao.id_setor,
+            quantidade: lotacao.quantidade,
+            valorTotal: lotacao.valorTotal
+          }
+        })
+        console.log(lotacao)
+      })
+  
+      return eventoDATA
+    }
+    return null
+  }
+}
 
-    return eventoDATA
-
+export async function edicaoEvento(tipoDeEdicao: string, novoDadoAlterado: string, idEvento: number) {
+  if (tipoDeEdicao === 'trocar status') {
+    try {
+      const evento = await prisma.evento.update({
+        where: { id: idEvento },
+        data: { status: novoDadoAlterado },
+      });
+      console.log("EVENTO NA LIB: ", evento)
+      return evento
+    } catch (error) {
+      console.error('Erro ao atualizar o evento:', error);
+      return null
+    }
   }
 }

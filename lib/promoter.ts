@@ -1,10 +1,30 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "./prisma";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { cpfDuplicado, emailDuplicado } from "./erros";
+import { cpfDuplicado, emailDuplicado, usuarioNaoEncontrado } from "./erros";
 
 export type Promoters = Prisma.PromiseReturnType<typeof getPromoters>;
-export type Promoter = Prisma.PromiseReturnType<typeof getPromoter>;
+export type Promoter = {
+    cpf: string,
+    cnpj: string,
+    status: string,
+    data_nasc: Date,
+    telefone: string,
+    usuario: {
+        nome: string,
+        email: string,
+        senha: string
+    },
+    endereco: {
+        rua: string,
+        numero: number,
+        bairro: string,
+        cidade: string,
+        estado: string,
+        cep: string,
+        complemento: string,
+    },
+};
 
 export async function getPromoters() {
     const data = await prisma.promoter.findMany({
@@ -15,20 +35,35 @@ export async function getPromoters() {
         },
         orderBy: [{
             id: "desc"
-          }
+        }
         ],
     })
-    
-    return data
+
+    const listaPromoterSemSenha: any = []
+    data.map((u) => {
+        if (u !== null) {
+            const { usuario, ...promoterSemSenha } = u;
+            const promoterSemSenhaCompleto = {
+                ...promoterSemSenha,
+                usuario: {
+                    ...usuario,
+                    senha: undefined // Exclui a propriedade "senha" do objeto interno "usuario"
+                }
+            }
+            listaPromoterSemSenha.push(promoterSemSenhaCompleto);
+        }
+    });
+    return listaPromoterSemSenha
+
 }
 
 export async function getPromoter(cpfORcnpj: string) {
     const data = await prisma.promoter.findMany({
         where: {
             OR: [
-                {cpf: cpfORcnpj},
-                {cnpj: cpfORcnpj}
-              ]
+                { cpf: cpfORcnpj },
+                { cnpj: cpfORcnpj }
+            ]
         },
         include: {
             usuario: true,
@@ -37,12 +72,24 @@ export async function getPromoter(cpfORcnpj: string) {
         },
         orderBy: [{
             id: "desc"
-          }
+        }
         ],
     })
 
-    return data[0]
-  }
+    if (data[0] === null) throw new usuarioNaoEncontrado('Promoter com esse CPF não foi encontrado')
+
+    const { usuario, ...promoterSemSenha } = data[0];
+    const promoterSemSenhaCompleto = {
+        ...promoterSemSenha,
+        usuario: {
+            ...usuario,
+            senha: undefined // Exclui a propriedade "senha" do objeto interno "usuario"
+        }
+    }
+
+    return promoterSemSenhaCompleto
+
+}
 
 export async function inserirPromoter(promoter: Promoter) {
 
@@ -77,18 +124,19 @@ export async function inserirPromoter(promoter: Promoter) {
                     }
                 }
             })
+
             return promoterDATA
 
         } catch (e) {
             if (e instanceof PrismaClientKnownRequestError) {
                 if (e.code === 'P2002') {
-                  if (e.message.split(' ')[8] === '`Usuario_email_key`') {
-                    throw new emailDuplicado("esté email já existe nos registros.")
-                  } else if (e.message.split(' ')[8] === '`Administrador_cpf_key`') {
-                    throw new cpfDuplicado("esté cpf já existe nos registros.")
-                  }
+                    if (e.message.split(' ')[8] === '`Usuario_email_key`') {
+                        throw new emailDuplicado("esté email já existe nos registros.")
+                    } else if (e.message.split(' ')[8] === '`Administrador_cpf_key`') {
+                        throw new cpfDuplicado("esté cpf já existe nos registros.")
+                    }
                 }
-              }
+            }
         }
 
     }

@@ -32,6 +32,7 @@ import {
   UserCircleIcon,
   ChevronDownIcon,
   PowerIcon,
+  BanknotesIcon,
 } from "@heroicons/react/24/outline";
 
 export { Accordion,
@@ -60,5 +61,6 @@ export { Accordion,
     UserCircleIcon,
     ChevronDownIcon,
     PowerIcon,
-    Checkbox
+    Checkbox,
+    BanknotesIcon,
   };

@@ -5,31 +5,38 @@ import { getPromoter } from "./promoter";
 
 export type Eventos = Prisma.PromiseReturnType<typeof getEventos>;
 export type Evento = {
-  nome: '',
-  horaInicio: '',
-  horaFim: '',
-  descricao: '',
-  banner: '',
-  id_endereco: 0,
-  id_promoter: '',
+  nome: string,
+  horaInicio: string,
+  horaFim: string,
+  descricao: string,
+  banner: string,
+  id_endereco: number,
+  id_promoter: string,
+  status: string,
   endereco: {
-    bairro: '',
-    cep: '',
-    cidade: '',
-    estado: '',
-    numero: 0,
-    rua: '',
-    complemento: ''
+    bairro: string,
+    cep: string,
+    cidade: string,
+    estado: string,
+    numero: number,
+    rua: string,
+    complemento: string
   }
   lotacoes: [
     lotacao: {
-      id_perfil: 0,
-      id_setor: 0,
-      quantidade: 0,
-      valorTotal: 0
+      id_perfil: number,
+      id_setor: number,
+      quantidade: number,
+      valorTotal: number
     }
   ]
 };
+
+export type edicaoEventoTipo = {
+  tipo: string,
+  novoDado: string,
+  idDoEvento: number
+}
 
 export async function getEventos() {
   const data = await prisma.evento.findMany({
@@ -99,7 +106,7 @@ export async function inserirEvento(evento: Evento) {
           banner: evento.banner,
           id_endereco: endereco.id,
           id_promoter: promoter.id,
-  
+          status: evento.status,
         }
       })
       console.log(eventoDATA)
@@ -119,5 +126,21 @@ export async function inserirEvento(evento: Evento) {
       return eventoDATA
     }
     return null
+  }
+}
+
+export async function edicaoEvento(tipoDeEdicao: string, novoDadoAlterado: string, idEvento: number) {
+  if (tipoDeEdicao === 'trocar status') {
+    try {
+      const evento = await prisma.evento.update({
+        where: { id: idEvento },
+        data: { status: novoDadoAlterado },
+      });
+      console.log("EVENTO NA LIB: ", evento)
+      return evento
+    } catch (error) {
+      console.error('Erro ao atualizar o evento:', error);
+      return null
+    }
   }
 }

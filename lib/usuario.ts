@@ -8,23 +8,6 @@ export type edicaoUsuarioTipo = {
   emailDoUsuario: string
 }
 
-export async function getUsuarios() {
-  const data = await prisma.usuario.findMany({
-    include:{
-      promoter: true,
-      adm: true,
-      cliente: true
-    },
-    orderBy: [{
-      id: "desc"
-    },
-    
-  ],
-  })
- 
-  return data
-}
-
 export async function getUsuario(email: string) {
     const data = await prisma.usuario.findUnique({
       where: {
@@ -37,7 +20,12 @@ export async function getUsuario(email: string) {
       }
     });
 
-    return data
+    if (data !== null){
+      const { senha, ...usuarioSemSenha } = data;
+      return usuarioSemSenha
+    }
+    return null
+
 }
 
 export async function edicaoUsuario(tipoDeEdicao: string, novoDadoAlterado: string, emailUsuario: string) {

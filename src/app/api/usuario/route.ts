@@ -1,12 +1,6 @@
 import { NextResponse } from "next/server"
-import { edicaoUsuario, edicaoUsuarioTipo, getUsuarios } from "../../../../lib/usuario"
+import { edicaoUsuario, edicaoUsuarioTipo } from "../../../../lib/usuario"
 
-
-export async function GET(request: Request) {
-    const data = await getUsuarios()
-    
-    return NextResponse.json(data)
-}
 
 export async function PUT(request:Request) {
     const dados: edicaoUsuarioTipo = await request.json()

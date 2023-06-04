@@ -20,6 +20,9 @@ function searchTicket(compras: any, ticketId: number) {
   export default function Ticket(data: any) {
 */
 
+
+
+
 export default function Ticket() {
   //const ingresso = cliente.compras;
   //console.log(data.cliente)

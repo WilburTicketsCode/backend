@@ -141,7 +141,7 @@ return (
 
     <div className="flex flex-col w-full">
       <Input size="lg" 
-        type="password"
+       type="password"
         label="Confirmação da Senha*" 
         containerProps={{ className: "min-w-[72px]" }}
         {...register("passwordConfirm")}

@@ -40,25 +40,9 @@ export default function AcessForm() {
           },
     })
 
-    const promoter = {
-      nome: infoCompanyForm.name,
-      cpf: infoCompanyForm.CPF,
-      cpnj: infoCompanyForm.CNPJ,
-      email: infoAcessForm.email,
-      password: infoAcessForm.password,
-      status: 'pendente',
-      data_nasc: new Date("1999-05-30"),
-      telefone: infoCompanyForm.phone,
-      rua: infoAdressForm.street,
-      numero: Number(infoAdressForm.number),
-      bairro: infoAdressForm.district,
-      cidade: infoAdressForm.street,
-      estado: infoAdressForm.state,
-      cep: infoAdressForm.CEP,
-      complemento: infoAdressForm.complement
-    }
+    
 
-    async function createPromoter() {
+    async function createPromoter(promoter: any) {
       const jaison = JSON.stringify({
         cpf: promoter.cpf,
         cnpj: promoter.cpnj,
@@ -96,7 +80,6 @@ export default function AcessForm() {
 
       
     }
-  
 
   const onSubmit = (data: AcessFormData) => {
 
@@ -108,8 +91,26 @@ export default function AcessForm() {
       email: data.email,
       password: data.password,
     })
+
+    const promoter = {
+      nome: infoCompanyForm.name,
+      cpf: infoCompanyForm.CPF,
+      cpnj: infoCompanyForm.CNPJ,
+      email: data.email,
+      password: data.password,
+      status: 'pendente',
+      data_nasc: new Date("1999-05-30"),
+      telefone: infoCompanyForm.phone,
+      rua: infoAdressForm.street,
+      numero: Number(infoAdressForm.number),
+      bairro: infoAdressForm.district,
+      cidade: infoAdressForm.street,
+      estado: infoAdressForm.state,
+      cep: infoAdressForm.CEP,
+      complemento: infoAdressForm.complement
+    }
     
-    createPromoter()
+    createPromoter(promoter)
 }
 
   const handlePrev = (e: any) => {
@@ -140,6 +141,7 @@ return (
 
     <div className="flex flex-col w-full">
       <Input size="lg" 
+        type="password"
         label="Confirmação da Senha*" 
         containerProps={{ className: "min-w-[72px]" }}
         {...register("passwordConfirm")}

@@ -2,7 +2,11 @@ import { NextResponse } from "next/server"
 import { edicaoUsuario, edicaoUsuarioTipo } from "../../../../lib/usuario"
 import { usuarioNaoEncontrado } from "../../../../lib/erros"
 
-
+/* STRING TIPOS DE ALTERAÇÃO DE DADOS */
+/* 'trocar senha' - string usada para alterar a senha do usuario
+    ...
+    ...
+*/
 export async function PUT(request: Request) {
     const dados: edicaoUsuarioTipo = await request.json()
     if (dados !== null) {

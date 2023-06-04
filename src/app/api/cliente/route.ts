@@ -14,7 +14,6 @@ mysql://nh7ntf3fxeucxnnj0c6s:pscale_pw_Xy42bmYPRmC8byFrTK6SzV7jv4OABObnuFmuSZogC
 
 export async function GET(request: Request) {
     const data = await getClientes()
-    
     return NextResponse.json(data)
 }
 
@@ -37,7 +36,7 @@ export async function POST(request:Request) {
                         ' quando sua conta foi criada no melhor site do universo. Sinta-se' +
                         ' honrado de estar recebendo o email do mago do beck-end Pedro VI</p>'
                     })
-                return NextResponse.json(dados)
+                return NextResponse.json(cliente)
             }
 
         } catch (e) {

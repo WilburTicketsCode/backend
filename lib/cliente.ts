@@ -4,7 +4,31 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { cpfDuplicado, emailDuplicado } from "./erros";
 
 export type Clientes = Prisma.PromiseReturnType<typeof getClientes>;
-export type Cliente = Prisma.PromiseReturnType<typeof getCliente>;
+export type Cliente = {
+  cpf: string,
+  telefone: string,
+  data_nasc: Date,
+  usuario: {
+    nome: string,
+    email: string,
+    senha: string
+  },
+  endereco: {
+    rua: string,
+    numero: number,
+    bairro: string,
+    cidade: string,
+    estado: string,
+    cep: string,
+    complemento: string,
+  },
+  cartao: {
+    num_cartao: string,
+    dono_cartao: string,
+    data_vencimento: string,
+    cvv: string,
+  }
+};
 export type edicaoClienteTipo = {
   tipo: string,
   novoDado: string,
@@ -28,8 +52,22 @@ export async function getClientes() {
     }
     ],
   })
+  const listaClienteSemSenha: any = []
+  data.map((u) => {
+    if (u !== null) {
+      const { usuario, ...clienteSemSenha } = u;
+      const clienteSemSenhaCompleto = {
+        ...clienteSemSenha,
+        usuario: {
+          ...usuario,
+          senha: undefined // Exclui a propriedade "senha" do objeto interno "usuario"
+        }
+      }
+      listaClienteSemSenha.push(clienteSemSenhaCompleto);
+    }
+  });
 
-  return data
+  return listaClienteSemSenha
 }
 
 export async function getCliente(cpf: string) {
@@ -48,8 +86,18 @@ export async function getCliente(cpf: string) {
       }
     },
   });
-
-  return data;
+  if (data !== null) {
+    const { usuario, ...clienteSemSenha } = data;
+    const clienteSemSenhaCompleto = {
+      ...clienteSemSenha,
+      usuario: {
+        ...usuario,
+        senha: undefined // Exclui a propriedade "senha" do objeto interno "usuario"
+      }
+    }
+    return clienteSemSenhaCompleto;
+  }
+  return null
 }
 
 export async function inserirCliente(cliente: Cliente) {
@@ -58,70 +106,43 @@ export async function inserirCliente(cliente: Cliente) {
     return null
   } else {
     try {
-      if (cliente.cartao !== null) {
-        const clienteDATA = prisma.cliente.create({
-          data: {
-            usuario: {
-              create: {
-                nome: cliente.usuario.nome,
-                email: cliente.usuario.email,
-                senha: cliente.usuario.senha
-              }
-            },
-            cartao: {
-              create: {
-                num_cartao: cliente.cartao.num_cartao,
-                dono_cartao: cliente.cartao.dono_cartao,
-                data_vencimento: cliente.cartao.data_vencimento,
-                cvv: cliente.cartao.cvv
-              }
-            },
-            endereco: {
-              create: {
-                bairro: cliente.endereco.bairro,
-                cep: cliente.endereco.cep,
-                cidade: cliente.endereco.cidade,
-                estado: cliente.endereco.estado,
-                numero: cliente.endereco.numero,
-                rua: cliente.endereco.rua,
-                complemento: cliente.endereco.complemento
-              }
-            },
-            cpf: cliente.cpf,
-            data_nasc: cliente.data_nasc,
-            telefone: cliente.telefone,
-          }
-        })
-        return clienteDATA
-      } else {
-        const clienteDATA = prisma.cliente.create({
-          data: {
-            usuario: {
-              create: {
-                nome: cliente.usuario.nome,
-                email: cliente.usuario.email,
-                senha: cliente.usuario.senha
-              }
-            },
-            endereco: {
-              create: {
-                bairro: cliente.endereco.bairro,
-                cep: cliente.endereco.cep,
-                cidade: cliente.endereco.cidade,
-                estado: cliente.endereco.estado,
-                numero: cliente.endereco.numero,
-                rua: cliente.endereco.rua,
-                complemento: cliente.endereco.complemento
-              }
-            },
-            cpf: cliente.cpf,
-            data_nasc: cliente.data_nasc,
-            telefone: cliente.telefone,
 
-          }
-        })
-        return clienteDATA
+      const clienteDATA = prisma.cliente.create({
+        data: {
+          usuario: {
+            create: {
+              nome: cliente.usuario.nome,
+              email: cliente.usuario.email,
+              senha: cliente.usuario.senha
+            }
+          },
+          endereco: {
+            create: {
+              bairro: cliente.endereco.bairro,
+              cep: cliente.endereco.cep,
+              cidade: cliente.endereco.cidade,
+              estado: cliente.endereco.estado,
+              numero: cliente.endereco.numero,
+              rua: cliente.endereco.rua,
+              complemento: cliente.endereco.complemento
+            }
+          },
+          cpf: cliente.cpf,
+          data_nasc: cliente.data_nasc,
+          telefone: cliente.telefone,
+
+        }
+      })
+      const { usuario, ...clienteSemSenha } = clienteDATA;
+      const clienteSemSenhaCompleto = {
+        ...clienteSemSenha,
+        usuario: {
+          ...usuario,
+          senha: undefined // Exclui a propriedade "senha" do objeto interno "usuario"
+        }
       }
+      return clienteSemSenhaCompleto
+
 
     } catch (e) {
       if (e instanceof PrismaClientKnownRequestError) {
@@ -139,12 +160,12 @@ export async function inserirCliente(cliente: Cliente) {
   }
 }
 
-export async function edicaoCliente(tipoDeEdicao:string, novoDadoAlterado:string, cpfCliente: string) {
-  if (tipoDeEdicao === 'trocar senha'){
+export async function edicaoCliente(tipoDeEdicao: string, novoDadoAlterado: string, cpfCliente: string) {
+  if (tipoDeEdicao === 'trocar senha') {
     try {
       const user = await prisma.cliente.update({
         where: { cpf: cpfCliente },
-        data: { usuario: {update: {senha: novoDadoAlterado}} },
+        data: { usuario: { update: { senha: novoDadoAlterado } } },
       });
       console.log('Cliente atualizado:', user);
       return user

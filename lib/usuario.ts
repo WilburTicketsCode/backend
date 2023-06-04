@@ -12,10 +12,11 @@ export async function getUsuarios() {
     },
     orderBy: [{
       id: "desc"
-    }
+    },
+    
   ],
   })
-
+ 
   return data
 }
 
@@ -30,6 +31,6 @@ export async function getUsuario(email: string) {
         cliente: true
       }
     });
-  
-    return data;
+
+    return data
 }

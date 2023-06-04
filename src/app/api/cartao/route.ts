@@ -41,6 +41,6 @@ export async function POST(request:Request) {
             }
         }
     }
-    NextResponse.json({error:"Erro ao cadastrar cartão!"}, {status: 400})
+    NextResponse.json({error:"Erro ao cadastrar cartão!"}, {status: 400});
 }
     

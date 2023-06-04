@@ -1,4 +1,4 @@
-import { getUsuario } from "../../../../lib/usuario"
+import prisma from "../../../../lib/prisma";
 
 interface RequestBody {
     email: string
@@ -7,8 +7,16 @@ interface RequestBody {
 export async function POST(request:Request) {
     const body:RequestBody = await request.json()
 
-    const user = await getUsuario(body.email);
-
+    const user = await prisma.usuario.findUnique({
+        where: {
+          email: body.email,
+        },
+        include: {
+          adm: true,
+          promoter: true,
+          cliente: true
+        }
+      });
 
     if (user && user.senha === body.password){
         if (user.adm !== null){

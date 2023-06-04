@@ -13,7 +13,7 @@ import Logo from './Logo';
 import Search from './Search';
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import ProfileMenuPromoter from './Promoter/ProfileMenuPromoter';
+import {ProfileMenuPromoter} from './Promoter/ProfileMenuPromoter';
 
 
 

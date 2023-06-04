@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "./prisma";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { cpfDuplicado, emailDuplicado } from "./erros";
+import { cpfDuplicado, emailDuplicado, usuarioNaoEncontrado } from "./erros";
 
 export type Promoters = Prisma.PromiseReturnType<typeof getPromoters>;
 export type Promoter = {
@@ -76,19 +76,19 @@ export async function getPromoter(cpfORcnpj: string) {
         ],
     })
 
-    if (data[0] !== null) {
-        const { usuario, ...promoterSemSenha } = data[0];
-        const promoterSemSenhaCompleto = {
-            ...promoterSemSenha,
-            usuario: {
-                ...usuario,
-                senha: undefined // Exclui a propriedade "senha" do objeto interno "usuario"
-            }
-        }
+    if (data[0] === null) throw new usuarioNaoEncontrado('Promoter com esse CPF não foi encontrado')
 
-        return promoterSemSenhaCompleto
+    const { usuario, ...promoterSemSenha } = data[0];
+    const promoterSemSenhaCompleto = {
+        ...promoterSemSenha,
+        usuario: {
+            ...usuario,
+            senha: undefined // Exclui a propriedade "senha" do objeto interno "usuario"
+        }
     }
-    return null
+
+    return promoterSemSenhaCompleto
+
 }
 
 export async function inserirPromoter(promoter: Promoter) {
@@ -124,7 +124,7 @@ export async function inserirPromoter(promoter: Promoter) {
                     }
                 }
             })
-            
+
             return promoterDATA
 
         } catch (e) {

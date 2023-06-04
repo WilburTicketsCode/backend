@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getAdministrador } from "../../../../../lib/administrador";
+import { usuarioNaoEncontrado } from "../../../../../lib/erros";
 
 export async function GET(
   request: Request,
@@ -10,7 +11,13 @@ export async function GET(
   }
 ) {
   const cpf = params.cpf;
-  const data = await getAdministrador(cpf);
+  try {
+    const data = await getAdministrador(cpf);
+    return NextResponse.json(data);
+  } catch (e) {
+    if (e instanceof usuarioNaoEncontrado) {
+      return NextResponse.json(JSON.stringify('ERROR 03'));
+    }
+  }
 
-  return NextResponse.json(data);
 }

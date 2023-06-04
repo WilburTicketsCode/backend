@@ -3,6 +3,7 @@ import {Button} from "../../../ClientSide";
 import CardProfile from "@/components/creditcard/CardProfile";
 import {useSession} from 'next-auth/react';
 import axios from 'axios';
+import { de } from "date-fns/locale";
 
 
 type Props = {
@@ -13,14 +14,21 @@ type Props = {
 export default function WithCard({ cType }: Props) {
 
     const {data: session} = useSession();
-    console.log(session?.user?.id);
+
+    function refreshPage() {
+        window.location.reload();
+      }
+
+    const deletar = () =>{
+        deleteCartao();
+        refreshPage();
+    }
     
     async function deleteCartao() {
         const jaison = {
             cpf: session?.user?.id,
         }
-        const res = await axios.post("/api/excluir", jaison)
-        console.log(res.data)
+        const res = await axios.post("/api/cartao/excluir", jaison)
         
       }
     
@@ -32,7 +40,7 @@ export default function WithCard({ cType }: Props) {
                 <CardProfile  cType={cType}/>
             </div>
             <div className="flex flex-col gap-6">
-                <Button onClick={deleteCartao} className="w-[17rem]  sm:w-[24rem]  md:w-[30rem] " color="red">Excluir Cartão</Button>
+                <Button onClick={deletar} className="w-[17rem]  sm:w-[24rem]  md:w-[30rem] " color="red">Excluir Cartão</Button>
             </div>
             
         </div>

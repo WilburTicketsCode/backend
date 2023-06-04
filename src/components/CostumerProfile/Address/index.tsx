@@ -1,11 +1,14 @@
 import { Button } from "../../ClientSide";
 import Link from "next/link";
+import {useState} from 'react';
 
 type Props = {
     cType: any
   }
 
 export default function Addrress( {cType}: Props) {
+
+    const [end,setEnd] = useState(cType);
 
     return (
         <div className="flex justify-center items-center md:min-h-[50rem] ">

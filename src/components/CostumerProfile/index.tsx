@@ -62,7 +62,11 @@ export default function CostumerP() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            
+            if (typeof cpf === 'undefined') {
+              // Se o cpf for undefined, aguarde 1 segundo e chame a função novamente
+              setTimeout(fetchData, 1000);
+              return;
+            }
             const response = await fetch(`/api/cliente/${cpf}`);
             const jsonData = await response.json();
             setData(jsonData);

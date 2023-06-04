@@ -132,6 +132,7 @@ async function main() {
       horaFim: new Date("2023-05-30 23:00"),
       descricao: "Depois de encerrar o ano de 2022 com participações marcantes em importantes festivais, Djavan volta aos palcos em 2023 com uma longa série de shows da turnê ‘D’!",
       banner: "nada",
+      status: 'disponivel',
       id_promoter: promoter1.id,
       id_endereco: endereco1.id
     }
@@ -235,6 +236,7 @@ async function main() {
       horaFim: new Date("2023-01-06 22:00"),
       descricao: "Uma festa que ira ver Tosta",
       banner: "nada",
+      status: 'suspenso',
       id_promoter: promoter3.id,
       id_endereco: endereco2.id
     }

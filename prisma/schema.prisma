@@ -104,6 +104,7 @@ model Evento {
   banner      String
   id_promoter Int
   id_endereco Int 
+  status String
   endereco    Endereco  @relation(fields: [id_endereco], references: [id])
   promoter    Promoter  @relation(fields: [id_promoter], references: [id])
   lotacao     Lotacao[]

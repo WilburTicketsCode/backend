@@ -1,26 +1,34 @@
 "use client"
 import React, { useState } from "react"
 import { edicaoClienteTipo } from "../../../../lib/cliente";
+import { edicaoEventoTipo } from "../../../../lib/evento";
+import { edicaoUsuarioTipo } from "../../../../lib/usuario";
 
 export default function testes() {
 
-  const exemploJsonAlterarSenha: edicaoClienteTipo = {
+  const exemploJsonAlterarSenha: edicaoUsuarioTipo = {
     tipo: 'trocar senha',
     novoDado: 'eunaoseitrocarsenha',
-    cpfDoUsuario: '66668230016'
+    emailDoUsuario: 'luanzito@gmaiil.com'
+  }
+
+  const exemploJsonEditarStatus: edicaoEventoTipo = {
+    tipo: 'trocar status',
+    novoDado: 'suspenso',
+    idDoEvento: 1
   }
 
   async function editarSenha(){
     const jaison = JSON.stringify({
       tipo: exemploJsonAlterarSenha.tipo,
       novoDado: exemploJsonAlterarSenha.novoDado,
-      cpfDoUsuario: exemploJsonAlterarSenha.cpfDoUsuario
+      emailDoUsuario: exemploJsonAlterarSenha.emailDoUsuario
     })
 
     console.log("Exemplo de como o JSON para edição de senha de um Cliente deve ser feito:\n" +
     jaison)
 
-    const res = await fetch("/api/cliente", {
+    const res = await fetch("/api/usuario", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -29,9 +37,37 @@ export default function testes() {
     })
 
     if (res.ok) {
-      const user = await res.json()
-      setJsonPraTela(JSON.stringify(user)) 
-      console.log(user)
+      const data = await res.json()
+      setJsonPraTela(JSON.stringify(data)) 
+      console.log(data)
+    } else {
+      setJsonPraTela("DEU BO")
+    }
+
+  }
+
+  async function editarStatusEvento(){
+    const jaison = JSON.stringify({
+      tipo: exemploJsonEditarStatus.tipo,
+      novoDado: exemploJsonEditarStatus.novoDado,
+      idDoEvento: exemploJsonEditarStatus.idDoEvento
+    })
+
+    console.log("Exemplo de como o JSON para edição staus de um Evento deve ser feito:\n" +
+    jaison)
+
+    const res = await fetch("/api/evento", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: jaison
+    })
+
+    if (res.ok) {
+      const data = await res.json()
+      setJsonPraTela(JSON.stringify(data)) 
+      console.log("AQUII:", res)
     } else {
       setJsonPraTela("DEU BO")
     }
@@ -47,6 +83,10 @@ export default function testes() {
         <div>
           <button onClick={editarSenha} className="bg-[#ffffff] text-black-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Alterar senha</button>
         </div>
+        <div>
+          <button onClick={editarStatusEvento} className="bg-[#ffffff] text-black-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Editar Status Evento</button>
+        </div>
+
 
       </div>
       <div className="bg-[#ffffff] flex flex-col lg:flex-row-reverse lg:gap-3 lg:justify-center lg:items-start items-center w-[98vw] min-h-[8rem] m-10">

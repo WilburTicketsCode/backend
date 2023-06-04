@@ -161,17 +161,5 @@ export async function inserirCliente(cliente: Cliente) {
 }
 
 export async function edicaoCliente(tipoDeEdicao: string, novoDadoAlterado: string, cpfCliente: string) {
-  if (tipoDeEdicao === 'trocar senha') {
-    try {
-      const user = await prisma.cliente.update({
-        where: { cpf: cpfCliente },
-        data: { usuario: { update: { senha: novoDadoAlterado } } },
-      });
-      console.log('Cliente atualizado:', user);
-      return user
-    } catch (error) {
-      console.error('Erro ao atualizar o usuário:', error);
-      return null
-    }
-  }
+  
 }

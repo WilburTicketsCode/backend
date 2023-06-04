@@ -51,7 +51,7 @@ const LoginAdm = () => {
             if (session.user.role === "cliente") {
               router.push("/");
             } else if (session.user.role === "promoter") {
-              router.push("/events/eventosPromoter");
+              router.push("/promoter/eventos");
             } else if (session.user.role === "administrador") {
               router.push("/administrador/eventos");
             }
@@ -77,7 +77,7 @@ const LoginAdm = () => {
                         name="email"
                         type="email"
                         autoComplete="email"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
                 </div>
@@ -101,7 +101,7 @@ const LoginAdm = () => {
                         name="password"
                         type="password"
                         autoComplete="current-password"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                     {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
                 </div>

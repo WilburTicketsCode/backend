@@ -4,31 +4,42 @@ import {
   CardBody,
   CardFooter,
   Typography,
-  Button
+  Button, 
 } from "../ClientSide";
+
+import Link from "next/link";
  
-export default function Example(props: any ) {
+
+type Props = {
+  imagem: string,
+  nome: string,
+  data: string,
+  local: string,
+  evento: number
+} 
+
+
+export default function CardEventoPromoter({imagem, nome, data, local, evento}: Props ) {
   return (
-    <Card className="flex flex-col mx-auto ">
-      <CardHeader floated={false} color="blue-gray" className="relative h-56">
-        <img  
-        src= {props.imagem} 
-        alt="thumbnail" 
-        className="w-full h-full "/>
+    <Card className="mt-0 w-[320px] h-[288px] shadow-black/40 col-span-12 md:col-span-6 xl:col-span-4"> 
+      <CardHeader floated={false} color="blue-gray" className="relative h-60 mx-0 mt-0">
+        <Link href={`/event-details/${evento}`}><img src={imagem} alt="img-blur-shadow" className="object-fill h-full w-full"/></Link>
       </CardHeader>
-      <CardBody>
-        <Typography >
-          {props.nome} - {props.data}
+      <CardBody className="p-5 pt-4 pb-2">
+        <Typography variant="h5" color="blue-gray" className="mb-1 truncate font-semibold text-base">
+          {nome} {/* nomeEvento */} 
         </Typography>
-        <Typography >
-          {props.local}
+        <Typography className="text-xs">
+            {data} {/* dataEvento */}
         </Typography>
-      </CardBody>
-      <CardFooter className="pt-0">
-        <Button className="bg-purple-800 h-[40px] w-[130px] mt-auto p-0">
+        <Typography className="text-xs">
+          {local}  {/* localEvento */} 
+        </Typography> 
+        <Button className="bg-roxo-wil font-sans h-[40px] w-[130px] mt-auto p-0">
           Editar 
         </Button>
-      </CardFooter>
+      </CardBody>
     </Card>
   );
 }
+

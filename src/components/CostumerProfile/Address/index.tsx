@@ -1,11 +1,14 @@
 import { Button } from "../../ClientSide";
 import Link from "next/link";
+import {useState} from 'react';
 
 type Props = {
     cType: any
   }
 
 export default function Addrress( {cType}: Props) {
+
+    const [end,setEnd] = useState(cType);
 
     return (
         <div className="flex justify-center items-center md:min-h-[50rem] ">
@@ -39,7 +42,7 @@ export default function Addrress( {cType}: Props) {
                     <div className="w-full bg-gray-200 p-2 rounded-xl">{cType?.endereco?.complemento}</div>
                 </div>
                 <div className="flex items-center justify-center w-[15rem] h-[10rem] sm:w-[20rem] lg:w-[30rem] ">
-                    <Link href='/profile/editaddress'><Button> Editar </Button></Link>
+                    <Link href='/editaddress'><Button> Editar </Button></Link>
                 </div>
             </div>
         </div>

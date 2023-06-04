@@ -232,3 +232,7 @@ html,body,:root{
   background-color: #fff;
   color: #000000;
 }
+
+.background-load{
+  background-color: rgba(0, 0, 0, 0.5);
+}

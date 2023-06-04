@@ -12,13 +12,13 @@ import {
             <Menu>
                 <MenuHandler>
                 <div className="flex justify-center mt-auto">
-                    <img src="/icons/menu.svg" />
+                    <img src="/icons/menu.svg" className="cursor-pointer"/>
                 </div>
                 </MenuHandler>
                 <MenuList>
                     <Link href={'/sighin'}><MenuItem>Entrar</MenuItem></Link>
-                    <Link href={'/auth/customer-registration'}><MenuItem>Cadastrar Cliente</MenuItem></Link>
-                    <Link href={'/auth/promoter-registration'}><MenuItem>Cadastrar Promoter</MenuItem></Link>
+                    <Link href={'/auth/customer-registration'}><MenuItem>Cadastre-se</MenuItem></Link>
+                    <Link href={'/auth/promoter-registration'}><MenuItem>Seja um Promoter</MenuItem></Link>
                 </MenuList>
             </Menu>
         </div>

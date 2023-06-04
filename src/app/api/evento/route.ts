@@ -30,6 +30,12 @@ export async function POST(request:Request) {
     }
 }
 
+/* STRING TIPOS DE ALTERAÇÃO DE DADOS */
+/* 'trocar status' - string usada para alterar o status do evento
+    ...
+    ...
+*/
+
 export async function PUT(request:Request) {
     const dados: edicaoEventoTipo = await request.json()
     if (dados !== null) {

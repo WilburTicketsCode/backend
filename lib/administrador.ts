@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "./prisma";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { cpfDuplicado, emailDuplicado } from "./erros";
+import { cpfDuplicado, emailDuplicado, usuarioNaoEncontrado } from "./erros";
 
 
 export type Administradores = Prisma.PromiseReturnType<typeof getAdministradores>;
@@ -56,18 +56,19 @@ export async function getAdministrador(cpf: string) {
     },
   });
 
-  if (data !== null) {
-    const { usuario, ...AdministradorSemSenha } = data;
-    const AdministradorSemSenhaCompleto = {
-      ...AdministradorSemSenha,
-      usuario: {
-        ...usuario,
-        senha: undefined // Exclui a propriedade "senha" do objeto interno "usuario"
-      }
-    }
+  if (data === null) throw new usuarioNaoEncontrado('Administrador com esse CPF não foi encontrado')
 
-    return AdministradorSemSenhaCompleto;
+  const { usuario, ...AdministradorSemSenha } = data;
+  const AdministradorSemSenhaCompleto = {
+    ...AdministradorSemSenha,
+    usuario: {
+      ...usuario,
+      senha: undefined // Exclui a propriedade "senha" do objeto interno "usuario"
+    }
   }
+
+  return AdministradorSemSenhaCompleto;
+
   return null
 }
 

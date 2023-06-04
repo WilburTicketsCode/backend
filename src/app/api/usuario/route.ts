@@ -1,16 +1,19 @@
 import { NextResponse } from "next/server"
 import { edicaoUsuario, edicaoUsuarioTipo } from "../../../../lib/usuario"
+import { usuarioNaoEncontrado } from "../../../../lib/erros"
 
 
-export async function PUT(request:Request) {
+export async function PUT(request: Request) {
     const dados: edicaoUsuarioTipo = await request.json()
     if (dados !== null) {
-        const clienteAlterado = await edicaoUsuario(dados.tipo, dados.novoDado, dados.emailDoUsuario)
-        if (clienteAlterado !== null){
-            return NextResponse.json(clienteAlterado)
-        } else {   
-            console.log("DEU UM ERRO")
-            return NextResponse.json({error: "ERROR 00"})
+        try {
+            const usuarioAlterado = await edicaoUsuario(dados.tipo, dados.novoDado, dados.emailDoUsuario)
+            return NextResponse.json(JSON.stringify(usuarioAlterado))
+
+        } catch (e) {
+            if (e instanceof usuarioNaoEncontrado) {
+                return NextResponse.json(JSON.stringify("ERROR 03"))
+            }
         }
     }
 

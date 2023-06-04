@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "./prisma";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { cpfDuplicado, emailDuplicado } from "./erros";
+import { cpfDuplicado, emailDuplicado, usuarioNaoEncontrado } from "./erros";
 
 export type Clientes = Prisma.PromiseReturnType<typeof getClientes>;
 export type Cliente = {
@@ -86,18 +86,18 @@ export async function getCliente(cpf: string) {
       }
     },
   });
-  if (data !== null) {
-    const { usuario, ...clienteSemSenha } = data;
-    const clienteSemSenhaCompleto = {
-      ...clienteSemSenha,
-      usuario: {
-        ...usuario,
-        senha: undefined // Exclui a propriedade "senha" do objeto interno "usuario"
-      }
+  if (data === null) throw new usuarioNaoEncontrado('Cliente com esse CPF não foi encontrado')
+
+  const { usuario, ...clienteSemSenha } = data;
+  const clienteSemSenhaCompleto = {
+    ...clienteSemSenha,
+    usuario: {
+      ...usuario,
+      senha: undefined // Exclui a propriedade "senha" do objeto interno "usuario"
     }
-    return clienteSemSenhaCompleto;
   }
-  return null
+  return clienteSemSenhaCompleto;
+
 }
 
 export async function inserirCliente(cliente: Cliente) {
@@ -161,5 +161,5 @@ export async function inserirCliente(cliente: Cliente) {
 }
 
 export async function edicaoCliente(tipoDeEdicao: string, novoDadoAlterado: string, cpfCliente: string) {
-  
+
 }

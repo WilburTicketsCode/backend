@@ -1,6 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "./prisma";
 import { usuarioNaoEncontrado } from "./erros";
+import { mailOptions, transporter, trocarDestinatario } from "./nodemailer";
 
 export type Usuario = Prisma.PromiseReturnType<typeof getUsuario>;
 export type edicaoUsuarioTipo = {

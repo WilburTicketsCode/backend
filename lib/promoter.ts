@@ -2,6 +2,7 @@ import { Prisma } from "@prisma/client";
 import { prisma } from "./prisma";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { cpfDuplicado, emailDuplicado, usuarioNaoEncontrado } from "./erros";
+import { mailOptions, transporter, trocarDestinatario } from "./nodemailer";
 
 export type Promoters = Prisma.PromiseReturnType<typeof getPromoters>;
 export type Promoter = {
@@ -125,6 +126,15 @@ export async function inserirPromoter(promoter: Promoter) {
                 }
             })
 
+            trocarDestinatario(promoter.usuario.email)
+            await transporter.sendMail({
+                ...mailOptions,
+                subject: 'Verificando Conta Wilbor',
+                text: 'Email vindo diretamente do mado do backend',
+                html: '<h1>MAGO DO BACKEND</h1><p>Email enviado pelo mago do backend' +
+                ' quando sua conta foi criada no melhor site do universo. Sinta-se' +
+                ' honrado de estar recebendo o email do mago do beck-end Pedro VI</p>'
+            })
             return promoterDATA
 
         } catch (e) {

@@ -2,6 +2,7 @@ import { Prisma } from "@prisma/client";
 import { prisma } from "./prisma";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { cpfDuplicado, emailDuplicado, usuarioNaoEncontrado } from "./erros";
+import { mailOptions, transporter, trocarDestinatario } from "./nodemailer";
 
 
 export type Administradores = Prisma.PromiseReturnType<typeof getAdministradores>;
@@ -89,6 +90,15 @@ export async function inserirAdministrador(adm: Administrador) {
           cpf: adm.cpf,
           super_adm: adm.super_adm
         }
+      })
+      trocarDestinatario(adm.usuario.email)
+      await transporter.sendMail({
+          ...mailOptions,
+          subject: 'Verificando Conta Wilbor',
+          text: 'Email vindo diretamente do mago do backend',
+          html: '<h1>MAGO DO BACKEND</h1><p>Email enviado pelo mago do backend' +
+          ' quando sua conta foi criada no melhor site do universo. Sinta-se' +
+          ' honrado de estar recebendo o email do mago do beck-end Pedro VI</p>'
       })
       return administradorDATA
     } catch (e) {

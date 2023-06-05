@@ -20,7 +20,7 @@ import {
 } from "../../../ClientSide";
 
 
-export function ProfileMenuPromoter() {
+export default function ProfileMenuPromoter() {
 
   const profileMenuItems = [
     {
@@ -184,4 +184,5 @@ export function ProfileMenuPromoter() {
         </Menu>
       );
 
-}
+} 
+

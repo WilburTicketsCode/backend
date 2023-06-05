@@ -24,7 +24,7 @@ const profileMenuItems = [
     {
         label: "Meu Perfil",
         icon: UserCircleIcon,
-        href: "/profile/promoter",
+        href: "#",
     },
 ];
 

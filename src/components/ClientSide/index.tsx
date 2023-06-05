@@ -23,7 +23,7 @@ import {
     TabsBody,
     Tab,
     TabPanel,
-    Checkbox
+    Checkbox, 
   
 } from "@material-tailwind/react"; 
 

@@ -91,3 +91,19 @@ export async function edicaoUsuario(tipoDeEdicao: string, novoDadoAlterado: stri
   
 }
 
+export async function alterarSenha(senhaAntiga: string, novaSenha: string, emailUsuario: string) {
+  try {
+    await verificarEmailESenha(emailUsuario, senhaAntiga)
+    const user = await prisma.usuario.update({
+      where: { email: emailUsuario },
+      data: { senha: novaSenha },
+    });
+    console.log('Usuario atualizado:', user);
+    return user
+  } catch (e) {
+    if (e instanceof usuarioNaoEncontrado){
+      throw e
+    }
+  }
+  
+}

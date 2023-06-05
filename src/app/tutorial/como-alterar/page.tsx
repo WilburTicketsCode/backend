@@ -2,14 +2,14 @@
 import React, { useState } from "react"
 import { edicaoClienteTipo } from "../../../../lib/cliente";
 import { edicaoEventoTipo } from "../../../../lib/evento";
-import { edicaoUsuarioTipo } from "../../../../lib/usuario";
+import { alterarSenhaType, edicaoUsuarioTipo } from "../../../../lib/usuario";
 
 export default function testes() {
 
-  const exemploJsonAlterarSenha: edicaoUsuarioTipo = {
-    tipo: 'trocar senha',
-    novoDado: 'eunaoseitrocarsenha',
-    emailDoUsuario: 'luanzito@gmaiil.com'
+  const exemploJsonAlterarSenha: alterarSenhaType = {
+    email: 'luanzito@gmaiil.com',
+    senhaAntiga: 'eunaoseitrocarsenha',
+    senhaNova: '12345',
   }
 
   const exemploJsonEditarStatus: edicaoEventoTipo = {
@@ -20,15 +20,15 @@ export default function testes() {
 
   async function editarSenha(){
     const jaison = JSON.stringify({
-      tipo: exemploJsonAlterarSenha.tipo,
-      novoDado: exemploJsonAlterarSenha.novoDado,
-      emailDoUsuario: exemploJsonAlterarSenha.emailDoUsuario
+      email: exemploJsonAlterarSenha.email,
+      senhaAntiga: exemploJsonAlterarSenha.senhaAntiga,
+      senhaNova: exemploJsonAlterarSenha.senhaNova
     })
 
     console.log("Exemplo de como o JSON para edição de senha de um Cliente deve ser feito:\n" +
     jaison)
 
-    const res = await fetch("/api/usuario", {
+    const res = await fetch("/api/usuario/alterar-senha", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

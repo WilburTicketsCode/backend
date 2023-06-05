@@ -8,6 +8,11 @@ export type edicaoUsuarioTipo = {
   novoDado: string,
   emailDoUsuario: string
 }
+export type alterarSenhaType = {
+  email: string,
+  senhaAntiga: string,
+  senhaNova: string,
+}
 
 export async function verificarEmailESenha(email: string, senha: string) {
   const user = await prisma.usuario.findUnique({
@@ -83,16 +88,21 @@ export async function getUsuario(email: string) {
 }
 
 export async function edicaoUsuario(tipoDeEdicao: string, novoDadoAlterado: string, emailUsuario: string) {
-  if (tipoDeEdicao === 'trocar senha') {
-    try {
-      const user = await prisma.usuario.update({
-        where: { email: emailUsuario },
-        data: { senha: novoDadoAlterado },
-      });
-      console.log('Usuario atualizado:', user);
-      return user
-    } catch (error) {
-      throw new usuarioNaoEncontrado('Erro ao atualizar o usuário.')
+  
+}
+
+export async function alterarSenha(senhaAntiga: string, novaSenha: string, emailUsuario: string) {
+  try {
+    await verificarEmailESenha(emailUsuario, senhaAntiga)
+    const user = await prisma.usuario.update({
+      where: { email: emailUsuario },
+      data: { senha: novaSenha },
+    });
+    console.log('Usuario atualizado:', user);
+    return user
+  } catch (e) {
+    if (e instanceof usuarioNaoEncontrado){
+      throw e
     }
   }
 }

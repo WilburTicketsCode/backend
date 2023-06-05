@@ -87,10 +87,7 @@ export default async function Event({params}: {params: { id: number }}) {
                                 qtdIngressos={lot.quantidade}
                             />
                         ))}
-
-                        <Button type="submit" className="bg-roxo-wil m-auto flex gap-3 rounded-full p-2">
-                            Adicionar ao carrinho
-                        </Button> 
+                        
                     </div>
 
                 </div>

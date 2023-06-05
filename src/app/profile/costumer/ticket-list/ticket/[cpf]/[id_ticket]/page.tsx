@@ -28,7 +28,7 @@ function searchLotacao(eventos: any, lotacaoId: number) {
   }
 
 async function loadEvent() {
-  const res = await fetch(`/api/evento`, { 
+  const res = await fetch(`https://backend-wilbortick.vercel.app/api/evento`, { 
           next: {
               revalidate: 3600 // Atualiza o cache a cada 1h
           } 
@@ -38,7 +38,7 @@ async function loadEvent() {
 }
 
 async function loadCustomer(cpf: String) {
-  const res = await fetch(`/api/cliente/${cpf}`, { 
+  const res = await fetch(`https://backend-wilbortick.vercel.app/api/cliente/${cpf}`, { 
           next: {
               revalidate: 0 // Atualiza o cache a cada 1h
           } 
@@ -48,7 +48,7 @@ async function loadCustomer(cpf: String) {
 }
 
 async function loadPromoter(cpf: String) {
-  const res = await fetch(`/api/promoter/${cpf}`, { 
+  const res = await fetch(`https://backend-wilbortick.vercel.app/api/promoter/${cpf}`, { 
           next: {
               revalidate: 3600 // Atualiza o cache a cada 1h
           } 
@@ -58,9 +58,9 @@ async function loadPromoter(cpf: String) {
 }
 
 
-export default async function Dash() {
-  const id_ingresso = 1;
-  const customer = await loadCustomer("66668230016");
+export default async function Dash({params}: {params: { cpf: string, id_ticket: string}}) {
+  const id_ingresso = Number(params.id_ticket);
+  const customer = await loadCustomer(params.cpf);
   const ticket = searchTicket(customer.compras, id_ingresso);
   const events = await loadEvent();
   const evento = searchLotacao(events, ticket.id_lotacao);
@@ -92,21 +92,22 @@ export default async function Dash() {
   
   
   const data = {
+    nome_evento: evento[0].nome,
     local: evento[0].endereco,
     data: evento[0].horaInicio,
     promoter: promoter.usuario.nome,
     id_ingresso: id_ingresso,
     perfil: perfil,
     setor: setor,
-    nome: customer.usuario.nome,
+    nome_cliente: customer.usuario.nome,
     cpf: customer.cpf
   }
 
-  console.log(data)
+  console.log(data.local)
 
   return(
     <div className="w-full h-full pt-32 flex justify-center">
-      <Ticket />
+      <Ticket data={data}/>
     </div>
   )
 }

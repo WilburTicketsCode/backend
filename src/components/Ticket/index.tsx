@@ -1,6 +1,7 @@
 "use client"
 
 import { Cliente } from "@prisma/client";
+import moment from "moment";
 import { useState } from "react";
 
 /*
@@ -23,20 +24,20 @@ function searchTicket(compras: any, ticketId: number) {
 
 
 
-export default function Ticket() {
+export default function Ticket(ticket:any) {
   //const ingresso = cliente.compras;
   //console.log(data.cliente)
   //console.log(searchTicket(data.cliente.compras, 8))
   const [ticketInfo, setTicketInfo] = useState({
-    event: "Djavan Turnê D 2023",
-    date: "02/04/2023",
-    local: "CLASSIC HALL",
-    promoter: "Paris Cultural",
-    code: "2352-1788284",
-    profile: "Entrada Inteira",
-    sector: "Camarote",
-    name: "Davi Marcelo Gabriel Brito",
-    cpf: "404.311.201-70",
+    event: ticket.data.nome_evento,
+    date: moment(ticket.data.data).format("DD/MM/YYYY"),
+    local: ticket.data.local.rua,
+    promoter: ticket.data.promoter,
+    code: ticket.data.id_ingresso,
+    profile: ticket.data.perfil,
+    sector: ticket.data.setor,
+    name: ticket.data.nome_cliente,
+    cpf: ticket.data.cpf,
   });
 
   return (

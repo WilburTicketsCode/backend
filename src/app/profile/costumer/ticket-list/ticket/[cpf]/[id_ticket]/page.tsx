@@ -28,7 +28,7 @@ function searchLotacao(eventos: any, lotacaoId: number) {
   }
 
 async function loadEvent() {
-  const res = await fetch(`/api/evento`, { 
+  const res = await fetch(`https://backend-wilbortick.vercel.app/api/evento`, { 
           next: {
               revalidate: 3600 // Atualiza o cache a cada 1h
           } 
@@ -38,7 +38,7 @@ async function loadEvent() {
 }
 
 async function loadCustomer(cpf: String) {
-  const res = await fetch(`/api/cliente/${cpf}`, { 
+  const res = await fetch(`https://backend-wilbortick.vercel.app/api/cliente/${cpf}`, { 
           next: {
               revalidate: 3600 // Atualiza o cache a cada 1h
           } 
@@ -48,7 +48,7 @@ async function loadCustomer(cpf: String) {
 }
 
 async function loadPromoter(cpf: String) {
-  const res = await fetch(`/api/promoter/${cpf}`, { 
+  const res = await fetch(`https://backend-wilbortick.vercel.app/api/promoter/${cpf}`, { 
           next: {
               revalidate: 3600 // Atualiza o cache a cada 1h
           } 

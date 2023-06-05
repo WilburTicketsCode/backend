@@ -1,5 +1,6 @@
 'use client'
 import { useState } from "react";
+import { Button } from "../ClientSide";
 
 interface Itickets {
     idLotacao: number,
@@ -51,9 +52,9 @@ export default function Tickets(props: any) {
                 <h4 className="text-deep-purple-400 font-bold">{props.perfil}</h4>
                 <h4 className="font-bold">{props.valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</h4>
                 <div className="justify-evenly flex">
-                    <button className="border-2 border-roxo-wil rounded-lg px-1 font-bold" onClick={handleDec}> - </button> 
-                    <p>{qtd}</p>
-                    <button className="border-2 border-roxo-wil rounded-lg px-1 font-bold" onClick={handleInc}> + </button>
+                 <Button type="submit" className="bg-roxo-wil m-auto flex gap-3 rounded-full p-2">
+                    Add carrinho
+                </Button> 
                 </div>
             </div>
         </div>

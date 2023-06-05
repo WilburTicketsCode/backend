@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import ProfileMenuPromoter from "../ProfileMenuPromoter"; 
+import {ProfileMenuPromoter} from "../ProfileMenuPromoter"; 
 import Logo from "../../Logo"; 
 import NavListPromoter from "../NavListPromoter";
 

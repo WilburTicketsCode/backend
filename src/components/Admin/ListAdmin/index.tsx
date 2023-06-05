@@ -22,7 +22,7 @@ export default function TelaListAdm(props: ListProps) {
     const [admins, setAdmins] = useState<Adm[]>([]);
  
     const fetchAdmins = async () => {
-        const reponse = await fetch("http://localhost:3000/api/administrador");
+        const reponse = await fetch("/api/administrador");
         const  data = await reponse.json();
         setAdmins(data);
     }

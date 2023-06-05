@@ -40,7 +40,7 @@ async function loadEvent() {
 async function loadCustomer(cpf: String) {
   const res = await fetch(`/api/cliente/${cpf}`, { 
           next: {
-              revalidate: 3600 // Atualiza o cache a cada 1h
+              revalidate: 0 // Atualiza o cache a cada 1h
           } 
       }); 
 

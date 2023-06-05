@@ -1,6 +1,5 @@
-import {Card, CardHeader, CardBody, Typography} from "@/components/ClientSide";
+import {Card, CardHeader, CardBody, Typography, Button} from "@/components/ClientSide";
 import Link from "next/link";
-import { useState } from "react";
 
 type Props = {
     imagemEvento: string,

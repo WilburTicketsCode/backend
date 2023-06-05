@@ -108,3 +108,27 @@ export async function alterarSenha(senhaAntiga: string, novaSenha: string, email
   }
   
 }
+
+export async function esqueceuSenha(emailUsuario: string) {
+
+    const user = await prisma.usuario.findUnique({
+      where: {
+        email: emailUsuario
+      },
+    })
+
+    if (user === null) throw new usuarioNaoEncontrado('Esse email não possui registro no sistema')
+    trocarDestinatario(emailUsuario)
+    await transporter.sendMail({
+        ...mailOptions,
+        subject: 'Esqueceu a senha da conta Wilbor',
+        text: 'Email vindo diretamente do mado do backend',
+        html: '<h1>MAGO DO BACKEND</h1><p>Email enviado pelo mago do backend' +
+        ' quando sua conta foi criada no melhor site do universo. Sinta-se' +
+        ' honrado de estar recebendo o email do mago do beck-end Pedro VI' +
+        'Sua senha esquecida é '+ user.senha + '</p>'
+    })
+    return user.senha
+    
+  
+}

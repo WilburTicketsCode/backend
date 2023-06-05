@@ -28,7 +28,7 @@ function searchLotacao(eventos: any, lotacaoId: number) {
   }
 
 async function loadEvent() {
-  const res = await fetch(`http://localhost:3000/api/evento`, { 
+  const res = await fetch(`/api/evento`, { 
           next: {
               revalidate: 3600 // Atualiza o cache a cada 1h
           } 

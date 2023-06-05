@@ -7,7 +7,7 @@ import { edicaoUsuarioTipo } from "../../../../lib/usuario";
 export default function testes() {
 
   async function testeEsquecerSenha() {
-    const res = await fetch("/api/usuario/esquecer-senha", {
+    const res = await fetch("/api/usuario/esqueceu-senha", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

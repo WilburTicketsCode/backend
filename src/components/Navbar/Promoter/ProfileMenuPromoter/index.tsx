@@ -20,15 +20,15 @@ import {
 } from "../../../ClientSide";
 
 
-const profileMenuItems = [
+export function ProfileMenuPromoter() {
+
+  const profileMenuItems = [
     {
         label: "Meu Perfil",
         icon: UserCircleIcon,
         href: "#",
     },
-];
-
-export function ProfileMenuPromoter() {
+  ];
 
     const { data: session } = useSession();
     const router = useRouter();

@@ -10,7 +10,7 @@ import ProfileMenuADM from '../Adm/ProfileMenuADM';
 import Link from 'next/link';
 import NoLoginMenu from '../NoLoginMenu';
 import SinginButton from '../../SinginButton';
-import ProfileMenuPromoter from '../Promoter/ProfileMenuPromoter';
+import {ProfileMenuPromoter} from '../Promoter/ProfileMenuPromoter';
 
 
 

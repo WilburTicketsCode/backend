@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { edicaoEvento, getEvento } from "../../../../../lib/evento";
+import { useState } from "react"
 
 const EditarStatusEv = {
     tipo: 'trocar status',
@@ -8,15 +7,31 @@ const EditarStatusEv = {
   }
 
 
-export async function editarStatusEvento(EventoID: any){
+export default function editarStatusEvento(evento: number){
 
-    const troca: any = getEvento(EventoID)
-    if (troca.status === 'suspenso'){
-        edicaoEvento('trocar status', 'ativo', EventoID)
-    }else if (troca.status === 'ativo'){
-        edicaoEvento('trocar status', 'suspenso', EventoID)
+    async function calledSuspension(){
+        const jaison = JSON.stringify({
+        tipo: EditarStatusEv.tipo,
+        novoDado: EditarStatusEv.novoDado,
+        idDoEvento: evento
+        })
+
+        const res = await fetch("/api/evento", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: jaison
+        })
+        const [jsonPraTela, setJsonPraTela] = useState('LOCAL ONDE O JSON CRIADO SERA EXIBIDO PARA SERVIR DE EXEMPLO')
+        if (res.ok) {
+            const data = await res.json()
+            setJsonPraTela(JSON.stringify(data)) 
+            console.log("AQUII:", res)
+        } else {
+            setJsonPraTela("DEU BO")
+        }
+        }
     }
 
-    }
-    
     

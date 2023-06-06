@@ -40,10 +40,10 @@ export default function TotalCart(){
             <div className="flex items-center justify-center m-auto bg-[#D9D9D9] h-[50px] w-[270px]">
                 <div className="text-center text-[30px]">
                     {
-                    cartItems?.reduce((total, cartItem) => {
+                    (cartItems?.reduce((total, cartItem) => {
                     const item = searchLotacao(eventos, cartItem.id)[1]
                     return total + (item?.valorTotal || 0) * cartItem.quantidade
-                    }, 0) || "R$0,00"}
+                    }, 0) || "R$0,00").toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}
                 
                 </div>
             </div>

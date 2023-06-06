@@ -29,19 +29,24 @@ export default function ListTickets(){
           fetchEvents();
       }, []);
     
-    const [events, setEvents] = useState<Evento[]>([]);
+    const [events, setEvents] = useState<Eventos>([]);
     const { cartItems } = useShoppingCart()
 
     let cartEventos: Eventos = []
-    cartEventos = cartItems?.map((item) =>(
-        cartEventos.includes(searchLotacao(events, item.id)[0]) === false? searchLotacao(events, item.id)[0]: {}
-    ))
-    console.log(cartItems)
+    cartEventos = cartItems?.reduce((resultado:Eventos, item) =>{
+              const evento = searchLotacao(events, item.id)[0];
+              if (!resultado?.includes(evento)) {
+                resultado?.push(evento);
+              }
+                return resultado;
+        }, [])
+        
     return(
         <div className="bg-[#FFF9F9] w-[350px] min-h-[615px] mt-3 rounded-xl flex flex-col items-center">
             <h1 className="text-center text-[30px]">Carrinho de Compras</h1>
+            {cartEventos.length == 0?"Carrinho está vazio":""}
             {cartEventos?.map((evento)=>(
-                <CartTickets event={evento} lotacoes={evento?.lotacao}></CartTickets>
+                <CartTickets key={evento?.id} event={evento} banner={events.find((ev)=>ev.id === evento?.id)?.banner} lotacoes={evento?.lotacao}></CartTickets>
             ))||"Carrinho está vazio"}
         </div>
     )

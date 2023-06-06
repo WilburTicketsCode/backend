@@ -1,5 +1,5 @@
 'use client'
-import { useState} from "react";
+import { useState, useEffect} from "react";
 import { useShoppingCart } from "@/contexts/ShoppingCartContext"
 
 interface Itickets {
@@ -12,8 +12,12 @@ let tickets : Itickets[] = [];
 export default function Tickets(props: any) {
     const {getItemQuantity,
         increaseCartQuantity,
-        decreaseCartQuantity} = useShoppingCart();
+        decreaseCartQuantity,
+        rescFromCart} = useShoppingCart();
     
+    useEffect(() => {
+            rescFromCart();
+        }, []);
     let quantidade = getItemQuantity(props.idLotacao);
 
     const [qtd, setQtd] = useState(0);

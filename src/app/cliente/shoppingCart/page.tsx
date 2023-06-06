@@ -1,9 +1,11 @@
 import TotalCart from "@/components/ShoppingCart/TotalCart"
 import ListTickets from "@/components/ShoppingCart/ListTickets"
-import { ShoppingCartProvider } from "@/contexts/ShoppingCartContext"
+import { ShoppingCartProvider} from "@/contexts/ShoppingCartContext"
+import RestartButton from "@/components/ShoppingCart/CartTickets/RestartButton"
 
 
 export default function Cart() {
+    
     return (
         <ShoppingCartProvider>
         <div className="pt-[110px] pb-5 bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200">
@@ -17,7 +19,8 @@ export default function Cart() {
                     <div>
                         <ListTickets></ListTickets>
                     </div>
-
+                
+                    <RestartButton/>
                 </div>
             </div>
         </div>

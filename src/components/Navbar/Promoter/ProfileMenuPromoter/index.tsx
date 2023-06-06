@@ -26,7 +26,7 @@ export default function ProfileMenuPromoter() {
     {
         label: "Meu Perfil",
         icon: UserCircleIcon,
-        href: "#",
+        href: "/profile/promoter",
     },
   ];
 

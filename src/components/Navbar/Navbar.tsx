@@ -22,20 +22,14 @@ type Props = {
     navbarType: string
 }
 
-function currentUser(){
-    const path = usePathname();
-    const user = path.split("/", 2);
-    return user[1];
-}
 const Navbar = ({ navbarType }: Props) => {
     const { data: session } = useSession();
-    const userAtual = currentUser();
     /*Pfv usar UseEffect ou outra coisa pois o codigo abaixo foi escrito por Pedro, ou seja, está errado. */
     if (session && session.user) {
         if (session.user.role === 'cliente') {
 
             return (
-                <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
+                <div className='w-full top-0 fixed bg-white z-50 shadow-sm rounded-b-lg'>
                     <div className='p-1 border-b-[2px] rounded-b-lg'>
                         <div className="2xl:px-[3rem] flex flex-row items-center justify-between gap-0 md:gap-1">
                             <Link href={'/'} className='flex items-center justify-center'><Logo /></Link>
@@ -60,9 +54,9 @@ const Navbar = ({ navbarType }: Props) => {
                     </div>
                 </div>
             )
-        } else if (userAtual === 'promoter') {
+        } else if (session.user.role === 'promoter') {
             return (
-                <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
+                <div className='w-full top-0 fixed bg-white z-50 shadow-sm rounded-b-lg'>
                     <div className='p-1 border-b-[2px] rounded-b-lg'>
                         <div className="2xl:px-[3rem]  flex flex-row items-center justify-between gap-0.5 md:gap-1">
                             <Link href={'/promoter/eventos'} className='flex items-center justify-center'><Logo /></Link>
@@ -79,7 +73,7 @@ const Navbar = ({ navbarType }: Props) => {
                     </div>
                 </div>
             )
-        } else if (userAtual === 'administrador') {
+        } else if (session.user.role === 'administrador') {
             return (
                 <div className='w-full top-0 fixed bg-white z-50 shadow-sm rounded-b-lg'>
                     <div className='p-1 border-b-[2px] rounded-b-lg'>
@@ -107,7 +101,7 @@ const Navbar = ({ navbarType }: Props) => {
     }
     return (
 
-        <div className='w-full fixed bg-white z-50 shadow-sm rounded-b-lg'>
+        <div className='w-full top-0 fixed bg-white z-50 shadow-sm rounded-b-lg'>
             <div className='p-1 border-b-[2px] rounded-b-lg'>
                 <div className=" flex flex-row items-center justify-between gap-3 md:gap-1">
                     <Link href={'/'}><Logo /></Link>

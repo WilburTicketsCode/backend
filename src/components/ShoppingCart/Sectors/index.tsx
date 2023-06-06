@@ -1,6 +1,9 @@
 import SectorProf from "./sectorProf"
+import { useShoppingCart } from "@/contexts/ShoppingCartContext"
 
 export default function Sector(props: any){
+    const { cartItems } = useShoppingCart()
+
     return(
         <div className="grid grid-cols-4 h-[90px] m-2">
 
@@ -9,9 +12,9 @@ export default function Sector(props: any){
             </div>
 
             <div className="col-span-3">
-                <SectorProf nomePerfil="Inteira" quantidade="1" preco="600,00"></SectorProf>
-                <SectorProf nomePerfil="Meia" quantidade="1" preco="300,00"></SectorProf>
-                <SectorProf nomePerfil="Gratuita" quantidade="1" preco="0,00"></SectorProf>
+                {cartItems?.map(item =>(
+                    item.id !== undefined?<SectorProf key={item.id} {...item}></SectorProf>:null
+                ))}
             </div>
 
         </div>

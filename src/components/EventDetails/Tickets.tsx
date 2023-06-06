@@ -1,6 +1,6 @@
 'use client'
-import { useState } from "react";
-import { Button } from "../ClientSide";
+import { useState} from "react";
+import { useShoppingCart } from "@/contexts/ShoppingCartContext"
 
 interface Itickets {
     idLotacao: number,
@@ -10,6 +10,12 @@ interface Itickets {
 let tickets : Itickets[] = [];
 
 export default function Tickets(props: any) {
+    const {getItemQuantity,
+        increaseCartQuantity,
+        decreaseCartQuantity} = useShoppingCart();
+    
+    let quantidade = getItemQuantity(props.idLotacao);
+
     const [qtd, setQtd] = useState(0);
 
     const handleDec = () => {
@@ -50,11 +56,11 @@ export default function Tickets(props: any) {
             <div className="grid gap-8 lg:grid-cols-4 md:grid-cols-4 sm:grid text-sm text-center">
                 <h4 className="font-bold">{props.setor}</h4>
                 <h4 className="text-deep-purple-400 font-bold">{props.perfil}</h4>
-                <h4 className="font-bold">{props.valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</h4>
+                <h4 className="font-bold">{props.valor?.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</h4>
                 <div className="justify-evenly flex">
-                 <Button type="submit" className="bg-roxo-wil m-auto flex gap-3 rounded-full p-2">
-                    Add carrinho
-                </Button> 
+                    <button className="border-2 border-roxo-wil rounded-lg px-1 font-bold" onClick={() => decreaseCartQuantity(props.idLotacao)}> - </button> 
+                    <p>{quantidade}</p>
+                    <button className="border-2 border-roxo-wil rounded-lg px-1 font-bold" onClick={() => increaseCartQuantity(props.idLotacao)}> + </button>
                 </div>
             </div>
         </div>

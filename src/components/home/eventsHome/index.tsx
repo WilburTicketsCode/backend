@@ -37,11 +37,12 @@ function dataDaHora(hora: string){
   const horaddmm = horammdd.slice(8, 10) + "/" + horammdd.slice(5, 7) + "/" + horammdd.slice(0, 4);
   return horaddmm;
 }
+
 export default function EventsHome() {
     const [eventos, setEventos] = useState<Evento[]>([]);
     
     const fetchEvents = async () => {
-        const reponse = await fetch("http://localhost:3000/api/evento");
+        const reponse = await fetch(`/api/evento`);
         const  data = await reponse.json();
         setEventos(data);
     }

@@ -36,7 +36,7 @@ export default function Carrossel(props: any){
     const [eventosCarrossel, setEventosCarrossel] = useState<Evento[]>([]);
   
     const fetchEvents = async () => {
-        const reponse = await fetch("http://localhost:3000/api/evento");
+        const reponse = await fetch(`/api/evento`);
         const  data = await reponse.json();
         setEventosCarrossel(data);
     }

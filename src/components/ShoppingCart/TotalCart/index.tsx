@@ -23,7 +23,7 @@ export default function TotalCart(){
         return []}
 
     const fetchEvents = async () => {
-        const reponse = await fetch("http://localhost:3000/api/evento");
+        const reponse = await fetch(`/api/evento`);
         const  data = await reponse.json();
         setEventos(data);
     }

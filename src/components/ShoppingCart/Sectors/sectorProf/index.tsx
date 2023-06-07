@@ -23,7 +23,7 @@ export default function SectorProf(props:any){
         decreaseCartQuantityDef} = useShoppingCart()
 
     const fetchEvents = async () => {
-        const reponse = await fetch("http://localhost:3000/api/evento");
+        const reponse = await fetch(`/api/evento`);
         const  data = await reponse.json();
         setEvents(data);
     }

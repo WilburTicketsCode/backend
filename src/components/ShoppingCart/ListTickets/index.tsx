@@ -20,7 +20,7 @@ function searchLotacao(eventos: any, lotacaoId: number) {
       
 export default function ListTickets(){
     const fetchEvents = async () => {
-        const reponse = await fetch("http://localhost:3000/api/evento");
+        const reponse = await fetch(`/api/evento`);
         const  data = await reponse.json();
         setEvents(data);
       }
@@ -45,8 +45,8 @@ export default function ListTickets(){
         <div className="bg-[#FFF9F9] w-[350px] min-h-[615px] mt-3 rounded-xl flex flex-col items-center">
             <h1 className="text-center text-[30px]">Carrinho de Compras</h1>
             {cartEventos.length == 0?"Carrinho está vazio":""}
-            {cartEventos?.map((evento)=>(
-                <CartTickets key={evento?.id} event={evento} banner={events.find((ev)=>ev.id === evento?.id)?.banner} lotacoes={evento?.lotacao}></CartTickets>
+            {cartEventos?.map((evento, index)=>(
+                <CartTickets key={index} event={evento} banner={events.find((ev)=>ev.id === evento?.id)?.banner} lotacoes={evento?.lotacao}></CartTickets>
             ))||"Carrinho está vazio"}
         </div>
     )

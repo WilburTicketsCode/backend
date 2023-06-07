@@ -19,8 +19,6 @@ export default function Cart() {
                     <div>
                         <ListTickets></ListTickets>
                     </div>
-                
-                    <RestartButton/>
                 </div>
             </div>
         </div>

@@ -94,13 +94,13 @@ export default function AcessForm() {
 
     const promoter = {
       nome: infoCompanyForm.name,
-      cpf: infoCompanyForm.CPF,
-      cpnj: infoCompanyForm.CNPJ,
+      cpf: infoCompanyForm.CPF.replace(/[.-]/gi,""),
+      cpnj: infoCompanyForm.CNPJ.replace(/[.-/]/gi,""),
       email: data.email,
       password: data.password,
       status: 'pendente',
       data_nasc: new Date("1999-05-30"),
-      telefone: infoCompanyForm.phone,
+      telefone: infoCompanyForm.phone.replace(/[()-\s)]/gi,""),
       rua: infoAdressForm.street,
       numero: Number(infoAdressForm.number),
       bairro: infoAdressForm.district,

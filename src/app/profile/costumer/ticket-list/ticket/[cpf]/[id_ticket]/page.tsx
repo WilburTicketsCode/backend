@@ -5,6 +5,7 @@ function searchTicket(compras: any, ticketId: number) {
     const compra = compras[i];
     for (let j = 0; j < compra.ingressos.length; i++) {
       const ticket = compra.ingressos[i];
+      console.log(ticket)
       if (ticket.id === ticketId) {
         return ticket
       }
@@ -102,9 +103,7 @@ export default async function Dash({params}: {params: { cpf: string, id_ticket: 
     nome_cliente: customer.usuario.nome,
     cpf: customer.cpf
   }
-
-  console.log(data.local)
-
+  
   return(
     <div className="w-full h-full pt-32 flex justify-center">
       <Ticket data={data}/>

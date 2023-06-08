@@ -3,31 +3,15 @@
 import { Cliente } from "@prisma/client";
 import moment from "moment";
 import { useState } from "react";
-
-/*
-function searchTicket(compras: any, ticketId: number) {
-  for (let i = 0; i < compras.length; i++) {
-    const compra = compras[i];
-    for (let j = 0; j < compra.ingressos.length; i++) {
-      const ticket = compra.ingressos[i];
-      if (ticket.id === ticketId) {
-        return ticket
-      }
-    }
-  }
-  return null
-  }
-
-  export default function Ticket(data: any) {
-*/
-
+import { usePathname} from 'next/navigation'
+import QRCode from "qrcode.react";
 
 
 
 export default function Ticket(ticket:any) {
-  //const ingresso = cliente.compras;
-  //console.log(data.cliente)
-  //console.log(searchTicket(data.cliente.compras, 8))
+  const path = usePathname()
+  const site = "https://backend-wilbortick.vercel.app"
+
   const [ticketInfo, setTicketInfo] = useState({
     event: ticket.data.nome_evento,
     date: moment(ticket.data.data).format("DD/MM/YYYY"),
@@ -104,12 +88,12 @@ export default function Ticket(ticket:any) {
               </div>
             </div>
             <div className="flex flex-col rounded-lg p-4 items-center bg-[#404c76]">
-              <h1 className="text-2xl font-semibold text-gray-200">
+              <h1 className="text-2xl font-semibold text-gray-200 pb-2">
                 QR CODE
               </h1>
-              <img className="h-64"
-                src="/img/qr-code/QR Code.svg" >
-              </img>
+              <QRCode
+              size={200}
+              value={site+path}/>
             </div>
           </div>
           

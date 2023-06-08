@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import { edicaoClienteTipo } from "../../../../lib/cliente";
 import { edicaoEventoTipo } from "../../../../lib/evento";
 import { alterarSenhaType, edicaoUsuarioTipo } from "../../../../lib/usuario";
+import { edicaoPromoterTipo } from "../../../../lib/promoter";
 
 export default function testes() {
 
@@ -12,7 +13,13 @@ export default function testes() {
     senhaNova: '12345',
   }
 
-  const exemploJsonEditarStatus: edicaoEventoTipo = {
+  const exemploJsonAlterarStatusPromoter: edicaoPromoterTipo = {
+    tipo: 'trocar status',
+    novoDado: 'aprovado',
+    cpfORcnpj: '28419554006'
+  }
+
+  const exemploJsonEditarStatusEvento: edicaoEventoTipo = {
     tipo: 'trocar status',
     novoDado: 'suspenso',
     idDoEvento: 1
@@ -48,15 +55,43 @@ export default function testes() {
 
   async function editarStatusEvento(){
     const jaison = JSON.stringify({
-      tipo: exemploJsonEditarStatus.tipo,
-      novoDado: exemploJsonEditarStatus.novoDado,
-      idDoEvento: exemploJsonEditarStatus.idDoEvento
+      tipo: exemploJsonEditarStatusEvento.tipo,
+      novoDado: exemploJsonEditarStatusEvento.novoDado,
+      idDoEvento: exemploJsonEditarStatusEvento.idDoEvento
     })
 
     console.log("Exemplo de como o JSON para edição staus de um Evento deve ser feito:\n" +
     jaison)
 
     const res = await fetch("/api/evento", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: jaison
+    })
+
+    if (res.ok) {
+      const data = await res.json()
+      setJsonPraTela(JSON.stringify(data)) 
+      console.log("AQUII:", res)
+    } else {
+      setJsonPraTela("DEU BO")
+    }
+
+  }
+
+  async function editarStatusPromoter(){
+    const jaison = JSON.stringify({
+      tipo: exemploJsonAlterarStatusPromoter.tipo,
+      novoDado: exemploJsonAlterarStatusPromoter.novoDado,
+      cpfORcnpj: exemploJsonAlterarStatusPromoter.cpfORcnpj
+    })
+
+    console.log("Exemplo de como o JSON para edição staus de um PROMOTER deve ser feito:\n" +
+    jaison)
+
+    const res = await fetch("/api/promoter", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -85,6 +120,9 @@ export default function testes() {
         </div>
         <div>
           <button onClick={editarStatusEvento} className="bg-[#ffffff] text-black-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Editar Status Evento</button>
+        </div>
+        <div>
+          <button onClick={editarStatusPromoter} className="bg-[#ffffff] text-black-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Editar Status Promoter</button>
         </div>
 
 

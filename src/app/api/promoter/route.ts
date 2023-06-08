@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Promoter, getPromoters, inserirPromoter } from "../../../../lib/promoter";
+import { Promoter, edicaoPromoter, edicaoPromoterTipo, getPromoters, inserirPromoter } from "../../../../lib/promoter";
 import { cpfDuplicado, emailDuplicado } from "../../../../lib/erros";
 
 export async function GET(request: Request) {
@@ -35,3 +35,25 @@ export async function POST(request:Request) {
     } 
 
 }
+
+/* STRING TIPOS DE ALTERAÇÃO DE DADOS */
+/* 'trocar status' - string usada para alterar o status do evento
+    ...
+    ...
+*/
+
+export async function PUT(request:Request) {
+    const dados: edicaoPromoterTipo = await request.json()
+    if (dados !== null) {
+        const promoterAlterado = await edicaoPromoter(dados.tipo, dados.novoDado, dados.cpfORcnpj)
+        if (promoterAlterado !== null){
+            console.log("PROMOTER NA API: ", promoterAlterado)
+            return NextResponse.json(promoterAlterado)
+        } else {   
+            console.log("DEU UM ERRO")
+            return NextResponse.json({error: "ERROR 00"})
+        }
+    }
+
+}
+

@@ -38,6 +38,7 @@ export default function AcessForm() {
               password: infoAcessForm.password,
           },
     })
+    
   
     async function createCliente(cliente: any) {
       const jaison = JSON.stringify({
@@ -93,11 +94,11 @@ export default function AcessForm() {
 
     const cliente = {
       nome: infoPersonalForm.name,
-      cpf: infoPersonalForm.CPF,
+      cpf: infoPersonalForm.CPF.replace(/[.-]/gi,""),
       email: data.email,
       password: data.password,
       data_nasc: new Date(infoPersonalForm.birthDate),
-      telefone: infoPersonalForm.phone,
+      telefone: infoPersonalForm.phone.replace(/[()-\s)]/gi,""),
       rua: infoAdressForm.street,
       numero: Number(infoAdressForm.number),
       bairro: infoAdressForm.district,
@@ -105,10 +106,10 @@ export default function AcessForm() {
       estado: infoAdressForm.state,
       cep: infoAdressForm.CEP,
       complemento: infoAdressForm.complement,
-      num_cartao: "132823123123",
-      dono_cartao: "Josivaldina",
-      data_vencimento: "2050",
-      cvv: "445",
+      num_cartao: null,
+      dono_cartao: null,
+      data_vencimento: null,
+      cvv: null,
     }
 
     createCliente(cliente)

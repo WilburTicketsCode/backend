@@ -27,6 +27,13 @@ export type Promoter = {
     },
 };
 
+export type edicaoPromoterTipo = {
+    tipo: string,
+    novoDado: string,
+    cpfORcnpj: string
+}
+
+
 export async function getPromoters() {
     const data = await prisma.promoter.findMany({
         include: {
@@ -132,8 +139,8 @@ export async function inserirPromoter(promoter: Promoter) {
                 subject: 'Verificando Conta Wilbor',
                 text: 'Email vindo diretamente do mado do backend',
                 html: '<h1>MAGO DO BACKEND</h1><p>Email enviado pelo mago do backend' +
-                ' quando sua conta foi criada no melhor site do universo. Sinta-se' +
-                ' honrado de estar recebendo o email do mago do beck-end Pedro VI</p>'
+                    ' quando sua conta foi criada no melhor site do universo. Sinta-se' +
+                    ' honrado de estar recebendo o email do mago do beck-end Pedro VI</p>'
             })
             return promoterDATA
 
@@ -151,3 +158,24 @@ export async function inserirPromoter(promoter: Promoter) {
 
     }
 }
+
+
+export async function edicaoPromoter(tipoDeEdicao: string, novoDadoAlterado: string, cpfORcnpjDoPromoter: string) {
+    if (tipoDeEdicao === 'trocar status') {
+        try {
+            const promoter = await getPromoter(cpfORcnpjDoPromoter)
+            if (promoter !== null) {
+                const promoterAtualizado = await prisma.promoter.update({
+                    where: { id: promoter.id },
+                    data: { status: novoDadoAlterado },
+                });
+                console.log("PROMOTER NA LIB: ", promoterAtualizado)
+                return promoterAtualizado
+            }
+        } catch (e) {
+            console.error('Erro ao atualizar o evento:', e);
+            return null
+        }
+    }
+}
+

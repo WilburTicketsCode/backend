@@ -1,5 +1,5 @@
 'use client'
-import { createContext, ReactNode, useContext, useState } from "react"
+import { createContext, ReactNode, useContext, useState, useEffect } from "react"
 import TotalCart from "../components/ShoppingCart/TotalCart"
 import { useLocalStorage } from "../../hooks/useLocalStorage"
 import Tickets from "@/components/EventDetails/Tickets"
@@ -36,6 +36,7 @@ export function useShoppingCart() {
 }
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
+  
   const [tempCartItems, setTempCartItems] = useLocalStorage<CartItem[]>(
     "temp-shopping-cart",
     []

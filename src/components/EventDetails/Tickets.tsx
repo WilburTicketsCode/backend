@@ -18,6 +18,7 @@ export default function Tickets(props: any) {
     useEffect(() => {
             rescFromCart();
         }, []);
+        
     let quantidade = getItemQuantity(props.idLotacao);
 
     const [qtd, setQtd] = useState(0);

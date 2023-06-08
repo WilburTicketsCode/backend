@@ -4,6 +4,7 @@ import { edicaoClienteTipo } from "../../../../lib/cliente";
 import { edicaoEventoTipo } from "../../../../lib/evento";
 import { alterarSenhaType, edicaoUsuarioTipo } from "../../../../lib/usuario";
 import { edicaoPromoterTipo } from "../../../../lib/promoter";
+import { edicaoEnderecoTipo } from "../../../../lib/endereco";
 
 export default function testes() {
 
@@ -11,6 +12,18 @@ export default function testes() {
     email: 'luanzito@gmaiil.com',
     senhaAntiga: 'eunaoseitrocarsenha',
     senhaNova: '12345',
+  }
+
+  const exemploJsonAlterarEndereco: edicaoEnderecoTipo = {
+    rua: "RUAZINHA",
+    numero: 132,
+    bairro: "BAIRRINHO",
+    cidade: "CIDADEZINHA",
+    estado: "ESTADINHO",
+    cep: "9283939",
+    complemento: "COMPLEMENTINHO",
+    identificadorDoDono: '66668230016',
+    tipoDoUsuario: 'cliente'
   }
 
   const exemploJsonAlterarStatusPromoter: edicaoPromoterTipo = {
@@ -25,7 +38,7 @@ export default function testes() {
     idDoEvento: 1
   }
 
-  async function editarSenha(){
+  async function editarSenha() {
     const jaison = JSON.stringify({
       email: exemploJsonAlterarSenha.email,
       senhaAntiga: exemploJsonAlterarSenha.senhaAntiga,
@@ -33,7 +46,7 @@ export default function testes() {
     })
 
     console.log("Exemplo de como o JSON para edição de senha de um Cliente deve ser feito:\n" +
-    jaison)
+      jaison)
 
     const res = await fetch("/api/usuario/alterar-senha", {
       method: "PUT",
@@ -45,7 +58,7 @@ export default function testes() {
 
     if (res.ok) {
       const data = await res.json()
-      setJsonPraTela(JSON.stringify(data)) 
+      setJsonPraTela(JSON.stringify(data))
       console.log(data)
     } else {
       setJsonPraTela("DEU BO")
@@ -53,7 +66,7 @@ export default function testes() {
 
   }
 
-  async function editarStatusEvento(){
+  async function editarStatusEvento() {
     const jaison = JSON.stringify({
       tipo: exemploJsonEditarStatusEvento.tipo,
       novoDado: exemploJsonEditarStatusEvento.novoDado,
@@ -61,7 +74,7 @@ export default function testes() {
     })
 
     console.log("Exemplo de como o JSON para edição staus de um Evento deve ser feito:\n" +
-    jaison)
+      jaison)
 
     const res = await fetch("/api/evento", {
       method: "PUT",
@@ -73,7 +86,7 @@ export default function testes() {
 
     if (res.ok) {
       const data = await res.json()
-      setJsonPraTela(JSON.stringify(data)) 
+      setJsonPraTela(JSON.stringify(data))
       console.log("AQUII:", res)
     } else {
       setJsonPraTela("DEU BO")
@@ -81,7 +94,42 @@ export default function testes() {
 
   }
 
-  async function editarStatusPromoter(){
+  async function editarEndereco() {
+    const jaison = JSON.stringify({
+      rua: exemploJsonAlterarEndereco.rua,
+      numero: exemploJsonAlterarEndereco.numero,
+      bairro: exemploJsonAlterarEndereco.bairro,
+      cidade: exemploJsonAlterarEndereco.cidade,
+      estado: exemploJsonAlterarEndereco.estado,
+      cep: exemploJsonAlterarEndereco.cep,
+      complemento: exemploJsonAlterarEndereco.complemento,
+      identificadorDoDono: exemploJsonAlterarEndereco.identificadorDoDono,
+      tipoDoUsuario: exemploJsonAlterarEndereco.tipoDoUsuario
+
+    })
+
+    console.log("Exemplo de como o JSON para edição de um Endereco do CLIENTE deve ser feito:\n" +
+      jaison)
+
+    const res = await fetch("/api/endereco", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: jaison
+    })
+
+    if (res.ok) {
+      const data = await res.json()
+      setJsonPraTela(JSON.stringify(data))
+      console.log("AQUII:", res)
+    } else {
+      setJsonPraTela("DEU BO")
+    }
+
+  }
+
+  async function editarStatusPromoter() {
     const jaison = JSON.stringify({
       tipo: exemploJsonAlterarStatusPromoter.tipo,
       novoDado: exemploJsonAlterarStatusPromoter.novoDado,
@@ -89,7 +137,7 @@ export default function testes() {
     })
 
     console.log("Exemplo de como o JSON para edição staus de um PROMOTER deve ser feito:\n" +
-    jaison)
+      jaison)
 
     const res = await fetch("/api/promoter", {
       method: "PUT",
@@ -101,7 +149,7 @@ export default function testes() {
 
     if (res.ok) {
       const data = await res.json()
-      setJsonPraTela(JSON.stringify(data)) 
+      setJsonPraTela(JSON.stringify(data))
       console.log("AQUII:", res)
     } else {
       setJsonPraTela("DEU BO")
@@ -123,6 +171,9 @@ export default function testes() {
         </div>
         <div>
           <button onClick={editarStatusPromoter} className="bg-[#ffffff] text-black-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Editar Status Promoter</button>
+        </div>
+        <div>
+          <button onClick={editarEndereco} className="bg-[#ffffff] text-black-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Editar Endereco</button>
         </div>
 
 

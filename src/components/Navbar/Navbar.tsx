@@ -3,7 +3,7 @@ import Container from './Container'
 import Select from './SelectContainer';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { IconButton } from '../ClientSide';
+import { IconButton, Badge } from '../ClientSide';
 import { BellIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 import NavList from './Adm/NavListADM';
 import NoLoginMenu from './NoLoginMenu';
@@ -79,7 +79,9 @@ const Navbar = ({ navbarType }: Props) => {
                                         variant="text"
                                         color="blue-gray"
                                         className="ml-0 mr-2">
-                                        <BellIcon className="h-8 w-8" />
+                                            <Badge>
+                                                <BellIcon className="h-8 w-8" />
+                                            </Badge>
                                     </IconButton>
                                 </div>
                

@@ -23,7 +23,8 @@ import {
     TabsBody,
     Tab,
     TabPanel,
-    Checkbox
+    Checkbox,
+    Badge
   
 } from "@material-tailwind/react"; 
 
@@ -47,6 +48,7 @@ export { Accordion,
     IconButton,
     Carousel,
     Card,
+    Badge,
     CardHeader,
     CardBody,
     Dialog,

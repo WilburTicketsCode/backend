@@ -12,9 +12,9 @@ const adminNSchema = z.object({
     email: z.string().email({ message: 'Email inválido' }),
     cpf: z.string().min(8, { message: 'CPF deve conter no mínimo 8 caracteres' }),
     password: z.string().min(8, { message: 'Senha deve conter no mínimo 8 caracteres' }),
-    passwordConfirm: z.string(),
-})
-.refine((data) => data.password === data.passwordConfirm, {
+    passwordConfirm: z.string().min(8, { message: 'Senha deve conter no mínimo 8 caracteres' }),
+
+}).refine((data) => data.password === data.passwordConfirm, {
     message: "Senhas diferentes",
     path: ["passwordConfirm"],
   });
@@ -80,7 +80,7 @@ export default function TelaNewAdm() {
                             <Input {...register('password')}  type="password" size='md' label="Senha" />
                             {errors.password?.message && <p className="text-red-500 text-xs">{errors.password?.message}</p>}
 
-                            <Input {...register('password')}  type="password" size='md' label="Confirme a senha" />
+                            <Input {...register('passwordConfirm')}  type="password" size='md' label="Confirme a senha" />
                             {errors.passwordConfirm?.message && <p className="text-red-500 text-xs">{errors.passwordConfirm?.message}</p>}
                         </div>
                         <Button type='submit' size='md' className="mt-20" fullWidth>

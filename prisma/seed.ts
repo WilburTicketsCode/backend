@@ -15,6 +15,8 @@ async function main() {
   await prisma.usuario.deleteMany()
   await prisma.endereco.deleteMany()
   await prisma.cartao_Credito.deleteMany()
+  await prisma.setor.deleteMany()
+  await prisma.perfil.deleteMany()
 
   /* ADMINISTRADOR 1 */
   const adm1 = await prisma.administrador.create({
@@ -238,7 +240,7 @@ async function main() {
       horaInicio: new Date("2023-06-01 18:00"),
       horaFim: new Date("2023-01-06 22:00"),
       descricao: "Uma festa que ira ver Tosta",
-      banner: "nada",
+      banner: "/img/event-banner/festinha-tosta.jpg",
       status: 'suspenso',
       id_promoter: promoter3.id,
       id_endereco: endereco2.id

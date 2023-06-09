@@ -62,7 +62,7 @@ export default async function Event({params}: {params: { id: number }}) {
                     <div className="flex flex-shrink mt-5 text-sm">
                         <div className="flex flex-wrap"><FaMapMarkerAlt className="fill-roxo-wil" size={'1.2rem'}/></div>
                         <h3 className="font-semibold ml-2 mr-5 text-blue-gray-900">
-                            {`${endereco.rua}, ${endereco.numero}, ${endereco.bairro}, ${endereco.cidade} - ${endereco.estado}`}
+                            {`${endereco?.rua}, ${endereco?.numero}, ${endereco?.bairro}, ${endereco?.cidade} - ${endereco?.estado}`}
                         </h3>
                     </div>
 

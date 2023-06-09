@@ -30,7 +30,7 @@ function formatDate(value: string) {
         .replace(/^([0-1]{1}[0-9]{1})([0-9]{1,2}).*/g, "$1/$2");
 }
 
-export default function Cardform(props:any) {
+export default function Cardform(props: any) {
     const { data: session } = useSession();
     const { register, handleSubmit, formState: { errors } } = useForm<CardFormData>({
         resolver: zodResolver(cardSchema),
@@ -43,7 +43,6 @@ export default function Cardform(props:any) {
     const [date, setDate] = useState("");
     const [cvv, setCvv] = useState("");
     const { setInfoCard } = UPayContext();
-    const router = useRouter();
 
 
 
@@ -110,18 +109,16 @@ export default function Cardform(props:any) {
 
         }
         await axios.post("/api/cartao", jaison);
-        
-
 
 
     }
 
     function refreshPage() {
         window.location.reload();
-      }
+    }
 
     const close = () => {
-        if (errors.name === undefined && errors.cardNumber === undefined && errors.date === undefined && errors.cvv === undefined) { 
+        if (errors.name === undefined && errors.cardNumber === undefined && errors.date === undefined && errors.cvv === undefined) {
             props.click();
             refreshPage();
         }
@@ -137,7 +134,7 @@ export default function Cardform(props:any) {
                 <Input {...register("cardNumber")} label='Número do Cartão' maxLength={19} value={cardNumber} type='text'
                     containerProps={{ className: "md:min-w-[90px]" }} onChange={(e) => { handleCardNumber(e) }} onClick={(e) => handleCardNumber(e)} />
                 {errors.cardNumber && <p className="text-red-500 text-xs">{errors.cardNumber.message}</p>}
-                <div className="my-1 flex-col flex md:flex-row items-center gap-3  ">
+                <div className="my-1 flex-col flex md:flex-row items-center gap-3 w-full">
                     <Input {...register("date")} label='Validade(MM/AA)' value={formatDate(date)} onChange={(e) => { handleDate(e) }}
                         maxLength={5} containerProps={{ className: "md:min-w-[90px]" }} onClick={(e) => { handleDate(e) }} />
                     <Input {...register("cvv")} label="CVV" value={cvv} onChange={(e) => { handleCvv(e) }} maxLength={4}

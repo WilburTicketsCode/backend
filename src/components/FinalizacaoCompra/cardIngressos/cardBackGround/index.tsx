@@ -16,7 +16,6 @@ function searchLotacao(eventos: any, lotacaoId: number) {
             }
         }
     }
-
     return []
 }
 
@@ -35,10 +34,7 @@ export default function CardIngresso() {
     }, []);
 
     const [events, setEvents] = useState<Eventos>([]);
-    const {cartItems}  = useShoppingCart();
-
-    console.log(cartItems);
-    console.log("aaaa");
+    const { cartItems } = useShoppingCart()
 
     let cartEventos: Eventos = []
     cartEventos = cartItems?.reduce((resultado: Eventos, item) => {
@@ -60,8 +56,8 @@ export default function CardIngresso() {
 
                 <div>
                     {cartEventos?.map((evento, index) => (
-                        <CardIngressoItem key={index} event={evento} imagem={events.find((ev) => ev.id === evento?.id)?.banner} lotacoes={evento?.lotacao}/> 
-                    ))}
+                        <CardIngressoItem key={index} event={evento} imagem={events.find((ev) => ev.id === evento?.id)?.banner} lotacoes={evento?.lotacao}/>
+                    )) || "Nenhum ingresso foi adicionado ao carrinho"}
 
                 </div>
             </div>

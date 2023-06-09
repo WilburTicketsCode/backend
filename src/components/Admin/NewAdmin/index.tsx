@@ -73,10 +73,10 @@ export default function TelaNewAdm() {
                         </div>
 
                         <div className="flex flex-col gap-6 md:flex-row">
-                            <Input {...register('password')}  size='md' label="Senha" />
+                            <Input {...register('password')}  type="password" size='md' label="Senha" />
                             {errors.password?.message && <p className="text-red-500 text-center">{errors.password?.message}</p>}
 
-                            <Input {...register('password')}  size='md' label="Confirme a senha" />
+                            <Input {...register('password')}  type="password" size='md' label="Confirme a senha" />
                             {errors.password?.message && <p className="text-red-500 text-center">{errors.password?.message}</p>}
                         </div>
                         <Button type='submit' size='md' className="mt-20" fullWidth>

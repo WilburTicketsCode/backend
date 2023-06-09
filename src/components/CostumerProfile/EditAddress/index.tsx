@@ -72,7 +72,7 @@ export default function EditAddress() {
     const handleChangeStreet = (event: any) => {
         if (cep.length === 8 && estado[0] !== "") return;
         const { value } = event.target;
-        const sanitizedValue = value.replace(/[0-9]/g, ''); 
+        const sanitizedValue = value.trim(); 
         setStreet(sanitizedValue);
     }
 
@@ -126,11 +126,11 @@ export default function EditAddress() {
 
     async function editAddress(data: addressFormData) {
         const jaison = {
-            rua: data.street,
+            rua: street,
             numero: parseInt(data.number),
-            bairro: data.neighborhood,
-            cidade: data.city,
-            estado: data.state,
+            bairro: neighborhood,
+            cidade: city,
+            estado: state,
             cep: data.cep,
             complemento: data.complement,
             identificadorDoDono: session?.user?.id,

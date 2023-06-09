@@ -10,7 +10,7 @@ export type edicaoEnderecoTipo = {
     estado: string,
     cep: string,
     complemento: string | null,
-    identificadorDoDono: string | number //AQUI COLOCA O CPF OU CNPJ DO DONO DAQUELE ENDEREÇO, SE FOR CLIENTE SÓ COLOCAR O CPF, SE FOR PROMOTER COLOCAR CPF OU CNPJ E SE FOR O EVENTO COLOCA O ID
+    identificadorDoDono: string | number, //AQUI COLOCA O CPF OU CNPJ DO DONO DAQUELE ENDEREÇO, SE FOR CLIENTE SÓ COLOCAR O CPF, SE FOR PROMOTER COLOCAR CPF OU CNPJ E SE FOR O EVENTO COLOCA O ID
     tipoDoUsuario: string //AQUI COLOCA O TIPO DO USUARIO, SE ELE È UM CLIENTE OU UM PROMOTER OU UM EVENTO
 }
 

@@ -43,7 +43,7 @@ export default function TelaListAdm() {
     }]*/
 
 return (
-    <section className='bg-gray-200 text-blue-900 rounded-xl p-10 m-5 w-auto h-auto flex flex-col gap-20'>
+    <section className='flex flex-col gap-20 bg-gray-200 text-blue-900 rounded-xl p-10 m-5 w-auto h-auto'>
 
         <Card color="transparent" shadow={false}>
             <Typography variant="h4" color="blue-gray">

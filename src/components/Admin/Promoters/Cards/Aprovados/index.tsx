@@ -9,7 +9,7 @@ type Props = {
     id: number
 }
  
-export default function CardPromotersAdm({email, nome, status, eventos, id}: Props) {
+export default function CardPromotersPendentes({email, nome, status, eventos, id}: Props) {
   return (
     <Card className="mt-3 w-[295px] h-[190px] shadow-black/40 col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-3"> 
       <CardBody className="p-5 pt-4 pb-2">
@@ -27,8 +27,8 @@ export default function CardPromotersAdm({email, nome, status, eventos, id}: Pro
         </Typography>
       </CardBody>
       <CardFooter className="grid grid-cols-2 py-3 gap-x-6 text-center">
-        <button className="border-2 border-roxo-wil text-center object-center rounded-full">Negar</button>                         {/*border-red-500 */}
-        <button className=" bg-roxo-wil text-white font-sans text-sm text-center object-center rounded-full">Aprovar</button> {/*bg-green-500 */}
+        <button className="border-2 border-roxo-wil text-center object-center rounded-full">Negar</button>                      {/*border-red-500 */}
+        {/*<button className=" bg-roxo-wil text-white font-sans text-sm text-center object-center rounded-full">Aprovar</button>*/} {/*bg-green-500 */}
       </CardFooter>
     </Card>
   );

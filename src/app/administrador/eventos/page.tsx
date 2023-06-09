@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import CardEventoAdm from "@/components/Admin/EventsAdmin";
+import CardEventoAdm from "@/components/Admin/Eventos";
 
 
 export default function AdmHome() {

@@ -12,7 +12,12 @@ const adminNSchema = z.object({
     email: z.string().email({ message: 'Email inválido' }),
     cpf: z.string().min(8, { message: 'CPF deve conter no mínimo 8 caracteres' }),
     password: z.string().min(8, { message: 'Senha deve conter no mínimo 8 caracteres' }),
+    passwordConfirm: z.string(),
 })
+.refine((data) => data.password === data.passwordConfirm, {
+    message: "Senhas diferentes",
+    path: ["passwordConfirm"],
+  });
 
 export default function TelaNewAdm() {
 
@@ -24,11 +29,10 @@ export default function TelaNewAdm() {
     });
 
     const onSubmit = (e: React.FormEvent) => {
-        //console.log(data);
         e.preventDefault();
     
         // Enviar dados do formulário para a API
-        fetch('http://localhost:3000/api/administrador', {
+        fetch('/api/administrador', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -48,7 +52,7 @@ export default function TelaNewAdm() {
     }
 
     return (
-        <div className='flex flex-col w-[90%] md:w-[40%] h-[80%] md:h-[80%] items-center justify-center gap-y-10 bg-white p-20 rounded-xl'>
+        <div className='flex flex-col gap-20 bg-gray-200 text-blue-900 rounded-xl p-10 m-5 w-auto h-auto'>
             
             <Card color="transparent" shadow={false} className="flex items-center justify-center">
                 <Typography variant="h4" color="blue-gray">
@@ -77,7 +81,7 @@ export default function TelaNewAdm() {
                             {errors.password?.message && <p className="text-red-500 text-xs">{errors.password?.message}</p>}
 
                             <Input {...register('password')}  type="password" size='md' label="Confirme a senha" />
-                            {errors.password?.message && <p className="text-red-500 text-xs">{errors.password?.message}</p>}
+                            {errors.passwordConfirm?.message && <p className="text-red-500 text-xs">{errors.passwordConfirm?.message}</p>}
                         </div>
                         <Button type='submit' size='md' className="mt-20" fullWidth>
                             Cadastrar

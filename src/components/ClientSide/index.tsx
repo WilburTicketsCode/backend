@@ -23,8 +23,7 @@ import {
     TabsBody,
     Tab,
     TabPanel,
-    Checkbox,
-    Badge
+    Checkbox, 
   
 } from "@material-tailwind/react"; 
 
@@ -33,6 +32,7 @@ import {
   UserCircleIcon,
   ChevronDownIcon,
   PowerIcon,
+  BanknotesIcon,
 } from "@heroicons/react/24/outline";
 
 export { Accordion,
@@ -48,7 +48,6 @@ export { Accordion,
     IconButton,
     Carousel,
     Card,
-    Badge,
     CardHeader,
     CardBody,
     Dialog,
@@ -62,5 +61,6 @@ export { Accordion,
     UserCircleIcon,
     ChevronDownIcon,
     PowerIcon,
-    Checkbox
+    Checkbox,
+    BanknotesIcon,
   };

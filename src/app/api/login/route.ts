@@ -1,4 +1,6 @@
-import { getUsuario } from "../../../../lib/usuario"
+import { NextResponse } from "next/server";
+import { verificarEmailESenha } from "../../../../lib/usuario";
+import { usuarioNaoEncontrado } from "../../../../lib/erros";
 
 interface RequestBody {
     email: string
@@ -7,37 +9,14 @@ interface RequestBody {
 export async function POST(request:Request) {
     const body:RequestBody = await request.json()
 
-    const user = await getUsuario(body.email);
-
-
-    if (user && user.senha === body.password){
-        if (user.adm !== null){
-            const userWithoutPass = {
-                name: user.nome,
-                email: user.email,
-                role: "administrador",
-                id: user.id
-            }
-            return new Response(JSON.stringify(userWithoutPass))
-        } else if (user.promoter !== null){
-            const userWithoutPass = {
-                name: user.nome,
-                email: user.email,
-                role: "promoter",
-                id: user.id
-            }
-            return new Response(JSON.stringify(userWithoutPass))
-        } else {
-            const userWithoutPass = {
-                name: user.nome,
-                email: user.email,
-                role: "cliente",
-                id: user.id
-            } 
-            return new Response(JSON.stringify(userWithoutPass))
+    try{
+        const usuario = await verificarEmailESenha(body.email, body.password)
+        
+        return NextResponse.json(usuario)
+    } catch (e) {
+        if (e instanceof usuarioNaoEncontrado){
+            return NextResponse.json(JSON.stringify("ERROR 03"))
         }
-    } else {
-        return new Response(JSON.stringify(null))
     }
 
 }

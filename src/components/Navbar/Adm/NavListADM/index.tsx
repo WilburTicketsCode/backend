@@ -7,7 +7,7 @@ import {
 const navListItems = [
     {
       label: "Eventos",
-      href:"/admin/eventos"
+      href:"/administrador/eventos"
     },
     {
       label: "Administradores",
@@ -22,7 +22,7 @@ const navListItems = [
   
 export default function NavList() {
     return (
-      <ul className="mb-4 mt-2 flex flex-row  md:gap-4 lg:gap-5 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
+      <ul className="mb-4 mt-2 flex flex-col sm:flex-row md:gap-4 lg:gap-5 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
         {navListItems.map(({ label,href}, key) => (
           <Typography
             key={label}

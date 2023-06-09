@@ -4,5 +4,5 @@ export interface User {
     email?: string | null | undefined,
     username?: string,
     accessToken?: string,
-    id? : number,
+    id? : string,
 }

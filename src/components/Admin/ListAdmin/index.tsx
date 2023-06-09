@@ -20,7 +20,7 @@ export default function TelaListAdm() {
     const [admins, setAdmins] = useState<Adm[]>([]);
  
     const fetchAdmins = async () => {
-        const reponse = await fetch("https://backend-wilbortick.vercel.app/api/administrador");
+        const reponse = await fetch("/api/administrador");
         const  data = await reponse.json();
         setAdmins(data);
     }

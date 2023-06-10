@@ -128,11 +128,10 @@ export async function updatePass(senhaAntiga: string, novaSenha: string, emailUs
 		throw new usuarioNaoEncontrado("A senha atual está incorreta")
 	}
 	// Se existir, chama a atualização de senha
-	const user = 1
-	// const user = await prisma.usuario.update({
-	// 	where: { email: emailUsuario },
-	// 	data: { senha: novaSenha },
-	// });
+	const user = await prisma.usuario.update({
+		where: { email: emailUsuario },
+		data: { senha: novaSenha },
+	});
 	return user
 }
 // ========================================================================================================================= //

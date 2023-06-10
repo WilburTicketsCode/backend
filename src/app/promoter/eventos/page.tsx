@@ -39,6 +39,7 @@ interface Promoter {
     status: string,
     data_nasc: Date,
     telefone: string,
+    id: string,
     usuario: {
         nome: string,
         email: string,
@@ -67,9 +68,28 @@ export default function eventosPromoter() {
 
     const { data: session } = useSession();
     console.log(session?.user.id);
-    
+    const cpf = session?.user?.id; 
    
 
+    useEffect(() => {
+        const fetchPromoter = async () => {
+            try {
+                if (typeof cpf === 'undefined') {
+                    // Se o cpf for undefined, aguarde 1 segundo e chame a função novamente
+                    setTimeout(fetchPromoter, 1000);
+                    return;
+                }
+                const response = await fetch(`/api/promoter/${cpf}`);
+                const jsonPromoter = await response.json();
+                setPromoter(jsonPromoter);
+                console.log(jsonPromoter)
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchPromoter();
+    }, [cpf]);
+    
 
     const fetchEvents = async () => {
         const reponse = await fetch("http://localhost:3000/api/evento");
@@ -107,7 +127,7 @@ export default function eventosPromoter() {
         <div className="flex flex-col h-full items-center justify-center mt-4 pt-20 bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200">
             <div className="grid grid-cols-12 md:col-span-6 xl:col-span-4 h-full xl:gap-x-14 md:gap-8 gap-y-8 mt-4 mb-4">  {/*Layout para essa página*/}
                 {slice.map((item, index) => {
-                        if(item.id_promoter == session?.user.id){
+                        if(item.id_promoter == promoter?.id){
                         return (<CardEventoPromoter key={item.id} imagem={item.banner} nome={item.nome} data={formatDate(item.horaInicio)} local={formatLocalEvento(item.endereco)} evento={item.id} /> )
                     } 
                 })}

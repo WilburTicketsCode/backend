@@ -103,7 +103,7 @@ export async function edicaoUsuario(tipoDeEdicao: string, novoDadoAlterado: stri
   }
 }
 
-// ========================================================================================================================= //
+// =============================================TRECHO ADEQUADO================================================================= //
 export async function findUserByEmailPass(pass: string, email: string) {
 	// Busca um user com base no email e senha
 	const user = await prisma.usuario.findFirst({
@@ -135,6 +135,9 @@ export async function updatePass(senhaAntiga: string, novaSenha: string, emailUs
 	return user
 }
 // ========================================================================================================================= //
+
+
+
 export async function alterarSenha(senhaAntiga: string, novaSenha: string, emailUsuario: string) {
   try {
     await verificarEmailESenha(emailUsuario, senhaAntiga)

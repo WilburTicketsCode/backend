@@ -23,7 +23,7 @@ export default function CardEventoPromoter({imagem, nome, data, local, evento}: 
   return (
     <Card className="mt-0 w-[320px] h-[288px] shadow-black/40 col-span-12 md:col-span-6 xl:col-span-4"> 
       <CardHeader floated={false} color="blue-gray" className="relative h-60 mx-0 mt-0">
-        <Link href={`/event-details/${evento}`}><img src={imagem} alt="img-blur-shadow" className="object-fill h-full w-full"/></Link>
+        <img src={imagem} alt="img-blur-shadow" className="object-fill h-full w-full"/>
       </CardHeader>
       <CardBody className="p-5 pt-4 pb-2">
         <Typography variant="h5" color="blue-gray" className="mb-1 truncate font-semibold text-base">

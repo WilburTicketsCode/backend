@@ -182,18 +182,6 @@ export default function FormPersonalData(props: any) {
               </div>
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
 			{/* Cidade */}
             <div className="sm:col-span-2 sm:col-start-1">
               <label className="block text-sm font-medium leading-6 text-gray-900">

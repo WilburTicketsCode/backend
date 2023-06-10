@@ -21,40 +21,6 @@ export default function Tickets(props: any) {
         
     let quantidade = getItemQuantity(props.idLotacao);
 
-    const [qtd, setQtd] = useState(0);
-
-    const handleDec = () => {
-        if (qtd > 0) {
-            setQtd(qtd - 1);
-        }
-    }
-
-    const handleInc = () => {
-        if (qtd < props.qtdIngressos){ // só pode comprar ate a quantidade disponivel na lotação
-            setQtd(qtd + 1);
-            addTicket();
-        }
-    }
-
-    const addTicket = () => {
-        const ticket = {
-            idLotacao: props.idLotacao,
-            qtd
-        }
-
-        const found = tickets.find(el => el.idLotacao === ticket.idLotacao);
-
-        if (!found) { // so adiciona o ingresso se não existir no array, se sim so incrementa a quantidade
-            tickets.push(ticket)
-        } else {
-            found.qtd++;
-        }
-    }
-
-    const removeTicket = () => {
-
-    }
-
 
     return (
         <div className="mb-8 bg-gray-100 rounded-md p-4">

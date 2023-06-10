@@ -48,7 +48,7 @@ export default function TelaNewAdm() {
     }
 
     return (
-        <section className='bg-gray-200 text-blue-900 rounded-xl p-10 m-5 w-auto h-auto flex gap-20 items-center justify-center'>
+        <div className='flex flex-col w-[90%] md:w-[40%] h-[80%] md:h-[80%] items-center justify-center gap-y-10 bg-white p-20 rounded-xl'>
             
             <Card color="transparent" shadow={false} className="flex items-center justify-center">
                 <Typography variant="h4" color="blue-gray">
@@ -73,11 +73,11 @@ export default function TelaNewAdm() {
                         </div>
 
                         <div className="flex flex-col gap-6 md:flex-row">
-                            <Input {...register('password')}  size='md' label="Senha" />
-                            {errors.password?.message && <p className="text-red-500 text-center">{errors.password?.message}</p>}
+                            <Input {...register('password')}  type="password" size='md' label="Senha" />
+                            {errors.password?.message && <p className="text-red-500 text-xs">{errors.password?.message}</p>}
 
-                            <Input {...register('password')}  size='md' label="Confirme a senha" />
-                            {errors.password?.message && <p className="text-red-500 text-center">{errors.password?.message}</p>}
+                            <Input {...register('password')}  type="password" size='md' label="Confirme a senha" />
+                            {errors.password?.message && <p className="text-red-500 text-xs">{errors.password?.message}</p>}
                         </div>
                         <Button type='submit' size='md' className="mt-20" fullWidth>
                             Cadastrar
@@ -92,6 +92,6 @@ export default function TelaNewAdm() {
                 </form>
             </Card>
 
-        </section>
+        </div>
     )
 }

@@ -28,7 +28,7 @@ const personalSchema = z.object({
 	number: z.string().min(1, {message: 'Exemplo: 1'}),
 	city: z.string().min(1, {message: 'Exemplo: Feira de Santana'}),
 	state: z.string().min(2, {message: 'Exemplo: BA'}),
-	cep: z.string().regex(/^\d{5}-\d{3}$/, {message: 'Exemplo: 44032-600'}),
+	cep: z.string().regex(/^\d+$/, 'Apenas dígitos são permitidos').min(8, {message: 'Exemplo: 44000002'}),
   
 	selectField: z.enum(['cpf', 'cnpj']),
 	cpf_cnpj: z.string().regex(/^\d+$/, 'Apenas dígitos são permitidos').refine((value) => {

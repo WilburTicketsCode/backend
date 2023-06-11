@@ -1,31 +1,45 @@
 import {zodResolver} from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
+import { useState } from 'react';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
+import React from 'react';
 
-const typePersona = ["cpf", "cnpj"] as const;
 
+
+
+
+// Status auxiliares para exibir alerts para informar aos usuários
+enum status {
+	EMPTY, // status inicial
+	SUCESS,
+	ERROR,
+}
+
+// Validação de tipos no campo
 type personalFormData = z.infer<typeof personalSchema>;
 
 const personalSchema = z.object({
  	name: z.string(),
-	// cnpj_cpf: z.string().min(11, {message: 'A senha deve ter no mínimo 8 caracteres'}),
 	email: z.string().email({message: 'O email é inválido'}),
-	phone: z.string().min(10, {message: 'Exemplo: 7190000000'}),
+	phone: z.string().regex(/^\d+$/, 'Apenas dígitos são permitidos').min(10, {message: 'Exemplo: 7100000000'}),
 	street: z.string().min(1, {message: 'Exemplo: Novo horizonte'}),
 	neighborhood: z.string().min(1, {message: 'Exemplo: Centro'}),
 	complement: z.string(),
 	number: z.string().min(1, {message: 'Exemplo: 1'}),
 	city: z.string().min(1, {message: 'Exemplo: Feira de Santana'}),
 	state: z.string().min(2, {message: 'Exemplo: BA'}),
-	cep: z.string().min(9, {message: 'Exemplo: 44036-900'}),
-	selectField: z.enum(typePersona),
-	cpf_cnpj: z.string().refine((value) => {
+	cep: z.string().regex(/^\d{5}-\d{3}$/, {message: 'Exemplo: 44032-600'}),
+  
+	selectField: z.enum(['cpf', 'cnpj']),
+	cpf_cnpj: z.string().regex(/^\d+$/, 'Apenas dígitos são permitidos').refine((value) => {
 	return value.length === 11 || value.length === 14 ;
-	}, { message: 'O campo é inválido' }),
+	}, { message: 'Formato inválido para CPF ou CNPJ' }),
 })
 
 export default function FormPersonalData(props: any) {
+	// Para o alert
+	const [statusAlert, setStatusAlert] = useState<status>(status.EMPTY);
+  //
   const {register,handleSubmit,formState:{errors} } = useForm<personalFormData>({
       resolver: zodResolver(personalSchema),
       criteriaMode: 'all',
@@ -46,9 +60,33 @@ export default function FormPersonalData(props: any) {
       },
   	});
 
-    const onSubmit = (data: personalFormData) => {
+    const onSubmit = async (data: personalFormData) => {
+      // Construindo o objeto de requisição
+      const user_data: any = {};
+      // Chama API
+      const res = await fetch(`/api/usuario/alterar-senha`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: user_data
+      })
+      // Se conseguiu alterar a senha (200-OK)
+      if (res.status == 200){
+        setStatusAlert(status.SUCESS)
+      }
+      // Se o usuário preencheu algum campo de forma errada (400-BAD REQUEST)
+      else if(res.status == 400){
+
+      }
+      // Se tiver dado problema no servidor (500-SERVIDOR ERROR)
+      else if (res.status == 500){// Talvez colocar o else seja melhor
+        setStatusAlert(status.ERROR)
+      }
+
         console.log(data);
     }
+
 
   return (
  	
@@ -81,11 +119,12 @@ export default function FormPersonalData(props: any) {
 						Identificador
 					</label>
 					<div className="mt-2 block sm:flex">
-					<select {...register('selectField')} className='block w-[80%] max-w-[90px] rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'>
+					<select disabled {...register('selectField')} className='block w-[80%] max-w-[90px] rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'>
 						<option value="cpf">CPF</option>
 						<option value="cnpj">CNPJ</option>
 					</select>
 						<input
+              maxLength={props.user.cpf ? 11 : 14}
 							{...register('cpf_cnpj')}
 							type="text"
 							className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -243,4 +282,8 @@ export default function FormPersonalData(props: any) {
       </div>
     </form>
   )
+}
+
+function getValues() {
+  throw new Error('Function not implemented.');
 }

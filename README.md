@@ -2,7 +2,7 @@
 
 Administrador - email: pedro200@hotmail.com | senha: pedropedro99
 
-Promoter - email: tostinha123@yahoo.com | senha: Tosta1234
+Promoter - email: tostinha123@yahoo.com | senha: tostinha123
 
 Cliente - email: andrezito@yahoo.com | senha: 123
 

@@ -1,3 +1,4 @@
+import ButtonAlterarCartao from "../ButtonAlterarCartão"
 
 export default function CardCartaoItem(props: any) {
     return(
@@ -21,7 +22,8 @@ export default function CardCartaoItem(props: any) {
                     vence em: {props.dataVencimento}
                 </p>
                 
-                <a href="/profile/costumer"><p className="text-[8px] font-sans text-blue-700 underline px-2 ">Alterar</p></a>
+                
+               <ButtonAlterarCartao></ButtonAlterarCartao>
                 
 
             </div>

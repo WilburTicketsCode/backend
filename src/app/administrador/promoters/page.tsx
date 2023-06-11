@@ -1,25 +1,53 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs, TabsHeader, TabsBody, Tab, TabPanel } from "@/components/ClientSide";
-import CardPromotersPendentes from "@/components/Admin/Promoters/Cards/Aprovados";
+import CardPromotersAprovados from "@/components/Admin/Promoters/Cards/Aprovados";
+import CardPromotersPendentes from "@/components/Admin/Promoters/Cards/Pendentes";
+import CardPromotersSuspensos from "@/components/Admin/Promoters/Cards/Suspensos";
 
 export default function adm_promoters() {
-    const [activeTab, setActiveTab] = React.useState("aprovado");
+    const [activeTab, setActiveTab] = useState("pendente");
+    const [promotersList, setPromotersList] = useState<any[]>([]);
+    const [atualizar, setAtualizar] = useState(false)
 
     const labels = [
         {
-            label: "Aprovados",
-            statusTab: "aprovado",
-        },
-        {
             label: "Pendentes",
             statusTab: "pendente",
+        },
+        {
+            label: "Aprovados",
+            statusTab: "aprovado",
         },
         {
             label: "Suspensos",
             statusTab: "suspenso",
         }
     ]
+
+    /*
+    const fetchEvents = async () => {
+        const reponse = await fetch("/api/promoter");
+        const data = await reponse.json();
+        setPromotersList(data);
+    }
+
+    let mudou = 1
+
+    useEffect(() => {
+        fetchEvents();
+    }, [atualizar]);
+    */
+    async function aprovar(){
+        //const response = await fetch("/api/promoter");
+        //if (!response.ok){
+            setAtualizar(!atualizar)
+        //} else {
+        //  alert("Não foi possível aprovar o usuário!")  
+        //}
+        alert('apertou!')
+        
+    }
 
     const data2 = [
         {
@@ -208,28 +236,14 @@ export default function adm_promoters() {
         }
     ]
 
-    const data = [
-        {
-            label: "Aprovados",
-            status: "aprovado",
-            desc: `It really matters and then like it really doesn't matter.
-                   What matters is the people who are sparked by it. And the people 
-                   who are like offended by it, it doesn't matter.`,
-        },
-        {
-            label: "Pendentes",
-            status: "pendente",
-            desc: `Because it's about motivating the doers. Because I'm here
-                   to follow my dreams and inspire other people to follow their dreams, too.`,
-        },
-        {
-            label: "Suspensos",
-            status: "suspenso",
-            desc: `We're not always in the position that we want to be at.
-                   We're constantly growing. We're constantly making mistakes. We're
-                   constantly trying to express ourselves and actualize our dreams.`,
-        }
-    ];
+    
+    function formatDate(date: string): string {
+        const fullDate = date.slice(0,16).replaceAll('-', '/').replaceAll('T', '-').split('-');   
+        const dateymdA = fullDate[0].split('/').reverse();      // Obtém o ano, mês e dia para ordenar como -> dia/mês/ano
+        const dateymdS = `${dateymdA[0]}/${dateymdA[1]}/${dateymdA[2]}`;    // Formata a data para ser exibida corretamente
+        return `${dateymdS}`
+    }
+
     return (
         <div className="bg-cinza-wil mx-8 mt-14 rounded-lg mb-14 h-[570px] overflow-hidden">
             <Tabs id="custom-animation" value={activeTab} >
@@ -261,9 +275,10 @@ export default function adm_promoters() {
                     {labels.map(({ statusTab }) => (
                         <TabPanel key={statusTab} value={statusTab} className="flex flex-col items-center">
                             <div className="grid grid-cols-12 md:col-span-6 xl:col-span-4 h-full xl:gap-x-8 md:gap-8 gap-y-8 mt-4 mb-4 2xl:col-span-3">
-                                {data2.map(({ id, status, usuario, eventos }) => (
-                                    status === statusTab &&
-                                    <CardPromotersPendentes email={usuario.email} nome={usuario.nome} status={statusTab} eventos={eventos.length} id={id} /> /*email="fulano1@gmail.com" nome="Fulano1" status="Aprovado" eventos={20} id={1}*/
+                                {data2.map(({ id, status, usuario, cpf, cnpj, eventos, data_nasc, telefone }) => (
+                                    status === statusTab && status === 'pendente' ? <CardPromotersPendentes key={id} email={usuario.email} telefone={telefone} nome={usuario.nome} identificacao={cpf ? cpf : cnpj ? cnpj : 'não identificado'} nascimento={formatDate(data_nasc)} id={id}/>
+                                    : status === statusTab && status === 'aprovado' ? <CardPromotersAprovados key={id} email={usuario.email} telefone={telefone} nome={usuario.nome} identificacao={cpf ? cpf : cnpj ? cnpj : 'não identificado'} eventos={eventos.length} id={id} />
+                                    : status === statusTab && <CardPromotersSuspensos key={id} email={usuario.email} telefone={telefone} nome={usuario.nome} identificacao={cpf ? cpf : cnpj ? cnpj : 'não identificado'} eventos={eventos.length} setTest={aprovar} id={id} />
                                 ))}
                             </div>
                         </TabPanel>

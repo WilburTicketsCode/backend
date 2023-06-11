@@ -25,7 +25,7 @@ export default function adm_promoters() {
         }
     ]
 
-    /*
+    
     const fetchEvents = async () => {
         const reponse = await fetch("/api/promoter");
         const data = await reponse.json();
@@ -37,15 +37,36 @@ export default function adm_promoters() {
     useEffect(() => {
         fetchEvents();
     }, [atualizar]);
-    */
-    async function aprovar(){
-        //const response = await fetch("/api/promoter");
-        //if (!response.ok){
-            setAtualizar(!atualizar)
-        //} else {
-        //  alert("Não foi possível aprovar o usuário!")  
-        //}
-        alert('apertou!')
+    
+    async function setStatus(identificador: string, novoStatus: string){
+        try {
+            const dados = JSON.stringify({      //Constroi o body da requisição para api
+                tipo: 'trocar status',
+                novoDado: novoStatus,
+                cpfORcnpj: identificador
+            })
+
+            const response = await fetch("/api/promoter",   //Efetua a requisição para a API para alterar o status do promoter
+            { 
+                method: "PUT",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: dados
+            })  
+            if (response.ok){                       //Verifica se a resposta da API foi 200
+                const conteudoResposta = await response.json()      //obtém o body da resposta da API
+                if (conteudoResposta.status === novoStatus){        //Verifica se o status foi realmente alterado
+                    setAtualizar(!atualizar)                        //Se o status foi realmente alterado, atualiza a lista de promoters
+                } else {                                            //Senão
+                    alert("Não foi possível mudar o status do usuário!")    //Mostra que não foi possível alterar o status
+                }   
+            } else {                                                //Caso a resposta da requisição para API seja diferente de 200
+            alert("Erro ao mudar o status do usuário!")             //Mostra que não foi possível alterar o status
+            }
+        } catch (e) {
+            alert("Erro ao se comunicar com a API para mudar o status do usuário!")
+        }
         
     }
 
@@ -245,8 +266,8 @@ export default function adm_promoters() {
     }
 
     return (
-        <div className="bg-cinza-wil mx-8 mt-14 rounded-lg mb-14 h-[570px] overflow-hidden">
-            <Tabs id="custom-animation" value={activeTab} >
+        <div className="bg-cinza-wil mx-8 mt-14 rounded-lg mb-14 h-[570px] overflow-hidden">      {/*tirar bg */}
+            <Tabs id="custom-animation" value={activeTab} >                                         {/*da um jeito de jogar o bg-cinza-wil aqui e colocar o mt-*/}                            
                 <TabsHeader
                     className="rounded-t-lg border-b bg-cinza-wil p-0"
                     indicatorProps={{
@@ -275,10 +296,10 @@ export default function adm_promoters() {
                     {labels.map(({ statusTab }) => (
                         <TabPanel key={statusTab} value={statusTab} className="flex flex-col items-center">
                             <div className="grid grid-cols-12 md:col-span-6 xl:col-span-4 h-full xl:gap-x-8 md:gap-8 gap-y-8 mt-4 mb-4 2xl:col-span-3">
-                                {data2.map(({ id, status, usuario, cpf, cnpj, eventos, data_nasc, telefone }) => (
-                                    status === statusTab && status === 'pendente' ? <CardPromotersPendentes key={id} email={usuario.email} telefone={telefone} nome={usuario.nome} identificacao={cpf ? cpf : cnpj ? cnpj : 'não identificado'} nascimento={formatDate(data_nasc)} id={id}/>
-                                    : status === statusTab && status === 'aprovado' ? <CardPromotersAprovados key={id} email={usuario.email} telefone={telefone} nome={usuario.nome} identificacao={cpf ? cpf : cnpj ? cnpj : 'não identificado'} eventos={eventos.length} id={id} />
-                                    : status === statusTab && <CardPromotersSuspensos key={id} email={usuario.email} telefone={telefone} nome={usuario.nome} identificacao={cpf ? cpf : cnpj ? cnpj : 'não identificado'} eventos={eventos.length} setTest={aprovar} id={id} />
+                                {promotersList.map(({ id, status, usuario, cpf, cnpj, eventos, data_nasc, telefone }) => (
+                                    status === statusTab && status === 'pendente' ? <CardPromotersPendentes key={id} email={usuario.email} telefone={telefone} nome={usuario.nome} identificacao={cpf ? cpf : cnpj ? cnpj : 'não identificado'} nascimento={formatDate(data_nasc)} setStatus={setStatus} />
+                                    : status === statusTab && status === 'aprovado' ? <CardPromotersAprovados key={id} email={usuario.email} telefone={telefone} nome={usuario.nome} identificacao={cpf ? cpf : cnpj ? cnpj : 'não identificado'} eventos={eventos.length} setStatus={setStatus} />
+                                    : status === statusTab && <CardPromotersSuspensos key={id} email={usuario.email} telefone={telefone} nome={usuario.nome} identificacao={cpf ? cpf : cnpj ? cnpj : 'não identificado'} eventos={eventos.length} setStatus={setStatus} />
                                 ))}
                             </div>
                         </TabPanel>

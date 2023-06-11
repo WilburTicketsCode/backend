@@ -24,7 +24,7 @@ export default function FlippableCard() {
     <div className="h-full w-full ">
       <div className=" w-full h-full flex justify-center perspective-1000 " >
         <CSSTransition in={infoCard.fucus} timeout={3000} classNames="flip" nodeRef={nodeRef}>
-          <div ref={nodeRef} onClick={handleClick} className="creditcard max-w-md w-full items-center flex ">
+          <div ref={nodeRef} onClick={handleClick} className="creditcard max-w-md w-full md:w-[50%] items-center flex ">
             <Cardfront />
             <Cardback />
           </div>

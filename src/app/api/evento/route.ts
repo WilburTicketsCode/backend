@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Evento, getEventos, inserirEvento } from "../../../../lib/evento";
+import { Evento, edicaoEvento, edicaoEventoTipo, getEventos, inserirEvento } from "../../../../lib/evento";
 
 
 /* Banco pessoal
@@ -28,4 +28,25 @@ export async function POST(request:Request) {
     } else {
         return NextResponse.json("ERROR 00")
     }
+}
+
+/* STRING TIPOS DE ALTERAÇÃO DE DADOS */
+/* 'trocar status' - string usada para alterar o status do evento
+    ...
+    ...
+*/
+
+export async function PUT(request:Request) {
+    const dados: edicaoEventoTipo = await request.json()
+    if (dados !== null) {
+        const eventoAlterado = await edicaoEvento(dados.tipo, dados.novoDado, dados.idDoEvento)
+        if (eventoAlterado !== null){
+            console.log("EVENTO NA API: ", eventoAlterado)
+            return NextResponse.json(eventoAlterado)
+        } else {   
+            console.log("DEU UM ERRO")
+            return NextResponse.json({error: "ERROR 00"})
+        }
+    }
+
 }

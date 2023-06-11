@@ -1,4 +1,5 @@
 import {zodResolver} from '@hookform/resolvers/zod';
+import { useEffect } from 'react';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 
@@ -7,38 +8,43 @@ const typePersona = ["cpf", "cnpj"] as const;
 type personalFormData = z.infer<typeof personalSchema>;
 
 const personalSchema = z.object({
-    name: z.string(),
-    // cnpj_cpf: z.string().min(11, {message: 'A senha deve ter no mínimo 8 caracteres'}),
+ 	name: z.string(),
+	// cnpj_cpf: z.string().min(11, {message: 'A senha deve ter no mínimo 8 caracteres'}),
 	email: z.string().email({message: 'O email é inválido'}),
-	phone: z.string().min(11, {message: 'Exemplo: 71900000000'}),
-	addres: z.string(),
-	city: z.string(),
-	state: z.string(),
+	phone: z.string().min(10, {message: 'Exemplo: 7190000000'}),
+	street: z.string().min(1, {message: 'Exemplo: Novo horizonte'}),
+	neighborhood: z.string().min(1, {message: 'Exemplo: Centro'}),
+	complement: z.string(),
+	number: z.string().min(1, {message: 'Exemplo: 1'}),
+	city: z.string().min(1, {message: 'Exemplo: Feira de Santana'}),
+	state: z.string().min(2, {message: 'Exemplo: BA'}),
 	cep: z.string().min(9, {message: 'Exemplo: 44036-900'}),
 	selectField: z.enum(typePersona),
 	cpf_cnpj: z.string().refine((value) => {
-		return value.length === 11 || value.length === 14 ;
+	return value.length === 11 || value.length === 14 ;
 	}, { message: 'O campo é inválido' }),
 })
 
 export default function FormPersonalData(props: any) {
-    const {register,handleSubmit,formState:{errors} } = useForm<personalFormData>({
-        resolver: zodResolver(personalSchema),
-        criteriaMode: 'all',
-        mode: 'all',
-        defaultValues: {
-            name: props.user.name,
-            cpf_cnpj: props.user.cpf_cnpj,
-            email: props.user.email,
-            phone: props.user.phone,
-            addres: props.user.addres,
-            city: props.user.city,
-            state: props.user.state,
-            cep: props.user.cep,
-			      selectField: props.user.selectField
-        },
-
-    });
+  const {register,handleSubmit,formState:{errors} } = useForm<personalFormData>({
+      resolver: zodResolver(personalSchema),
+      criteriaMode: 'all',
+      mode: 'all',
+      defaultValues: {
+          name: props.user.usuario.nome,//
+          cpf_cnpj: props.user.cpf ? props.user.cpf : props.user.cnpj,// 
+          email: props.user.usuario.email,//
+          phone: props.user.telefone,//
+          street: props.user.endereco.rua,//
+          neighborhood: props.user.endereco.bairro,
+          complement: props.user.endereco.complemento,
+          number: props.user.endereco.numero,
+          city: props.user.endereco.cidade,//
+          state: props.user.endereco.estado,//
+          cep: props.user.endereco.cep,//
+          selectField: props.user.cpf ? 'cpf' : 'cnpj'
+      },
+  	});
 
     const onSubmit = (data: personalFormData) => {
         console.log(data);
@@ -121,18 +127,59 @@ export default function FormPersonalData(props: any) {
             </div>
 
 			{/* Endereço */}
-            <div className="col-span-full">
+            <div className="sm:col-span-2 sm:col-start-1">
               <label className="block text-sm font-medium leading-6 text-gray-900">
-                Endereço
+                Rua
               </label>
               <div className="mt-2">
                 <input
-					{...register('addres')}
+					{...register('street')}
                     type="text"
                     className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
+				{errors.street?.message && <span className="text-red-500">{errors.street?.message}</span>}
               </div>
-			  {errors.addres?.message && <span className="text-red-500">{errors.addres?.message}</span>}
+            </div>
+
+            <div className="sm:col-span-1">
+              <label className="block text-sm font-medium leading-6 text-gray-900">
+                Número
+              </label>
+              <div className="mt-2">
+                <input
+					{...register('number')}
+                    type="text"
+                    className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+				{errors.number?.message && <span className="text-red-500">{errors.number?.message}</span>}
+              </div>
+            </div>
+            <div className="sm:col-span-1">
+              <label className="block text-sm font-medium leading-6 text-gray-900">
+                Bairro
+              </label>
+              <div className="mt-2">
+                <input
+					{...register('neighborhood')}
+                    type="text"
+                    className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+				{errors.neighborhood?.message && <span className="text-red-500">{errors.neighborhood?.message}</span>}
+              </div>
+            </div>
+
+            <div className="sm:col-span-2">
+              <label className="block text-sm font-medium leading-6 text-gray-900">
+                Complemento
+              </label>
+              <div className="mt-2">
+                <input
+					{...register('complement')}
+                    type="text"
+                    className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+				{errors.complement?.message && <span className="text-red-500">{errors.complement?.message}</span>}
+              </div>
             </div>
 
 			{/* Cidade */}

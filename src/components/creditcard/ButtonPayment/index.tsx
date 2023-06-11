@@ -51,7 +51,7 @@ export default function Payment() {
                             <FlippableCard />
                         </div>
                         <div className="flex justify-center h-[50%]">
-                            <Cardform />
+                            <Cardform click={handleOpen}/>
                         </div>
                     </div>
 

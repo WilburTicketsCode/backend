@@ -1,5 +1,5 @@
 'use client';
-import React from "react";
+import React, {useState , useEffect} from "react";
 
 import {
   Typography,
@@ -22,7 +22,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+
 
 
 
@@ -56,95 +56,149 @@ const profileMenuItems = [
 
 ];
 
-
+interface Data {
+  id: number;
+  perfil_foto: string | null;
+  cpf: string;
+  data_nasc: string;
+  id_usuario: number;
+  id_cartao: number;
+  id_endereco: number;
+  telefone: string;
+  endereco: {
+    id: number;
+    rua: string;
+    numero: number;
+    bairro: string;
+    cidade: string;
+    estado: string;
+    cep: string;
+    complemento: string;
+  };
+  usuario: {
+    id: number;
+    nome: string;
+    email: string;
+    senha: string;
+  };
+  cartao: {
+    id: number;
+    num_cartao: string;
+    dono_cartao: string;
+    data_vencimento: string;
+    cvv: string;
+  };
+  compras: any[];
+}
 
 export function ProfileMenu() {
-  const {data: session } = useSession();
-  const router = useRouter();
+  const { data: session } = useSession();
+
 
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
 
+  const [data, setData] = useState<Data | null>(null);
 
+  console.log(session)
+  const cpf = session?.user?.id;
 
-  if (session && session.user && session.user.email){
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (typeof cpf === 'undefined') {
+          // Se o cpf for undefined, aguarde 1 segundo e chame a função novamente
+          setTimeout(fetchData, 1000);
+          return;
+        }
+        const response = await fetch(`/api/cliente/${cpf}`);
+        const jsonData = await response.json();
+        setData(jsonData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, [cpf]);
+
+  if (session && session.user && session.user.email) {
     return (
       <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
-      <MenuHandler>
-        <Button
-          variant="text"
-          color="blue-gray"
-          className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
-        >
-          <Avatar
-            variant="circular"
-            size="lg"
-            alt="Profile"
-            className="border border-blue-500 p-0.5"
-            src="/img/profile/placeholder.jpg" />
-          <ChevronDownIcon
-            strokeWidth={2.5}
-            className={`h-3 w-3 transition-transform ${isMenuOpen ? "rotate-180" : ""
-              }`}
-          />
-        </Button>
-      </MenuHandler>
-
-      <MenuList className="p-1">
-        <div className="border-transparent p-2.5 cursor-pointer w-full bg-[#404C76] flex justify-center gap-2 rounded"> 
-        
-          <Typography
-            as="span"
-            variant="h5"
-            className="font-normal"
-            color="black"
+        <MenuHandler>
+          <Button
+            variant="text"
+            color="blue-gray"
+            className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
           >
-            {session.user.name}
-          </Typography>
-        </div>
-        {profileMenuItems.map(({ label, icon, href }, key) => {
-          return (
-            <MenuItem
-              key={label}
-              onClick={closeMenu}
-              className={`flex items-center gap-2 rounded`}
+            <Avatar
+              variant="circular"
+              size="lg"
+              alt="Profile"
+              className="border border-blue-500 p-0.5"
+              src={data?.perfil_foto ? `/img/profile/custumer/${data?.perfil_foto}` : "/img/profile/placeholder.jpg"}/>
+            <ChevronDownIcon
+              strokeWidth={2.5}
+              className={`h-3 w-3 transition-transform ${isMenuOpen ? "rotate-180" : ""
+                }`}
+            />
+          </Button>
+        </MenuHandler>
+
+        <MenuList className="p-1">
+          <div className="border-transparent p-2.5 cursor-pointer w-full bg-[#404C76] flex justify-center gap-2 rounded">
+
+            <Typography
+              as="span"
+              variant="h5"
+              className="font-normal"
+              color="black"
             >
-              <Link href={href} className='flex flex-row gap-2'>
-                {React.createElement(icon, {
-                  className: `h-6 w-6`,
-                  strokeWidth: 2,
-                })}
-                <Typography
-                  as="span"
-                  variant="h5"
-                  className="font-normal"
-                  color={"inherit"}
-                >
-                  {label}
-                </Typography>
-              </Link>
-            </MenuItem>
-          );
-        })}
-        
-        <MenuItem onClick={() => { signOut({callbackUrl:'/'}); }} className='border-transparent p-2.5 cursor-pointer w-full bg-white flex gap-2 rounded hover:bg-red-500'>
-          {React.createElement(PowerIcon, {
-            className: `h-6 w-6 text-red-500`,
+              {session.user.name}
+            </Typography>
+          </div>
+          {profileMenuItems.map(({ label, icon, href }, key) => {
+            return (
+              <MenuItem
+                key={label}
+                onClick={closeMenu}
+                className={`flex items-center gap-2 rounded`}
+              >
+                <Link href={href} className='flex flex-row gap-2'>
+                  {React.createElement(icon, {
+                    className: `h-6 w-6`,
+                    strokeWidth: 2,
+                  })}
+                  <Typography
+                    as="span"
+                    variant="h5"
+                    className="font-normal"
+                    color={"inherit"}
+                  >
+                    {label}
+                  </Typography>
+                </Link>
+              </MenuItem>
+            );
           })}
-          <Typography
-            as="span"
-            variant="h5"
-            className="font-normal"
-            color="red"
-          >
-            Sair
-          </Typography>
-        </MenuItem>
 
-      </MenuList>
-    </Menu>
-  );
+          <MenuItem onClick={() => { signOut({ callbackUrl: '/' }); }} className='border-transparent p-2.5 cursor-pointer w-full bg-white flex gap-2 rounded hover:bg-red-500'>
+            {React.createElement(PowerIcon, {
+              className: `h-6 w-6 text-red-500`,
+            })}
+            <Typography
+              as="span"
+              variant="h5"
+              className="font-normal"
+              color="red"
+            >
+              Sair
+            </Typography>
+          </MenuItem>
+
+        </MenuList>
+      </Menu>
+    );
   }
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -152,7 +206,7 @@ export function ProfileMenu() {
         <Button
           variant="text"
           color="blue-gray"
-          className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
+          className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5"
         >
           <Avatar
             variant="circular"
@@ -168,8 +222,8 @@ export function ProfileMenu() {
         </Button>
       </MenuHandler>
       <MenuList className="p-1">
-        <MenuItem> 
-        {React.createElement(BanknotesIcon, {
+        <MenuItem>
+          {React.createElement(BanknotesIcon, {
             className: `h-6 w-6 `,
           })}
           <Typography
@@ -205,8 +259,8 @@ export function ProfileMenu() {
             </MenuItem>
           );
         })}
-        
-        <MenuItem onClick={() => {signOut({callbackUrl:'/'});}} className='border-transparent p-2.5 cursor-pointer w-full bg-white flex gap-2 rounded hover:bg-red-500'>
+
+        <MenuItem onClick={() => { signOut({ callbackUrl: '/' }); }} className='border-transparent p-2.5 cursor-pointer w-full bg-white flex gap-2 rounded hover:bg-red-500'>
           {React.createElement(PowerIcon, {
             className: `h-6 w-6 text-red-500`,
           })}

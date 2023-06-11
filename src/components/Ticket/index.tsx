@@ -1,39 +1,27 @@
 "use client"
 
 import { Cliente } from "@prisma/client";
+import moment from "moment";
 import { useState } from "react";
+import { usePathname} from 'next/navigation'
+import QRCode from "qrcode.react";
 
-/*
-function searchTicket(compras: any, ticketId: number) {
-  for (let i = 0; i < compras.length; i++) {
-    const compra = compras[i];
-    for (let j = 0; j < compra.ingressos.length; i++) {
-      const ticket = compra.ingressos[i];
-      if (ticket.id === ticketId) {
-        return ticket
-      }
-    }
-  }
-  return null
-  }
 
-  export default function Ticket(data: any) {
-*/
 
-export default function Ticket() {
-  //const ingresso = cliente.compras;
-  //console.log(data.cliente)
-  //console.log(searchTicket(data.cliente.compras, 8))
+export default function Ticket(ticket:any) {
+  const path = usePathname()
+  const site = "https://backend-wilbortick.vercel.app"
+
   const [ticketInfo, setTicketInfo] = useState({
-    event: "Djavan Turnê D 2023",
-    date: "02/04/2023",
-    local: "CLASSIC HALL",
-    promoter: "Paris Cultural",
-    code: "2352-1788284",
-    profile: "Entrada Inteira",
-    sector: "Camarote",
-    name: "Davi Marcelo Gabriel Brito",
-    cpf: "404.311.201-70",
+    event: ticket.data.nome_evento,
+    date: moment(ticket.data.data).format("DD/MM/YYYY"),
+    local: ticket.data.local.rua,
+    promoter: ticket.data.promoter,
+    code: ticket.data.id_ingresso,
+    profile: ticket.data.perfil,
+    sector: ticket.data.setor,
+    name: ticket.data.nome_cliente,
+    cpf: ticket.data.cpf,
   });
 
   return (
@@ -100,12 +88,12 @@ export default function Ticket() {
               </div>
             </div>
             <div className="flex flex-col rounded-lg p-4 items-center bg-[#404c76]">
-              <h1 className="text-2xl font-semibold text-gray-200">
+              <h1 className="text-2xl font-semibold text-gray-200 pb-2">
                 QR CODE
               </h1>
-              <img className="h-64"
-                src="/img/qr-code/QR Code.svg" >
-              </img>
+              <QRCode
+              size={200}
+              value={site+path}/>
             </div>
           </div>
           

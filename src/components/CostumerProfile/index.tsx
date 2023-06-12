@@ -75,7 +75,7 @@ export default function CostumerP() {
           }
         };
         fetchData();
-      }, [cpf]);
+      }, [cpf,data]);
 
 
   return (

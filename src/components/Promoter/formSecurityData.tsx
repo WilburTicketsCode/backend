@@ -14,7 +14,7 @@ const securitySchema = z.object({
 
 // Status auxiliares para exibir alerts para informar aos usuários
 enum status {
-	EMPTY,
+	EMPTY, // status inicial
 	SUCESS,
 	ERROR,
 	NOT_FOUND,
@@ -55,13 +55,13 @@ export default function FormSecurityData(props: any) {
 		if (res.status == 404){
 			setStatusAlert(status.NOT_FOUND)
 		}
-		// Se tiver dado problema no servidor
-		if (res.status == 500){
-			setStatusAlert(status.ERROR)
-		}
-		// Se achou conseguiu alterar a senha
-		if (res.status == 200){
+		// Se achou e conseguiu alterar a senha
+		else if (res.status == 200){
 			setStatusAlert(status.SUCESS)
+		}
+		// Se tiver dado problema no servidor
+		else if (res.status == 500){// Talvez colocar o else seja melhor
+			setStatusAlert(status.ERROR)
 		}
         
     }

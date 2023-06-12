@@ -60,14 +60,10 @@ export default function eventosPromoter() {
 
     const [numOfElement, setNumOfElement] = useState(6);
 
-    //------ Consulta a API
-
-
     const [eventos, setEventos] = useState<Evento[]>([]);
     const [promoter, setPromoter] = useState<Promoter | null>(null);
 
     const { data: session } = useSession();
-    console.log(session?.user.id);
     const cpf = session?.user?.id; 
    
 
@@ -82,7 +78,6 @@ export default function eventosPromoter() {
                 const response = await fetch(`/api/promoter/${cpf}`);
                 const jsonPromoter = await response.json();
                 setPromoter(jsonPromoter);
-                console.log(jsonPromoter)
             } catch (error) {
                 console.error('Error fetching data:', error);
             }

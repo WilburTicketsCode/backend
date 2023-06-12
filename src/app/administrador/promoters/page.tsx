@@ -266,12 +266,14 @@ export default function adm_promoters() {
     }
 
     return (
-        <div className="bg-cinza-wil mx-8 mt-14 rounded-lg mb-14 h-[570px] overflow-hidden">      {/*tirar bg */}
-            <Tabs id="custom-animation" value={activeTab} >                                         {/*da um jeito de jogar o bg-cinza-wil aqui e colocar o mt-*/}                            
+        <div className="top-5 mx-8 mt-14 mb-14 h-[90vh] overflow-hidden rounded-lg">                        {/*h-[590px]*/}
+            <Tabs id="custom-animation" value={activeTab} >                                               
                 <TabsHeader
-                    className="rounded-t-lg border-b bg-cinza-wil p-0"
+                    className="rounded-none bg-cinza-wil bg-opacity-100 p-0 mt-8 border-b-2 border-purple-gray-200"
+                    style={{borderRadius: "8px 8px 0px 0px"}}
                     indicatorProps={{
-                        className: "border-b-4 border-roxo-wil shadow-none rounded-t-lg",
+                        className: "border-b-4 border-roxo-wil shadow-none rounded-none bg-cinza-wil",
+                        style: {borderRadius: "8px 8px 0px 0px"}
                     }}
                 >
                     {labels.map(({ label, statusTab }) => (
@@ -279,7 +281,7 @@ export default function adm_promoters() {
                             key={statusTab}
                             value={statusTab}
                             onClick={() => setActiveTab(statusTab)}
-                            className={activeTab === statusTab ? "text-roxo-wil rounded-t-lg" : "text-roxo-wil/90 rounded-t-lg"}
+                            className={activeTab === statusTab ? "text-roxo-wil" : "text-roxo-wil/90"}
                         >
                             {label}
                         </Tab>
@@ -291,11 +293,11 @@ export default function adm_promoters() {
                         mount: { y: 0 },
                         unmount: { y: 250 },
                       }}*/
-                    className="flex flex-col overflow-y-scroll h-[527px]"
+                    className="flex flex-col overflow-y-scroll h-[80vh] bg-cinza-wil" /*h-[527px] */
                 >
                     {labels.map(({ statusTab }) => (
                         <TabPanel key={statusTab} value={statusTab} className="flex flex-col items-center">
-                            <div className="grid grid-cols-12 md:col-span-6 xl:col-span-4 h-full xl:gap-x-8 md:gap-8 gap-y-8 mt-4 mb-4 2xl:col-span-3">
+                            <div className="grid grid-cols-12 h-full xl:gap-x-8 md:gap-8 gap-y-8 mt-4 mb-4"> {/*md:col-span-6 xl:col-span-4 2xl:col-span-6*/}
                                 {promotersList.map(({ id, status, usuario, cpf, cnpj, eventos, data_nasc, telefone }) => (
                                     status === statusTab && status === 'pendente' ? <CardPromotersPendentes key={id} email={usuario.email} telefone={telefone} nome={usuario.nome} identificacao={cpf ? cpf : cnpj ? cnpj : 'não identificado'} nascimento={formatDate(data_nasc)} setStatus={setStatus} />
                                     : status === statusTab && status === 'aprovado' ? <CardPromotersAprovados key={id} email={usuario.email} telefone={telefone} nome={usuario.nome} identificacao={cpf ? cpf : cnpj ? cnpj : 'não identificado'} eventos={eventos.length} setStatus={setStatus} />

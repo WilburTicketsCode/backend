@@ -28,7 +28,7 @@ export type Promoter = {
 };
 
 export type PromoterEdicao = {
-    cpf: string
+    cpfORcpnj: string
     status: string,
     data_nasc: Date,
     telefone: string,

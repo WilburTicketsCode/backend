@@ -28,11 +28,13 @@ export type Promoter = {
 };
 
 export type PromoterEdicao = {
+    cpf: string
     status: string,
     data_nasc: Date,
     telefone: string,
     usuario: {
         nome: string,
+        email: string
     },
     endereco: {
         rua: string,

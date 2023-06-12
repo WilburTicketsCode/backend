@@ -18,7 +18,25 @@ export type Promoter = {
     },
     endereco: {
         rua: string,
-        numero: number,
+        numero: string,
+        bairro: string,
+        cidade: string,
+        estado: string,
+        cep: string,
+        complemento: string,
+    },
+};
+
+export type PromoterEdicao = {
+    status: string,
+    data_nasc: Date,
+    telefone: string,
+    usuario: {
+        nome: string,
+    },
+    endereco: {
+        rua: string,
+        numero: string,
         bairro: string,
         cidade: string,
         estado: string,
@@ -176,6 +194,42 @@ export async function edicaoPromoter(tipoDeEdicao: string, novoDadoAlterado: str
             console.error('Erro ao atualizar o evento:', e);
             return null
         }
+    }
+}
+
+export async function novaEdicaoPromoter(promoter: PromoterEdicao, id: string) {
+    const res = await getPromoter(id);
+
+	if (!res || res == undefined){
+		throw new usuarioNaoEncontrado("Promoter com essa identificação não existe")
+	}
+    try {
+        
+        const promoterAtualizado = await prisma.promoter.update({
+            where: { cpf: id},
+            data: {
+                status: promoter.status,
+                data_nasc: promoter.data_nasc,
+                telefone: promoter.telefone,
+                usuario: {
+                    update: { nome: promoter.usuario.nome}
+                },
+                endereco: {
+                    update: {
+                        rua: promoter.endereco.rua,
+                        numero: promoter.endereco.numero,
+                        bairro: promoter.endereco.bairro,
+                        cidade: promoter.endereco.cidade,
+                        estado: promoter.endereco.estado,
+                        cep: promoter.endereco.cep,
+                        complemento: promoter.endereco.complemento,
+                    }
+                }
+            }
+        })
+    } catch (e) {
+        console.error('Erro ao atualizar o promoter:', e);
+        return null
     }
 }
 

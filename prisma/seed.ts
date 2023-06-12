@@ -589,6 +589,7 @@ async function main() {
           senha: "123"
         }
       },
+      
       endereco: {
         create: {
           rua: "Rua Barão de Itapetininga",

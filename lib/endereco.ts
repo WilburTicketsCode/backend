@@ -4,7 +4,7 @@ import { prisma } from "./prisma";
 
 export type edicaoEnderecoTipo = {
     rua: string,
-    numero: number,
+    numero: string,
     bairro: string,
     cidade: string,
     estado: string,
@@ -34,7 +34,7 @@ export async function edicaoEndereco(endereco:edicaoEnderecoTipo) {
                     if (endereco.rua === ''){
                       endereco.rua = enderecoDoCliente.rua
                     }
-                    if (endereco.numero === -1) {
+                    if (endereco.numero === '') {
                       endereco.numero = enderecoDoCliente.numero
                     }
                     if (endereco.bairro === '') {

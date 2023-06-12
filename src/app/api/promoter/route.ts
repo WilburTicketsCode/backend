@@ -48,7 +48,7 @@ export async function PUT(request:Request) {
         const promoterAlterado = await edicaoPromoter(dados.tipo, dados.novoDado, dados.cpfORcnpj)
         if (promoterAlterado !== null){
             console.log("PROMOTER NA API: ", promoterAlterado)
-            return NextResponse.json(promoterAlterado)
+            return NextResponse.json(JSON.stringify({ message: "O Pormoter foi alterado com sucesso"}), { status: 200, headers: { "Content-Type": "application/json" } })
         } else {   
             console.log("DEU UM ERRO")
             return NextResponse.json({error: "ERROR 00"})

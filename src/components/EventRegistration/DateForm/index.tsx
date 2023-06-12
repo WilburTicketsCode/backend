@@ -30,8 +30,6 @@ export default function DateForm() {
           defaultValues: {
             startDate: infoDateForm.startDate,
             endDate: infoDateForm.endDate,
-            startTime: infoDateForm.endTime,
-            endTime: infoDateForm.endTime,
           },
     })
 
@@ -44,8 +42,6 @@ export default function DateForm() {
     setInfoDateForm({
         startDate: data.startDate,
         endDate: data.endDate,
-        startTime: data.endTime,
-        endTime: data.endTime,
   });
   }  
   const handlePrev = (e: any) => {
@@ -61,36 +57,19 @@ export default function DateForm() {
         label="data de inicio" 
         maxLength={10}
         type="date"
+        color="indigo"
         {...register("startDate")}
         error={Boolean(errors.startDate)}
         containerProps={{ className: "min-w-[20px]" }}
         />
       
-        <Input size="lg" 
-        label="horário de início" 
-        maxLength={5}
-        type="time"
-        {...register("startTime")}
-        error={Boolean(errors.startTime)}
-        containerProps={{ className: "min-w-[20px]" }}
-        />
-      </div>
-      <div className="flex flex-row gap-4">
-        <Input size="lg" 
+      <Input size="lg" 
         label="data de término" 
         maxLength={10}
         type="date"
+        color="indigo"
         {...register("endDate")}
         error={Boolean(errors.endDate)}
-        containerProps={{ className: "min-w-[20px]" }}
-        />
-      
-        <Input size="lg" 
-        label="horário de término" 
-        maxLength={5}
-        type="time"
-        {...register("endTime")}
-        error={Boolean(errors.endTime)}
         containerProps={{ className: "min-w-[20px]" }}
         />
       </div>
@@ -103,6 +82,5 @@ export default function DateForm() {
       </Button>
     </div>
     </form>
-  
   );
 }

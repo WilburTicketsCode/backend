@@ -16,7 +16,7 @@ export type Cliente = {
   },
   endereco: {
     rua: string,
-    numero: number,
+    numero: string,
     bairro: string,
     cidade: string,
     estado: string,

@@ -1,3 +1,4 @@
+import ButtonAlterarCartao from "../ButtonAlterarCartão"
 
 export default function CardCartaoItem(props: any) {
     return(
@@ -5,22 +6,24 @@ export default function CardCartaoItem(props: any) {
 
         <div className="card-details flex flex-row  rounded-lg h-12 w-full">
 
-            <img src={props.imagem}
-                alt="thumnail" className="tumbnail px-py "
-                height="50" width="75" />
 
             <div className="top flex flex-row justify justify-between">
 
                 <p className=" text-[11px] font-sans px-1 ">
-                    {props.bandeira}
+                    Cartão de Crédito
                 </p>
 
 
                 <p className="text-[11px] font-sans text-gray-700 px-2 ">
                     termina em: {props.finalCartao}
+                </p> 
+
+                <p className="text-[11px] font-sans text-gray-700 px-2 ">
+                    vence em: {props.dataVencimento}
                 </p>
                 
-                <a href="#"><p className="text-[8px] font-sans text-blue-700 underline px-2 ">Alterar</p></a>
+                
+               <ButtonAlterarCartao></ButtonAlterarCartao>
                 
 
             </div>

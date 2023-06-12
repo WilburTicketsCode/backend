@@ -11,7 +11,6 @@ interface Adm {
     senha: String;
 }
 
-
 //Forma de exibir tirando os dados da API (Não vai ser utilizado agora)
 
 export default function TelaListAdm() {
@@ -20,7 +19,7 @@ export default function TelaListAdm() {
     const [admins, setAdmins] = useState<Adm[]>([]);
  
     const fetchAdmins = async () => {
-        const reponse = await fetch("https://backend-wilbortick.vercel.app/api/administrador");
+        const reponse = await fetch("/api/administrador");
         const  data = await reponse.json();
         setAdmins(data);
     }
@@ -43,9 +42,9 @@ export default function TelaListAdm() {
     }]*/
 
 return (
-    <section className='bg-gray-200 text-blue-900 rounded-xl p-10 m-5 w-auto h-auto flex flex-col gap-20'>
+    <div className='flex flex-col gap-20 bg-gray-200 text-blue-900 rounded-xl p-10 m-5 w-auto h-auto'>
 
-        <Card color="transparent" shadow={false}>
+        <Card className="rounded-xl" color="transparent" shadow={false}>
             <Typography variant="h4" color="blue-gray">
                 Administradores:
             </Typography>
@@ -61,11 +60,11 @@ return (
         </Card>
 
         <Link href="/administrador/admin-new">
-            <Button className="mt-20" fullWidth>
+            <Button className="mt-20">
                 Cadastrar Novo Administrador
             </Button>
         </Link>
 
-    </section>
+    </div>
 )
 }

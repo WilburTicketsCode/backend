@@ -6,10 +6,10 @@ export default function testes() {
   const [jsonPraTela, setJsonPraTela] = useState('LOCAL ONDE O JSON CRIADO SERA EXIBIDO PARA SERVIR DE EXEMPLO')
 
   const adm = {
-    nome: 'CARALHOO',
-    cpf: '00090780405',
-    email: 'aaaazfezqasdwa@xxxx.com',
-    password: '123',
+    nome: 'semsenhaman2',
+    cpf: '11090780405',
+    email: 'sousemsenhaa@xxxx.com',
+    password: '12345',
   }
 /*
   const promoter = {

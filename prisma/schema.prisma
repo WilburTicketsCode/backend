@@ -56,7 +56,7 @@ model Promoter {
 model Endereco {
   id          Int        @id @default(autoincrement())
   rua         String
-  numero      Int
+  numero      String
   bairro      String
   cidade      String
   estado      String
@@ -68,13 +68,13 @@ model Endereco {
 }
 
 model Setor {
-  id      Int      @id @default(autoincrement())
+  id      Int      @id 
   nome    String
   lotacao Lotacao[]
 }
 
 model Perfil {
-  id      Int      @id @default(autoincrement())
+  id      Int      @id 
   nome    String
   lotacao Lotacao[]
 
@@ -100,10 +100,11 @@ model Evento {
   nome        String
   horaInicio  DateTime
   horaFim     DateTime
-  descricao   String
+  descricao   String    @db.VarChar(500)
   banner      String
   id_promoter Int
   id_endereco Int 
+  status String
   endereco    Endereco  @relation(fields: [id_endereco], references: [id])
   promoter    Promoter  @relation(fields: [id_promoter], references: [id])
   lotacao     Lotacao[]

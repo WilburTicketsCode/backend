@@ -8,26 +8,28 @@ export default function Dropdown() {
 
     const [isOpen, setIsOpen] = useState(false)
     const [inputValue, setInputValue] = useState("")
-   
-    return (
 
+    return (
+        
         <button onClick={() => setIsOpen((prev) => !prev)}
-        className="relative flex flex-col justify-center items-center bg-white border focus:outline-none
+            className="relative flex flex-col justify-center items-center bg-white border focus:outline-none
             shadow text-gray-600 rounded focus:ring ring-gray-200 group">
 
-            <p className="px-4 font-sans justify-between text-[14px] "> Parcelas | v </p> 
+            <p className="px-4 font-sans justify-between text-[14px] "> Parcelas | v </p>
 
-            {isOpen && <div className="absolute hidden group-focus:block top-4 w-full bg-white shadow-md mt-1 rounded"> 
-            {list.map((item, i) => (
-                <ul className="text-left border rounded">
-                    <li className="px-4 text-[14px] font-sans hover:bg-gray-100 border-b">{item.Parcela}X</li>
-                </ul>
-            ))}
-        </div>}
+            {isOpen && <div className="absolute hidden group-focus:block top-4 w-full bg-white shadow-md mt-1 rounded">
+                {list.map((item, i) => (
+                    <ul className="text-left border rounded">
+                        <li className="px-4 text-[14px] font-sans hover:bg-gray-100 border-b">
+                            {item.Parcela}X
+                        </li>
+                    </ul>
+                ))}
+            </div>}
 
-        </button> 
+        </button>
 
-       
+
 
     )
 }

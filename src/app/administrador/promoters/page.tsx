@@ -55,14 +55,14 @@ export default function adm_promoters() {
                 body: dados
             })  
             if (response.ok){                       //Verifica se a resposta da API foi 200
-                const conteudoResposta = await response.json()      //obtém o body da resposta da API
-                if (conteudoResposta.status === novoStatus){        //Verifica se o status foi realmente alterado
-                    setAtualizar(!atualizar)                        //Se o status foi realmente alterado, atualiza a lista de promoters
-                } else {                                            //Senão
-                    alert("Não foi possível mudar o status do usuário!")    //Mostra que não foi possível alterar o status
-                }   
+                //const conteudoResposta = await response.json()      //obtém o body da resposta da API
+                //if (conteudoResposta.status === novoStatus){        //Verifica se o status foi realmente alterado
+                setAtualizar(!atualizar)                        //Se o status foi realmente alterado, atualiza a lista de promoters
+                //} else {                                            //Senão
+                //    alert("Não foi possível mudar o status do usuário!")    //Mostra que não foi possível alterar o status
+                //}   
             } else {                                                //Caso a resposta da requisição para API seja diferente de 200
-            alert("Erro ao mudar o status do usuário!")             //Mostra que não foi possível alterar o status
+            alert("Não foi possível mudar o status do usuário!")             //Mostra que não foi possível alterar o status
             }
         } catch (e) {
             alert("Erro ao se comunicar com a API para mudar o status do usuário!")

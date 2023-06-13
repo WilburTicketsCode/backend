@@ -47,7 +47,6 @@ export default function AcessForm() {
         cpf: promoter.cpf,
         cnpj: promoter.cpnj,
         status: promoter.status,
-        data_nasc: promoter.data_nasc,
         telefone: promoter.telefone,
         usuario: {
           nome: promoter.nome,
@@ -95,18 +94,17 @@ export default function AcessForm() {
     const promoter = {
       nome: infoCompanyForm.name,
       cpf: infoCompanyForm.CPF.replace(/[.-]/gi,""),
-      cpnj: infoCompanyForm.CNPJ.replace(/[.-/]/gi,""),
+      cpnj: infoCompanyForm.CNPJ.replace(/[\/\-.]/gi,""),
       email: data.email,
       password: data.password,
       status: 'pendente',
-      data_nasc: new Date("1999-05-30"),
-      telefone: infoCompanyForm.phone.replace(/[()-\s)]/gi,""),
+      telefone: infoCompanyForm.phone.replace(/[()-\s]/gi,""),
       rua: infoAdressForm.street,
-      numero: Number(infoAdressForm.number),
+      numero: infoAdressForm.number,
       bairro: infoAdressForm.district,
       cidade: infoAdressForm.street,
       estado: infoAdressForm.state,
-      cep: infoAdressForm.CEP,
+      cep: infoAdressForm.CEP.replace(/[-]/gi,""),
       complemento: infoAdressForm.complement
     }
     

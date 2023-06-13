@@ -44,7 +44,6 @@ model Promoter {
   cpf         String?  @unique
   cnpj        String?  @unique
   status      String
-  data_nasc   DateTime
   telefone    String
   id_endereco Int      @unique
   usuario     Usuario  @relation(fields: [id_usuario], references: [id])

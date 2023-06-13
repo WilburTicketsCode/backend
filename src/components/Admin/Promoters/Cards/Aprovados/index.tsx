@@ -1,4 +1,3 @@
-'use client'
 import {Card, CardBody, Typography, CardFooter} from "@/components/ClientSide";
 
 type Props = {
@@ -10,6 +9,16 @@ type Props = {
   setStatus: Function
 }
 
+function fromatCpfCnpj(identificador: string): string{
+  if (identificador.length > 11){ //CNPJ
+    var cnpj = identificador.slice(0,2)+'.'+identificador.slice(2,5)+'.'+identificador.slice(5,8)+'/'+identificador.slice(8,12)+'-'+identificador.slice(12,14)
+    return cnpj
+  } else{
+    var cpf = identificador.slice(0,3)+'.'+identificador.slice(3,6)+'.'+identificador.slice(6,9)+'-'+identificador.slice(9,11)
+    return cpf
+  }
+}
+
 export default function CardPromotersAprovados(props: Props) {
   return (
     <Card className="mt-3 w-[295px] h-[210px] shadow-black/40 col-span-12 md:col-span-6 xl:col-span-4"> 
@@ -18,7 +27,7 @@ export default function CardPromotersAprovados(props: Props) {
           {props.nome}
         </Typography>
         <Typography className="text-xs">
-          CPF/CNPJ: {props.identificacao}
+          CPF/CNPJ: {fromatCpfCnpj(props.identificacao)}
         </Typography>
         <Typography className="text-xs">
           E-mail: {props.email}

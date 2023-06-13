@@ -1,12 +1,34 @@
 import {Card, CardBody, Typography, CardFooter} from "@/components/ClientSide";
 
+type tEndereco = {
+  id: number, 
+  rua: string,
+  numero: string, 
+  bairro: string, 
+  cidade: string,
+  estado: string, 
+  cep: string, 
+  complemento: string
+}
+
+
 type Props = {
   email: string,
   telefone: string
   nome: string,
   identificacao: string,
-  nascimento: string,
+  endereco: tEndereco,
   setStatus: Function
+}
+
+function fromatCpfCnpj(identificador: string): string{
+  if (identificador.length > 11){ //CNPJ
+    var cnpj = identificador.slice(0,2)+'.'+identificador.slice(2,5)+'.'+identificador.slice(5,8)+'/'+identificador.slice(8,12)+'-'+identificador.slice(12,14)
+    return cnpj
+  } else{
+    var cpf = identificador.slice(0,3)+'.'+identificador.slice(3,6)+'.'+identificador.slice(6,9)+'-'+identificador.slice(9,11)
+    return cpf
+  }
 }
  
 export default function CardPromotersPendentes(props: Props) {
@@ -17,7 +39,7 @@ export default function CardPromotersPendentes(props: Props) {
           {props.nome}
         </Typography>
         <Typography className="text-xs">
-          CPF/CNPJ: {props.identificacao} 
+          CPF/CNPJ: {fromatCpfCnpj(props.identificacao)} 
         </Typography>
         <Typography className="text-xs">
           E-mail: {props.email}
@@ -26,7 +48,7 @@ export default function CardPromotersPendentes(props: Props) {
           Telefone: {props.telefone}
         </Typography>
         <Typography className="text-xs">
-          Data de nascimento: {props.nascimento}
+          Endereço: {props.endereco.cidade + ", " + props.endereco.estado}
         </Typography>
       </CardBody>
       <CardFooter className="grid grid-cols-2 py-3 gap-x-6 text-center">

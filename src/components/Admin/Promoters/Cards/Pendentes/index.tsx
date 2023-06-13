@@ -35,19 +35,19 @@ export default function CardPromotersPendentes(props: Props) {
   return (
     <Card className="mt-3 w-[295px] h-[210px] shadow-black/40 col-span-12 md:col-span-6 xl:col-span-4"> 
       <CardBody className="p-5 pt-4 pb-2">
-        <Typography color="blue-gray" className="mb-1 truncate font-semibold text-sm text-center">
+        <Typography color="blue-gray" className="mb-1 truncate font-semibold text-sm text-center" title={props.nome}>
           {props.nome}
         </Typography>
-        <Typography className="text-xs">
+        <Typography className="text-xs truncate ...">
           CPF/CNPJ: {fromatCpfCnpj(props.identificacao)} 
         </Typography>
-        <Typography className="text-xs">
+        <Typography className="text-xs truncate ..." title={props.email}>
           E-mail: {props.email}
         </Typography>
-        <Typography className="text-xs">
+        <Typography className="text-xs truncate ...">
           Telefone: {props.telefone}
         </Typography>
-        <Typography className="text-xs">
+        <Typography className="text-xs truncate ..." title={props.endereco.cidade + ", " + props.endereco.estado}>
           Endereço: {props.endereco.cidade + ", " + props.endereco.estado}
         </Typography>
       </CardBody>

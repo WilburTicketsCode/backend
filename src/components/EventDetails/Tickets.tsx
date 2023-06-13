@@ -2,13 +2,6 @@
 import { useState, useEffect} from "react";
 import { useShoppingCart } from "@/contexts/ShoppingCartContext"
 
-interface Itickets {
-    idLotacao: number,
-    qtd: number
-}
-
-let tickets : Itickets[] = [];
-
 export default function Tickets(props: any) {
     const {getItemQuantity,
         increaseCartQuantity,

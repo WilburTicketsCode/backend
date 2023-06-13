@@ -8,7 +8,6 @@ export type Promoters = Prisma.PromiseReturnType<typeof getPromoters>;
 export type Promoter = {
     cpf: string,
     cnpj: string,
-    data_nasc: Date,
     status: string,
     telefone: string,
     usuario: {
@@ -136,7 +135,6 @@ export async function inserirPromoter(promoter: Promoter) {
                     cpf: promoter.cpf,
                     cnpj: promoter.cnpj,
                     status: promoter.status,
-                    data_nasc: promoter.data_nasc,
                     telefone: promoter.telefone,
                     endereco: {
                         create: {

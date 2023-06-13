@@ -1,7 +1,7 @@
 import TotalCart from "@/components/ShoppingCart/TotalCart"
 import ListTickets from "@/components/ShoppingCart/ListTickets"
 import { ShoppingCartProvider} from "@/contexts/ShoppingCartContext"
-import RestartButton from "@/components/ShoppingCart/CartTickets/RestartButton"
+
 
 
 export default function Cart() {

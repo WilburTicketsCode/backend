@@ -9,7 +9,6 @@ import RegistrationSteps from "@/components/EventRegistration/EventStepper";
 
 export default function EventRegistration() {
   const [infoAdressForm, setInfoAdressForm] = React.useState({
-    placeName: "",
     CEP: "",
     state: "",
     city: "",
@@ -31,8 +30,6 @@ export default function EventRegistration() {
   const [infoDateForm, setInfoDateForm] = React.useState({
     startDate: "",
     endDate: "",
-    startTime: "",
-    endTime: "",
   })
 
   const [infoTicketForm, setInfoTicketForm] = React.useState({

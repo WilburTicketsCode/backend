@@ -14,6 +14,7 @@ type CartItem = {
 }
 
 type ShoppingCartContextType = {
+  restartCartDef: () => void
   rescFromCart: () => void
   restartCart: () => void
   addToCart: () => void
@@ -129,6 +130,12 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     })
   }
 
+  function removeFromCartDef(id: number) {
+    setCartItems(currItems => {
+      return currItems.filter(item => item.id !== id)
+    })
+  }
+
   function addToCart(){
     setCartItems(tempCartItems);
   }
@@ -143,9 +150,16 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     })
   }
 
+  function restartCartDef(){
+    cartItems.map(item =>{
+      removeFromCartDef(item.id)
+    })
+  }
+
   return (
     <ShoppingCartContext.Provider
       value={{
+        restartCartDef,
         rescFromCart,
         increaseCartQuantityDef,
         decreaseCartQuantityDef,

@@ -98,13 +98,12 @@ async function main() {
         create: {
           nome: "Rafeael Tosta",
           email: "tostinha123@yahoo.com",
-          senha: "Tosta1134"
+          senha: "tostinha123"
         }
       },
       cpf: "45267413020",
       status: "aprovado",
-      data_nasc: new Date(),
-      telefone: "96523848514",
+      telefone: "965238485414",
       endereco: {
         create: {
           rua: "Rua da Paz",
@@ -194,7 +193,6 @@ async function main() {
       },
       cpf: "72417917033",
       status: "aprovado",
-      data_nasc: new Date(),
       telefone: "99136945571",
       endereco: {
         create: {
@@ -222,7 +220,6 @@ async function main() {
       },
       cpf: "58429911014",
       status: "aprovado",
-      data_nasc: new Date(),
       telefone: "98536231962",
       endereco: {
         create: {
@@ -475,7 +472,6 @@ async function main() {
       },
       cpf: "28419554006",
       status: "suspenso",
-      data_nasc: new Date(),
       telefone: "96838738801",
       endereco: {
         create: {
@@ -503,7 +499,6 @@ async function main() {
       },
       cpf: "28419994006",
       status: "aprovado",
-      data_nasc: new Date(),
       telefone: "96838738801",
       endereco: {
         create: {

@@ -2,35 +2,36 @@
 import { data } from '@/data/eventsData/data';
 import { useState, useEffect } from 'react';
 import EventCard from '@/components/home/eventCard';
+import { Eventos } from '../../../../lib/evento';
 
 interface Evento {
-    id: number,
-    nome: string,
-    horaInicio: string,
-    horaFim: string,
-    descricao: string,
-    banner: string,
-    id_endereco: number,
-    id_promoter: string,
-    status: string,
-    endereco: {
-      bairro: string,
-      cep: string,
-      cidade: string,
-      estado: string,
-      numero: number,
-      rua: string,
-      complemento: string
-    }
-    lotacoes: [
-      lotacao: {
-        id_perfil: number,
-        id_setor: number,
-        quantidade: number,
-        valorTotal: number
-      }
-    ]
+  id: number,
+  nome: string,
+  horaInicio: string,
+  horaFim: string,
+  descricao: string,
+  banner: string,
+  id_endereco: number,
+  id_promoter: string,
+  status: string,
+  endereco: {
+    bairro: string,
+    cep: string,
+    cidade: string,
+    estado: string,
+    numero: number,
+    rua: string,
+    complemento: string
   }
+  lotacoes: [
+    lotacao: {
+      id_perfil: number,
+      id_setor: number,
+      quantidade: number,
+      valorTotal: number
+    }
+  ]
+}
 
 function dataDaHora(hora: string){
   const horammdd = hora.slice(0, 10);
@@ -38,7 +39,7 @@ function dataDaHora(hora: string){
   return horaddmm;
 }
 
-export default function EventsHome() {
+export default function EventsHome(props: any) {
     const [eventos, setEventos] = useState<Evento[]>([]);
     
     const fetchEvents = async () => {
@@ -47,20 +48,37 @@ export default function EventsHome() {
         setEventos(data);
     }
 
+    let eventosListados: Evento[] = eventos;
+
+    function determinarEventos(){
+      if (props.nome === ""){
+        eventosListados = eventos;
+      } else{
+        eventosListados = eventos.reduce((resultado: Evento[], evento) =>{
+          if (evento.nome.toUpperCase().includes(props.nome.toUpperCase())){
+            resultado.push(evento)
+          }
+          return resultado;
+        }, [])
+      }
+    }
+
+
     useEffect(() => {
         fetchEvents();
     }, []);
     
+    determinarEventos();
     return (
-        <div>
-        {eventos.map((evento, index) =>(
-            <div key={index}>
-                
-                <EventCard id= {evento.id} imagem={evento.banner} data={dataDaHora(evento.horaInicio)} local={`${evento.endereco.cidade} - ${evento.endereco.estado}`}>
+        <div className="text-center">
+          {eventosListados.length==0?"Não há eventos correspondentes":""}
+          {
+            eventosListados?.map((evento, index)=>(
+                <EventCard key={index} id= {evento.id} imagem={evento.banner} data={dataDaHora(evento.horaInicio)} local={`${evento.endereco.cidade} - ${evento.endereco.estado}`}>
                     {evento.nome}
                 </EventCard>
-            </div>
-        ))}
+            ))
+          }
         </div>
     )
 }

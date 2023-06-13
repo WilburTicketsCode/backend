@@ -69,9 +69,9 @@ export default function FormSecurityData(props: any) {
 
   return (
 	<>
-		{statusAlert == status.SUCESS && <AlertSucess/>}
-		{statusAlert == status.ERROR && <AlertError />}
-		{statusAlert == status.NOT_FOUND && <AlertNotFound />}
+		{statusAlert == status.SUCESS && <AlertSucess msg="Senha alterada com sucesso"/>}
+		{statusAlert == status.ERROR && <AlertError msg="Ocorreu um erro no servidor"/>}
+		{statusAlert == status.NOT_FOUND && <AlertNotFound msg='Você errou sua senha atual'/>}
 
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className="space-y-12">

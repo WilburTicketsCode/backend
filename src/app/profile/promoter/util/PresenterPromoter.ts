@@ -5,8 +5,8 @@ export class PresenterPromoter{
 
     public static toUpdateProfile(form: personalFormData, id_is_cpf: boolean){
         const obj = {
-            cpf: id_is_cpf ? form.cpf_cnpj : '',
-            cnpj: id_is_cpf ? '' : form.cpf_cnpj,
+            cpf: id_is_cpf ? form.cpf_cnpj : null,
+            cnpj: id_is_cpf ? null : form.cpf_cnpj,
             endereco:{ 
                 bairro: form.neighborhood, 
                 cep: form.cep, 

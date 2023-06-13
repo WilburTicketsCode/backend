@@ -14,7 +14,7 @@ import {
     IconButton,
     Carousel,
     Card,
-    CardHeader,
+    CardHeader, 
     CardBody,
     Dialog,
     CardFooter,
@@ -23,7 +23,8 @@ import {
     TabsBody,
     Tab,
     TabPanel,
-    Checkbox, 
+    Checkbox,
+    Badge,
   
 } from "@material-tailwind/react"; 
 
@@ -63,4 +64,5 @@ export { Accordion,
     PowerIcon,
     Checkbox,
     BanknotesIcon,
+    Badge,
   };

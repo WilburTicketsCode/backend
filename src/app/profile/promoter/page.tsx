@@ -33,12 +33,18 @@ export default function PromoterPage() {
 
     const {data: session} = useSession();
     const cpfORcnpj = session?.user?.id;
+	const email = session?.user.email;
 
     useEffect(() => {
         const fetchData = async () => {
             // Só chama a api se já tiver obtido os dados do cpf ou cnpj
-            if (cpfORcnpj){
+            if (cpfORcnpj && email){
                 try {
+                    // const response2 = await fetch(`/api/promoter`);
+                    // const jsonData2 = await response2.json();
+                    // console.log(jsonData2)
+
+
                     const response = await fetch(`/api/promoter/${cpfORcnpj}`);
                     const jsonData = await response.json();
                     setDataPromoter(jsonData);
@@ -75,7 +81,7 @@ export default function PromoterPage() {
                                     <FormPersonalData user={dataPromoter}/>
                                 </TabPanel>
                                 <TabPanel className="h-full overflow-auto" value="security">
-                                    <FormSecurityData/>
+                                    <FormSecurityData email={email}/>
                                 </TabPanel>
                             </TabsBody>
                         </Tabs>

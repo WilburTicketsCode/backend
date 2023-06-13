@@ -103,7 +103,6 @@ async function main() {
       },
       cpf: "45267413020",
       status: "aprovado",
-      data_nasc: new Date(),
       telefone: "965238485414",
       endereco: {
         create: {
@@ -194,7 +193,6 @@ async function main() {
       },
       cpf: "72417917033",
       status: "aprovado",
-      data_nasc: new Date(),
       telefone: "99136945571",
       endereco: {
         create: {
@@ -222,7 +220,6 @@ async function main() {
       },
       cpf: "58429911014",
       status: "aprovado",
-      data_nasc: new Date(),
       telefone: "98536231962",
       endereco: {
         create: {
@@ -475,7 +472,6 @@ async function main() {
       },
       cpf: "28419554006",
       status: "suspenso",
-      data_nasc: new Date(),
       telefone: "96838738801",
       endereco: {
         create: {
@@ -503,7 +499,6 @@ async function main() {
       },
       cpf: "28419994006",
       status: "aprovado",
-      data_nasc: new Date(),
       telefone: "96838738801",
       endereco: {
         create: {

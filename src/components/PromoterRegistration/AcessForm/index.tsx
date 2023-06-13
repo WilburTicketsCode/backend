@@ -26,6 +26,14 @@ const AcessFormSchema = z.object({
   path: ["passwordConfirm"],
 });
 
+function campoVazio(value:string) {
+  if (value === "") {
+    return null
+  } else {
+    return value
+  }
+}
+
 export default function AcessForm() {
   const { infoStepper, setInfoStepper } = UseStepperContext();
   const { infoAcessForm, setInfoAcessForm, infoAdressForm, infoCompanyForm } = UsePromoterRegistrationContext();
@@ -93,8 +101,8 @@ export default function AcessForm() {
 
     const promoter = {
       nome: infoCompanyForm.name,
-      cpf: infoCompanyForm.CPF.replace(/[.-]/gi,""),
-      cpnj: infoCompanyForm.CNPJ.replace(/[\/\-.]/gi,""),
+      cpf: campoVazio(infoCompanyForm.CPF.replace(/[.-]/gi,"")),
+      cpnj: campoVazio(infoCompanyForm.CNPJ.replace(/[\/\-.]/gi,"")),
       email: data.email,
       password: data.password,
       status: 'pendente',

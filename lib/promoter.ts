@@ -8,8 +8,8 @@ export type Promoters = Prisma.PromiseReturnType<typeof getPromoters>;
 export type Promoter = {
     cpf: string,
     cnpj: string,
-    status: string,
     data_nasc: Date,
+    status: string,
     telefone: string,
     usuario: {
         nome: string,
@@ -30,7 +30,6 @@ export type Promoter = {
 export type PromoterEdicao = {
     cpf: string | null,
     cnpj: string | null,
-    data_nasc: Date,
     telefone: string,
     usuario: {
         nome: string,
@@ -211,7 +210,6 @@ export async function novaEdicaoPromoter(promoter: PromoterEdicao, id: string) {
             const promoterAtualizado = await prisma.promoter.update({
                 where: { cpf: id},
                 data: {
-                    data_nasc: promoter.data_nasc,
                     telefone: promoter.telefone,
                     usuario: {
                         update: { nome: promoter.usuario.nome}
@@ -233,7 +231,6 @@ export async function novaEdicaoPromoter(promoter: PromoterEdicao, id: string) {
             const promoterAtualizado = await prisma.promoter.update({
                 where: { cnpj: id},
                 data: {
-                    data_nasc: promoter.data_nasc,
                     telefone: promoter.telefone,
                     usuario: {
                         update: { nome: promoter.usuario.nome}

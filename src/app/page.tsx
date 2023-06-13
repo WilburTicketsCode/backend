@@ -16,7 +16,7 @@ export default function Home() {
             </div>
 
             <div className="flex justify-center lg:w-[60vw] w-[95vw] min-h-[128px] flex-col bg-gray-300 rounded-xl">
-                <EventsHome />
+                <EventsHome nome=""/>
             </div>
 
         </div>

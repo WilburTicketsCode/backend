@@ -4,6 +4,7 @@ import { useShoppingCart } from "@/contexts/ShoppingCartContext"
 import { useState, useEffect } from "react";
 import { Evento, Eventos } from "../../../../../lib/evento";
 import Preco from "../CardPreco";
+import ButtonFinalizar from "./ButtonFinalizar";
 
 function searchLotacao(eventos: any, lotacaoId: number) {
     for (let i = 0; i < eventos.length; i++) {
@@ -63,7 +64,7 @@ export default function CardPrecoTotal(props:any){
                     return total + (item?.valorTotal || 0) * cartItem.quantidade
                     }, 0) || "R$0,00").toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})} </p>
 
-                    <button className="bg-purple-800  h-[23px] w-[100px] rounded-lg font-sans text-[10px] text-white">Finalizar Pagamento</button>
+                    <ButtonFinalizar></ButtonFinalizar>
                     
                     </div>
 

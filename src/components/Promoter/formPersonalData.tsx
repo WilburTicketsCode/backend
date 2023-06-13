@@ -16,7 +16,7 @@ enum status {
 }
 
 // Validação de tipos no campo
-type personalFormData = z.infer<typeof personalSchema>;
+export type personalFormData = z.infer<typeof personalSchema>;
 
 const personalSchema = z.object({
  	name: z.string(),

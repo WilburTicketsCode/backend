@@ -2,7 +2,7 @@ import React from "react";
 import { Alert, Typography } from "@material-tailwind/react";
 import { InformationCircleIcon, CheckCircleIcon, ExclamationTriangleIcon } from "@heroicons/react/24/solid";
  
-export function AlertNotFound() {
+export function AlertNotFound(props: any) {
   const [open, setOpen] = React.useState(true);
  
   return (
@@ -15,7 +15,7 @@ export function AlertNotFound() {
       onClose={() => setOpen(false)}
     >
       <Typography variant="h5" color="white">
-        Você errou sua senha atual
+        {props.msg}
       </Typography>
     </Alert>
   </div>
@@ -37,14 +37,14 @@ export function AlertSucess(props: any) {
         onClose={() => setOpen(false)}
       >
         <Typography variant="h5" color="white">
-          Senha alterada com sucesso
+          {props.msg}
         </Typography>
       </Alert>
     </div>
   );
 }
 
-export function AlertError() {
+export function AlertError(props: any) {
   const [open, setOpen] = React.useState(true);
  
   return (
@@ -57,7 +57,7 @@ export function AlertError() {
       onClose={() => setOpen(false)}
     >
       <Typography variant="h5" color="white">
-        Ocorreu um erro no servidor
+        {props.msg}
       </Typography>
     </Alert>
   </div>

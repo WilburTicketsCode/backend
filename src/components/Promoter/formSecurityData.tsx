@@ -36,6 +36,7 @@ export default function FormSecurityData(props: any) {
 
 
     const onSubmit = async (data: securityFormData) => {
+		setStatusAlert(status.EMPTY)// Para garantir que o alert vai aparecer sempre, mesmo que se mantenha no mesmo erro
 		// Construindo o objeto de requisição
 		const user_data = JSON.stringify({
 			email: props.email,
@@ -51,7 +52,6 @@ export default function FormSecurityData(props: any) {
 			body: user_data
 		})
 
-		setStatusAlert(status.EMPTY)// Para garantir que o alert vai aparecer sempre, mesmo que se mantenha no mesmo erro
 		// Se não achou o user 
 		if (res.status == 404){
 			setStatusAlert(status.NOT_FOUND)

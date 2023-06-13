@@ -65,6 +65,7 @@ export default function FormPersonalData(props: any) {
   	});
 
     const onSubmit = async (data: personalFormData) => {
+		setStatusAlert(status.EMPTY)// Para garantir que o alert vai aparecer sempre, mesmo que se mantenha no mesmo erro
       // Construindo o objeto de requisição
       const body_req = JSON.stringify(PresenterPromoter.toUpdateProfile(data))
 
@@ -79,7 +80,6 @@ export default function FormPersonalData(props: any) {
       })
 
 
-	  setStatusAlert(status.EMPTY)// Para garantir que o alert vai aparecer sempre, mesmo que se mantenha no mesmo erro
       // Se conseguiu alterar a senha (200-OK)
       if (res.status == 200){
         setStatusAlert(status.SUCESS)

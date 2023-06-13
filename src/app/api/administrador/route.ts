@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { getAdministradores, inserirAdministrador } from "../../../../lib/administrador";
+import { Administrador, getAdministradores, inserirAdministrador } from "../../../../lib/administrador";
+import { cpfDuplicado, emailDuplicado } from "../../../../lib/erros";
+import { mailOptions, transporter, trocarDestinatario } from "../../../../lib/nodemailer";
 
 
 /* Banco pessoal
@@ -16,25 +18,41 @@ export async function GET(request: Request) {
     return NextResponse.json(data)
 }
 
-/* Versão beta do codigo de POST, sofrera mudanças em breve. */
 export async function POST(request:Request) {
-    const dados = await request.json()
-    try {
-        const nome = dados.nome
-        const email = dados.email
-        const senha = dados.senha
-        const cpf = dados.cpf
-        const superAdm = dados.superAdm
+    const dados: Administrador = await request.json()
+    if (dados !== null){
+        try {
 
-        const adm = await inserirAdministrador(nome, email, senha, cpf, superAdm)
+            const adm = await inserirAdministrador(dados)
+    
+            if (adm === null) {
+                return NextResponse.json("ERROR 00")
+            } else {
+                console.log("Dados criados.\n", adm);
+                try {
+                    trocarDestinatario(dados.usuario.email)
+                    await transporter.sendMail({
+                        ...mailOptions,
+                        subject: 'Verificando Conta Wilbor',
+                        text: 'Email vindo diretamente do mado do backend',
+                        html: '<h1>MAGO DO BACKEND</h1><p>Email enviado pelo mago do backend' +
+                        ' quando sua conta foi criada no melhor site do universo. Sinta-se' +
+                        ' honrado de estar recebendo o email do mago do beck-end Pedro VI</p>'
+                    })
+                } catch (e) {
+                    console.log(e)
+                }
+                return NextResponse.json(dados)
+            }
 
-        if (adm === null) {
-            console.log("Dados de ADM invalidos.")
-        } else {
-            console.log("Dados criados.");
+        } catch (e) {
+            if (e instanceof cpfDuplicado){
+                return NextResponse.json("ERROR 01")
+            } else if (e instanceof emailDuplicado){
+                return NextResponse.json("ERROR 02")
+            }
         }
-    } catch (e) {
-        console.log("Não deu.")
-    }
+    
+    } 
 
 }

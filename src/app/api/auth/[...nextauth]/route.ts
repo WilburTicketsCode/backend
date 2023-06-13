@@ -16,7 +16,7 @@ const handler = NextAuth({
             },
             async authorize(credentials, req) {
               // Add logic here to look up the user from the credentials supplied
-              const res = await fetch("http://localhost:3000/api/login", {
+              const res = await fetch("https://backend-wilbortick.vercel.app/api/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -41,6 +41,20 @@ const handler = NextAuth({
             },
           }),
     ],
+
+    pages: {
+      signIn: "/auth/sign-in"
+    },
+
+    callbacks: {
+      async jwt({token, user}) {
+        return ({...token,...user})
+      },
+      async session ({session, token, user}){
+        session.user = token
+        return session
+      }
+    }
     
 })
 

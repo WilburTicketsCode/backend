@@ -39,12 +39,12 @@ export default function PromoterRegistration() {
     <ThemeProvider>
       <StepperContext.Provider value={{ infoStepper, setInfoStepper }}>
         <PromoterRegistrationContext.Provider value={{ infoCompanyForm, setInfoCompanyForm, infoAdressForm, setInfoAdressForm,infoAcessForm, setInfoAcessForm}} >
-          <div className="w-full h-[90%] flex justify-center">
-            <div className="flex flex-col items-center w-[400px] h-fit rounded-lg bg-gray-200">
-              <Typography variant="h2" className="text-[#404c76] mt-6">
+          <div className="w-full h-[90%] flex justify-center p-4">
+            <div className="flex flex-col items-center w-[500px] h-fit rounded-lg bg-gray-200">
+              <Typography variant="h2" className="text-[#404c76] mt-6 ml-4">
                 Seja um promoter!
               </Typography>
-              <Typography variant="small" className="text-[#404c76] mb-4">
+              <Typography variant="small" className="text-[#404c76] mb-4 ml-4">
                 Cadastre-se no sistema para vender seus ingressos.
               </Typography>
               <PromoteRegSteps />  

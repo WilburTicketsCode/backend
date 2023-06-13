@@ -127,10 +127,10 @@ async function main() {
   //Criação do Evento
   const evento1 = await prisma.evento.create({
     data: {
-      nome: "Festinha da UEFS",
+      nome: "Djavan Turnê D 2023",
       horaInicio: new Date("2023-05-30 19:00"),
       horaFim: new Date("2023-05-30 23:00"),
-      descricao: "Uma festa que ira acontecer na UEFS",
+      descricao: "Depois de encerrar o ano de 2022 com participações marcantes em importantes festivais, Djavan volta aos palcos em 2023 com uma longa série de shows da turnê ‘D’!",
       banner: "nada",
       id_promoter: promoter1.id,
       id_endereco: endereco1.id
@@ -446,6 +446,32 @@ async function main() {
           cvv: "333",
         }
       }
+    }
+  })
+
+  const cliente4 = await prisma.cliente.create({
+    data: {
+      cpf: '66168230016',
+      telefone: '6906587229',
+      data_nasc: new Date(),
+      usuario: {
+        create: {
+          nome: "Jorge Amado",
+          email: "seuxxxamado@yahoo.com",
+          senha: "1234"
+        }
+      },
+      endereco: {
+        create: {
+          rua: "Rua da Consolação",
+          numero: 1000,
+          bairro: "Consolação",
+          cidade: "São Paulo",
+          estado: "SP",
+          cep: "01302-907",
+          complemento: "Apt 501"
+        }  
+      },
     }
   })
 

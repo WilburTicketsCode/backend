@@ -1,6 +1,6 @@
 import { Input, Button } from '../../ClientSide'
 import { CiSearch } from "react-icons/ci"
-
+import Link from 'next/link';
 
 
 export default function Search() {
@@ -17,9 +17,11 @@ export default function Search() {
           className: "min-w-[200px]",
         }}
       />
+      <Link href="../../search">
       <Button size="md" className="!absolute right-1 top-1 rounded">
         <CiSearch/>
       </Button>
+      </Link>
     </div>
   )
 }

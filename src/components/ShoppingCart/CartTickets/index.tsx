@@ -1,6 +1,6 @@
 "use client"
 
-import { Fragment, useState } from "react";
+import {  useState } from "react";
 import {
   Accordion,
   AccordionHeader,
@@ -54,7 +54,7 @@ export default function Example() {
             <Sector nomeSetor="Backstage"></Sector>
             <Sector nomeSetor="Camarote"></Sector>
             <Sector nomeSetor="Área Vip"></Sector>
-            <p className="text-right pr-1 text-[#404C76] font-bold">Valor Total: R$2700,00</p>
+            <p className="text-right pr-1 text-[#404C76] font-bold text-[14px]">Valor Total: R$2700,00</p>
             
           </AccordionBody>
       </Accordion>

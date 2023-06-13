@@ -67,7 +67,7 @@ export default function FormPersonalData(props: any) {
     const onSubmit = async (data: personalFormData) => {
 		setStatusAlert(status.EMPTY)// Para garantir que o alert vai aparecer sempre, mesmo que se mantenha no mesmo erro
       // Construindo o objeto de requisição
-      const body_req = JSON.stringify(PresenterPromoter.toUpdateProfile(data))
+      const body_req = JSON.stringify(PresenterPromoter.toUpdateProfile(data, props.user.cpf ? true : false))
 
       // Chama API
 	  const id = props.user.cpf ? props.user.cpf : props.user.cnpj

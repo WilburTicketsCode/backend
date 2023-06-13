@@ -3,10 +3,10 @@ import { personalFormData } from "@/components/Promoter/formPersonalData";
 // Classe para realizar a modificação nas estruturas de dados (como dto)
 export class PresenterPromoter{
 
-    public static toUpdateProfile(form: personalFormData){
+    public static toUpdateProfile(form: personalFormData, id_is_cpf: boolean){
         const obj = {
-            cpf: form.cpf_cnpj ? form.cpf_cnpj : '',
-            cnpj: form.cpf_cnpj ? '' : form.cpf_cnpj,
+            cpf: id_is_cpf ? form.cpf_cnpj : '',
+            cnpj: id_is_cpf ? '' : form.cpf_cnpj,
             endereco:{ 
                 bairro: form.neighborhood, 
                 cep: form.cep, 

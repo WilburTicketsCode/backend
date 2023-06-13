@@ -98,13 +98,13 @@ async function main() {
         create: {
           nome: "Rafeael Tosta",
           email: "tostinha123@yahoo.com",
-          senha: "Tosta1134"
+          senha: "tostinha123"
         }
       },
       cpf: "45267413020",
       status: "aprovado",
       data_nasc: new Date(),
-      telefone: "96523848514",
+      telefone: "965238485414",
       endereco: {
         create: {
           rua: "Rua da Paz",

@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import UseEventRegistrationContext from "../../../use/UseEventRegistrationContext";
+import BasicInformationForm from "../BasicInformationForm";
 
 function formatCEP(value:string) {
   return value
@@ -29,10 +30,8 @@ const AdressFormSchema = z.object({
 })
 
 export default function AdressForm() {
-
   const { infoStepper, setInfoStepper } = UseStepperContext();
-
-  const { infoAdressForm, setInfoAdressForm } = UseEventRegistrationContext();
+  const { infoAdressForm, setInfoAdressForm, infoBasicInformationForm, infoDateForm, infoDescriptionForm, infoTicketForm } = UseEventRegistrationContext();
 
   const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<AdressFormData>({
       resolver: zodResolver(AdressFormSchema),
@@ -49,6 +48,48 @@ export default function AdressForm() {
           },
     })
 
+  async function createEvento(evento: any) {
+      const jaison = JSON.stringify({
+        nome: evento.nome,
+        horaInicio: evento.horaInicio,
+        horaFim: evento.horaFim,
+        descricao: evento.descricao,
+        banner: evento.banner, 
+        status: evento.status,
+        endereco: {
+          rua: evento.rua,
+          numero: evento.numero,
+          bairro: evento.bairro,
+          cidade: evento.cidade,
+          estado: evento.estado,
+          cep: evento.cep,
+          complemento: evento.complemento,
+        },
+        lotacoes: [{
+            lotacao: {
+            id_setor: evento.setor,
+            id_perfil: evento.perfil,
+            quantidade: evento.quantidade,
+            valortotal: evento.valor,
+            }
+          }
+        ]
+    })
+
+    /* Mostrando no console do navegador o formato do json usado para enviar os dados para API */
+    console.log("Exemplo de como o JSON para criação de um Promoter deve ser feito:\n" +
+    jaison)
+
+    /* Enviando de verdade para API */
+    const res = await fetch("/api/evento", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: jaison
+    })
+
+    }
   const onSubmit = (data: AdressFormData) => {
     
     setInfoStepper({
@@ -64,7 +105,35 @@ export default function AdressForm() {
       city: data.city,
       state: data.state,
   });
+
+  const evento = {
+    nome: infoBasicInformationForm.name,
+    horaInicio: new Date(infoDateForm.startDate),
+    horaFim: new Date(infoDateForm.endDate),
+    descricao: infoDescriptionForm.Description,
+    banner: infoBasicInformationForm.image,
+    status: "pendente",
+    rua: infoAdressForm.street,
+    numero: infoAdressForm.number,
+    bairro: infoAdressForm.district,
+    cidade: infoAdressForm.city,
+    estado: infoAdressForm.state,
+    cep: infoAdressForm.CEP.replace(/[-]/gi,""),
+    complemento: infoAdressForm.complement,
+    lotacoes: [{
+      lotacao: {
+        id_perfil: infoTicketForm.profile,
+        id_setor: infoTicketForm.sector,
+        quantidade: infoTicketForm.amount,
+        valorTotal: infoTicketForm.price
+        }
+      }
+    ]  
+  }
+
+  createEvento(evento)
 }
+
   const CEP = watch("CEP")
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 import React from 'react';
 import { AlertError, AlertNotFound, AlertSucess } from './alert';
-import { PresenterPromoter } from '@/app/profile/promoter/util/PresenterPromoter';
+import { PresenterPromoter } from '@/adapters/presenters/PresenterPromoter';
 
 
 // Status auxiliares para exibir alerts para informar aos usuários

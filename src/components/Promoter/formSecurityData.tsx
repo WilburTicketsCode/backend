@@ -14,7 +14,7 @@ const securitySchema = z.object({
 
 // Status auxiliares para exibir alerts para informar aos usuários
 enum status {
-	EMPTY,
+	EMPTY, // status inicial
 	SUCESS,
 	ERROR,
 	NOT_FOUND,
@@ -36,6 +36,7 @@ export default function FormSecurityData(props: any) {
 
 
     const onSubmit = async (data: securityFormData) => {
+		setStatusAlert(status.EMPTY)// Para garantir que o alert vai aparecer sempre, mesmo que se mantenha no mesmo erro
 		// Construindo o objeto de requisição
 		const user_data = JSON.stringify({
 			email: props.email,
@@ -55,13 +56,13 @@ export default function FormSecurityData(props: any) {
 		if (res.status == 404){
 			setStatusAlert(status.NOT_FOUND)
 		}
-		// Se tiver dado problema no servidor
-		if (res.status == 500){
-			setStatusAlert(status.ERROR)
-		}
-		// Se achou conseguiu alterar a senha
-		if (res.status == 200){
+		// Se achou e conseguiu alterar a senha
+		else if (res.status == 200){
 			setStatusAlert(status.SUCESS)
+		}
+		// Se tiver dado problema no servidor
+		else if (res.status == 500){// Talvez colocar o else seja melhor
+			setStatusAlert(status.ERROR)
 		}
         
     }
@@ -69,9 +70,9 @@ export default function FormSecurityData(props: any) {
 
   return (
 	<>
-		{statusAlert == status.SUCESS && <AlertSucess/>}
-		{statusAlert == status.ERROR && <AlertError />}
-		{statusAlert == status.NOT_FOUND && <AlertNotFound />}
+		{statusAlert == status.SUCESS && <AlertSucess msg="Senha alterada com sucesso"/>}
+		{statusAlert == status.ERROR && <AlertError msg="Ocorreu um erro no servidor"/>}
+		{statusAlert == status.NOT_FOUND && <AlertNotFound msg='Você errou sua senha atual'/>}
 
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className="space-y-12">

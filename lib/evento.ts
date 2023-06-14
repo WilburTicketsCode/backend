@@ -18,7 +18,7 @@ export type Evento = {
     cep: string,
     cidade: string,
     estado: string,
-    numero: number,
+    numero: string,
     rua: string,
     complemento: string
   }

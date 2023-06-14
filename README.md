@@ -1,10 +1,12 @@
 ## Contas (PlanetScale/seed.ts)
 
-Administrador - email: pedro200@hotmail.com | senha: pedropedro99
+Administrador - `email: pedro200@hotmail.com | senha: pedropedro99`
 
-Promoter - email: tostinha123@yahoo.com | senha: Tosta1234
+Promoter (CPF) - `email: tostinha123@yahoo.com | senha: tostinha123`
 
-Cliente - email: andrezito@yahoo.com | senha: 123
+Promoter (CNPJ) - `email: zuzu@gmail.com | senha: 12345678`
+
+Cliente - email: `andrezito@yahoo.com | senha: 123`
 
 
 ## Getting Started

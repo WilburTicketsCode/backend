@@ -6,6 +6,13 @@ import { useState } from "react";
 import { usePathname} from 'next/navigation'
 import QRCode from "qrcode.react";
 
+function formatCPF(value:string) {
+  return value
+  .replace(/[^0-9]/g, "")
+  .replace(/^([0-9]{3})([0-9]{1,3})$/, "$1.$2")
+  .replace(/^([0-9]{3})([0-9]{3})([0-9]{1,3})$/, "$1.$2.$3")
+  .replace(/^([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{1,2})$/, "$1.$2.$3-$4")
+  }
 
 
 export default function Ticket(ticket:any) {
@@ -21,7 +28,7 @@ export default function Ticket(ticket:any) {
     profile: ticket.data.perfil,
     sector: ticket.data.setor,
     name: ticket.data.nome_cliente,
-    cpf: ticket.data.cpf,
+    cpf:  formatCPF(ticket.data.cpf),
   });
 
   return (

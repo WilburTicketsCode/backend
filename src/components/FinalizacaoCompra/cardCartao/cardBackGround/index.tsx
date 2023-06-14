@@ -47,6 +47,7 @@ export default function CardCartao() {
     const { data: session } = useSession();
     console.log(session)
     const cpf = session?.user?.id;
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -74,10 +75,11 @@ export default function CardCartao() {
                 <h6 className="font-semibold px-2">Método de Pagamento</h6>
 
                 <CardCartaoItem finalCartao= {data?.cartao.num_cartao.slice(14)} dataVencimento = {data?.cartao.data_vencimento} />
-
-                <div className="relative flex flex-col justify-center items-center gap-5 pt-1">
-                    <Dropdown />
+                
+                <div className="relative flex flex-col justify-center items-center gap-0 pt-1">
+                    <p className="text-[14px]">Parcelas:</p><Dropdown />
                 </div>
+                
             </div>
 
         </div>

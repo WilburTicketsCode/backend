@@ -9,7 +9,6 @@ export type Promoter = {
     cpf: string,
     cnpj: string,
     status: string,
-    data_nasc: Date,
     telefone: string,
     usuario: {
         nome: string,
@@ -18,7 +17,26 @@ export type Promoter = {
     },
     endereco: {
         rua: string,
-        numero: number,
+        numero: string,
+        bairro: string,
+        cidade: string,
+        estado: string,
+        cep: string,
+        complemento: string,
+    },
+};
+
+export type PromoterEdicao = {
+    cpf: string | null,
+    cnpj: string | null,
+    telefone: string,
+    usuario: {
+        nome: string,
+        email: string
+    },
+    endereco: {
+        rua: string,
+        numero: string,
         bairro: string,
         cidade: string,
         estado: string,
@@ -117,7 +135,6 @@ export async function inserirPromoter(promoter: Promoter) {
                     cpf: promoter.cpf,
                     cnpj: promoter.cnpj,
                     status: promoter.status,
-                    data_nasc: promoter.data_nasc,
                     telefone: promoter.telefone,
                     endereco: {
                         create: {
@@ -176,6 +193,63 @@ export async function edicaoPromoter(tipoDeEdicao: string, novoDadoAlterado: str
             console.error('Erro ao atualizar o evento:', e);
             return null
         }
+    }
+}
+
+export async function novaEdicaoPromoter(promoter: PromoterEdicao, id: string) {
+    const res = await getPromoter(id);
+
+	if (!res || res == undefined){
+		throw new usuarioNaoEncontrado("Promoter com essa identificação não existe")
+	}
+    try {
+        if (id.length === 11){
+
+            const promoterAtualizado = await prisma.promoter.update({
+                where: { cpf: id},
+                data: {
+                    telefone: promoter.telefone,
+                    usuario: {
+                        update: { nome: promoter.usuario.nome}
+                    },
+                    endereco: {
+                        update: {
+                            rua: promoter.endereco.rua,
+                            numero: promoter.endereco.numero,
+                            bairro: promoter.endereco.bairro,
+                            cidade: promoter.endereco.cidade,
+                            estado: promoter.endereco.estado,
+                            cep: promoter.endereco.cep,
+                            complemento: promoter.endereco.complemento,
+                        }
+                    }
+                }
+            })
+        } else if (id.length === 14){
+            const promoterAtualizado = await prisma.promoter.update({
+                where: { cnpj: id},
+                data: {
+                    telefone: promoter.telefone,
+                    usuario: {
+                        update: { nome: promoter.usuario.nome}
+                    },
+                    endereco: {
+                        update: {
+                            rua: promoter.endereco.rua,
+                            numero: promoter.endereco.numero,
+                            bairro: promoter.endereco.bairro,
+                            cidade: promoter.endereco.cidade,
+                            estado: promoter.endereco.estado,
+                            cep: promoter.endereco.cep,
+                            complemento: promoter.endereco.complemento,
+                        }
+                    }
+                }
+            })
+        }
+    } catch (e) {
+        console.error('Erro ao atualizar o promoter:', e);
+        return null
     }
 }
 

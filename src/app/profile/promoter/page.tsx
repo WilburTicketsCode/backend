@@ -40,6 +40,11 @@ export default function PromoterPage() {
             // Só chama a api se já tiver obtido os dados do cpf ou cnpj
             if (cpfORcnpj && email){
                 try {
+                    // const response2 = await fetch(`/api/promoter`);
+                    // const jsonData2 = await response2.json();
+                    // console.log(jsonData2)
+
+
                     const response = await fetch(`/api/promoter/${cpfORcnpj}`);
                     const jsonData = await response.json();
                     setDataPromoter(jsonData);

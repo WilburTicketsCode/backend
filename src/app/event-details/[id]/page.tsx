@@ -83,7 +83,6 @@ export default async function Event({params}: {params: { id: number }}) {
                                     setor={lot.setor.nome}
                                     perfil={lot.perfil.nome}
                                     valor={lot.valorTotal}
-                                    qtdIngressos={lot.quantidade}
                                 />
                             ))}
 

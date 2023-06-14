@@ -1,10 +1,11 @@
 'use client'
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 type loginFormData = z.infer<typeof loginASchema>;
 
@@ -28,9 +29,8 @@ const LoginAdm = () => {
 
     });
 
-    
 
-   
+
 
     const onSubmit = async (data: loginFormData) => {
         const result = await signIn("credentials", {
@@ -42,25 +42,25 @@ const LoginAdm = () => {
         if (result && result.error === 'CredentialsSignin') {
             result.error ? setCredentials(true) : setCredentials(false);
         }
-        
+
     }
 
     useEffect(() => {
         const redirectToRolePage = async () => {
-          if (session && session.user) {
-            if (session.user.role === "cliente") {
-              router.push("/");
-            } else if (session.user.role === "promoter") {
-              router.push("/promoter/eventos");
-            } else if (session.user.role === "administrador") {
-              router.push("/administrador/eventos");
+            if (session && session.user) {
+                if (session.user.role === "cliente") {
+                    router.push("/");
+                } else if (session.user.role === "promoter") {
+                    router.push("/promoter/eventos");
+                } else if (session.user.role === "administrador") {
+                    router.push("/administrador/eventos");
+                }
             }
-          }
         };
 
         redirectToRolePage();
-      }, [session]);
-    
+    }, [session]);
+
 
     return (
 
@@ -89,9 +89,9 @@ const LoginAdm = () => {
                         Senha
                     </label>
                     <div className="text-sm">
-                        <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                        <Link href="/auth/recsenha" className="font-semibold text-indigo-600 hover:text-indigo-500">
                             Esqueceu sua senha?
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <div className="mt-2">

@@ -16,15 +16,9 @@ function formatCEP(value:string) {
   .replace(/[^0-9]/g, "")
   .replace(/^([0-9]{5})([0-9]{1,3})$/, "$1-$2")
   }
-  function formatNumber(value:string) {
-    return value
-    .replace(/[^0-9]/g, "")
-    }
-    
 type AdressFormData = z.infer<typeof AdressFormSchema>;
 
 const AdressFormSchema = z.object({
-    placeName: z.string().min(1),
     CEP: z.string().min(9),
     street: z.string().min(1),
     number: z.string().min(1),
@@ -32,7 +26,6 @@ const AdressFormSchema = z.object({
     district: z.string().min(1),
     city: z.string().min(1),
     state: z.string().min(1),
-
 })
 
 export default function AdressForm() {
@@ -46,7 +39,6 @@ export default function AdressForm() {
       criteriaMode: 'all',
           mode: 'all',
           defaultValues: {
-            placeName: infoAdressForm.placeName,
             CEP: infoAdressForm.CEP,
             street: infoAdressForm.street,
             number: infoAdressForm.number,
@@ -64,10 +56,8 @@ export default function AdressForm() {
     });
     
     setInfoAdressForm({
-      placeName: data.placeName,
       CEP: data.CEP,
       street: data.street,
-
       number: data.number,
       complement: data.complement,
       district: data.district,
@@ -83,13 +73,6 @@ export default function AdressForm() {
 
 return (
   <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center px-8 gap-4 w-500 mt-8">
-    <Input size="lg" 
-        label="local do evento*" 
-        {...register("placeName")}
-          color="indigo"
-          error={Boolean(errors.placeName)}
-          containerProps={{ className: "min-w-[20px]" }}
-      />
     <div className="flex flex-row gap-6">
       <Input size="lg" 
         maxLength={9}

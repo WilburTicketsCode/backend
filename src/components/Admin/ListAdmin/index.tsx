@@ -59,13 +59,16 @@ return (
                     <li key={admin.id}>Senha: {admin.usuario.senha}</li>
                 </ul>
             ))}
+
+            <Link href="/administrador/admin-new" className="flex items-center justify-center p-0 m-0">
+                <Button className="mt-20" fullWidth>
+                Cadastrar Novo Administrador
+                </Button>
+            </Link>
+            
         </Card>
 
-        <Link href="/administrador/admin-new" className="flex items-center justify-center p-0 m-0">
-            <Button className="mt-20" fullWidth>
-                Cadastrar Novo Administrador
-            </Button>
-        </Link>
+        
 
     </div>
 )

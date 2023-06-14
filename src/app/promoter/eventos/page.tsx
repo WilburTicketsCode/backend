@@ -101,7 +101,7 @@ export default function eventosPromoter() {
 
     // ----- Fim Consulta a API
 
-    const slice = eventos.slice(0, numOfElement);  //const slice = events.slice(0, numOfElement);
+    
 
     function formatDate(date: string): string {
         const fullDate = date.slice(0, 16).replaceAll('-', '/').replaceAll('T', '-').split('-');
@@ -114,23 +114,16 @@ export default function eventosPromoter() {
         return endereco.rua + ", " + endereco.bairro + ", " + endereco.cidade
     }
 
-    const loadMore = () => {
-        setNumOfElement(numOfElement + numOfElement)
-    }
+   
 
     return (
-        <div className="flex flex-col h-full items-center justify-center mt-4 pt-20 bg-gradient-to-br from-indigo-300 via-purple-800 to-blue-200">
+        <div className="flex flex-col h-full items-center justify-center mt-4 pt-20  ">
             <div className="grid grid-cols-12 md:col-span-6 xl:col-span-4 h-full xl:gap-x-14 md:gap-8 gap-y-8 mt-4 mb-4">  {/*Layout para essa página*/}
-                {slice.map((item, index) => {
+                {eventos.map((item, index) => {
                         if(item.id_promoter == promoter?.id){
                         return (<CardEventoPromoter key={item.id} imagem={item.banner} nome={item.nome} data={formatDate(item.horaInicio)} local={formatLocalEvento(item.endereco)} evento={item.id} /> )
                     } 
                 })}
-                <div className="object-center text-center col-span-12 mt-10 mb-3">
-                    <button className="bg-roxo-wil h-[36px] w-[230px] text-white font-sans text-sm font-semibold text-center object-center rounded-full shadow-md shadow-black/40" onClick={() => loadMore()}>
-                        MAIS EVENTOS
-                    </button>
-                </div>
             </div>
         </div>
     )

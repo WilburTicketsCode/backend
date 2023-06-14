@@ -14,6 +14,7 @@ import Search from './Search';
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import ProfileMenuPromoter from './Promoter/ProfileMenuPromoter';
+import { ShoppingCartProvider } from '@/contexts/ShoppingCartContext';
 
 
 
@@ -29,6 +30,7 @@ const Navbar = ({ navbarType }: Props) => {
         if (session.user.role === 'cliente') {
 
             return (
+                <ShoppingCartProvider>
                 <div className='w-full top-0 fixed bg-white z-50 shadow-sm rounded-b-lg'>
                     <div className='p-1 border-b-[2px] rounded-b-lg'>
                         <div className="2xl:px-[3rem] flex flex-row items-center justify-between gap-0 md:gap-1">
@@ -53,6 +55,7 @@ const Navbar = ({ navbarType }: Props) => {
                         </div>
                     </div>
                 </div>
+                </ShoppingCartProvider>
             )
         } else if (session.user.role === 'promoter') {
             return (

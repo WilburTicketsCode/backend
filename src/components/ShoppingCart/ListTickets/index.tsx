@@ -17,8 +17,6 @@ function searchLotacao(eventos: any, lotacaoId: number) {
     }
     return []}
 
-
-      
 export default function ListTickets(){
     const fetchEvents = async () => {
         const reponse = await fetch(`/api/evento`);
@@ -31,7 +29,7 @@ export default function ListTickets(){
       }, []);
     
     const [events, setEvents] = useState<Eventos>([]);
-    const { cartItems, restartCart } = useShoppingCart()
+    const { cartItems} = useShoppingCart()
 
     let cartEventos: Eventos = []
     cartEventos = cartItems?.reduce((resultado:Eventos, item) =>{

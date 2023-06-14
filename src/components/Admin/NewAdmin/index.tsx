@@ -40,7 +40,7 @@ export default function TelaNewAdm() {
         }
     
         // Enviar dados do formulário para a API
-        fetch('https://backend-wilbortick.vercel.app/api/administrador', {
+        fetch('/api/administrador', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

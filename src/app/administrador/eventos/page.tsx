@@ -14,6 +14,7 @@ export default function AdmHome() {
     const [numOfElement, setNumOfElement] = useState(6);
     const [events, setEvents] = useState<any[]>([]);
     const [isVisible, setIsVisible] = useState(true);
+    const [refreshEvents, setRefreshEvents] = useState(false);
 
      //------ Consulta a API
     const fetchEvents = async () => {
@@ -24,7 +25,7 @@ export default function AdmHome() {
 
     useEffect(() => {
         fetchEvents();
-    }, []);
+    }, [refreshEvents]);
     // ----- Fim Consulta a API
     
     useEffect(() =>{                            // Ativar/desativar o botão de carregar mais
@@ -56,7 +57,7 @@ export default function AdmHome() {
         <div className="flex flex-col h-full items-center justify-center mt-4 pt-20 bg-transparent">
             <div className="grid grid-cols-12 md:col-span-6 xl:col-span-4 h-full xl:gap-x-14 md:gap-8 gap-y-8 mt-4 mb-4">
                 {slice.map((item, index) => {
-                    return (<CardEventoAdm key={item.id} imagemEvento={item.banner} nomeEvento={item.nome} dataEvento={formatDate(item.horaInicio)} localEvento={formatLocalEvento(item.endereco)} evento={item.id} />)
+                    return (<CardEventoAdm key={item.id} imagemEvento={item.banner} nomeEvento={item.nome} dataEvento={formatDate(item.horaInicio)} localEvento={formatLocalEvento(item.endereco)} evento={item.id} status={item.status} refreshEvents={refreshEvents} setRefreshEvents={setRefreshEvents}/>)
                 })}
                 <div className="object-center text-center col-span-12 mt-10 mb-3">
                     {isVisible ? 

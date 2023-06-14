@@ -1,12 +1,14 @@
-import {Card, CardHeader, CardBody, Typography, Button} from "@/components/ClientSide";
-import Link from "next/link";
+import {Card, CardHeader, CardBody, Typography, Button, IconButton} from "@/components/ClientSide";
 
 type Props = {
     imagemEvento: string,
     nomeEvento: string,
     dataEvento: string,
     localEvento: string,
-    evento: number
+    evento: number,
+    status: string,
+    refreshEvents: boolean,
+    setRefreshEvents: Function
 }
 
 
@@ -17,8 +19,7 @@ const EditarStatusEv = {
 }
 
 
-
-export default function CardEventoAdm({imagemEvento, nomeEvento, dataEvento, localEvento, evento}: Props) {
+export default function CardEventoAdm({imagemEvento, nomeEvento, dataEvento, localEvento, evento, status, refreshEvents, setRefreshEvents}: Props) {
   async function CallChangeStats(){
     const jaison = JSON.stringify({
     tipo: EditarStatusEv.tipo,
@@ -38,16 +39,19 @@ export default function CardEventoAdm({imagemEvento, nomeEvento, dataEvento, loc
         const data = await res.json()
         console.log(JSON.stringify(data)) 
         console.log("AQUII:", res)
+
+        setRefreshEvents(!refreshEvents)
     } else {
-      console.log("DEU BO")
-        }
+        alert("Não foi possível suspender o evento!")    //Mostra que não foi possível alterar o status
+      }
       }
 
   return (
 
     <Card className="mt-0 w-[320px] h-[288px] shadow-black/40 col-span-12 md:col-span-6 xl:col-span-4"> 
       <CardHeader floated={false} color="blue-gray" className="relative h-60 mx-0 mt-0">
-        <img src={imagemEvento} alt="imagem-do-evento" className="object-fill h-full w-full"/>
+        <img src={imagemEvento} alt="imagem-do-evento" className={`object-fill h-full w-full ${status === "suspenso" ? " brightness-[.25]" : ""}`} />
+        {status === "suspenso" && <span className="!absolute top-1/3 right-1/3 text-white px-1 text-center">Suspenso</span>}
       </CardHeader>
       <CardBody className="p-5 pt-4 pb-2">
         <Typography variant="h5" color="blue-gray" className="mb-1 truncate font-semibold text-base">
@@ -61,9 +65,9 @@ export default function CardEventoAdm({imagemEvento, nomeEvento, dataEvento, loc
         </Typography>
         <hr className="my-1 border-blue-gray-50" />
         <div className="flex flex-row gap-2">
-        <Button type='submit' className="bg-roxo-wil m-auto flex gap-y-4 rounded-full p-2" onClick={CallChangeStats}>
+        {status !== "suspenso" && <Button type='submit' className="bg-roxo-wil m-auto flex gap-y-4 rounded-full p-2" onClick={CallChangeStats}>
           Suspender Evento
-          </Button>
+        </Button>}
         <Button type="submit"  className="bg-roxo-wil m-auto flex gap-y-4 rounded-full p-2">
           Excluir Evento
         </Button> 

@@ -44,7 +44,7 @@ export default function TelaListAdm() {
     }]*/
 
 return (
-    <div className='flex flex-col gap-20 bg-gray-200 text-blue-900 rounded-xl p-30 m-5 w-auto h-auto m-10'>
+    <div className='flex flex-col gap-20 bg-gray-200 text-blue-900 rounded-xl p-15 m-5 w-auto h-auto m-10'>
 
         <Card color="transparent" shadow={false}>
             <Typography variant="h4" color="blue-gray">

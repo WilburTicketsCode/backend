@@ -42,9 +42,9 @@ export default function TelaListAdm() {
     }]*/
 
 return (
-    <div className='flex flex-col gap-20 bg-gray-200 text-blue-900 rounded-xl p-10 m-5 w-auto h-auto'>
+    <div className='flex flex-col gap-20 bg-gray-200 text-blue-900 rounded-xl p-10 m-5 w-auto h-auto m-10'>
 
-        <Card className="rounded-xl" color="transparent" shadow={false}>
+        <Card color="transparent" shadow={false}>
             <Typography variant="h4" color="blue-gray">
                 Administradores:
             </Typography>
@@ -52,7 +52,7 @@ return (
             {admins.map((admin) => (
                 <ul className="bg-gray-300 mt-10 mr-5 flex flex-col gap-6">
                     <li key={admin.id} className="font-semibold">{admin.nome}</li>
-                    <li key={admin.id}>Email: {admin.email}</li>
+                    <li key={admin.id}>Email: {admin.usuario.email}</li>
                     <li key={admin.id}>CPF: {admin.cpf}</li>
                     <li key={admin.id}>Senha: {admin.senha}</li>
                 </ul>
@@ -60,7 +60,7 @@ return (
         </Card>
 
         <Link href="/administrador/admin-new">
-            <Button className="mt-20">
+            <Button className="mt-20" fullWidth>
                 Cadastrar Novo Administrador
             </Button>
         </Link>

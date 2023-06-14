@@ -52,7 +52,7 @@ export default function TelaNewAdm() {
     }
 
     return (
-        <section className='bg-white flex flex-col items-center justify-center gap-y-10 p-20 rounded-xl max-w-screen-lg'>
+        <section className='w-300 h-[90%] bg-white flex flex-col items-center justify-center gap-y-10 p-20 rounded-xl'>
             
             <Card color="transparent" shadow={false} className="flex items-center justify-center">
                 <Typography variant="h4" color="blue-gray">

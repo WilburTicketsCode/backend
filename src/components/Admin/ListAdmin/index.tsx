@@ -5,10 +5,12 @@ import Link from 'next/link';
 
 interface Adm {
     id: number;
-    nome: String;
-    email: String
-    cpf: String;
-    senha: String;
+    cpf: String; 
+    usuario: {
+        nome: String;
+        email: String
+        senha: String;
+    } 
 }
 
 //Forma de exibir tirando os dados da API (Não vai ser utilizado agora)
@@ -51,10 +53,10 @@ return (
             
             {admins.map((admin) => (
                 <ul className="bg-gray-300 mt-10 mr-5 flex flex-col gap-6">
-                    <li key={admin.id} className="font-semibold">{admin.nome}</li>
-                    <li key={admin.id}>Email: {admin.usuario.email}</li>
+                    <li key={admin.id} className="font-semibold">{admin.usuario.nome}</li>
+                    <li key={admin.id}>Email: {admin.usuario.nome}</li>
                     <li key={admin.id}>CPF: {admin.cpf}</li>
-                    <li key={admin.id}>Senha: {admin.senha}</li>
+                    <li key={admin.id}>Senha: {admin.usuario.senha}</li>
                 </ul>
             ))}
         </Card>

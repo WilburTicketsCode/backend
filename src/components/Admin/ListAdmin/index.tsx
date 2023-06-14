@@ -61,7 +61,7 @@ return (
             ))}
         </Card>
 
-        <Link href="/administrador/admin-new" className="p-0">
+        <Link href="/administrador/admin-new" className="flex items-center justify-center p-0 m-0">
             <Button className="mt-20" fullWidth>
                 Cadastrar Novo Administrador
             </Button>

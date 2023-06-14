@@ -145,15 +145,11 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   }
 
   function restartCart(){
-    tempCartItems.map(item =>{
-      removeFromCart(item.id)
-    })
+    setTempCartItems([]);
   }
 
   function restartCartDef(){
-    cartItems.map(item =>{
-      removeFromCartDef(item.id)
-    })
+    setCartItems([]);
   }
 
   return (

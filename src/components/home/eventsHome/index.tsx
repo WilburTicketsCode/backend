@@ -50,11 +50,31 @@ export default function EventsHome(props: any) {
 
     let eventosListados: Evento[] = eventos;
 
+    function filtrarDisponiveis(){
+      return eventos.reduce((resultado: Evento[], evento) =>{
+        if(evento.status!=="suspenso"){
+          resultado.push(evento)
+        }
+        return resultado;
+      }, [])
+    }
+    function ordenarPorData(lista: Evento[]) {
+      const sortedList = lista.sort((a:Evento, b:Evento) => {
+        const dateA = new Date(a.horaInicio).getTime();
+        const dateB = new Date(b.horaInicio).getTime();
+        return dateA - dateB;
+      });
+    
+      return sortedList;
+    }
+    
+    const eventosDisp = ordenarPorData(filtrarDisponiveis());
+
     function determinarEventos(){
       if (props.nome === ""){
-        eventosListados = eventos;
+        eventosListados = eventosDisp;
       } else{
-        eventosListados = eventos.reduce((resultado: Evento[], evento) =>{
+        eventosListados = eventosDisp.reduce((resultado: Evento[], evento) =>{
           if (evento.nome.toUpperCase().includes(props.nome.toUpperCase())){
             resultado.push(evento)
           }

@@ -23,6 +23,7 @@ import {
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { CldImage } from 'next-cloudinary';
+import { useShoppingCart } from "@/contexts/ShoppingCartContext";
 
 
 
@@ -94,8 +95,14 @@ interface Data {
 
 export function ProfileMenu() {
   const { data: session } = useSession();
+  const {restartCart, restartCartDef, cartItems} = useShoppingCart();
 
-
+  
+  function handleOut(){
+    restartCart();
+    restartCartDef();
+    signOut({ callbackUrl: '/' });
+  }
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
@@ -180,7 +187,7 @@ export function ProfileMenu() {
             );
           })}
 
-          <MenuItem onClick={() => { signOut({ callbackUrl: '/' }); }} className='border-transparent p-2.5 cursor-pointer w-full bg-white flex gap-2 rounded hover:bg-red-500'>
+          <MenuItem onClick={() => handleOut()} className='border-transparent p-2.5 cursor-pointer w-full bg-white flex gap-2 rounded hover:bg-red-500'>
             {React.createElement(PowerIcon, {
               className: `h-6 w-6 text-red-500`,
             })}
@@ -258,7 +265,7 @@ export function ProfileMenu() {
           );
         })}
 
-        <MenuItem onClick={() => { signOut({ callbackUrl: '/' }); }} className='border-transparent p-2.5 cursor-pointer w-full bg-white flex gap-2 rounded hover:bg-red-500'>
+        <MenuItem onClick={() => handleOut()} className='border-transparent p-2.5 cursor-pointer w-full bg-white flex gap-2 rounded hover:bg-red-500'>
           {React.createElement(PowerIcon, {
             className: `h-6 w-6 text-red-500`,
           })}

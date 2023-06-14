@@ -17,8 +17,6 @@ function searchLotacao(eventos: any, lotacaoId: number) {
     }
     return []}
 
-
-      
 export default function ListTickets(){
     const fetchEvents = async () => {
         const reponse = await fetch(`/api/evento`);
@@ -31,7 +29,7 @@ export default function ListTickets(){
       }, []);
     
     const [events, setEvents] = useState<Eventos>([]);
-    const { cartItems, restartCart } = useShoppingCart()
+    const { cartItems} = useShoppingCart()
 
     let cartEventos: Eventos = []
     cartEventos = cartItems?.reduce((resultado:Eventos, item) =>{
@@ -41,11 +39,8 @@ export default function ListTickets(){
               }
                 return resultado;
         }, [])
-    
-        console.log(cartItems);
     return(
         <div className="bg-[#FFF9F9] w-[350px] min-h-[615px] mt-3 rounded-xl flex flex-col items-center">
-          <RestartButton></RestartButton>
             <h1 className="text-center text-[30px]">Carrinho de Compras</h1>
             {cartEventos.length == 0?"Carrinho está vazio":""}
             {cartEventos?.map((evento, index)=>(

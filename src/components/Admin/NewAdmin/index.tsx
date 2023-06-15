@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import React, { useState } from 'react';
 
 type adminFormData = z.infer<typeof adminNSchema>;
 
@@ -28,6 +29,14 @@ export default function TelaNewAdm() {
 
     });
 
+    const [user, setUser] = useState({
+        name: '',
+        email: '',
+        cpf: '',
+        password: '',
+        passwordConfirm: '',
+    });
+
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
     
@@ -42,6 +51,15 @@ export default function TelaNewAdm() {
           .then((response) => {
             if (response.ok) {
               console.log('Dados salvos com sucesso!');
+
+              setUser({
+                name: '',
+                email: '',
+                cpf: '',
+                password: '',
+                passwordConfirm: '',
+              });
+
             } else {
               console.error('Erro ao salvar os dados!');
             }
@@ -65,22 +83,22 @@ export default function TelaNewAdm() {
                 {/**Formulário começa aqui */}
                 <form onSubmit={onSubmit} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
                     <div className="min-w-fit mb-4 flex flex-col gap-6">
-                        <Input {...register('name')}  size='md'  label="Nome Completo" />
+                        <Input {...register('name')}  size='md'  label="Nome Completo" value={user.name}/>
                         {errors.name?.message && <p className="text-red-500 text-xs">{errors.name?.message}</p>}
 
                         <div className="flex flex-col gap-6 md:flex-row">
-                            <Input {...register('email')}  size='md'  label="Email" />
+                            <Input {...register('email')}  size='md'  label="Email" value={user.email}/>
                             {errors.email?.message && <p className="text-red-500 text-xs">{errors.email?.message}</p>}
 
-                            <Input {...register('cpf')}  size='md' label="CPF" />
+                            <Input {...register('cpf')}  size='md' label="CPF" value={user.cpf}/>
                             {errors.cpf?.message && <p className="text-red-500 text-xs">{errors.cpf?.message}</p>}
                         </div>
 
                         <div className="flex flex-col gap-6 md:flex-row">
-                            <Input {...register('password')}  type="password" size='md' label="Senha" />
+                            <Input {...register('password')}  type="password" size='md' label="Senha" value={user.password}/>
                             {errors.password?.message && <p className="text-red-500 text-xs">{errors.password?.message}</p>}
 
-                            <Input {...register('passwordConfirm')}  type="password" size='md' label="Confirme a senha" />
+                            <Input {...register('passwordConfirm')}  type="password" size='md' label="Confirme a senha" value={user.passwordConfirm}/>
                             {errors.passwordConfirm?.message && <p className="text-red-500 text-xs">{errors.passwordConfirm?.message}</p>}
                         </div>
                         <Button type='submit' size='md' className="mt-20" fullWidth>

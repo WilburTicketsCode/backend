@@ -35,7 +35,7 @@ export default function TotalCart(){
     return(
         <div className="flex flex-col w-[350px] h-[200px] bg-[#FFF9F9] rounded-lg">
 
-            <h1 className="text-center text-[30px]">Total do Carrinho:</h1>
+            <h1 className="text-center text-[30px]">Total</h1>
 
             <div className="flex items-center justify-center m-auto bg-[#D9D9D9] h-[50px] w-[270px]">
                 <div className="text-center text-[30px]">

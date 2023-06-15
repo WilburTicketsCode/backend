@@ -32,7 +32,7 @@ export default function ShareButton() {
         <Alert
           open={openAlert}
           color="green"
-          className="max-w-[20%] absolute bottom-5"
+          className="max-w-fit absolute bottom-5"
           icon={<CheckCircleIcon className="mt-px h-6 w-6" />}
         >
           <p className="font-normal">

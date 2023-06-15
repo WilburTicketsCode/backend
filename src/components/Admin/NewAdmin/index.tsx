@@ -37,6 +37,16 @@ export default function TelaNewAdm() {
         passwordConfirm: '',
     });
 
+    const cleanInfoAdm = () => {
+        setUser({
+            name: '',
+            email: '',
+            cpf: '',
+            password: '',
+            passwordConfirm: '',
+        })
+    }
+
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
     
@@ -51,15 +61,6 @@ export default function TelaNewAdm() {
           .then((response) => {
             if (response.ok) {
               console.log('Dados salvos com sucesso!');
-
-              setUser({
-                name: '',
-                email: '',
-                cpf: '',
-                password: '',
-                passwordConfirm: '',
-              });
-
             } else {
               console.error('Erro ao salvar os dados!');
             }
@@ -101,7 +102,7 @@ export default function TelaNewAdm() {
                             <Input {...register('passwordConfirm')}  type="password" size='md' label="Confirme a senha" value={user.passwordConfirm}/>
                             {errors.passwordConfirm?.message && <p className="text-red-500 text-xs">{errors.passwordConfirm?.message}</p>}
                         </div>
-                        <Button type='submit' size='md' className="mt-20" fullWidth>
+                        <Button onClick={()=>{cleanInfoAdm()}} type='submit' size='md' className="mt-20" fullWidth>
                             Cadastrar
                         </Button>
                     </div>

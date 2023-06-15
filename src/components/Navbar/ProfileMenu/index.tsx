@@ -151,8 +151,8 @@ export function ProfileMenu() {
             <Typography
               as="span"
               variant="h5"
-              className="font-normal"
-              color="black"
+              className="font-semibold"
+              color="white"
             >
               {session.user.name}
             </Typography>

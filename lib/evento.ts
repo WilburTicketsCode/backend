@@ -32,6 +32,13 @@ export type Evento = {
   ]
 };
 
+export type Ingresso = {
+  valor_pago: number,
+  id_lotacao: number
+}
+
+
+
 export type edicaoEventoTipo = {
   tipo: string,
   novoDado: string,
@@ -65,7 +72,8 @@ export async function getEvento(id: number) {
       lotacao: {
         include: {
           perfil: true,
-          setor: true
+          setor: true,
+          ingressos: true
         }
       }
     },
@@ -141,6 +149,29 @@ export async function edicaoEvento(tipoDeEdicao: string, novoDadoAlterado: strin
     } catch (error) {
       console.error('Erro ao atualizar o evento:', error);
       return null
+    }
+  }
+}
+
+
+export async function deletarEvento(id: number) {
+  const evento = await getEvento(id)
+  let podeDeletar = true;
+  if (evento !== null){
+    evento.lotacao.map(l => {
+      if (l.ingressos.length){
+        podeDeletar = false;
+      }
+    })
+    if (podeDeletar){
+      try {
+        await prisma.evento.delete({
+          where: { id: id}
+        })
+        return true
+      } catch (e) {
+        return null
+      }
     }
   }
 }

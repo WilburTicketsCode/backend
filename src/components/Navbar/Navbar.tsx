@@ -15,7 +15,7 @@ import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import ProfileMenuPromoter from './Promoter/ProfileMenuPromoter';
 import { ShoppingCartProvider } from '@/contexts/ShoppingCartContext';
-
+import ProfileMenuADM from './Adm/ProfileMenuADM';
 
 
 /* Deixando isso aqui só pra não quebrar o codigo por agora*/
@@ -95,7 +95,7 @@ const Navbar = ({ navbarType }: Props) => {
                                     </IconButton>
                                 </div>
                                 <div className="w-[100px]">
-                                    <ProfileMenu />
+                                    <ProfileMenuADM />
                                 </div>
                             </div>
                         </div>

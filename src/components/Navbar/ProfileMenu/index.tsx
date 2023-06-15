@@ -46,11 +46,6 @@ const profileMenuItems = [
     href: '/profile/costumer/ticket-list',
   },
   {
-    label: "Histórico",
-    icon: InboxArrowDownIcon,
-    href: '#',
-  },
-  {
     label: "Mudar Senha",
     icon: Cog6ToothIcon,
     href: '/profile/changepassword',

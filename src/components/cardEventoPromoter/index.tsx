@@ -16,14 +16,16 @@ type Props = {
   data: string,
   local: string,
   evento: number
+  status: string,
 } 
 
 
-export default function CardEventoPromoter({imagem, nome, data, local, evento}: Props ) {
+export default function CardEventoPromoter({imagem, nome, data, local, evento, status}: Props ) {
   return (
     <Card className="mt-0 w-[320px] h-[288px] shadow-black/40 col-span-12 md:col-span-6 xl:col-span-4"> 
       <CardHeader floated={false} color="blue-gray" className="relative h-60 mx-0 mt-0">
-        <img src={imagem} alt="img-blur-shadow" className="object-fill h-full w-full"/>
+      <img src={imagem} alt="imagem-do-evento" className={`object-fill h-full w-full ${status === "suspenso" ? " brightness-[.25]" : ""}`} />
+        {status === "suspenso" && <span className="!absolute top-1/3 right-1/3 text-white px-1 text-center">Suspenso</span>}
       </CardHeader>
       <CardBody className="p-5 pt-4 pb-2">
         <Typography variant="h5" color="blue-gray" className="mb-1 truncate font-semibold text-base">

@@ -9,7 +9,8 @@ type ShoppingCartProviderProps = {
 }
 
 type CartItem = {
-  id: number
+  id: number,
+  idSetor: number,
   quantidade:number
 }
 
@@ -20,8 +21,8 @@ type ShoppingCartContextType = {
   addToCart: () => void
   getItemQuantityDef: (id:number) => number
   getItemQuantity: (id: number) => number
-  increaseCartQuantityDef: (id: number) => void
-  increaseCartQuantity: (id: number) => void
+  increaseCartQuantityDef: (id: number, idSetor: number) => void
+  increaseCartQuantity: (id: number, idSetor: number) => void
   decreaseCartQuantityDef: (id: number) => void
   decreaseCartQuantity: (id: number) => void
   removeFromCart: (id: number) => void
@@ -60,10 +61,10 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     return cartItems.find(item => item.id === id)?.quantidade || 0
   }
 
-  function increaseCartQuantity(id: number) {
+  function increaseCartQuantity(id: number, idSetor: number) {
     setTempCartItems(currItems => {
       if (currItems.find(item => item.id === id) == null) {
-        return [...currItems, { id, quantidade: 1 }]
+        return [...currItems, { id, idSetor, quantidade: 1 }]
       } else {
         return currItems.map(item => {
           if (item.id === id) {
@@ -76,10 +77,10 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     })
   }
 
-  function increaseCartQuantityDef(id: number) {
+  function increaseCartQuantityDef(id: number, idSetor: number) {
     setCartItems(currItems => {
       if (currItems.find(item => item.id === id) == null) {
-        return [...currItems, { id, quantidade: 1 }]
+        return [...currItems, { id, idSetor, quantidade: 1 }]
       } else {
         return currItems.map(item => {
           if (item.id === id) {

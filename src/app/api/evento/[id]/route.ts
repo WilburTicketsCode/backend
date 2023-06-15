@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getEvento } from "../../../../../lib/evento";
+import { deletarEvento, getEvento } from "../../../../../lib/evento";
 
 
 /* Banco pessoal
@@ -16,4 +16,18 @@ export async function GET(request: Request, {params}: {
 {
     const data = await getEvento(Number(params.id))
     return NextResponse.json(data)
+}
+
+export async function DELETE(request: Request, {params}: {
+  params: { id: number }
+})
+{
+  const data = await deletarEvento(Number(params.id))
+
+  if (data === true){
+    return new Response(JSON.stringify({ message: "Evento deletado com sucesso"}), { status: 200, headers: { "Content-Type": "application/json" } });
+  }
+  else {
+    return new Response(JSON.stringify({ message: "Ouve um erro ao deletar o evento"}), { status: 500, headers: { "Content-Type": "application/json" } });
+  }
 }

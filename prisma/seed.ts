@@ -15,6 +15,8 @@ async function main() {
   await prisma.usuario.deleteMany()
   await prisma.endereco.deleteMany()
   await prisma.cartao_Credito.deleteMany()
+  await prisma.setor.deleteMany()
+  await prisma.perfil.deleteMany()
 
   /* ADMINISTRADOR 1 */
   const adm1 = await prisma.administrador.create({
@@ -48,37 +50,43 @@ async function main() {
   /* PERFIS DE INGREO */
   const perfilInteira = await prisma.perfil.create({
     data: {
+      id: 1,
       nome: "Inteira"
     }
   })
 
   const perfilMeia = await prisma.perfil.create({
     data: {
+      id: 2,
       nome: "Meia"
     }
   })
 
   const perfilGratuita = await prisma.perfil.create({
     data: {
+      id: 3,
       nome: "Gratuita"
     }
   })
 
   /* SETORES DE INGREÇO */
-  const sertorVip = await prisma.setor.create({
+  const setorVip = await prisma.setor.create({
     data: {
+      id: 1,
       nome: "Vip"
     }
   })
 
-  const sertorCamarote = await prisma.setor.create({
+  const setorCamarote = await prisma.setor.create({
     data: {
+      id: 2,
       nome: "Camarote"
     }
   })
   
-  const sertorBackstage = await prisma.setor.create({
+  const setorBackstage = await prisma.setor.create({
     data: {
+      id: 3,
       nome: "Backstage"
     }
   })
@@ -90,21 +98,20 @@ async function main() {
         create: {
           nome: "Rafeael Tosta",
           email: "tostinha123@yahoo.com",
-          senha: "Tosta1134"
+          senha: "tostinha123"
         }
       },
       cpf: "45267413020",
       status: "aprovado",
-      data_nasc: new Date(),
-      telefone: "6523848514",
+      telefone: "965238485414",
       endereco: {
         create: {
           rua: "Rua da Paz",
-          numero: 123,
+          numero: '123',
           bairro: "Centro",
           cidade: "São Paulo",
           estado: "SP",
-          cep: "01010-010",
+          cep: "01010010",
           complemento: "Apartamento 42"
        }
       }
@@ -115,48 +122,64 @@ async function main() {
   const endereco1 = await prisma.endereco.create({
     data: {
       "rua": "Avenida das Flores",
-      numero: 1234,
+      numero: '1234',
       bairro: "Jardim das Tulipas",
       cidade: "São Paulo",
       estado: "SP",
-      cep: "04567-890",
+      cep: "04567890",
       complemento: "Apartamento 56"
     }
   })
 
-  //Criação do Evento
-  const evento1 = await prisma.evento.create({
+  const endereco2 = await prisma.endereco.create({
     data: {
-      nome: "Djavan Turnê D 2023",
-      horaInicio: new Date("2023-05-30 19:00"),
-      horaFim: new Date("2023-05-30 23:00"),
-      descricao: "Depois de encerrar o ano de 2022 com participações marcantes em importantes festivais, Djavan volta aos palcos em 2023 com uma longa série de shows da turnê ‘D’!",
-      banner: "nada",
-      id_promoter: promoter1.id,
-      id_endereco: endereco1.id
+      rua: "Rua da Paz",
+      numero: '100',
+      bairro: "Jardim das Flores",
+      cidade: "São Paulo",
+      estado: "SP",
+      cep: "04535070",
+      complemento: "Apto 501"
+   }
+  })
+
+  const endereco3 = await prisma.endereco.create({
+    data: {
+      rua: "Avenida Senador Teotônio Vilela",
+      numero: '400',
+      bairro: "Jardim Malia I",
+      cidade: "São Paulo",
+      estado: "SP",
+      cep: "04792090",
+      complemento: "Autódromo de Interlagos"
     }
   })
 
-  //Cirnado lotações do Evento
-  const lotacao1 = await prisma.lotacao.create({
+  const endereco4 = await prisma.endereco.create({
     data: {
-      id_evento: evento1.id,
-      id_perfil: perfilInteira.id,
-      id_setor: sertorVip.id,
-      quantidade: 100,
-      valorTotal: 200
+      rua: "Avenida Luís Viana Filho",
+      numero: '1590',
+      bairro: "Itapuã",
+      cidade: "Salvador",
+      estado: "BA",
+      cep: "41730101",
+      complemento: "Parque de Exposições"
     }
   })
 
-  const lotacao2 = await prisma.lotacao.create({
+  const endereco5 = await prisma.endereco.create({
     data: {
-      id_evento: evento1.id,
-      id_perfil: perfilMeia.id,
-      id_setor: sertorVip.id,
-      quantidade: 100,
-      valorTotal: 100
+      rua: "Avenida Getulio",
+      numero: '190',
+      bairro: "Ponto central",
+      cidade: "Feira de Santana",
+      estado: "BA",
+      cep: "44075075",
+      complemento: "Parque de Exposições"
     }
   })
+
+
 
    /* PROMOTER 2 */
    const promoter2 = await prisma.promoter.create({
@@ -170,16 +193,15 @@ async function main() {
       },
       cpf: "72417917033",
       status: "aprovado",
-      data_nasc: new Date(),
-      telefone: "9136945571",
+      telefone: "99136945571",
       endereco: {
         create: {
           rua: "Rua dos Girassóis",
-          numero: 123,
+          numero: '123',
           bairro: "Jardim das Flores",
           cidade: "Curitiba",
           estado: "PR",
-          cep: "80000-000",
+          cep: "80000000",
           complemento: ""
           }
       }
@@ -198,54 +220,115 @@ async function main() {
       },
       cpf: "58429911014",
       status: "aprovado",
-      data_nasc: new Date(),
-      telefone: "8536231962",
+      telefone: "98536231962",
       endereco: {
         create: {
           rua: "Rua das Flores",
-          numero: 123,
+          numero: '123',
           bairro: "Jardim Botânico",
           cidade: "Porto Alegre",
           estado: "RS",
-          cep: "90210-123",
+          cep: "90210123",
           complemento: "Apartamento 401"
           }
       }
     }
   })
 
-  //Criação de Enderço do Evento
-  const endereco2 = await prisma.endereco.create({
+  //Criação do Evento
+  const evento1 = await prisma.evento.create({
     data: {
-      rua: "Rua da Paz",
-      numero: 100,
-      bairro: "Jardim das Flores",
-      cidade: "São Paulo",
-      estado: "SP",
-      cep: "04535-070",
-      complemento: "Apto 501"
-   }
+      nome: "Djavan Turnê D 2023",
+      horaInicio: new Date("2023-07-30 19:00"),
+      horaFim: new Date("2023-07-30 23:00"),
+      descricao: "Depois de encerrar o ano de 2022 com participações marcantes em importantes festivais, Djavan volta aos palcos em 2023 com uma longa série de shows da turnê ‘D’!",
+      banner: "/img/event-banner/show_djavan.jpeg",
+      status: 'disponivel',
+      id_promoter: promoter1.id,
+      id_endereco: endereco1.id
+    }
   })
 
-  //Criação do Evento
   const evento2 = await prisma.evento.create({
     data: {
       nome: "Festinha de Tosta",
       horaInicio: new Date("2023-06-01 18:00"),
       horaFim: new Date("2023-01-06 22:00"),
       descricao: "Uma festa que ira ver Tosta",
-      banner: "nada",
+      banner: "/img/event-banner/festinha-tosta.jpg",
+      status: 'suspenso',
       id_promoter: promoter3.id,
       id_endereco: endereco2.id
     }
   })
 
-  //Cirnado lotações do Evento
+  const evento3 = await prisma.evento.create({
+    data: {
+      nome: "Rock in Rio",
+      horaInicio: new Date("2023-09-29 17:00"),
+      horaFim: new Date("2023-09-30 02:00"),
+      descricao: "O Rock in Rio está de volta para mais uma edição épica. Prepare-se para vivenciar dias incríveis de música, diversão e energia inigualável. O festival trará artistas nacionais e internacionais renomados, com performances emocionantes e shows memoráveis. Desfrute de uma experiência única no coração do Rio de Janeiro, na Cidade do Rock, com uma atmosfera vibrante e uma diversidade musical que atende a todos os gostos e estilos.",
+      banner: "/img/event-banner/rock-in-rio.jpg",
+      status: "disponível",
+      id_promoter: promoter1.id,
+      id_endereco: endereco2.id
+
+    }
+  })
+
+  const evento4 = await prisma.evento.create({
+    data: {
+      nome: "Lollapalooza Brasil",
+      horaInicio: new Date("2023-11-04 15:00"),
+      horaFim: new Date("2023-11-04 00:00"),
+      descricao: "O Lollapalooza Brasil está de volta com um line-up imperdível de artistas nacionais e internacionais. Prepare-se para um fim de semana incrível no Autódromo de Interlagos, em São Paulo, repleto de música, arte e entretenimento. Explore diferentes gêneros musicais, desde o rock e pop até a música eletrônica e alternativa.",
+      banner:"/img/event-banner/lollapalooza.jpg",
+      status: "disponível",
+      id_promoter: promoter2.id,
+      id_endereco: endereco3.id
+    }
+  })
+
+  const evento5 = await prisma.evento.create({
+    data: {
+      nome: "Festival de Verão Salvador",
+      horaInicio: new Date("2023-12-10 18:00"),
+      horaFim: new Date("2023-12-11 04:00"),
+      descricao: "O Festival de Verão Salvador é o lugar onde a alegria encontra a música. Desfrute de dias ensolarados, praia e shows incríveis no Parque de Exposições, em Salvador. Com uma mistura de ritmos como axé, sertanejo, pagode e música eletrônica, o festival promete agitar o público com artistas renomados.",
+      banner: "/img/event-banner/festival-de-verao.jpg",
+      status: "disponível",
+      id_promoter: promoter1.id,
+      id_endereco: endereco4.id
+    }
+  })
+
+  //Lotações do Evento
+  const lotacao1 = await prisma.lotacao.create({
+    data: {
+      id_evento: evento1.id,
+      id_perfil: perfilInteira.id,
+      id_setor: setorVip.id,
+      quantidade: 100,
+      valorTotal: 200
+    }
+  })
+
+  const lotacao2 = await prisma.lotacao.create({
+    data: {
+      id_evento: evento1.id,
+      id_perfil: perfilMeia.id,
+      id_setor: setorVip.id,
+      quantidade: 100,
+      valorTotal: 100
+    }
+  })
+  
+
   const lotacao3 = await prisma.lotacao.create({
     data: {
       id_evento: evento2.id,
       id_perfil: perfilInteira.id,
-      id_setor: sertorVip.id,
+      id_setor: setorVip.id,
       quantidade: 100,
       valorTotal: 200
     }
@@ -255,7 +338,7 @@ async function main() {
     data: {
       id_evento: evento2.id,
       id_perfil: perfilMeia.id,
-      id_setor: sertorVip.id,
+      id_setor: setorVip.id,
       quantidade: 100,
       valorTotal: 100
     }
@@ -265,7 +348,7 @@ async function main() {
     data: {
       id_evento: evento2.id,
       id_perfil: perfilInteira.id,
-      id_setor: sertorCamarote.id,
+      id_setor: setorCamarote.id,
       quantidade: 300,
       valorTotal: 500
     }
@@ -275,9 +358,104 @@ async function main() {
     data: {
       id_evento: evento2.id,
       id_perfil: perfilMeia.id,
-      id_setor: sertorCamarote.id,
+      id_setor: setorCamarote.id,
       quantidade: 100,
       valorTotal: 250
+    }
+  })
+
+  //evento 3
+
+  const lotacao7 = await prisma.lotacao.create({
+    data: {
+      id_evento: evento3.id,
+      id_perfil: perfilMeia.id,
+      id_setor: setorCamarote.id,
+      quantidade: 500,
+      valorTotal: 250
+    }
+  })
+
+  const lotacao8 = await prisma.lotacao.create({
+    data: {
+      id_evento: evento3.id,
+      id_perfil: perfilInteira.id,
+      id_setor: setorCamarote.id,
+      quantidade: 500,
+      valorTotal: 500
+    }
+  })
+
+  const lotacao9 = await prisma.lotacao.create({
+     data: {
+      id_evento: evento3.id,
+      id_perfil: perfilInteira.id,
+      id_setor: setorVip.id,
+      quantidade: 200,
+      valorTotal: 1000
+    }
+  })
+
+  //evento 4
+  const lotacao10 = await prisma.lotacao.create({
+     data: {
+      id_evento: evento4.id,
+      id_perfil: perfilInteira.id,
+      id_setor: setorVip.id,
+      quantidade: 200,
+      valorTotal: 650
+    }
+  })
+
+    const lotacao11 = await prisma.lotacao.create({
+     data: {
+      id_evento: evento4.id,
+      id_perfil: perfilMeia.id,
+      id_setor: setorVip.id,
+      quantidade: 200,
+      valorTotal: 325
+    }
+  })
+
+  //evento 5
+
+    const lotacao12 = await prisma.lotacao.create({
+     data: {
+      id_evento: evento5.id,
+      id_perfil: perfilInteira.id,
+      id_setor: setorVip.id,
+      quantidade: 100,
+      valorTotal: 300
+    }
+  })
+
+    const lotacao13 = await prisma.lotacao.create({
+     data: {
+      id_evento: evento5.id,
+      id_perfil: perfilMeia.id,
+      id_setor: setorVip.id,
+      quantidade: 100,
+      valorTotal: 150
+    }
+  })
+
+    const lotacao14 = await prisma.lotacao.create({
+     data: {
+      id_evento: evento5.id,
+      id_perfil: perfilInteira.id,
+      id_setor: setorCamarote.id,
+      quantidade: 200,
+      valorTotal: 400
+    }
+  })
+
+    const lotacao15 = await prisma.lotacao.create({
+     data: {
+      id_evento: evento3.id,
+      id_perfil: perfilGratuita.id,
+      id_setor: setorBackstage.id,
+      quantidade: 50,
+      valorTotal: 0
     }
   })
 
@@ -294,27 +472,108 @@ async function main() {
       },
       cpf: "28419554006",
       status: "suspenso",
-      data_nasc: new Date(),
-      telefone: "6838738801",
+      telefone: "96838738801",
       endereco: {
         create: {
           rua: "Rua dos Jasmins",
-          numero: 12,
+          numero: '12',
           bairro: "Jardim das Flores",
           cidade: "São Paulo",
           estado: "SP",
-          cep: "04567-890",
+          cep: "04567890",
           complemento: "Apto 42"
         }
       }
     }
   })
 
+  /* PROMOTER 5 */
+  const promoter5 = await prisma.promoter.create({
+    data: {
+      usuario: {
+        create: {
+          nome: "Seu Jorge Aado",
+          email: "jorgeamado@gmail.com",
+          senha: "123456789"
+        }
+      },
+      cpf: "28419994006",
+      status: "aprovado",
+      telefone: "96838738801",
+      endereco: {
+        create: {
+          rua: "Rua dos Piraracuas",
+          numero: '12222',
+          bairro: "Jardim das Arvores",
+          cidade: "São Paulo",
+          estado: "SP",
+          cep: "00567890",
+          complemento: "Apto 1"
+        }
+      }
+    }
+  })
+
+  /* CRIANDO EVENTO 6 */
+  const evento6 = await prisma.evento.create({
+    data: {
+      nome: "Festival de Cores",
+      horaInicio: new Date("2023-12-10 18:00"),
+      horaFim: new Date("2023-12-11 04:00"),
+      descricao: "Um festival de artes para mostrar obras criadas pelo povo local",
+      banner: "/img/event-banner/festival-de-verao.jpg",
+      status: "disponível",
+      id_promoter: promoter5.id,
+      id_endereco: endereco5.id
+    }
+  })
+
+  // evvento 6
+  const lotacao16 = await prisma.lotacao.create({
+    data: {
+     id_evento: evento6.id,
+     id_perfil: perfilInteira.id,
+     id_setor: setorVip.id,
+     quantidade: 100,
+     valorTotal: 300
+   }
+ })
+
+ const lotacao17 = await prisma.lotacao.create({
+  data: {
+   id_evento: evento6.id,
+   id_perfil: perfilMeia.id,
+   id_setor: setorVip.id,
+   quantidade: 100,
+   valorTotal: 300
+ }
+})
+
+const lotacao18 = await prisma.lotacao.create({
+  data: {
+   id_evento: evento6.id,
+   id_perfil: perfilInteira.id,
+   id_setor: setorCamarote.id,
+   quantidade: 100,
+   valorTotal: 300
+ }
+})
+
+const lotacao19 = await prisma.lotacao.create({
+  data: {
+   id_evento: evento6.id,
+   id_perfil: perfilMeia.id,
+   id_setor: setorCamarote.id,
+   quantidade: 100,
+   valorTotal: 300
+ }
+})
+
   /* CLEINTE 1 */
   const cliente1 = await prisma.cliente.create({
     data: {
       cpf: '66668230016',
-      telefone: '6926587229',
+      telefone: '96926587229',
       data_nasc: new Date(),
       usuario: {
         create: {
@@ -326,11 +585,11 @@ async function main() {
       endereco: {
         create: {
           rua: "Rua da Consolação",
-          numero: 1000,
+          numero: '1000',
           bairro: "Consolação",
           cidade: "São Paulo",
           estado: "SP",
-          cep: "01302-907",
+          cep: "01302907",
           complemento: "Apt 501"
         }  
       },
@@ -368,7 +627,7 @@ async function main() {
   const cliente2 = await prisma.cliente.create({
     data: {
       cpf: '66668240016',
-      telefone: '5926587229',
+      telefone: '95926587229',
       data_nasc: new Date(),
       usuario: {
         create: {
@@ -380,11 +639,11 @@ async function main() {
       endereco: {
         create: {
           rua: "Rua Barão de Itapetininga",
-          numero: 37,
+          numero: '37',
           bairro: "República",
           cidade: "São Paulo",
           estado: "SP",
-          cep: "01042-000",
+          cep: "01042000",
           complemento: "Sala 12"
        }
        
@@ -417,7 +676,7 @@ async function main() {
   const cliente3 = await prisma.cliente.create({
     data: {
       cpf: '62807982085',
-      telefone: '6725361968',
+      telefone: '96725361968',
       data_nasc: new Date(),
       usuario: {
         create: {
@@ -429,7 +688,7 @@ async function main() {
       endereco: {
         create: {
           rua: "Rua Barão de Itapetininga",
-          numero: 150,
+          numero: '150',
           bairro: "República",
           cidade: "São Paulo",
           estado: "SP",
@@ -452,7 +711,7 @@ async function main() {
   const cliente4 = await prisma.cliente.create({
     data: {
       cpf: '66168230016',
-      telefone: '6906587229',
+      telefone: '96906587229',
       data_nasc: new Date(),
       usuario: {
         create: {
@@ -464,7 +723,7 @@ async function main() {
       endereco: {
         create: {
           rua: "Rua da Consolação",
-          numero: 1000,
+          numero: '1000',
           bairro: "Consolação",
           cidade: "São Paulo",
           estado: "SP",

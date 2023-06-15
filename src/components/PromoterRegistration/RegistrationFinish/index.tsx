@@ -12,7 +12,7 @@ import {
                 Cadastro Finalizado!
             </Typography>
 
-            <Typography variant="h8" className="text-[#404c76]">
+            <Typography variant="h6" className="text-[#404c76]">
                 Agora é só entrar em sua conta.
             </Typography>
         </div>

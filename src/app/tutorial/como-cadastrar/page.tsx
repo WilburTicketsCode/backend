@@ -6,12 +6,12 @@ export default function testes() {
   const [jsonPraTela, setJsonPraTela] = useState('LOCAL ONDE O JSON CRIADO SERA EXIBIDO PARA SERVIR DE EXEMPLO')
 
   const adm = {
-    nome: 'CARALHOO',
-    cpf: '00090780405',
-    email: 'aaaazfezqasdwa@xxxx.com',
-    password: '123',
+    nome: 'semsenhaman2',
+    cpf: '11090780405',
+    email: 'sousemsenhaa@xxxx.com',
+    password: '12345',
   }
-
+/*
   const promoter = {
     nome: 'Roberval',
     cpf: '77777777777',
@@ -28,6 +28,24 @@ export default function testes() {
     estado: "SP",
     cep: "01010-010",
     complemento: "Apartamento 42"
+  }*/
+
+  const promoter = {
+    nome: 'Luis',
+    cpf: '12377777777',
+    cpnj: null,
+    email: 'luisluis@yahoo.com',
+    password: '123123',
+    status: 'aprovado',
+    data_nasc: new Date("1999-05-30"),
+    telefone: '1233848524',
+    rua: "Rua da Se",
+    numero: 133,
+    bairro: "Centro",
+    cidade: "ipira",
+    estado: "BA",
+    cep: "01110-010",
+    complemento: "Casa"
   }
 
   const cliente = {
@@ -82,7 +100,7 @@ export default function testes() {
       jaison)
 
     /* Enviando de verdade para API */
-    const res = await fetch("http://localhost:3000/api/cliente", {
+    const res = await fetch("/api/cliente", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -129,7 +147,7 @@ export default function testes() {
       jaison)
 
     /* Enviando de verdade para API */
-    const res = await fetch("http://localhost:3000/api/promoter", {
+    const res = await fetch("/api/promoter", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -163,7 +181,7 @@ export default function testes() {
     console.log("Exemplo de como o JSON para criação de um Administrador deve ser feito:\n" +
       jaison)
     /* Enviando de verdade para API */
-    const res = await fetch("http://localhost:3000/api/administrador", {
+    const res = await fetch("/api/administrador", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

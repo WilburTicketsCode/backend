@@ -1,20 +1,9 @@
 import { NextResponse } from "next/server";
-import { Cliente, getClientes, inserirCliente } from "../../../../lib/cliente";
+import { Cliente, edicaoCliente, edicaoClienteTipo, getClientes, inserirCliente } from "../../../../lib/cliente";
 import { cpfDuplicado, emailDuplicado } from "../../../../lib/erros";
-import { mailOptions, transporter, trocarDestinatario } from "../../../../lib/nodemailer";
-
-
-/* Banco pessoal
-mysql://root:(SENHA)@localhost:3306/(NOME DO BANCO) 
-*/
-
-/* Banco PlanetScale (Com erro)
-mysql://nh7ntf3fxeucxnnj0c6s:pscale_pw_Xy42bmYPRmC8byFrTK6SzV7jv4OABObnuFmuSZogCrY@aws.connect.psdb.cloud/bd_wilticket?sslaccept=strict
-*/
 
 export async function GET(request: Request) {
     const data = await getClientes()
-    
     return NextResponse.json(data)
 }
 
@@ -28,16 +17,7 @@ export async function POST(request:Request) {
                 return NextResponse.json("ERROR 00")
             } else {
                 console.log("Dados criados.\n", cliente);
-                trocarDestinatario(dados.usuario.email)
-                    await transporter.sendMail({
-                        ...mailOptions,
-                        subject: 'Verificando Conta Wilbor',
-                        text: 'Email vindo diretamente do mado do backend',
-                        html: '<h1>MAGO DO BACKEND</h1><p>Email enviado pelo mago do backend' +
-                        ' quando sua conta foi criada no melhor site do universo. Sinta-se' +
-                        ' honrado de estar recebendo o email do mago do beck-end Pedro VI</p>'
-                    })
-                return NextResponse.json(dados)
+                return NextResponse.json(cliente)
             }
 
         } catch (e) {
@@ -50,5 +30,20 @@ export async function POST(request:Request) {
         
        
     } 
+
+}
+
+export async function PUT(request:Request) {
+    const dados: edicaoClienteTipo = await request.json()
+    if (dados !== null) {
+        const clienteAlterado = edicaoCliente(dados.tipo, dados.novoDado, dados.cpfDoUsuario)
+        if (clienteAlterado !== null){
+            console.log("SENHA ALTERADA")
+            return NextResponse.json(clienteAlterado)
+        } else {   
+            console.log("DEU UM ERRO")
+            return NextResponse.json({error: "ERROR 00"})
+        }
+    }
 
 }

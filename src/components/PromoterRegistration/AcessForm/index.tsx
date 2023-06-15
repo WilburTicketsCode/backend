@@ -12,6 +12,7 @@ import UseStepperContext from "../../../use/UseStepperContext";
 import { useForm } from "react-hook-form";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import UsePromoterRegistrationContext from "@/use/UsePromoterRegistrationContext";
+import CompanyForm from "../CompanyForm";
 
 type AcessFormData = z.infer<typeof AcessFormSchema>;
 
@@ -25,9 +26,17 @@ const AcessFormSchema = z.object({
   path: ["passwordConfirm"],
 });
 
+function campoVazio(value:string) {
+  if (value === "") {
+    return null
+  } else {
+    return value
+  }
+}
+
 export default function AcessForm() {
   const { infoStepper, setInfoStepper } = UseStepperContext();
-  const { infoAcessForm, setInfoAcessForm } = UsePromoterRegistrationContext();
+  const { infoAcessForm, setInfoAcessForm, infoAdressForm, infoCompanyForm } = UsePromoterRegistrationContext();
 
   const { register, handleSubmit, formState: { errors } } = useForm<AcessFormData>({
       resolver: zodResolver(AcessFormSchema),
@@ -39,6 +48,46 @@ export default function AcessForm() {
           },
     })
 
+    
+
+    async function createPromoter(promoter: any) {
+      const jaison = JSON.stringify({
+        cpf: promoter.cpf,
+        cnpj: promoter.cpnj,
+        status: promoter.status,
+        telefone: promoter.telefone,
+        usuario: {
+          nome: promoter.nome,
+          email: promoter.email,
+          senha: promoter.password
+        },
+        endereco: {
+          rua: promoter.rua,
+          numero: promoter.numero,
+          bairro: promoter.bairro,
+          cidade: promoter.cidade,
+          estado: promoter.estado,
+          cep: promoter.cep,
+          complemento: promoter.complemento,
+        }
+      })
+  
+      /* Mostrando no console do navegador o formato do json usado para enviar os dados para API */
+      console.log("Exemplo de como o JSON para criação de um Promoter deve ser feito:\n" +
+        jaison)
+  
+      /* Enviando de verdade para API */
+      const res = await fetch("/api/promoter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: jaison
+      })
+
+      
+    }
+
   const onSubmit = (data: AcessFormData) => {
 
     setInfoStepper({
@@ -49,6 +98,25 @@ export default function AcessForm() {
       email: data.email,
       password: data.password,
     })
+
+    const promoter = {
+      nome: infoCompanyForm.name,
+      cpf: campoVazio(infoCompanyForm.CPF.replace(/[.-]/gi,"")),
+      cpnj: campoVazio(infoCompanyForm.CNPJ.replace(/[\/\-.]/gi,"")),
+      email: data.email,
+      password: data.password,
+      status: 'pendente',
+      telefone: infoCompanyForm.phone.replace(/[()-\s]/gi,""),
+      rua: infoAdressForm.street,
+      numero: infoAdressForm.number,
+      bairro: infoAdressForm.district,
+      cidade: infoAdressForm.street,
+      estado: infoAdressForm.state,
+      cep: infoAdressForm.CEP.replace(/[-]/gi,""),
+      complemento: infoAdressForm.complement
+    }
+    
+    createPromoter(promoter)
 }
 
   const handlePrev = (e: any) => {
@@ -79,6 +147,7 @@ return (
 
     <div className="flex flex-col w-full">
       <Input size="lg" 
+       type="password"
         label="Confirmação da Senha*" 
         containerProps={{ className: "min-w-[72px]" }}
         {...register("passwordConfirm")}

@@ -10,6 +10,7 @@ import ProfileMenuADM from '../Adm/ProfileMenuADM';
 import Link from 'next/link';
 import NoLoginMenu from '../NoLoginMenu';
 import SinginButton from '../../SinginButton';
+import ProfileMenuPromoter from '../Promoter/ProfileMenuPromoter';
 
 
 
@@ -22,12 +23,12 @@ const costumer = () => {
                 <div className='gap-0.5 md:gap-5 flex flex-row justify-center items-center'>
                     <div>
                         <Link href={'/shoppingCart'}>
-                        <IconButton
-                            variant="text"
-                            color="blue-gray"
-                            className="ml-0 mr-2">
-                            <ShoppingCartIcon className="h-8 w-8" />
-                        </IconButton>
+                            <IconButton
+                                variant="text"
+                                color="blue-gray"
+                                className="ml-0 mr-2">
+                                <ShoppingCartIcon className="h-8 w-8" />
+                            </IconButton>
                         </Link>
                     </div>
                     <ProfileMenu />
@@ -39,13 +40,27 @@ const costumer = () => {
 
 const promoter = () => {
     return (
-        <div>
-            <div className='gap-1 md:gap-5 flex flex-row justify-between items-center md:px-5'>
-                <a href='/events/eventosPromoter'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Meus eventos</button></a>
-                <a href='/events/event-registration'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Criar evento</button></a>
-                <a href='/profile/promoter'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Meu Perfil</button></a>
+        <div className="2xl:px-[3rem]  flex flex-row items-center justify-between gap-3 md:gap-1">
+            <Link href={'/promoter/eventos'} className='flex items-center justify-center'><Logo /></Link>
+            <Search />
+            <div>
+                <div className='gap-0.5 md:gap-5 flex flex-row justify-center items-center'>
+                    <div>
+                        <a href='/promoter/eventos'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Meus eventos</button></a>
+                        <a href='/events/event-registration'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Criar evento</button></a>
+                    </div>
+                    <ProfileMenuPromoter />
+                </div>
             </div>
         </div>
+
+        /* <div>
+             <div className='gap-1 md:gap-5 flex flex-row justify-between items-center md:px-5'>
+                 <a href='/events/eventosPromoter'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Meus eventos</button></a>
+                 <a href='/events/event-registration'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Criar evento</button></a>
+                 <a href='/profile/promoter'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Meu Perfil</button></a>
+             </div>
+         </div>*/
     )
 }
 
@@ -56,8 +71,8 @@ const noLogin = () => {
             <Search />
             <div className='flex flex-col w-full max-w-screen md:flex-row gap-1 md:gap-6'>
                 <NoLoginMenu></NoLoginMenu>
-                <Link href={'/promoter-registration'} className='md:flex items-center justify-center hidden'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar promoter</button> </Link>
-                <Link href={'/customer-registration'} className='md:flex items-center justify-center hidden'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar cliente</button> </Link>
+                <Link href={'/auth/promoter-registration'} className='md:flex items-center justify-center hidden'> <button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar promoter</button> </Link>
+                <Link href={'/auth/customer-registration'} className='md:flex items-center justify-center hidden'><button className="bg-[#ffffff] text-light-blue-900 text-lg hover:bg-blue-gray-300 px-4 py-2 rounded-md">Cadastrar cliente</button> </Link>
                 <SinginButton />
 
             </div>
@@ -68,7 +83,7 @@ const noLogin = () => {
 const adm = () => {
     return (
         <div className="lg:px-[20rem] flex flex-row items-center justify-between gap-0.5 md:gap-1">
-            <Link href={'/admin/eventos'}><Logo/></Link> 
+            <Link href={'/administrador/eventos'}><Logo /></Link>
             <NavList />
             <div className=' md:gap-5 flex flex-row justify-center items-center'>
                 <div>

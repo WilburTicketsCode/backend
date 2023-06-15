@@ -8,9 +8,6 @@ import { PayContext } from '../../../contexts/payContext';
 import {
     Button,
     Dialog,
-    Card,
-    CardBody,
-    CardFooter,
 } from "../../ClientSide";
 
 
@@ -25,6 +22,7 @@ export default function Payment() {
         date: "",
         cvv: "",
         fucus: true
+
     })
 
     const cleanInfoCard = () => {
@@ -53,7 +51,7 @@ export default function Payment() {
                             <FlippableCard />
                         </div>
                         <div className="flex justify-center h-[50%]">
-                            <Cardform />
+                            <Cardform click={handleOpen}/>
                         </div>
                     </div>
 

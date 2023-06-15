@@ -13,9 +13,6 @@ type DateFormData = z.infer<typeof DateFormSchema>;
 const DateFormSchema = z.object({
     startDate: z.string().min(10),
     endDate: z.string().min(10),
-    startTime: z.string().min(5),
-    endTime: z.string().min(5),
-
 })
 
 export default function DateForm() {
@@ -30,8 +27,6 @@ export default function DateForm() {
           defaultValues: {
             startDate: infoDateForm.startDate,
             endDate: infoDateForm.endDate,
-            startTime: infoDateForm.endTime,
-            endTime: infoDateForm.endTime,
           },
     })
 
@@ -44,8 +39,6 @@ export default function DateForm() {
     setInfoDateForm({
         startDate: data.startDate,
         endDate: data.endDate,
-        startTime: data.endTime,
-        endTime: data.endTime,
   });
   }  
   const handlePrev = (e: any) => {
@@ -58,39 +51,22 @@ export default function DateForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center px-8 gap-4 w-full mt-8">
       <div className="flex flex-row gap-4">
         <Input size="lg" 
-        label="data de inicio" 
-        maxLength={10}
-        type="date"
+        label="Data e hora de início" 
+        maxLength={16}
+        type="datetime-local"
+        color="indigo"
         {...register("startDate")}
         error={Boolean(errors.startDate)}
         containerProps={{ className: "min-w-[20px]" }}
         />
       
-        <Input size="lg" 
-        label="horário de início" 
-        maxLength={5}
-        type="time"
-        {...register("startTime")}
-        error={Boolean(errors.startTime)}
-        containerProps={{ className: "min-w-[20px]" }}
-        />
-      </div>
-      <div className="flex flex-row gap-4">
-        <Input size="lg" 
+      <Input size="lg" 
         label="data de término" 
-        maxLength={10}
-        type="date"
+        maxLength={16}
+        type="datetime-local"
+        color="indigo"
         {...register("endDate")}
         error={Boolean(errors.endDate)}
-        containerProps={{ className: "min-w-[20px]" }}
-        />
-      
-        <Input size="lg" 
-        label="horário de término" 
-        maxLength={5}
-        type="time"
-        {...register("endTime")}
-        error={Boolean(errors.endTime)}
         containerProps={{ className: "min-w-[20px]" }}
         />
       </div>
@@ -103,6 +79,5 @@ export default function DateForm() {
       </Button>
     </div>
     </form>
-  
   );
 }

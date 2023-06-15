@@ -232,3 +232,13 @@ html,body,:root{
   background-color: #fff;
   color: #000000;
 }
+
+.background-load{
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.pop-b-r{
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+}

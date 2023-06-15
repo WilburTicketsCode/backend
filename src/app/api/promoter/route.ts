@@ -1,16 +1,6 @@
 import { NextResponse } from "next/server";
-import { Promoter, getPromoters, inserirPromoter } from "../../../../lib/promoter";
+import { Promoter, edicaoPromoter, edicaoPromoterTipo, getPromoters, inserirPromoter } from "../../../../lib/promoter";
 import { cpfDuplicado, emailDuplicado } from "../../../../lib/erros";
-import { mailOptions, transporter, trocarDestinatario } from "../../../../lib/nodemailer";
-
-
-/* Banco pessoal
-mysql://root:(SENHA)@localhost:3306/(NOME DO BANCO) 
-*/
-
-/* Banco PlanetScale (Com erro)
-mysql://nh7ntf3fxeucxnnj0c6s:pscale_pw_Xy42bmYPRmC8byFrTK6SzV7jv4OABObnuFmuSZogCrY@aws.connect.psdb.cloud/bd_wilticket?sslaccept=strict
-*/
 
 export async function GET(request: Request) {
     const data = await getPromoters()
@@ -30,16 +20,8 @@ export async function POST(request:Request) {
                 return NextResponse.json("ERROR 00")
             } else {
                 console.log("Dados criados.\n", promoter);
-                trocarDestinatario(dados.usuario.email)
-                    await transporter.sendMail({
-                        ...mailOptions,
-                        subject: 'Verificando Conta Wilbor',
-                        text: 'Email vindo diretamente do mado do backend',
-                        html: '<h1>MAGO DO BACKEND</h1><p>Email enviado pelo mago do backend' +
-                        ' quando sua conta foi criada no melhor site do universo. Sinta-se' +
-                        ' honrado de estar recebendo o email do mago do beck-end Pedro VI</p>'
-                    })
-                return NextResponse.json(dados)
+                
+                return NextResponse.json(promoter)
             }
 
         } catch (e) {
@@ -53,3 +35,25 @@ export async function POST(request:Request) {
     } 
 
 }
+
+/* STRING TIPOS DE ALTERAÇÃO DE DADOS */
+/* 'trocar status' - string usada para alterar o status do evento
+    ...
+    ...
+*/
+
+export async function PUT(request:Request) {
+    const dados: edicaoPromoterTipo = await request.json()
+    if (dados !== null) {
+        const promoterAlterado = await edicaoPromoter(dados.tipo, dados.novoDado, dados.cpfORcnpj)
+        if (promoterAlterado !== null){
+            console.log("PROMOTER NA API: ", promoterAlterado)
+            return NextResponse.json(JSON.stringify({ message: "O Pormoter foi alterado com sucesso"}), { status: 200, headers: { "Content-Type": "application/json" } })
+        } else {   
+            console.log("DEU UM ERRO")
+            return NextResponse.json({error: "ERROR 00"})
+        }
+    }
+
+}
+

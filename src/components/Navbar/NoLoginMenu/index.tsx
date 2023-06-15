@@ -4,6 +4,7 @@ import {
     MenuList,
     MenuItem,
   } from "../../ClientSide";
+  import { signIn } from "next-auth/react"
   import Link from 'next/link';
    
   export default function NoLoginMenu() {
@@ -12,13 +13,13 @@ import {
             <Menu>
                 <MenuHandler>
                 <div className="flex justify-center mt-auto">
-                    <img src="/icons/menu.svg" />
+                    <img src="/icons/menu.svg" className="cursor-pointer"/>
                 </div>
                 </MenuHandler>
                 <MenuList>
-                    <Link href={'/sighin'}><MenuItem>Entrar</MenuItem></Link>
-                    <Link href={'/customer-registration'}><MenuItem>Cadastrar Cliente</MenuItem></Link>
-                    <Link href={'/promoter-registration'}><MenuItem>Cadastrar Promoter</MenuItem></Link>
+                    <MenuItem onClick={() => signIn()}>Entrar</MenuItem>
+                    <Link href={'/auth/customer-registration'}><MenuItem>Cadastre-se</MenuItem></Link>
+                    <Link href={'/auth/promoter-registration'}><MenuItem>Seja um Promoter</MenuItem></Link>
                 </MenuList>
             </Menu>
         </div>

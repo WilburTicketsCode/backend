@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import UseEventRegistrationContext from "../../../use/UseEventRegistrationContext";
-import BasicInformationForm from "../BasicInformationForm";
+import { useSession } from "next-auth/react";
 
 function formatCEP(value:string) {
   return value
@@ -30,6 +30,7 @@ const AdressFormSchema = z.object({
 })
 
 export default function AdressForm() {
+  const {data: session} = useSession();
   const { infoStepper, setInfoStepper } = UseStepperContext();
   const { infoAdressForm, setInfoAdressForm, infoBasicInformationForm, infoDateForm, infoDescriptionForm, infoTicketForm } = UseEventRegistrationContext();
 
@@ -49,31 +50,28 @@ export default function AdressForm() {
     })
 
   async function createEvento(evento: any) {
-      const jaison = JSON.stringify({
-        nome: evento.nome,
-        horaInicio: evento.horaInicio,
-        horaFim: evento.horaFim,
-        descricao: evento.descricao,
-        banner: evento.banner, 
-        status: evento.status,
-        endereco: {
-          rua: evento.rua,
-          numero: evento.numero,
-          bairro: evento.bairro,
-          cidade: evento.cidade,
-          estado: evento.estado,
-          cep: evento.cep,
-          complemento: evento.complemento,
-        },
-        lotacoes: [{
-            lotacao: {
-            id_setor: evento.setor,
-            id_perfil: evento.perfil,
-            quantidade: evento.quantidade,
-            valortotal: evento.valor,
-            }
-          }
-        ]
+    const jaison = JSON.stringify({
+      nome: evento.nome,
+      horaInicio: evento.horaInicio,
+      horaFim: evento.horaFim,
+      descricao: evento.descricao,
+      banner: evento.banner,
+      id_promoter: session?.user.id,
+      endereco: {
+        bairro: evento.bairro,
+        cep: evento.cep,
+        cidade: evento.cidade,
+        estado: evento.estado,
+        numero: evento.numero,
+        rua: evento.rua,
+        complemento: evento.complemento
+      },
+      lotacoes: evento.lotacoes.map((lotacao: any) => ({
+        id_perfil: lotacao.id_perfil,
+        id_setor: lotacao.id_setor,
+        quantidade: lotacao.quantidade,
+        valorTotal: lotacao.valorTotal
+      }))
     })
 
     /* Mostrando no console do navegador o formato do json usado para enviar os dados para API */

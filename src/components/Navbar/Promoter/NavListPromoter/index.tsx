@@ -11,7 +11,7 @@ const navListItems = [
     },
     {
       label: "Novo Evento",
-      href: '/event-registration'
+      href: '/events/event-registration'
     },
   ];
   

@@ -521,7 +521,7 @@ async function main() {
       horaInicio: new Date("2023-12-10 18:00"),
       horaFim: new Date("2023-12-11 04:00"),
       descricao: "Um festival de artes para mostrar obras criadas pelo povo local",
-      banner: "/img/event-banner/festival-de-verao.jpg",
+      banner: "/img/event-banner/festival-das-cores.webp",
       status: "disponível",
       id_promoter: promoter5.id,
       id_endereco: endereco5.id

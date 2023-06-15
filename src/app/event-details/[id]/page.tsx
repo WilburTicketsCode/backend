@@ -40,7 +40,7 @@ export default async function Event({params}: {params: { id: number }}) {
 
                 <div className='mb-10 shadow-2xl mr-6 ml-6 flex-row rounded-lg bg-gray-100 p-10'>
                     <div className='flex flex-col items-center'>
-                        <h1 className="text-2xl font-bold m-6">
+                        <h1 className="text-2xl font-bold font-sans m-6">
                             {evento?.nome}
                         </h1>
                         <ShareButton/>
@@ -48,12 +48,12 @@ export default async function Event({params}: {params: { id: number }}) {
 
                     <div className="items-center text-sm">
                         <div className="flex flex-wrap mt-8"><MdCalendarMonth className="fill-roxo-wil" size={'1rem'}/>
-                        <h3 className="font-semibold ml-2 mr-16 text-blue-gray-900">
+                        <h3 className="font-semibold font-sans ml-2 mr-16 text-blue-gray-900">
                             {weekDay.charAt(0).toUpperCase() + weekDay.slice(1)}, {moment(evento?.horaInicio).format("L")}
                         </h3>
                         </div>
                         <div className="flex flex-wrap mt-5"><ImClock className="fill-roxo-wil" size={'1rem'}/>
-                        <h3 className="font-semibold ml-2 mr-5 text-blue-gray-900">
+                        <h3 className="font-semibold font-sans ml-2 mr-5 text-blue-gray-900">
                             {moment(evento?.horaInicio).format("HH:mm")} - {moment(evento?.horaFim).format("HH:mm")}
                         </h3>
                         </div>
@@ -61,16 +61,16 @@ export default async function Event({params}: {params: { id: number }}) {
 
                     <div className="flex flex-shrink mt-5 text-sm">
                         <div className="flex flex-wrap"><FaMapMarkerAlt className="fill-roxo-wil" size={'1.2rem'}/></div>
-                        <h3 className="font-semibold ml-2 mr-5 text-blue-gray-900">
+                        <h3 className="font-semibold font-sans ml-2 mr-5 text-blue-gray-900">
                             {`${endereco?.rua}, ${endereco?.numero}, ${endereco?.bairro}, ${endereco?.cidade} - ${endereco?.estado}`}
                         </h3>
                     </div>
 
-                    <h2 className='font-bold mt-16 text-blue-gray-900'>Descrição</h2>
+                    <h2 className='font-bold mt-16 text-blue-gray-900 font-sans'>Descrição</h2>
                     <div className='lg:flex lg:gap-10 grid mt-2 text-justify justify-between'>
 
                         <div className='lg:w-[50%] mb-10'>
-                            <h3 className='text-blue-gray-900 text-sm'> 
+                            <h3 className='font-sans text-blue-gray-900 text-sm'> 
                                 {evento?.descricao}
                             </h3> 
                         </div>

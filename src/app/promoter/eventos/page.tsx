@@ -87,7 +87,7 @@ export default function eventosPromoter() {
     
 
     const fetchEvents = async () => {
-        const reponse = await fetch("http://localhost:3000/api/evento");
+        const reponse = await fetch("/api/evento");
         const data = await reponse.json();
         setEventos(data);
     }
@@ -121,7 +121,8 @@ export default function eventosPromoter() {
             <div className="grid grid-cols-12 md:col-span-6 xl:col-span-4 h-full xl:gap-x-14 md:gap-8 gap-y-8 mt-4 mb-4">  {/*Layout para essa página*/}
                 {eventos.map((item, index) => {
                         if(item.id_promoter == promoter?.id){
-                        return (<CardEventoPromoter key={item.id} imagem={item.banner} nome={item.nome} data={formatDate(item.horaInicio)} local={formatLocalEvento(item.endereco)} evento={item.id} /> )
+                        return (<CardEventoPromoter key={item.id} imagem={item.banner} nome={item.nome} data={formatDate(item.horaInicio)} 
+                        local={formatLocalEvento(item.endereco)} evento={item.id}  status= {item.status}/> )
                     } 
                 })}
             </div>

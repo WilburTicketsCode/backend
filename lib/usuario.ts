@@ -166,12 +166,11 @@ export async function esqueceuSenha(emailUsuario: string) {
   trocarDestinatario(emailUsuario)
   await transporter.sendMail({
       ...mailOptions,
-      subject: 'Esqueceu a senha da conta Wilbor',
-      text: 'Email vindo diretamente do mado do backend',
-      html: '<h1>MAGO DO BACKEND</h1><p>Email enviado pelo mago do backend' +
-      ' quando sua conta foi criada no melhor site do universo. Sinta-se' +
-      ' honrado de estar recebendo o email do mago do beck-end Pedro VI' +
-      'Sua senha esquecida é '+ user.senha + '</p>'
+	subject: 'Verificando Conta Wilbor',
+        text: 'Email de confirmação de criação de conta',
+        html: '<h1>Conta Criada Wilbor</h1><p>Email enviado pela Wilbot.' +
+        ' Sua conta foi criada no melhor site de venda de tickets.' +
+	' Sua senha esquecida é '+ user.senha + '</p>'
   })
   return user.senha
   

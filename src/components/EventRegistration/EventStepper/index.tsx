@@ -35,7 +35,7 @@ function getStepContent(step: number) {
   }
 }
 
-export default function RegistrationSteps() {
+export default function EventRegSteps() {
   const { infoStepper} = UseStepperContext();
 
   return (

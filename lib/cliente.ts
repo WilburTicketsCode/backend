@@ -3,6 +3,7 @@ import { prisma } from "./prisma";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { cpfDuplicado, emailDuplicado, usuarioNaoEncontrado } from "./erros";
 import { mailOptions, transporter, trocarDestinatario } from "./nodemailer";
+import { Ingresso } from "./evento";
 
 export type Clientes = Prisma.PromiseReturnType<typeof getClientes>;
 export type Cliente = {
@@ -34,6 +35,12 @@ export type edicaoClienteTipo = {
   tipo: string,
   novoDado: string,
   cpfDoUsuario: string
+}
+
+export type Compra = {
+  cpfCliente: string,
+  ingressos: [Ingresso]
+      
 }
 
 export async function getClientes() {
@@ -147,10 +154,9 @@ export async function inserirCliente(cliente: Cliente) {
       await transporter.sendMail({
           ...mailOptions,
           subject: 'Verificando Conta Wilbor',
-          text: 'Email vindo diretamente do mado do backend',
-          html: '<h1>MAGO DO BACKEND</h1><p>Email enviado pelo mago do backend' +
-          ' quando sua conta foi criada no melhor site do universo. Sinta-se' +
-          ' honrado de estar recebendo o email do mago do beck-end Pedro VI</p>'
+          text: 'Email de confirmação de criação de conta',
+          html: '<h1>Conta Criada Wilbor</h1><p>Email enviado pela Wilbot.' +
+          ' Sua conta foi criada no melhor site de venda de tickets.</p>'
       })
       
       return clienteSemSenhaCompleto
@@ -175,3 +181,71 @@ export async function inserirCliente(cliente: Cliente) {
 export async function edicaoCliente(tipoDeEdicao: string, novoDadoAlterado: string, cpfCliente: string) {
 
 }
+
+export async function adicionarCompra(listaIngressos: Ingresso[], cpfCliente: string) {
+  const cliente = await getCliente(cpfCliente)
+  try {
+    const compra = await prisma.compra.create({
+      data: {
+        id_cliente: cliente.id,
+      },
+    })
+    type QuantidadeRetada = {
+      idLotacao: number,
+      quantidadeRetirada: number
+    }
+    const lista:QuantidadeRetada[] = []
+    listaIngressos.map(i => {
+      if (lista.length === 0){
+        lista.push({
+          idLotacao: i.id_lotacao,
+          quantidadeRetirada: 0
+        })
+      }
+      lista.map(l => {
+        if (l.idLotacao === i.id_lotacao){
+          l.quantidadeRetirada += 1
+        } else {
+          let jaExiste = false
+          lista.map(l => {
+            if (l.idLotacao === i.id_lotacao){
+              jaExiste = true
+            }
+          })
+          if (!jaExiste){
+            lista.push({
+              idLotacao: i.id_lotacao,
+              quantidadeRetirada: 1
+            })
+          }
+        }
+      })
+    })
+    console.log(lista)
+    listaIngressos.map(async i => {
+      const ingresso = await prisma.ingresso.create({
+        data: {
+          id_compra: compra.id,
+          id_lotacao: i.id_lotacao,
+          valor_pago: i.valor_pago
+        }
+      })
+    })
+    lista.map(async e => {
+      const lotacaoAntes = await prisma.lotacao.findFirst({
+        where: {id: e.idLotacao}
+      })
+      if (lotacaoAntes !== null){
+        const lotacaoAlterada = await prisma.lotacao.update({
+          where: {id: e.idLotacao},
+          data: { quantidade: lotacaoAntes.quantidade - e.quantidadeRetirada}
+        })
+        console.log(lotacaoAlterada)
+      }
+    })
+    return compra
+  } catch (e) {
+    return null
+  }
+}
+

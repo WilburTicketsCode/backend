@@ -102,7 +102,7 @@ export default function TelaNewAdm() {
                             <Input {...register('passwordConfirm')}  type="password" size='md' label="Confirme a senha" value={user.passwordConfirm}/>
                             {errors.passwordConfirm?.message && <p className="text-red-500 text-xs">{errors.passwordConfirm?.message}</p>}
                         </div>
-                        <Button onClick={()=>{cleanInfoAdm()}} type='submit' size='md' className="mt-20" fullWidth>
+                        <Button onClick={()=>{cleanInfoAdm(); handleSubmit}} type='submit' size='md' className="mt-20" fullWidth>
                             Cadastrar
                         </Button>
                     </div>

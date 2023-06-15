@@ -32,6 +32,13 @@ export type Evento = {
   ]
 };
 
+export type Ingresso = {
+  valor_pago: number,
+  id_lotacao: number
+}
+
+
+
 export type edicaoEventoTipo = {
   tipo: string,
   novoDado: string,

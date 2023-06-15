@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import {useState} from 'react';
 
 type adminFormData = z.infer<typeof adminNSchema>;
 
@@ -20,6 +21,14 @@ const adminNSchema = z.object({
   });
 
 export default function TelaNewAdm() {
+
+    const [user, setUser] = useState({
+        name: '',
+        email: '',
+        cpf: '',
+        password: '',
+        passwordConfirm: '',
+    })
 
     const { register, handleSubmit, formState: { errors } } = useForm<adminFormData>({
         resolver: zodResolver(adminNSchema),
@@ -65,7 +74,7 @@ export default function TelaNewAdm() {
                 {/**Formulário começa aqui */}
                 <form onSubmit={onSubmit} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
                     <div className="min-w-fit mb-4 flex flex-col gap-6">
-                        <Input {...register('name')}  size='md'  label="Nome Completo" />
+                        <Input {...register('name')}  size='md'  label="Nome Completo" value={user.name}/>
                         {errors.name?.message && <p className="text-red-500 text-xs">{errors.name?.message}</p>}
 
                         <div className="flex flex-col gap-6 md:flex-row">

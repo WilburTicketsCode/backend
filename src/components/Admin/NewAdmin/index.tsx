@@ -40,23 +40,6 @@ export default function TelaNewAdm() {
 
     });
 
-    const [user, setUser] = useState({
-        name: '',
-        email: '',
-        cpf: '',
-        password: '',
-        passwordConfirm: '',
-    });
-
-    const cleanInfoAdm = () => {
-        setUser({
-            name: '',
-            email: '',
-            cpf: '',
-            password: '',
-            passwordConfirm: '',
-        })
-    }
 
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -95,25 +78,25 @@ export default function TelaNewAdm() {
                 {/**Formulário começa aqui */}
                 <form onSubmit={onSubmit} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
                     <div className="min-w-fit mb-4 flex flex-col gap-6">
-                        <Input {...register('name')} size='md' label="Nome Completo" value={user.name} />
+                        <Input {...register('name')} size='md' label="Nome Completo" />
                         {errors.name?.message && <p className="text-red-500 text-xs">{errors.name?.message}</p>}
 
                         <div className="flex flex-col gap-6 md:flex-row">
-                            <Input {...register('email')} size='md' label="Email" value={user.email} />
+                            <Input {...register('email')} size='md' label="Email" />
                             {errors.email?.message && <p className="text-red-500 text-xs">{errors.email?.message}</p>}
 
-                            <Input {...register('cpf')} size='md' label="CPF" value={user.cpf} />
+                            <Input {...register('cpf')} size='md' label="CPF"/>
                             {errors.cpf?.message && <p className="text-red-500 text-xs">{errors.cpf?.message}</p>}
                         </div>
 
                         <div className="flex flex-col gap-6 md:flex-row">
-                            <Input {...register('password')} type="password" size='md' label="Senha" value={user.password} />
+                            <Input {...register('password')} type="password" size='md' label="Senha" />
                             {errors.password?.message && <p className="text-red-500 text-xs">{errors.password?.message}</p>}
 
-                            <Input {...register('passwordConfirm')} type="password" size='md' label="Confirme a senha" value={user.passwordConfirm} />
+                            <Input {...register('passwordConfirm')} type="password" size='md' label="Confirme a senha" />
                             {errors.passwordConfirm?.message && <p className="text-red-500 text-xs">{errors.passwordConfirm?.message}</p>}
                         </div>
-                        <Button onClick={() => {cleanInfoAdm(); handleSubmit; buttonAction}} type='submit' size='md' className="mt-20" fullWidth>
+                        <Button onClick={() => {buttonAction}} type='submit' size='md' className="mt-20" fullWidth>
                             Cadastrar
                         </Button>
                     </div>

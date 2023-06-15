@@ -46,6 +46,31 @@ export default function CardEventoAdm({imagemEvento, nomeEvento, dataEvento, loc
       }
       }
 
+  async function CallExclude(){
+    const jaison = JSON.stringify({
+      id: evento
+      })
+      
+      const res = await fetch("/api/evento/id", {
+      method: "DELETE",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: jaison
+      })
+      
+      if (res.ok) {
+          const data = await res.json()
+          console.log(JSON.stringify(data)) 
+          console.log("AQUII:", res)
+  
+          setRefreshEvents(!refreshEvents)
+      } else {
+          alert("Não foi possível Excluir o evento!")    //Mostra que não foi possível excluir
+        }
+      }
+    
+
   return (
 
     <Card className="mt-0 w-[320px] h-[288px] shadow-black/40 col-span-12 md:col-span-6 xl:col-span-4"> 
@@ -68,7 +93,7 @@ export default function CardEventoAdm({imagemEvento, nomeEvento, dataEvento, loc
         {status !== "suspenso" && <Button type='submit' className="bg-roxo-wil m-auto flex gap-y-4 rounded-full p-2" onClick={CallChangeStats}>
           Suspender Evento
         </Button>}
-        <Button type="submit"  className="bg-roxo-wil m-auto flex gap-y-4 rounded-full p-2">
+        <Button type="submit"  className="bg-roxo-wil m-auto flex gap-y-4 rounded-full p-2" onClick={CallExclude}>
           Excluir Evento
         </Button> 
         </div>

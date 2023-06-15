@@ -56,10 +56,7 @@ export default function SectorProf(props:any){
                     <p className='mx-1 bg-[#D9D9D9] text-[16px] w-[20px]'>{quantidade}</p>
 
                     <Button onClick={() => handleInc()} className="h-[15px] w-[15px] p-0 text-blue-gray-700 bg-gray-500">+</Button>
-                    
-                    <Button className="h-[20px] w-[20px] p-0 bg-transparent ml-1">
-                        <img src="/icons/bin.svg" alt="" className="h-[15px] w-[15px]"/>
-                    </Button>
+
                 </div>
 
                 <div className= "flex ml-1 col-auto row-auto items-center">

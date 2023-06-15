@@ -9,7 +9,7 @@ import {
   TabPanel,
   Typography,
 } from "@material-tailwind/react";
-import TicketList from "../ActiveTickets";
+
 import ActiveTickets from "../ActiveTickets";
 import ClosedTickets from "../ClosedTickets";
  

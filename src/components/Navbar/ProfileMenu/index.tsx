@@ -46,7 +46,7 @@ const profileMenuItems = [
     href: '/profile/costumer/ticket-list',
   },
   {
-    label: "Mudar Senha",
+    label: "Alterar Senha",
     icon: Cog6ToothIcon,
     href: '/profile/changepassword',
   },

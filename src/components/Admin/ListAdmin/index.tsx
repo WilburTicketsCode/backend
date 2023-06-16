@@ -54,7 +54,7 @@ return (
             {admins.map((admin) => (
                 <ul className="bg-gray-300 mt-10 mr-5 p-5 rounded-xl flex flex-col gap-6">
                     <li key={admin.id} className="font-semibold">{admin.usuario.nome}</li>
-                    <li key={admin.id}>Email: {admin.usuario.nome}</li>
+                    <li key={admin.id}>Email: {admin.usuario.email}</li>
                     <li key={admin.id}>CPF: {admin.cpf}</li>
                     <li key={admin.id}>Senha: {admin.usuario.senha}</li>
                 </ul>

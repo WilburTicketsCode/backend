@@ -142,9 +142,9 @@ export default function EditAddress() {
     }
 
 
-    const onSubmit = (data: addressFormData) => {
+    const onSubmit = async(data: addressFormData) => {
         if(erro === true) return;
-        editAddress(data);
+        await editAddress(data);
         router.push('/profile/costumer');
     }
 
@@ -152,7 +152,7 @@ export default function EditAddress() {
     return (
         <div className="w-full h-[80vh] md:h-[80vh] md:w-[70%] lg:w-[60%] xl: gap-3 flex flex-col justify-center items-center overflow-auto bg-white rounded-xl">
             <h2 className="text-2xl font-bold text-center">Editar Endereço</h2>
-            <form onSubmit={handleSubmit(editAddress)} className="flex flex-col gap-2 overflow-auto">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2 overflow-auto">
                 <Input {...register('cep')} type='text' value={cep} onChange={handleChangeCep} maxLength={8} className='w-[15rem] sm:w-[20rem] lg:w-[30rem]' label='CEP*'></Input>
                 {errors.cep?.message && <p className="text-red-500 text-sm">{errors.cep?.message}</p>}
                 {erro && <p className="text-red-500 text-sm">CEP não encontrado</p>}

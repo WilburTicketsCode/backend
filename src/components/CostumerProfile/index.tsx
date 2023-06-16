@@ -89,7 +89,7 @@ export default function CostumerP() {
           <Typography className="text-base font-bold" >Endereço</Typography> 
           </Tab>
           <Tab value="card" onClick={() => { setType("card") }}>
-          <Typography className="text-base font-bold" >Cartão de Credito</Typography> 
+          <Typography className="text-base font-bold" >Cartão de Crédito</Typography> 
           </Tab>
         </TabsHeader>
         <TabsBody className="h-auto min-h-full" animate={{

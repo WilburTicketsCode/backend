@@ -36,6 +36,7 @@ export default function FormSecurityData(props: any) {
 
 
     const onSubmit = async (data: securityFormData) => {
+		setStatusAlert(status.EMPTY)// Para garantir que o alert vai aparecer sempre, mesmo que se mantenha no mesmo erro
 		// Construindo o objeto de requisição
 		const user_data = JSON.stringify({
 			email: props.email,
@@ -69,9 +70,9 @@ export default function FormSecurityData(props: any) {
 
   return (
 	<>
-		{statusAlert == status.SUCESS && <AlertSucess/>}
-		{statusAlert == status.ERROR && <AlertError />}
-		{statusAlert == status.NOT_FOUND && <AlertNotFound />}
+		{statusAlert == status.SUCESS && <AlertSucess msg="Senha alterada com sucesso"/>}
+		{statusAlert == status.ERROR && <AlertError msg="Ocorreu um erro no servidor"/>}
+		{statusAlert == status.NOT_FOUND && <AlertNotFound msg='Você errou sua senha atual'/>}
 
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className="space-y-12">

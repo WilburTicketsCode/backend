@@ -13,7 +13,6 @@ const adminNSchema = z.object({
     cpf: z.string().min(8, { message: 'CPF deve conter no mínimo 8 caracteres' }),
     password: z.string().min(8, { message: 'Senha deve conter no mínimo 8 caracteres' }),
     passwordConfirm: z.string().min(8, { message: 'Senha deve conter no mínimo 8 caracteres' }),
-
 }).refine((data) => data.password === data.passwordConfirm, {
     message: "Senhas diferentes",
     path: ["passwordConfirm"],
@@ -28,8 +27,17 @@ export default function TelaNewAdm() {
 
     });
 
-    const onSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+    const onSubmit = (data: adminFormData) => {
+        
+        const admininistrador = {
+            cpf: data.cpf,
+            super_adm: false,
+            usuario: {
+                nome: data.name,
+                email: data.email,
+                senha: data.password
+            }
+        }
     
         // Enviar dados do formulário para a API
         fetch('/api/administrador', {
@@ -37,11 +45,12 @@ export default function TelaNewAdm() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(adminNSchema),
+          body: JSON.stringify(admininistrador),
         })
           .then((response) => {
             if (response.ok) {
               console.log('Dados salvos com sucesso!');
+              alert('usuário cadastrado')
             } else {
               console.error('Erro ao salvar os dados!');
             }
@@ -63,7 +72,7 @@ export default function TelaNewAdm() {
                 </Typography>
 
                 {/**Formulário começa aqui */}
-                <form onSubmit={onSubmit} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+                <form onSubmit={handleSubmit(onSubmit)} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
                     <div className="min-w-fit mb-4 flex flex-col gap-6">
                         <Input {...register('name')}  size='md'  label="Nome Completo" />
                         {errors.name?.message && <p className="text-red-500 text-center">{errors.name?.message}</p>}

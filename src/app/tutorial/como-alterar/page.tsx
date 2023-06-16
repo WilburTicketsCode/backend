@@ -16,7 +16,7 @@ export default function testes() {
 
   const exemploJsonAlterarEndereco: edicaoEnderecoTipo = {
     rua: "RUAZINHA",
-    numero: 132,
+    numero: '132',
     bairro: "BAIRRINHO",
     cidade: "CIDADEZINHA",
     estado: "ESTADINHO",

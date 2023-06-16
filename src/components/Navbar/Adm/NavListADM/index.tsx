@@ -15,8 +15,7 @@ const navListItems = [
     },
     {
       label: "Promoters",
-      href:"#"
-      //criar telas para os promoters
+      href:"/administrador/promoters"
     },
   ];
   

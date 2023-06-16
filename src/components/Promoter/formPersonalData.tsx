@@ -3,9 +3,8 @@ import { useState } from 'react';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 import React from 'react';
-
-
-
+import { AlertError, AlertNotFound, AlertSucess } from './alert';
+import { PresenterPromoter } from '@/adapters/presenters/PresenterPromoter';
 
 
 // Status auxiliares para exibir alerts para informar aos usuários
@@ -13,28 +12,33 @@ enum status {
 	EMPTY, // status inicial
 	SUCESS,
 	ERROR,
+	BAD_REQUEST,
 }
 
 // Validação de tipos no campo
-type personalFormData = z.infer<typeof personalSchema>;
+export type personalFormData = z.infer<typeof personalSchema>;
 
 const personalSchema = z.object({
  	name: z.string(),
 	email: z.string().email({message: 'O email é inválido'}),
-	phone: z.string().regex(/^\d+$/, 'Apenas dígitos são permitidos').min(10, {message: 'Exemplo: 7100000000'}),
+	phone: z.string().regex(/^\d+$/, 'Apenas dígitos são permitidos').length(11, {message: 'Exemplo: 7100000000'}),
 	street: z.string().min(1, {message: 'Exemplo: Novo horizonte'}),
 	neighborhood: z.string().min(1, {message: 'Exemplo: Centro'}),
-	complement: z.string(),
-	number: z.string().min(1, {message: 'Exemplo: 1'}),
+	complement: z.string(),// É opcional
+	number: z.string().min(1, {message: 'Exemplo: 1'}),// Pode ser 12A
 	city: z.string().min(1, {message: 'Exemplo: Feira de Santana'}),
 	state: z.string().min(2, {message: 'Exemplo: BA'}),
-	cep: z.string().regex(/^\d+$/, 'Apenas dígitos são permitidos').min(8, {message: 'Exemplo: 44000002'}),
+	cep: z.string().regex(/^\d+$/, 'Apenas dígitos são permitidos').length(8, {message: 'Exemplo: 44000002'}),
   
 	selectField: z.enum(['cpf', 'cnpj']),
-	cpf_cnpj: z.string().regex(/^\d+$/, 'Apenas dígitos são permitidos').refine((value) => {
-	return value.length === 11 || value.length === 14 ;
-	}, { message: 'Formato inválido para CPF ou CNPJ' }),
+	cpf_cnpj: z.string().regex(/^\d+$/, 'Apenas dígitos são permitidos'),
 })
+// Validação do CPF ou CNPJ
+.refine((data) => (data.selectField === 'cnpj' && data.cpf_cnpj.length === 14) || (data.selectField === 'cpf' && data.cpf_cnpj.length === 11), {
+  message: "CPF ou CNPJ com tamanhos inválidos",
+  path: ["cpf_cnpj"],
+});
+
 
 export default function FormPersonalData(props: any) {
 	// Para o alert
@@ -61,229 +65,233 @@ export default function FormPersonalData(props: any) {
   	});
 
     const onSubmit = async (data: personalFormData) => {
+		setStatusAlert(status.EMPTY)// Para garantir que o alert vai aparecer sempre, mesmo que se mantenha no mesmo erro
       // Construindo o objeto de requisição
-      const user_data: any = {};
+      const body_req = JSON.stringify(PresenterPromoter.toUpdateProfile(data, props.user.cpf ? true : false))
+
       // Chama API
-      const res = await fetch(`/api/usuario/alterar-senha`, {
+	  const id = props.user.cpf ? props.user.cpf : props.user.cnpj
+      const res = await fetch(`/api/promoter/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: user_data
+        body: body_req
       })
+
+
       // Se conseguiu alterar a senha (200-OK)
       if (res.status == 200){
         setStatusAlert(status.SUCESS)
       }
       // Se o usuário preencheu algum campo de forma errada (400-BAD REQUEST)
       else if(res.status == 400){
-
+		setStatusAlert(status.BAD_REQUEST)
       }
       // Se tiver dado problema no servidor (500-SERVIDOR ERROR)
       else if (res.status == 500){// Talvez colocar o else seja melhor
         setStatusAlert(status.ERROR)
       }
-
-        console.log(data);
+	  console.log(body_req)
     }
 
 
   return (
- 	
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="space-y-12">
+ 	<>
+		{statusAlert == status.SUCESS && <AlertSucess msg="Dados atualizados com sucesso"/>}
+		{statusAlert == status.ERROR && <AlertError msg="Ocorreu um erro no servidor"/>}
+		{statusAlert == status.BAD_REQUEST && <AlertNotFound msg='Você digitou algum dado inválido'/>}
 
-        <div className="border-b border-gray-900/10 pb-12">
+	    <form onSubmit={handleSubmit(onSubmit)}>
+			<div className="space-y-12">
 
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+				<div className="border-b border-gray-900/10 pb-12">
 
-			{/* Nome */}
-            <div className="sm:col-span-3">
-              <label className="block text-sm font-medium leading-6 text-gray-900">
-                Nome
-              </label>
-              <div className="mt-2">
-                <input
-					{...register('name')}
-                    type="text"
-                    className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-				{errors.name?.message && <span className="text-red-500">{errors.name?.message}</span>}
-              </div>
-            </div>
+				<div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
-			{/* Identificador */}
-            <div className="sm:col-span-3 flex">
-				<div>
+					{/* Nome */}
+					<div className="sm:col-span-3">
 					<label className="block text-sm font-medium leading-6 text-gray-900">
-						Identificador
+						Nome
 					</label>
-					<div className="mt-2 block sm:flex">
-					<select disabled {...register('selectField')} className='block w-[80%] max-w-[90px] rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'>
-						<option value="cpf">CPF</option>
-						<option value="cnpj">CNPJ</option>
-					</select>
+					<div className="mt-2">
 						<input
-              maxLength={props.user.cpf ? 11 : 14}
-							{...register('cpf_cnpj')}
+							{...register('name')}
 							type="text"
 							className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 						/>
+						{errors.name?.message && <span className="text-red-500">{errors.name?.message}</span>}
 					</div>
-					{errors.cpf_cnpj && <span className="text-red-500">{errors.cpf_cnpj.message}</span>}
+					</div>
+
+					{/* Identificador */}
+					<div className="sm:col-span-3 flex">
+						<div>
+							<label className="block text-sm font-medium leading-6 text-gray-900">
+								Identificador
+							</label>
+							<div className="mt-2 block sm:flex">
+							<select disabled {...register('selectField')} className='block w-[80%] max-w-[90px] rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'>
+								<option value="cpf">CPF</option>
+								<option value="cnpj">CNPJ</option>
+							</select>
+								<input
+									{...register('cpf_cnpj')}
+									type="text"
+									className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+								/>
+							</div>
+							{errors.cpf_cnpj && <span className="text-red-500">{errors.cpf_cnpj.message}</span>}
+						</div>
+					</div>
+
+
+					{/* Email */}
+					<div className="sm:col-span-3">
+					<label className="block text-sm font-medium leading-6 text-gray-900">
+						Email
+					</label>
+					<div className="mt-2">
+						<input
+							{...register('email')}
+							type="email"
+							className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						/>
+						{errors.email?.message && <span className="text-red-500">{errors.email?.message}</span>}
+					</div>
+					</div>
+
+					{/* Telefone */}
+					<div className="sm:col-span-3">
+					<label className="block text-sm font-medium leading-6 text-gray-900">
+						Telefone
+					</label>
+					<div className="mt-2">
+						<input
+							{...register('phone')}
+							type="phone"
+							className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						/>
+					</div>
+					{errors.phone?.message && <span className="text-red-500">{errors.phone?.message}</span>}
+					</div>
+
+					{/* Endereço */}
+					<div className="sm:col-span-2 sm:col-start-1">
+					<label className="block text-sm font-medium leading-6 text-gray-900">
+						Rua
+					</label>
+					<div className="mt-2">
+						<input
+							{...register('street')}
+							type="text"
+							className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						/>
+						{errors.street?.message && <span className="text-red-500">{errors.street?.message}</span>}
+					</div>
+					</div>
+
+					<div className="sm:col-span-1">
+					<label className="block text-sm font-medium leading-6 text-gray-900">
+						Número
+					</label>
+					<div className="mt-2">
+						<input
+							{...register('number')}
+							type="text"
+							className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						/>
+						{errors.number?.message && <span className="text-red-500">{errors.number?.message}</span>}
+					</div>
+					</div>
+					<div className="sm:col-span-1">
+					<label className="block text-sm font-medium leading-6 text-gray-900">
+						Bairro
+					</label>
+					<div className="mt-2">
+						<input
+							{...register('neighborhood')}
+							type="text"
+							className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						/>
+						{errors.neighborhood?.message && <span className="text-red-500">{errors.neighborhood?.message}</span>}
+					</div>
+					</div>
+
+					<div className="sm:col-span-2">
+					<label className="block text-sm font-medium leading-6 text-gray-900">
+						Complemento
+					</label>
+					<div className="mt-2">
+						<input
+							{...register('complement')}
+							type="text"
+							className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						/>
+						{errors.complement?.message && <span className="text-red-500">{errors.complement?.message}</span>}
+					</div>
+					</div>
+
+					{/* Cidade */}
+					<div className="sm:col-span-2 sm:col-start-1">
+					<label className="block text-sm font-medium leading-6 text-gray-900">
+						Cidade
+					</label>
+					<div className="mt-2">
+						<input
+							{...register('city')}
+							type="text"
+							className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						/>
+						{errors.city?.message && <span className="text-red-500">{errors.city?.message}</span>}
+					</div>
+					</div>
+
+					{/* Estado */}
+					<div className="sm:col-span-2">
+					<label className="block text-sm font-medium leading-6 text-gray-900">
+						Estado
+					</label>
+					<div className="mt-2">
+						<input
+							{...register('state')}
+							type="text"
+							className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						/>
+						{errors.state?.message && <span className="text-red-500">{errors.state?.message}</span>}
+					</div>
+					</div>
+
+					{/* CEP */}
+					<div className="sm:col-span-2">
+					<label className="block text-sm font-medium leading-6 text-gray-900">
+						CEP
+					</label>
+					<div className="mt-2">
+						<input
+							{...register('cep')}
+							type="text"
+							className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						/>
+						{errors.cep?.message && <span className="text-red-500">{errors.cep?.message}</span>}
+					</div>
+					</div>
 				</div>
-            </div>
+				</div>
+			</div>
 
-
-			{/* Email */}
-            <div className="sm:col-span-3">
-              <label className="block text-sm font-medium leading-6 text-gray-900">
-                Email
-              </label>
-              <div className="mt-2">
-                <input
-					{...register('email')}
-                    type="email"
-                    className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-				{errors.email?.message && <span className="text-red-500">{errors.email?.message}</span>}
-              </div>
-            </div>
-
-            {/* Telefone */}
-            <div className="sm:col-span-3">
-              <label className="block text-sm font-medium leading-6 text-gray-900">
-                Telefone
-              </label>
-              <div className="mt-2">
-                <input
-					{...register('phone')}
-                    type="phone"
-                    className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-			  {errors.phone?.message && <span className="text-red-500">{errors.phone?.message}</span>}
-            </div>
-
-			{/* Endereço */}
-            <div className="sm:col-span-2 sm:col-start-1">
-              <label className="block text-sm font-medium leading-6 text-gray-900">
-                Rua
-              </label>
-              <div className="mt-2">
-                <input
-					{...register('street')}
-                    type="text"
-                    className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-				{errors.street?.message && <span className="text-red-500">{errors.street?.message}</span>}
-              </div>
-            </div>
-
-            <div className="sm:col-span-1">
-              <label className="block text-sm font-medium leading-6 text-gray-900">
-                Número
-              </label>
-              <div className="mt-2">
-                <input
-					{...register('number')}
-                    type="text"
-                    className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-				{errors.number?.message && <span className="text-red-500">{errors.number?.message}</span>}
-              </div>
-            </div>
-            <div className="sm:col-span-1">
-              <label className="block text-sm font-medium leading-6 text-gray-900">
-                Bairro
-              </label>
-              <div className="mt-2">
-                <input
-					{...register('neighborhood')}
-                    type="text"
-                    className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-				{errors.neighborhood?.message && <span className="text-red-500">{errors.neighborhood?.message}</span>}
-              </div>
-            </div>
-
-            <div className="sm:col-span-2">
-              <label className="block text-sm font-medium leading-6 text-gray-900">
-                Complemento
-              </label>
-              <div className="mt-2">
-                <input
-					{...register('complement')}
-                    type="text"
-                    className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-				{errors.complement?.message && <span className="text-red-500">{errors.complement?.message}</span>}
-              </div>
-            </div>
-
-			{/* Cidade */}
-            <div className="sm:col-span-2 sm:col-start-1">
-              <label className="block text-sm font-medium leading-6 text-gray-900">
-                Cidade
-              </label>
-              <div className="mt-2">
-                <input
-					{...register('city')}
-                    type="text"
-                    className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-				{errors.city?.message && <span className="text-red-500">{errors.city?.message}</span>}
-              </div>
-            </div>
-
-			{/* Estado */}
-            <div className="sm:col-span-2">
-              <label className="block text-sm font-medium leading-6 text-gray-900">
-                Estado
-              </label>
-              <div className="mt-2">
-                <input
-					{...register('state')}
-                    type="text"
-                    className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-				{errors.state?.message && <span className="text-red-500">{errors.state?.message}</span>}
-              </div>
-            </div>
-
-			{/* CEP */}
-            <div className="sm:col-span-2">
-              <label className="block text-sm font-medium leading-6 text-gray-900">
-                CEP
-              </label>
-              <div className="mt-2">
-                <input
-					{...register('cep')}
-                    type="text"
-                    className="block w-full rounded-md px-3 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-				{errors.cep?.message && <span className="text-red-500">{errors.cep?.message}</span>}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-6 flex items-center justify-end gap-x-6">
-        <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
-          Cancel
-        </button>
-        <button
-          type="submit"
-          className="rounded-md w-[150px] bg-[#404C76] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Save
-        </button>
-      </div>
-    </form>
+			<div className="mt-6 flex items-center justify-end gap-x-6">
+				<button type="button" className="text-sm font-semibold leading-6 text-gray-900">
+				Cancel
+				</button>
+				<button
+				type="submit"
+				className="rounded-md w-[150px] bg-[#404C76] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+				>
+				Save
+				</button>
+			</div>
+		</form>
+	</>
   )
-}
-
-function getValues() {
-  throw new Error('Function not implemented.');
 }

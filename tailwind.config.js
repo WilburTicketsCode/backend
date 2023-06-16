@@ -11,6 +11,9 @@ module.exports = withMT({
       'roxo-wil': '#404C76',
       'cinza-wil': '#E7E7E7',
     },
+    fontFamily: {
+      'sans': 'system-ui'
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

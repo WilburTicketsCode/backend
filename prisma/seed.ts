@@ -50,18 +50,21 @@ async function main() {
   /* PERFIS DE INGREO */
   const perfilInteira = await prisma.perfil.create({
     data: {
+      id: 1,
       nome: "Inteira"
     }
   })
 
   const perfilMeia = await prisma.perfil.create({
     data: {
+      id: 2,
       nome: "Meia"
     }
   })
 
   const perfilGratuita = await prisma.perfil.create({
     data: {
+      id: 3,
       nome: "Gratuita"
     }
   })
@@ -69,18 +72,21 @@ async function main() {
   /* SETORES DE INGREÇO */
   const setorVip = await prisma.setor.create({
     data: {
+      id: 1,
       nome: "Vip"
     }
   })
 
   const setorCamarote = await prisma.setor.create({
     data: {
+      id: 2,
       nome: "Camarote"
     }
   })
   
   const setorBackstage = await prisma.setor.create({
     data: {
+      id: 3,
       nome: "Backstage"
     }
   })
@@ -92,21 +98,20 @@ async function main() {
         create: {
           nome: "Rafeael Tosta",
           email: "tostinha123@yahoo.com",
-          senha: "Tosta1134"
+          senha: "tostinha123"
         }
       },
       cpf: "45267413020",
       status: "aprovado",
-      data_nasc: new Date(),
-      telefone: "6523848514",
+      telefone: "965238485414",
       endereco: {
         create: {
           rua: "Rua da Paz",
-          numero: 123,
+          numero: '123',
           bairro: "Centro",
           cidade: "São Paulo",
           estado: "SP",
-          cep: "01010-010",
+          cep: "01010010",
           complemento: "Apartamento 42"
        }
       }
@@ -117,11 +122,11 @@ async function main() {
   const endereco1 = await prisma.endereco.create({
     data: {
       "rua": "Avenida das Flores",
-      numero: 1234,
+      numero: '1234',
       bairro: "Jardim das Tulipas",
       cidade: "São Paulo",
       estado: "SP",
-      cep: "04567-890",
+      cep: "04567890",
       complemento: "Apartamento 56"
     }
   })
@@ -129,11 +134,11 @@ async function main() {
   const endereco2 = await prisma.endereco.create({
     data: {
       rua: "Rua da Paz",
-      numero: 100,
+      numero: '100',
       bairro: "Jardim das Flores",
       cidade: "São Paulo",
       estado: "SP",
-      cep: "04535-070",
+      cep: "04535070",
       complemento: "Apto 501"
    }
   })
@@ -141,11 +146,11 @@ async function main() {
   const endereco3 = await prisma.endereco.create({
     data: {
       rua: "Avenida Senador Teotônio Vilela",
-      numero: 400,
+      numero: '400',
       bairro: "Jardim Malia I",
       cidade: "São Paulo",
       estado: "SP",
-      cep: "04792-090",
+      cep: "04792090",
       complemento: "Autódromo de Interlagos"
     }
   })
@@ -153,11 +158,23 @@ async function main() {
   const endereco4 = await prisma.endereco.create({
     data: {
       rua: "Avenida Luís Viana Filho",
-      numero: 1590,
+      numero: '1590',
       bairro: "Itapuã",
       cidade: "Salvador",
       estado: "BA",
-      cep: "41730-101",
+      cep: "41730101",
+      complemento: "Parque de Exposições"
+    }
+  })
+
+  const endereco5 = await prisma.endereco.create({
+    data: {
+      rua: "Avenida Getulio",
+      numero: '190',
+      bairro: "Ponto central",
+      cidade: "Feira de Santana",
+      estado: "BA",
+      cep: "44075075",
       complemento: "Parque de Exposições"
     }
   })
@@ -176,16 +193,15 @@ async function main() {
       },
       cpf: "72417917033",
       status: "aprovado",
-      data_nasc: new Date(),
-      telefone: "9136945571",
+      telefone: "99136945571",
       endereco: {
         create: {
           rua: "Rua dos Girassóis",
-          numero: 123,
+          numero: '123',
           bairro: "Jardim das Flores",
           cidade: "Curitiba",
           estado: "PR",
-          cep: "80000-000",
+          cep: "80000000",
           complemento: ""
           }
       }
@@ -204,16 +220,15 @@ async function main() {
       },
       cpf: "58429911014",
       status: "aprovado",
-      data_nasc: new Date(),
-      telefone: "8536231962",
+      telefone: "98536231962",
       endereco: {
         create: {
           rua: "Rua das Flores",
-          numero: 123,
+          numero: '123',
           bairro: "Jardim Botânico",
           cidade: "Porto Alegre",
           estado: "RS",
-          cep: "90210-123",
+          cep: "90210123",
           complemento: "Apartamento 401"
           }
       }
@@ -457,27 +472,108 @@ async function main() {
       },
       cpf: "28419554006",
       status: "suspenso",
-      data_nasc: new Date(),
-      telefone: "6838738801",
+      telefone: "96838738801",
       endereco: {
         create: {
           rua: "Rua dos Jasmins",
-          numero: 12,
+          numero: '12',
           bairro: "Jardim das Flores",
           cidade: "São Paulo",
           estado: "SP",
-          cep: "04567-890",
+          cep: "04567890",
           complemento: "Apto 42"
         }
       }
     }
   })
 
+  /* PROMOTER 5 */
+  const promoter5 = await prisma.promoter.create({
+    data: {
+      usuario: {
+        create: {
+          nome: "Seu Jorge Aado",
+          email: "jorgeamado@gmail.com",
+          senha: "123456789"
+        }
+      },
+      cpf: "28419994006",
+      status: "aprovado",
+      telefone: "96838738801",
+      endereco: {
+        create: {
+          rua: "Rua dos Piraracuas",
+          numero: '12222',
+          bairro: "Jardim das Arvores",
+          cidade: "São Paulo",
+          estado: "SP",
+          cep: "00567890",
+          complemento: "Apto 1"
+        }
+      }
+    }
+  })
+
+  /* CRIANDO EVENTO 6 */
+  const evento6 = await prisma.evento.create({
+    data: {
+      nome: "Festival de Cores",
+      horaInicio: new Date("2023-12-10 18:00"),
+      horaFim: new Date("2023-12-11 04:00"),
+      descricao: "Um festival de artes para mostrar obras criadas pelo povo local",
+      banner: "/img/event-banner/festival-das-cores.webp",
+      status: "disponível",
+      id_promoter: promoter5.id,
+      id_endereco: endereco5.id
+    }
+  })
+
+  // evvento 6
+  const lotacao16 = await prisma.lotacao.create({
+    data: {
+     id_evento: evento6.id,
+     id_perfil: perfilInteira.id,
+     id_setor: setorVip.id,
+     quantidade: 100,
+     valorTotal: 300
+   }
+ })
+
+ const lotacao17 = await prisma.lotacao.create({
+  data: {
+   id_evento: evento6.id,
+   id_perfil: perfilMeia.id,
+   id_setor: setorVip.id,
+   quantidade: 100,
+   valorTotal: 300
+ }
+})
+
+const lotacao18 = await prisma.lotacao.create({
+  data: {
+   id_evento: evento6.id,
+   id_perfil: perfilInteira.id,
+   id_setor: setorCamarote.id,
+   quantidade: 100,
+   valorTotal: 300
+ }
+})
+
+const lotacao19 = await prisma.lotacao.create({
+  data: {
+   id_evento: evento6.id,
+   id_perfil: perfilMeia.id,
+   id_setor: setorCamarote.id,
+   quantidade: 100,
+   valorTotal: 300
+ }
+})
+
   /* CLEINTE 1 */
   const cliente1 = await prisma.cliente.create({
     data: {
       cpf: '66668230016',
-      telefone: '6926587229',
+      telefone: '96926587229',
       data_nasc: new Date(),
       usuario: {
         create: {
@@ -489,11 +585,11 @@ async function main() {
       endereco: {
         create: {
           rua: "Rua da Consolação",
-          numero: 1000,
+          numero: '1000',
           bairro: "Consolação",
           cidade: "São Paulo",
           estado: "SP",
-          cep: "01302-907",
+          cep: "01302907",
           complemento: "Apt 501"
         }  
       },
@@ -531,7 +627,7 @@ async function main() {
   const cliente2 = await prisma.cliente.create({
     data: {
       cpf: '66668240016',
-      telefone: '5926587229',
+      telefone: '95926587229',
       data_nasc: new Date(),
       usuario: {
         create: {
@@ -543,11 +639,11 @@ async function main() {
       endereco: {
         create: {
           rua: "Rua Barão de Itapetininga",
-          numero: 37,
+          numero: '37',
           bairro: "República",
           cidade: "São Paulo",
           estado: "SP",
-          cep: "01042-000",
+          cep: "01042000",
           complemento: "Sala 12"
        }
        
@@ -580,7 +676,7 @@ async function main() {
   const cliente3 = await prisma.cliente.create({
     data: {
       cpf: '62807982085',
-      telefone: '6725361968',
+      telefone: '96725361968',
       data_nasc: new Date(),
       usuario: {
         create: {
@@ -592,7 +688,7 @@ async function main() {
       endereco: {
         create: {
           rua: "Rua Barão de Itapetininga",
-          numero: 150,
+          numero: '150',
           bairro: "República",
           cidade: "São Paulo",
           estado: "SP",
@@ -615,7 +711,7 @@ async function main() {
   const cliente4 = await prisma.cliente.create({
     data: {
       cpf: '66168230016',
-      telefone: '6906587229',
+      telefone: '96906587229',
       data_nasc: new Date(),
       usuario: {
         create: {
@@ -627,7 +723,7 @@ async function main() {
       endereco: {
         create: {
           rua: "Rua da Consolação",
-          numero: 1000,
+          numero: '1000',
           bairro: "Consolação",
           cidade: "São Paulo",
           estado: "SP",

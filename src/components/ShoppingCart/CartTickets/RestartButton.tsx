@@ -3,10 +3,14 @@ import {useShoppingCart } from "@/contexts/ShoppingCartContext"
 import {Button} from '@/components/ClientSide'
 
 export default function RestartButton(){
-    const {restartCart} = useShoppingCart();
+    const {restartCartDef} = useShoppingCart();
+
+    function toDo(){
+        restartCartDef()
+    }
     return(
         <div>
-            <Button onClick={()=> restartCart()}>Reiniciar carrinho</Button>
+            <Button onClick={()=> toDo()}>Reiniciar carrinho</Button>
         </div>
     )
 }

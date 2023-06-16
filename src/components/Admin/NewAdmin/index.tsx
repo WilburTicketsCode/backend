@@ -61,7 +61,7 @@ export default function TelaNewAdm() {
     }
 
     return (
-        <section className='bg-gray-200 flex flex-col items-center justify-center gap-y-10 p-20 rounded-xl w-auto h-auto'>
+        <section className='flex flex-col w-[90%] md:w-[40%] h-[80%] md:h-[80%] items-center justify-center gap-y-10 bg-white p-20 rounded-xl'>
             
             <Card color="transparent" shadow={false} className="flex items-center justify-center">
                 <Typography variant="h4" color="blue-gray">
@@ -75,14 +75,14 @@ export default function TelaNewAdm() {
                 <form onSubmit={handleSubmit(onSubmit)} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
                     <div className="min-w-fit mb-4 flex flex-col gap-6">
                         <Input {...register('name')}  size='md'  label="Nome Completo" />
-                        {errors.name?.message && <p className="text-red-500 text-xs">{errors.name?.message}</p>}
+                        {errors.name?.message && <p className="text-red-500 text-center">{errors.name?.message}</p>}
 
                         <div className="flex flex-col gap-6 md:flex-row">
                             <Input {...register('email')}  size='md'  label="Email" />
-                            {errors.email?.message && <p className="text-red-500 text-xs">{errors.email?.message}</p>}
+                            {errors.email?.message && <p className="text-red-500 text-center">{errors.email?.message}</p>}
 
                             <Input {...register('cpf')}  size='md' label="CPF" />
-                            {errors.cpf?.message && <p className="text-red-500 text-xs">{errors.cpf?.message}</p>}
+                            {errors.cpf?.message && <p className="text-red-500 text-center">{errors.cpf?.message}</p>}
                         </div>
 
                         <div className="flex flex-col gap-6 md:flex-row">

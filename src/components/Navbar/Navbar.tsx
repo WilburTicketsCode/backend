@@ -1,6 +1,5 @@
 "use client"
-import Container from './Container'
-import Select from './SelectContainer';
+
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { IconButton, Badge } from '../ClientSide';
@@ -11,8 +10,6 @@ import SinginButton from '../SinginButton';
 import { ProfileMenu } from './ProfileMenu';
 import Logo from './Logo';
 import Search from './Search';
-import { useEffect } from 'react';
-import { usePathname } from 'next/navigation';
 import ProfileMenuPromoter from './Promoter/ProfileMenuPromoter';
 import { ShoppingCartProvider } from '@/contexts/ShoppingCartContext';
 import ProfileMenuADM from './Adm/ProfileMenuADM';
@@ -33,7 +30,7 @@ const Navbar = ({ navbarType }: Props) => {
                 <ShoppingCartProvider>
                 <div className='w-full top-0 fixed bg-white z-50 shadow-sm rounded-b-lg'>
                     <div className='p-1 border-b-[2px] rounded-b-lg'>
-                        <div className="2xl:px-[3rem] flex flex-row items-center justify-between gap-0 md:gap-1">
+                        <div className="2xl:px-[1rem] flex flex-row items-center justify-between gap-0 md:gap-1">
                             <Link href={'/'} className='flex items-center justify-center'><Logo /></Link>
                             <Search />
                             <div>
@@ -61,7 +58,7 @@ const Navbar = ({ navbarType }: Props) => {
             return (
                 <div className='w-full top-0 fixed bg-white z-50 shadow-sm rounded-b-lg'>
                     <div className='p-1 border-b-[2px] rounded-b-lg'>
-                        <div className="2xl:px-[3rem]  flex flex-row items-center justify-between gap-0.5 md:gap-1">
+                        <div className="2xl:px-[1rem]  flex flex-row items-center justify-between gap-0.5 md:gap-1">
                             <Link href={'/promoter/eventos'} className='flex items-center justify-center'><Logo /></Link>
                             <div>
                                 <div className='gap-0.5 md:gap-5 flex flex-row justify-center items-center'>

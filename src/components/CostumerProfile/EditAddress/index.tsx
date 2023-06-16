@@ -127,7 +127,7 @@ export default function EditAddress() {
     async function editAddress(data: addressFormData) {
         const jaison = {
             rua: street,
-            numero: parseInt(data.number),
+            numero: data.number,
             bairro: neighborhood,
             cidade: city,
             estado: state,

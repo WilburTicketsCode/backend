@@ -5,11 +5,15 @@ import { Alert, Button } from "@material-tailwind/react";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import { MdOutlineShare } from "react-icons/md";
  
-export default function ShareButton() {
+interface Props {
+  id: number
+}
+
+export default function ShareButtonPromoter(props: Props) {
     const [openAlert, setOpenAlert] = useState(false);
  
     const copyLink = () => {
-        const url = window.location.href;
+        const url = window.location.origin + `/event-details/${props.id}`;
         navigator.clipboard.writeText(url);
     }
 
@@ -32,7 +36,7 @@ export default function ShareButton() {
         <Alert
           open={openAlert}
           color="green"
-          className="max-w-fit absolute bottom-5"
+          className="max-w-[20%] absolute bottom-5"
           icon={<CheckCircleIcon className="mt-px h-6 w-6" />}
         >
           <p className="font-normal">

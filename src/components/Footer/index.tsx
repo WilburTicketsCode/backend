@@ -1,7 +1,7 @@
 export default function Footer() {
     return (
       <footer className="mx-auto max-w-[1920px] px-3 bg-gray-100" >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b py-3 text-gray-600 transition-colors duration-150 bg-gray-100">
+        <div className="grid grid-cols-1 lg:grid-cols-8 gap-8 border-b py-3 text-gray-600 transition-colors duration-150 bg-gray-100">
           <div className=" justify-center col-span-1 lg:col-span-1">
             <h1 className="text-2px">
               <b>Contato</b>

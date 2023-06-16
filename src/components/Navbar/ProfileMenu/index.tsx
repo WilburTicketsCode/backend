@@ -46,12 +46,7 @@ const profileMenuItems = [
     href: '/profile/costumer/ticket-list',
   },
   {
-    label: "Histórico",
-    icon: InboxArrowDownIcon,
-    href: '#',
-  },
-  {
-    label: "Mudar Senha",
+    label: "Alterar Senha",
     icon: Cog6ToothIcon,
     href: '/profile/changepassword',
   },
@@ -156,8 +151,8 @@ export function ProfileMenu() {
             <Typography
               as="span"
               variant="h5"
-              className="font-normal"
-              color="black"
+              className="font-semibold"
+              color="white"
             >
               {session.user.name}
             </Typography>

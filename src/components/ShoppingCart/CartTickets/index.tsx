@@ -32,6 +32,7 @@ function lotacoesDoSetor(listaLotacoes: any, idDoSetor: number){
             return lotacao.id_setor === idDoSetor
             })
 }
+
 export default function CartTickets(props:any) {
   const {cartItems} = useShoppingCart()
   const [open, setOpen] = useState(0);
@@ -43,11 +44,12 @@ export default function CartTickets(props:any) {
 
   let setores: number []= []
     setores = props.lotacoes?.reduce((resultado:number[], lot: Lotacao) =>{
-              if (!resultado?.includes(lot.id_setor)) {
-                resultado?.push(lot.id_setor);
-              }
-                return resultado;
-        }, [])
+        const setorSelecionado = cartItems.find(item => item.idSetor == lot.id_setor && item.id == lot.id)
+        if (!resultado?.includes(lot.id_setor) && setorSelecionado) {
+          resultado?.push(lot.id_setor);
+        }
+          return resultado;
+    }, [])
   
   const valorTotal = setores?.reduce((total, id) =>{
     const lotacoes = lotacoesDoSetor(props.lotacoes, id);
@@ -68,10 +70,10 @@ export default function CartTickets(props:any) {
 
               </div>
 
-              <div className="pt-3 pl-2 w-full">
-                  <h1 className="text-[12px] text-center font-bold">{props.event?.nome}</h1>
-                  <h1 className="text-[10px] text-center pl-1 mt-[30px] font-bold">Valor total:</h1>
-                  <h1 className="text-[12px] text-center pl-1">{(valorTotal)?.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</h1>
+              <div className="pt-3 pl-4 w-full">
+                  <h1 className="text-xs text-center font-bold">{props.event?.nome}</h1>
+                  <h1 className="text-xs text-center pl-1 mt-[30px] font-bold">Valor total:</h1>
+                  <h1 className="text-xs text-center pl-1">{(valorTotal)?.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</h1>
               </div>
           </AccordionHeader>
           <AccordionBody className="bg-gray-300">

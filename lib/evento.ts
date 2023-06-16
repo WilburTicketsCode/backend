@@ -24,10 +24,10 @@ export type Evento = {
   }
   lotacoes: [
     lotacao: {
-      id_perfil: number,
-      id_setor: number,
-      quantidade: number,
-      valorTotal: number
+      id_perfil: string,
+      id_setor: string,
+      quantidade: string,
+      valorTotal: string
     }
   ]
 };
@@ -119,13 +119,16 @@ export async function inserirEvento(evento: Evento) {
       })
       console.log(eventoDATA)
       evento.lotacoes.map(async (lotacao) => {
+        let setor = parseInt(lotacao.id_setor);
+        let perfil = parseInt(lotacao.id_perfil)
+        console.log(lotacao)
         await prisma.lotacao.create({
           data: {
             id_evento: eventoDATA.id,
-            id_perfil: lotacao.id_perfil,
-            id_setor: lotacao.id_setor,
-            quantidade: lotacao.quantidade,
-            valorTotal: lotacao.valorTotal
+            id_perfil: perfil,
+            id_setor: setor,
+            quantidade: parseInt(lotacao.quantidade),
+            valorTotal: parseInt(lotacao.valorTotal)
           }
         })
         console.log(lotacao)

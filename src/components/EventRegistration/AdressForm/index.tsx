@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import UseEventRegistrationContext from "../../../use/UseEventRegistrationContext";
+import { useSession } from "next-auth/react";
 
 function formatCEP(value:string) {
   return value
@@ -29,10 +30,9 @@ const AdressFormSchema = z.object({
 })
 
 export default function AdressForm() {
-
+  const {data: session} = useSession();
   const { infoStepper, setInfoStepper } = UseStepperContext();
-
-  const { infoAdressForm, setInfoAdressForm } = UseEventRegistrationContext();
+  const { infoAdressForm, setInfoAdressForm, infoBasicInformationForm, infoDateForm, infoDescriptionForm, infoTicketForm } = UseEventRegistrationContext();
 
   const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<AdressFormData>({
       resolver: zodResolver(AdressFormSchema),
@@ -65,6 +65,7 @@ export default function AdressForm() {
       state: data.state,
   });
 }
+
   const CEP = watch("CEP")
 
   useEffect(() => {

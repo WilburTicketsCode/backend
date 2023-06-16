@@ -44,17 +44,17 @@ export default function TelaListAdm() {
     }]*/
 
 return (
-    <div className='flex flex-col gap-20 bg-gray-200 text-blue-900 rounded-xl p-20 m-5 w-auto h-auto m-10'>
+    <div className='flex flex-col gap-20 bg-transparent text-blue-900 rounded-xl p-20 m-5 w-auto h-auto m-10'>
 
         <Card color="transparent" shadow={false}>
-            <Typography variant="h4" color="blue-gray">
+            <Typography variant="h4" color="white">
                 Administradores:
             </Typography>
             
             {admins.map((admin) => (
                 <ul className="bg-gray-300 mt-10 mr-5 p-5 rounded-xl flex flex-col gap-6">
                     <li key={admin.id} className="font-semibold">{admin.usuario.nome}</li>
-                    <li key={admin.id}>Email: {admin.usuario.nome}</li>
+                    <li key={admin.id}>Email: {admin.usuario.email}</li>
                     <li key={admin.id}>CPF: {admin.cpf}</li>
                     <li key={admin.id}>Senha: {admin.usuario.senha}</li>
                 </ul>

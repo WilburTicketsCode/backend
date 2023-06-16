@@ -36,10 +36,7 @@ export default function CardEventoPromoter({imagem, nome, data, local, evento, s
         </Typography>
         <Typography className="text-xs">
           {local}  {/* localEvento */} 
-        </Typography> 
-        <Button className="bg-roxo-wil font-sans h-[40px] w-[130px] mt-auto p-0">
-          Editar 
-        </Button>
+        </Typography>     
         <Link href={`/promoter/eventos/vendas/${evento}`}>
           <Button className="bg-roxo-wil font-sans h-[40px] w-[130px] mt-auto p-0 ml-2">
             Detalhes 

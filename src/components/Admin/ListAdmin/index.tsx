@@ -56,7 +56,7 @@ return (
                     <li key={admin.id} className="font-semibold">{admin.usuario.nome}</li>
                     <li key={admin.id}>Email: {admin.usuario.email}</li>
                     <li key={admin.id}>CPF: {admin.cpf}</li>
-                    <li key={admin.id}>Senha: {admin.usuario.senha}</li>
+                    <li key={admin.id}>Senha: (Solicitar ao Administrador)</li>
                 </ul>
             ))}
         </Card>

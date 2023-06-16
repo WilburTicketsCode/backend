@@ -25,14 +25,6 @@ export default function TelaNewAdm() {
 
     const [openAlert, setOpenAlert] = useState(false);
 
-    //função para mostrar alerta de ADM cadastrado
-    const buttonAction = () => {
-        setOpenAlert(true);
-        setTimeout(() => {
-          setOpenAlert(false);
-        }, 3000);
-    }
-
     const { register, handleSubmit, formState: { errors }, reset } = useForm<adminFormData>({
         resolver: zodResolver(adminNSchema),
         criteriaMode: 'all',
@@ -65,6 +57,12 @@ export default function TelaNewAdm() {
                     console.log('Dados salvos com sucesso!');
                     //alert('usuário cadastrado')
                     reset(); // Limpa o formulário após o cadastro
+
+                    setOpenAlert(true);//mostrando o alerta de cadastro bem sucedido
+                    setTimeout(() => {
+                        setOpenAlert(false);
+                    }, 3000);
+
                 } else {
                     console.error('Erro ao salvar os dados!');
                 }
@@ -106,7 +104,7 @@ export default function TelaNewAdm() {
                             <Input {...register('passwordConfirm')} type="password" size='md' label="Confirme a senha" />
                             {errors.passwordConfirm?.message && <p className="text-red-500 text-xs">{errors.passwordConfirm?.message}</p>}
                         </div>
-                        <Button onClick={buttonAction} type='submit' size='md' className="mt-20" fullWidth>
+                        <Button type='submit' size='md' className="mt-20" fullWidth>
                             Cadastrar
                         </Button>
                     </div>
@@ -126,7 +124,7 @@ export default function TelaNewAdm() {
                 icon={<CheckCircleIcon className="mt-px h-6 w-6" />}
             >
                 <p className="font-normal">
-                    Link Copiado
+                    Administrador cadastrado!
                 </p>
             </Alert>
 

@@ -1,5 +1,11 @@
 import {createContext} from "react";
 
+export type ticketForm = {
+    id_setor: string,
+    id_perfil: string,
+    quantidade: string,
+    valorTotal: string,
+}
 interface EventRegistrationContextType {
   infoAdressForm: {
     CEP: string,
@@ -20,13 +26,8 @@ interface EventRegistrationContextType {
   infoDateForm: {
     startDate: string,
     endDate: string,
-  }
-  infoTicketForm: {
-    sector: string,
-    profile: string,
-    amount: string,
-    price: string,
-  }
+  },
+  infoTicketForm: ticketForm[],
   setInfoAdressForm: React.Dispatch<React.SetStateAction<{ 
     CEP: string,
     street: string,
@@ -48,12 +49,7 @@ interface EventRegistrationContextType {
     startDate: string,
     endDate: string,
   }>>;
-  setInfoTicketForm: React.Dispatch<React.SetStateAction<{
-    sector: string,
-    profile: string,
-    amount: string,
-    price: string,
-  }>>;
+  setInfoTicketForm: React.Dispatch<React.SetStateAction<ticketForm[]>>;
 }
   
   export const EventRegistrationContext = createContext<EventRegistrationContextType>({
@@ -77,15 +73,10 @@ interface EventRegistrationContextType {
           startDate: "",
           endDate: "",
       },
-      infoTicketForm: {
-          sector: "",
-          profile: "",
-          amount: "",
-          price: "",
-      },
+      infoTicketForm: [],
       setInfoAdressForm: () => {},
       setInfoBasicInformationForm: () => {},
       setInfoDescriptionForm: () => {},
       setInfoDateForm: () => {},
-      setInfoTicketForm: () => {},
+      setInfoTicketForm: () => [{}],
   });

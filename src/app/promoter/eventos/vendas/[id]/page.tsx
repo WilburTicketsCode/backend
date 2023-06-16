@@ -71,7 +71,7 @@ export default function Event({params}: {params: { id: number }}) {
                         <h1 className="text-2xl font-bold m-6">
                         {event?.nome}
                         </h1>
-                        {event?.status === "disponivel" && <ShareButtonPromoter id={params.id}/>}
+                        {event?.status !== "suspenso" && <ShareButtonPromoter id={params.id}/>}
                     </div>
                     
                     <div className="items-center text-sm">

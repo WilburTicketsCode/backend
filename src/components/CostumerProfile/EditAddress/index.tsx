@@ -127,7 +127,7 @@ export default function EditAddress() {
     async function editAddress(data: addressFormData) {
         const jaison = {
             rua: street,
-            numero: parseInt(data.number),
+            numero: data.number,
             bairro: neighborhood,
             cidade: city,
             estado: state,
@@ -142,9 +142,9 @@ export default function EditAddress() {
     }
 
 
-    const onSubmit = (data: addressFormData) => {
+    const onSubmit = async(data: addressFormData) => {
         if(erro === true) return;
-        editAddress(data);
+        await editAddress(data);
         router.push('/profile/costumer');
     }
 

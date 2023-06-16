@@ -64,7 +64,7 @@ export default function CardPrecoTotal(props:any){
                     return total + (item?.valorTotal || 0) * cartItem.quantidade
                     }, 0) || "R$0,00").toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})} </p>
 
-                    <ButtonFinalizar></ButtonFinalizar>
+                    <ButtonFinalizar CartEventoss = {cartEventos} CartItems = {cartItems} ></ButtonFinalizar>
                     
                     </div>
 

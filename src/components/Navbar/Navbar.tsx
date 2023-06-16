@@ -13,6 +13,7 @@ import Search from './Search';
 import ProfileMenuPromoter from './Promoter/ProfileMenuPromoter';
 import { ShoppingCartProvider } from '@/contexts/ShoppingCartContext';
 import ProfileMenuADM from './Adm/ProfileMenuADM';
+import {useState} from 'react';
 
 
 /* Deixando isso aqui só pra não quebrar o codigo por agora*/
@@ -22,36 +23,38 @@ type Props = {
 
 const Navbar = ({ navbarType }: Props) => {
     const { data: session } = useSession();
+    const [novaNotificacao, setNovaNotificacao] = useState(false);
+
     /*Pfv usar UseEffect ou outra coisa pois o codigo abaixo foi escrito por Pedro, ou seja, está errado. */
     if (session && session.user) {
         if (session.user.role === 'cliente') {
 
             return (
                 <ShoppingCartProvider>
-                <div className='w-full top-0 fixed bg-white z-50 shadow-sm rounded-b-lg'>
-                    <div className='p-1 border-b-[2px] rounded-b-lg'>
-                        <div className="2xl:px-[1rem] flex flex-row items-center justify-between gap-0 md:gap-1">
-                            <Link href={'/'} className='flex items-center justify-center'><Logo /></Link>
-                            <Search />
-                            <div>
-                                <div className='gap-0.5 md:gap-5 flex flex-row justify-center items-center'>
-                                    <div>
-                                        <Link href={'/cliente/shoppingCart'}>
-                                            <IconButton
-                                                variant="text"
-                                                color="blue-gray"
-                                                className="ml-0 mr-2">
-                                                <ShoppingCartIcon className="h-6 w-6 sm:h-8 md:w-8" />
-                                            </IconButton>
-                                        </Link>
-                                    </div>
+                    <div className='w-full top-0 fixed bg-white z-50 shadow-sm rounded-b-lg'>
+                        <div className='p-1 border-b-[2px] rounded-b-lg'>
+                            <div className="2xl:px-[1rem] flex flex-row items-center justify-between gap-0 md:gap-1">
+                                <Link href={'/'} className='flex items-center justify-center'><Logo /></Link>
+                                <Search />
+                                <div>
+                                    <div className='gap-0.5 md:gap-5 flex flex-row justify-center items-center'>
+                                        <div>
+                                            <Link href={'/cliente/shoppingCart'}>
+                                                <IconButton
+                                                    variant="text"
+                                                    color="blue-gray"
+                                                    className="ml-0 mr-2">
+                                                    <ShoppingCartIcon className="h-6 w-6 sm:h-8 md:w-8" />
+                                                </IconButton>
+                                            </Link>
+                                        </div>
 
-                                    <ProfileMenu />
+                                        <ProfileMenu />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </ShoppingCartProvider>
             )
         } else if (session.user.role === 'promoter') {
@@ -85,11 +88,13 @@ const Navbar = ({ navbarType }: Props) => {
                                     <IconButton
                                         variant="text"
                                         color="blue-gray"
-                                        className="ml-0 mr-2">
-                                            <Badge>
-                                                <BellIcon className="h-8 w-8" />
-                                            </Badge>
+                                        className="ml-0 mr-2"
+                                        onClick={() => setNovaNotificacao(false)}>
+                                        <Badge>
+                                            <BellIcon className="h-8 w-8" />
+                                        </Badge>
                                     </IconButton>
+                                    {novaNotificacao && <span className="bg-red-500 rounded-full w-3 h-3 absolute top-0 right-0 mt-1 mr-1"></span>}
                                 </div>
                                 <div className="w-[100px]">
                                     <ProfileMenuADM />

@@ -51,7 +51,7 @@ export default function CardEventoAdm({imagemEvento, nomeEvento, dataEvento, loc
       id: evento
       })
       
-      const res = await fetch("/api/evento/id", {
+      const res = await fetch(`/api/evento/${evento}`, {
       method: "DELETE",
       headers: {
           "Content-Type": "application/json",

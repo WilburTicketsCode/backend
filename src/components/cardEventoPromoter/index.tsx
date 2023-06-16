@@ -37,9 +37,7 @@ export default function CardEventoPromoter({imagem, nome, data, local, evento, s
         <Typography className="text-xs">
           {local}  {/* localEvento */} 
         </Typography> 
-        <Button className="bg-roxo-wil font-sans h-[40px] w-[130px] mt-auto p-0">
-          Editar 
-        </Button>
+        
       </CardBody>
     </Card>
   );

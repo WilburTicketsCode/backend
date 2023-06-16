@@ -33,7 +33,7 @@ export default function TelaNewAdm() {
         }, 3000);
     }
 
-    const { register, handleSubmit, formState: { errors } } = useForm<adminFormData>({
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<adminFormData>({
         resolver: zodResolver(adminNSchema),
         criteriaMode: 'all',
         mode: 'all',
@@ -63,7 +63,8 @@ export default function TelaNewAdm() {
             .then((response) => {
                 if (response.ok) {
                     console.log('Dados salvos com sucesso!');
-                    alert('usuário cadastrado')
+                    //alert('usuário cadastrado')
+                    reset(); // Limpa o formulário após o cadastro
                 } else {
                     console.error('Erro ao salvar os dados!');
                 }

@@ -12,7 +12,7 @@ import {
                 Cadastro Finalizado!
             </Typography>
 
-            <Typography variant="h8" className="text-[#404c76]">
+            <Typography variant="h5" className="text-[#404c76]">
                 Evento criado com sucesso!
             </Typography>
         </div>

@@ -1,11 +1,18 @@
 'use client'
 
 import { Typography } from "@/components/ClientSide";
-import { EventRegistrationContext } from "../../contexts/EventRegistrationContext";
+import { EventRegistrationContext , ticketForm} from "../../contexts/EventRegistrationContext";
 import { StepperContext } from "../../contexts/StepperContext";
 import React from "react";
 import RegistrationSteps from "@/components/EventRegistration/EventStepper";
  
+
+// type ticketForm = {
+//     setor: string,
+//     perfil: string,
+//     quantidade: string,
+//     valorTotal: string,
+// }
 
 export default function EventRegistration() {
   const [infoAdressForm, setInfoAdressForm] = React.useState({
@@ -32,12 +39,7 @@ export default function EventRegistration() {
     endDate: "",
   })
 
-  const [infoTicketForm, setInfoTicketForm] = React.useState({
-    sector: "",
-    profile: "",
-    amount: "",
-    price: "",
-  })
+  const [infoTicketForm, setInfoTicketForm] = React.useState<ticketForm[]>([])
   
 
   const [infoStepper, setInfoStepper] = React.useState({

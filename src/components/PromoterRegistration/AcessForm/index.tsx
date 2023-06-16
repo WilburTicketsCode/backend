@@ -5,7 +5,7 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import UseStepperContext from "../../../use/UseStepperContext";
@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import UsePromoterRegistrationContext from "@/use/UsePromoterRegistrationContext";
 import CompanyForm from "../CompanyForm";
+import { setNovaNotificacao, registrarCallbackNotificacao } from '../../Notificacao/notificacao';
 
 type AcessFormData = z.infer<typeof AcessFormSchema>;
 
@@ -35,6 +36,18 @@ function campoVazio(value:string) {
 }
 
 export default function AcessForm() {
+  //enviar notificação de cadastro para o Adm
+  const [novaNotificacao, setNovaNotificacaoLocal] = useState(false);
+
+  useEffect(() => {
+    registrarCallbackNotificacao(setNovaNotificacaoLocal);
+  }, []);
+
+  const handleNovaNotificacao = () => {
+    setNovaNotificacao(true);
+  };
+  //----------------------------------------
+
   const { infoStepper, setInfoStepper } = UseStepperContext();
   const { infoAcessForm, setInfoAcessForm, infoAdressForm, infoCompanyForm } = UsePromoterRegistrationContext();
 
@@ -165,7 +178,7 @@ return (
       <Button onClick={handlePrev} className="bg-[#404c76]  hover:shadow-[#404c76]/50">
         Voltar
       </Button>
-      <Button type="submit" className="bg-[#404c76]  hover:shadow-[#404c76]/50">
+      <Button onClick={handleNovaNotificacao} type="submit" className="bg-[#404c76]  hover:shadow-[#404c76]/50">
         Próximo
       </Button>
     </div>

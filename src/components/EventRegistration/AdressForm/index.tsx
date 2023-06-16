@@ -5,12 +5,13 @@ import {
   Input,
   Button,
 } from "@material-tailwind/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import UseEventRegistrationContext from "../../../use/UseEventRegistrationContext";
 import { useSession } from "next-auth/react";
+import { setNovaNotificacao, registrarCallbackNotificacao } from '../../Notificacao/notificacao';
 
 function formatCEP(value:string) {
   return value
@@ -30,6 +31,18 @@ const AdressFormSchema = z.object({
 })
 
 export default function AdressForm() {
+  //enviar notificação de cadastro para o Adm
+  const [novaNotificacao, setNovaNotificacaoLocal] = useState(false);
+
+  useEffect(() => {
+    registrarCallbackNotificacao(setNovaNotificacaoLocal);
+  }, []);
+
+  const handleNovaNotificacao = () => {
+    setNovaNotificacao(true);
+  };
+  //----------------------------------------
+
   const {data: session} = useSession();
   const { infoStepper, setInfoStepper } = UseStepperContext();
   const { infoAdressForm, setInfoAdressForm, infoBasicInformationForm, infoDateForm, infoDescriptionForm, infoTicketForm } = UseEventRegistrationContext();
@@ -196,7 +209,7 @@ return (
           error={Boolean(errors.complement)}
     />   
     <div className="flex flex-row w-800 -between mt-4 mb-8">
-      <Button type="submit" className="bg-[#404c76]  hover:shadow-[#404c76]/50">
+      <Button onClick={handleNovaNotificacao} type="submit" className="bg-[#404c76]  hover:shadow-[#404c76]/50">
         Próximo
       </Button>
     </div>

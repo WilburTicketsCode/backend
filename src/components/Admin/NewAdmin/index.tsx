@@ -126,7 +126,7 @@ export default function TelaNewAdm() {
                 icon={<CheckCircleIcon className="mt-px h-6 w-6" />}
             >
                 <p className="font-normal">
-                    Link Copiado
+                    Administrador cadastrado!
                 </p>
             </Alert>
 

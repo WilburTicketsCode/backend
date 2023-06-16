@@ -47,7 +47,7 @@ return (
     <div className='flex flex-col gap-20 bg-transparent text-blue-900 rounded-xl p-20 m-5 w-auto h-auto m-10'>
 
         <Card color="transparent" shadow={false}>
-            <Typography variant="h4" color="blue-gray">
+            <Typography variant="h4" color="white">
                 Administradores:
             </Typography>
             
@@ -61,11 +61,7 @@ return (
             ))}
         </Card>
 
-        <Link href="/administrador/admin-new" className="flex items-center justify-center p-0 m-0">
-            <Button fullWidth>
-                Cadastrar Novo Administrador
-            </Button>
-        </Link>
+        
 
     </div>
 )

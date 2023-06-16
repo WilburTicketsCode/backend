@@ -61,7 +61,11 @@ return (
             ))}
         </Card>
 
-        
+        <Link href="/administrador/admin-new" className="flex items-center justify-center p-0 m-0">
+            <Button fullWidth>
+                Cadastrar Novo Administrador
+            </Button>
+        </Link>
 
     </div>
 )
